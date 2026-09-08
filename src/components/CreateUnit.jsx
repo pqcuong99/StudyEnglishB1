@@ -4,7 +4,7 @@ import { extractPdfText } from '../lib/pdf.js'
 import { newId } from '../lib/storage.js'
 import { randomSeed } from '../lib/image.js'
 
-export default function CreateUnit({ onSave, onCancel }) {
+export default function CreateUnit({ onSave, onAppend, appendTo, onCancel }) {
   const [unitName, setUnitName] = useState('')
   const [pasteText, setPasteText] = useState('')
   const [rows, setRows] = useState([])
@@ -76,6 +76,21 @@ export default function CreateUnit({ onSave, onCancel }) {
       setStatus('⚠️ Chưa có từ nào hợp lệ để lưu (cần ít nhất Từ + Nghĩa).')
       return
     }
+    if (appendTo) {
+      // bỏ qua các từ đã có trong unit
+      const existing = new Set(appendTo.words.map((w) => w.word.trim().toLowerCase()))
+      const fresh = words.filter((w) => !existing.has(w.word.toLowerCase()))
+      if (fresh.length === 0) {
+        setStatus('⚠️ Tất cả các từ này đã có sẵn trong unit rồi.')
+        return
+      }
+      const skipped = words.length - fresh.length
+      if (skipped > 0 && !confirm(`${skipped} từ đã có trong unit sẽ được bỏ qua. Thêm ${fresh.length} từ mới?`)) {
+        return
+      }
+      onAppend(appendTo.id, fresh)
+      return
+    }
     onSave({
       id: newId(),
       name: unitName.trim() || 'Unit chưa đặt tên',
@@ -90,18 +105,25 @@ export default function CreateUnit({ onSave, onCancel }) {
         <button className="btn btn-ghost" onClick={onCancel}>
           ← Quay lại
         </button>
-        <h1>Tạo Unit mới</h1>
+        <h1>{appendTo ? 'Import thêm từ' : 'Tạo Unit mới'}</h1>
       </header>
 
-      <div className="card">
-        <label className="field-label">Tên Unit</label>
-        <input
-          className="input"
-          placeholder="VD: Unit 1 – Session 2: Giving personal information"
-          value={unitName}
-          onChange={(e) => setUnitName(e.target.value)}
-        />
-      </div>
+      {appendTo ? (
+        <div className="card">
+          Thêm từ vào unit: <b>{appendTo.name}</b> (hiện có {appendTo.words.length} từ). Từ trùng
+          với từ đã có sẽ tự động được bỏ qua.
+        </div>
+      ) : (
+        <div className="card">
+          <label className="field-label">Tên Unit</label>
+          <input
+            className="input"
+            placeholder="VD: Unit 1 – Session 2: Giving personal information"
+            value={unitName}
+            onChange={(e) => setUnitName(e.target.value)}
+          />
+        </div>
+      )}
 
       <div className="card">
         <label className="field-label">Import file từ vựng (PDF hoặc TXT)</label>
@@ -225,7 +247,8 @@ export default function CreateUnit({ onSave, onCancel }) {
 
       <div className="btn-row sticky-actions">
         <button className="btn btn-primary btn-lg" onClick={save} disabled={rows.length === 0}>
-          💾 Lưu Unit ({rows.filter((r) => r.word.trim() && r.meaning.trim()).length} từ)
+          💾 {appendTo ? 'Thêm vào unit' : 'Lưu Unit'} (
+          {rows.filter((r) => r.word.trim() && r.meaning.trim()).length} từ)
         </button>
         <button className="btn btn-ghost" onClick={onCancel}>
           Hủy

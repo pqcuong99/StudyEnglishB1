@@ -22,6 +22,7 @@ export default function UnitDetail({
   onStartFlashcards,
   onStartQuiz,
   onStartWriting,
+  onImportMore,
 }) {
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
@@ -116,6 +117,9 @@ export default function UnitDetail({
             onClick={() => onStartWriting(shuffle(items), `✍️ ${unit.name}`)}
           >
             ✍️ Kiểm tra viết
+          </button>
+          <button className="btn btn-outline" onClick={onImportMore}>
+            ➕ Import thêm từ
           </button>
         </div>
       </div>
