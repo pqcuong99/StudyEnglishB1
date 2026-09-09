@@ -151,6 +151,7 @@ export default function App() {
           onUpdateWord={updateWord}
           onExit={goHome}
           onStartFlashcards={startFlashcards}
+          onStartWriting={startWriting}
         />
       )}
       {view.name === 'writing' && (

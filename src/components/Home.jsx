@@ -7,6 +7,12 @@ function shuffle(arr) {
   return a
 }
 
+// Chọn ngẫu nhiên 10-15 từ (hoặc ít hơn nếu chưa đủ từ) cho bài kiểm tra nhanh
+function pickRandom(items, min = 10, max = 15) {
+  const n = Math.min(items.length, min + Math.floor(Math.random() * (max - min + 1)))
+  return shuffle(items).slice(0, n)
+}
+
 export default function Home({
   units,
   onCreate,
@@ -47,9 +53,13 @@ export default function Home({
           <div className="btn-row">
             <button
               className="btn btn-primary"
-              onClick={() => onStartFlashcards(shuffle(allItems), '🎲 Học ngẫu nhiên tất cả')}
+              disabled={allItems.length < 2}
+              onClick={() => {
+                const picked = pickRandom(allItems)
+                onStartQuiz(picked, `🎲 Kiểm tra ngẫu nhiên (${picked.length} từ)`)
+              }}
             >
-              🎲 Học ngẫu nhiên tất cả
+              🎲 Kiểm tra ngẫu nhiên (10-15 từ)
             </button>
             <button
               className="btn btn-warning"
