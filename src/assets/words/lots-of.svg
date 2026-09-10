@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <ellipse cx="200" cy="266" rx="170" ry="16" fill="#C8E6C9"/>
+  <path d="M120 196 Q200 100 280 196" stroke="#8D6E63" stroke-width="10" fill="none"/>
+  <circle cx="164" cy="98" r="18" fill="#EF5350"/>
+  <circle cx="200" cy="96" r="18" fill="#FFA726"/>
+  <circle cx="236" cy="98" r="18" fill="#66BB6A"/>
+  <circle cx="146" cy="124" r="18" fill="#66BB6A"/>
+  <circle cx="182" cy="124" r="18" fill="#EF5350"/>
+  <circle cx="218" cy="124" r="18" fill="#FFA726"/>
+  <circle cx="254" cy="124" r="18" fill="#EF5350"/>
+  <circle cx="128" cy="152" r="18" fill="#FFA726"/>
+  <circle cx="164" cy="152" r="18" fill="#66BB6A"/>
+  <circle cx="200" cy="152" r="18" fill="#EF5350"/>
+  <circle cx="236" cy="152" r="18" fill="#66BB6A"/>
+  <circle cx="272" cy="152" r="18" fill="#FFA726"/>
+  <circle cx="110" cy="182" r="18" fill="#EF5350"/>
+  <circle cx="146" cy="182" r="18" fill="#FFA726"/>
+  <circle cx="182" cy="182" r="18" fill="#66BB6A"/>
+  <circle cx="218" cy="182" r="18" fill="#EF5350"/>
+  <circle cx="254" cy="182" r="18" fill="#FFA726"/>
+  <circle cx="290" cy="182" r="18" fill="#66BB6A"/>
+  <path d="M164 80 v-6 M200 78 v-6 M236 80 v-6 M146 106 v-6 M254 106 v-6 M128 134 v-6 M272 134 v-6" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+  <path d="M80 200 L100 276 H300 L320 200 Z" fill="#A1887F"/>
+  <path d="M96 220 H304 M92 240 H308 M98 258 H302" stroke="#8D6E63" stroke-width="3"/>
+  <path d="M120 202 l8 74 M160 202 l4 74 M200 202 v74 M240 202 l-4 74 M280 202 l-8 74" stroke="#8D6E63" stroke-width="2"/>
+  <rect x="72" y="192" width="256" height="14" rx="7" fill="#8D6E63"/>
+  <circle cx="48" cy="254" r="16" fill="#EF5350"/>
+  <path d="M48 238 v-6" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="352" cy="250" r="16" fill="#66BB6A"/>
+  <path d="M352 234 v-6" stroke="#6D4C41" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="374" cy="272" r="13" fill="#FFA726"/>
+</svg>

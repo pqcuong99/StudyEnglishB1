@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <clipPath id="racket-head"><ellipse cx="200" cy="112" rx="58" ry="74"/></clipPath>
+  </defs>
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <ellipse cx="200" cy="112" rx="58" ry="74" fill="#FFF"/>
+  <g clip-path="url(#racket-head)" stroke="#B0BEC5" stroke-width="2">
+    <path d="M152 30 V200 M164 30 V200 M176 30 V200 M188 30 V200 M200 30 V200 M212 30 V200 M224 30 V200 M236 30 V200 M248 30 V200"/>
+    <path d="M130 44 H270 M130 56 H270 M130 68 H270 M130 80 H270 M130 92 H270 M130 104 H270 M130 116 H270 M130 128 H270 M130 140 H270 M130 152 H270 M130 164 H270 M130 176 H270"/>
+  </g>
+  <ellipse cx="200" cy="112" rx="58" ry="74" fill="none" stroke="#EF5350" stroke-width="10"/>
+  <path d="M178 180 L200 212 L222 180" stroke="#EF5350" stroke-width="10" fill="none" stroke-linejoin="round"/>
+  <rect x="189" y="206" width="22" height="74" rx="8" fill="#8D6E63"/>
+  <path d="M189 224 h22 M189 240 h22 M189 256 h22" stroke="#6D4C41" stroke-width="3"/>
+  <rect x="186" y="272" width="28" height="10" rx="5" fill="#37474F"/>
+  <path d="M282 200 l-10 -8 M278 226 h-14 M282 252 l-10 8" stroke="#90A4AE" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="320" cy="226" r="22" fill="#D4E157" stroke="#AFB42B" stroke-width="3"/>
+  <path d="M304 214 q16 12 32 0 M304 238 q16 -12 32 0" stroke="#FFF" stroke-width="3" fill="none"/>
+</svg>
