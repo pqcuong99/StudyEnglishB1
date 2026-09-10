@@ -12,6 +12,131 @@ function shuffle(arr) {
   return a
 }
 
+// Gom từ theo phần (giữ thứ tự xuất hiện). Từ không có tên phần được xếp
+// vào nhóm "Từ khác" ở cuối. Unit không chia phần -> trả về [] để hiển thị
+// một danh sách phẳng như cũ.
+function groupBySection(words) {
+  const map = new Map()
+  for (const w of words) {
+    const key = w.section || ''
+    if (!map.has(key)) map.set(key, [])
+    map.get(key).push(w)
+  }
+  const named = [...map.entries()].filter(([name]) => name)
+  if (named.length === 0) return []
+  const groups = named.map(([name, ws]) => ({ name, words: ws }))
+  if (map.has('')) groups.push({ name: 'Từ khác', words: map.get('') })
+  return groups
+}
+
+function Stats({ words }) {
+  const known = words.filter((w) => w.known).length
+  return (
+    <>
+      <p>
+        <b>{words.length}</b> từ · đã thuộc <b>{known}</b> · chưa thuộc{' '}
+        <b>{words.length - known}</b>
+      </p>
+      <div className="progress-bar">
+        <div
+          className="progress-fill"
+          style={{ width: `${words.length ? (known / words.length) * 100 : 0}%` }}
+        />
+      </div>
+    </>
+  )
+}
+
+// Bộ nút học/kiểm tra dùng chung cho cả unit lẫn từng phần
+function StudyButtons({
+  label,
+  items,
+  size,
+  onStartFlashcards,
+  onStartQuiz,
+  onStartWriting,
+  children,
+}) {
+  const unknownItems = items.filter(({ word }) => !word.known)
+  const sm = size === 'sm' ? ' btn-sm' : ''
+  return (
+    <div className="btn-row">
+      <button
+        className={`btn btn-primary${sm}`}
+        disabled={items.length === 0}
+        onClick={() => onStartFlashcards(items, `🃏 ${label}`)}
+      >
+        🃏 Học flashcard
+      </button>
+      <button
+        className={`btn btn-warning${sm}`}
+        disabled={unknownItems.length === 0}
+        onClick={() => onStartFlashcards(unknownItems, `🔥 Từ chưa thuộc – ${label}`)}
+      >
+        🔥 Học từ chưa thuộc ({unknownItems.length})
+      </button>
+      <button
+        className={`btn btn-outline${sm}`}
+        disabled={items.length < 2}
+        onClick={() => onStartQuiz(shuffle(items), `📝 ${label}`)}
+      >
+        📝 Kiểm tra
+      </button>
+      <button
+        className={`btn btn-outline${sm}`}
+        disabled={items.length === 0}
+        onClick={() => onStartWriting(shuffle(items), `✍️ ${label}`)}
+      >
+        ✍️ Kiểm tra viết
+      </button>
+      {children}
+    </div>
+  )
+}
+
+function WordCard({ unitId, w, onUpdateWord, onDeleteWord }) {
+  return (
+    <div className={`word-card card ${w.known ? 'is-known' : ''}`}>
+      <div className="word-img-wrap">
+        <WordImage
+          word={w.word}
+          meaning={w.meaning}
+          seed={w.seed}
+          showRefresh
+          onNewSeed={() => onUpdateWord(unitId, w.id, { seed: randomSeed() })}
+        />
+      </div>
+      <div className="word-info">
+        <div className="word-line">
+          <b>{w.word}</b> {w.pos && <span className="pos">({w.pos})</span>}
+          <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
+            🔊
+          </button>
+        </div>
+        {w.ipa && <div className="ipa">/{w.ipa}/</div>}
+        <div className="meaning">{w.meaning}</div>
+      </div>
+      <div className="word-actions">
+        <label className="known-toggle">
+          <input
+            type="checkbox"
+            checked={!!w.known}
+            onChange={(e) => onUpdateWord(unitId, w.id, { known: e.target.checked })}
+          />
+          Đã thuộc
+        </label>
+        <button
+          className="btn btn-ghost btn-sm"
+          title="Xóa từ"
+          onClick={() => onDeleteWord(unitId, w.id)}
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function UnitDetail({
   unit,
   onBack,
@@ -26,6 +151,8 @@ export default function UnitDetail({
 }) {
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
+  // tên phần đang mở (null = màn chọn phần)
+  const [openSection, setOpenSection] = useState(null)
 
   if (!unit) {
     return (
@@ -38,10 +165,45 @@ export default function UnitDetail({
     )
   }
 
-  const known = unit.words.filter((w) => w.known).length
-  const items = unit.words.map((word) => ({ unitId: unit.id, word }))
-  const unknownItems = items.filter(({ word }) => !word.known)
+  const toItems = (words) => words.map((word) => ({ unitId: unit.id, word }))
+  const sections = groupBySection(unit.words)
+  const studyProps = { onStartFlashcards, onStartQuiz, onStartWriting }
+  const cardProps = { unitId: unit.id, onUpdateWord, onDeleteWord }
+  const current = openSection ? sections.find((s) => s.name === openSection) : null
 
+  // ---------- màn danh sách từ của một phần ----------
+  if (current) {
+    return (
+      <div className="page">
+        <header className="page-header">
+          <button className="btn btn-ghost" onClick={() => setOpenSection(null)}>
+            ← Chọn phần
+          </button>
+          <div>
+            <h1>{current.name}</h1>
+            <p className="part-sub">{unit.name}</p>
+          </div>
+        </header>
+
+        <div className="card part-card">
+          <Stats words={current.words} />
+          <StudyButtons
+            label={`${current.name} – ${unit.name}`}
+            items={toItems(current.words)}
+            {...studyProps}
+          />
+        </div>
+
+        <div className="word-grid">
+          {current.words.map((w) => (
+            <WordCard key={w.id} w={w} {...cardProps} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  // ---------- màn unit: chọn phần (hoặc danh sách phẳng nếu unit không chia phần) ----------
   return (
     <div className="page">
       <header className="page-header">
@@ -80,92 +242,102 @@ export default function UnitDetail({
         )}
       </header>
 
-      <div className="card">
-        <p>
-          <b>{unit.words.length}</b> từ · đã thuộc <b>{known}</b> · chưa thuộc{' '}
-          <b>{unit.words.length - known}</b>
-        </p>
-        <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{ width: `${unit.words.length ? (known / unit.words.length) * 100 : 0}%` }}
-          />
+      {sections.length > 0 && (
+        <div className="section-head">
+          <h2>Cả unit</h2>
         </div>
-        <div className="btn-row">
+      )}
+
+      <div className="card">
+        <Stats words={unit.words} />
+        <StudyButtons
+          label={unit.name}
+          items={toItems(unit.words)}
+          size={sections.length > 0 ? 'sm' : undefined}
+          {...studyProps}
+        >
           <button
-            className="btn btn-primary"
-            onClick={() => onStartFlashcards(items, `🃏 ${unit.name}`)}
+            className={`btn btn-outline${sections.length > 0 ? ' btn-sm' : ''}`}
+            onClick={onImportMore}
           >
-            🃏 Học flashcard
-          </button>
-          <button
-            className="btn btn-warning"
-            disabled={unknownItems.length === 0}
-            onClick={() => onStartFlashcards(unknownItems, `🔥 Từ chưa thuộc – ${unit.name}`)}
-          >
-            🔥 Học từ chưa thuộc ({unknownItems.length})
-          </button>
-          <button
-            className="btn btn-outline"
-            disabled={unit.words.length < 2}
-            onClick={() => onStartQuiz(shuffle(items), `📝 ${unit.name}`)}
-          >
-            📝 Kiểm tra
-          </button>
-          <button
-            className="btn btn-outline"
-            onClick={() => onStartWriting(shuffle(items), `✍️ ${unit.name}`)}
-          >
-            ✍️ Kiểm tra viết
-          </button>
-          <button className="btn btn-outline" onClick={onImportMore}>
             ➕ Import thêm từ
           </button>
-        </div>
+        </StudyButtons>
       </div>
 
-      <div className="word-grid">
-        {unit.words.map((w) => (
-          <div key={w.id} className={`word-card card ${w.known ? 'is-known' : ''}`}>
-            <div className="word-img-wrap">
-              <WordImage
-                word={w.word}
-                meaning={w.meaning}
-                seed={w.seed}
-                showRefresh
-                onNewSeed={() => onUpdateWord(unit.id, w.id, { seed: randomSeed() })}
-              />
-            </div>
-            <div className="word-info">
-              <div className="word-line">
-                <b>{w.word}</b> {w.pos && <span className="pos">({w.pos})</span>}
-                <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
-                  🔊
-                </button>
-              </div>
-              {w.ipa && <div className="ipa">/{w.ipa}/</div>}
-              <div className="meaning">{w.meaning}</div>
-            </div>
-            <div className="word-actions">
-              <label className="known-toggle">
-                <input
-                  type="checkbox"
-                  checked={!!w.known}
-                  onChange={(e) => onUpdateWord(unit.id, w.id, { known: e.target.checked })}
-                />
-                Đã thuộc
-              </label>
-              <button
-                className="btn btn-ghost btn-sm"
-                title="Xóa từ"
-                onClick={() => onDeleteWord(unit.id, w.id)}
-              >
-                🗑️
-              </button>
-            </div>
+      {sections.length > 0 && (
+        <>
+          <div className="section-head">
+            <h2>Chọn phần để học</h2>
+            <span className="hint">Bấm vào thẻ để xem danh sách từ của phần</span>
           </div>
-        ))}
-      </div>
+          <div className="unit-grid">
+            {sections.map((s) => {
+              const known = s.words.filter((w) => w.known).length
+              const unknown = s.words.filter((w) => !w.known)
+              const label = `${s.name} – ${unit.name}`
+              const items = toItems(s.words)
+              return (
+                <div
+                  key={s.name}
+                  className="unit-card card"
+                  onClick={() => setOpenSection(s.name)}
+                >
+                  <h3>{s.name}</h3>
+                  <p className="unit-meta">
+                    {s.words.length} từ · đã thuộc {known}/{s.words.length}
+                  </p>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${s.words.length ? (known / s.words.length) * 100 : 0}%` }}
+                    />
+                  </div>
+                  <div className="btn-row" onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={() => onStartFlashcards(items, `🃏 ${label}`)}
+                    >
+                      🃏 Học
+                    </button>
+                    <button
+                      className="btn btn-warning btn-sm"
+                      disabled={unknown.length === 0}
+                      onClick={() =>
+                        onStartFlashcards(toItems(unknown), `🔥 Từ chưa thuộc – ${label}`)
+                      }
+                    >
+                      🔥 Chưa thuộc ({unknown.length})
+                    </button>
+                    <button
+                      className="btn btn-outline btn-sm"
+                      disabled={s.words.length < 2}
+                      onClick={() => onStartQuiz(shuffle(items), `📝 ${label}`)}
+                    >
+                      📝 Kiểm tra
+                    </button>
+                    <button
+                      className="btn btn-outline btn-sm"
+                      onClick={() => onStartWriting(shuffle(items), `✍️ ${label}`)}
+                    >
+                      ✍️ Viết
+                    </button>
+                  </div>
+                  <div className="hint">Xem danh sách từ →</div>
+                </div>
+              )
+            })}
+          </div>
+        </>
+      )}
+
+      {sections.length === 0 && (
+        <div className="word-grid">
+          {unit.words.map((w) => (
+            <WordCard key={w.id} w={w} {...cardProps} />
+          ))}
+        </div>
+      )}
 
       <div className="danger-zone">
         <button

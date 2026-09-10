@@ -85,10 +85,11 @@ const UNITS = [
     // nếu không có unit trùng id (người dùng tự import lại PDF) thì nối từ
     // vào unit có tên khớp mẫu này
     nameMatch: /^\s*unit\s*1\b/i,
+    // `section`: tên phần hiển thị trong unit (mỗi phần có nút học/kiểm tra riêng)
     groups: [
-      { version: 1, prefix: 'u1s2', seedBase: 100, rows: U1S2_WORDS },
-      { version: 2, prefix: 'u1s3', seedBase: 200, rows: U1S3_WORDS },
-      { version: 2, prefix: 'u1n', seedBase: 300, rows: U1_NOTES_WORDS },
+      { version: 1, prefix: 'u1s2', seedBase: 100, section: 'Phần 1 – Session 2', rows: U1S2_WORDS },
+      { version: 2, prefix: 'u1s3', seedBase: 200, section: 'Phần 2 – Session 3 & vở ghi', rows: U1S3_WORDS },
+      { version: 2, prefix: 'u1n', seedBase: 300, section: 'Phần 2 – Session 3 & vở ghi', rows: U1_NOTES_WORDS },
     ],
   },
 ]
@@ -100,6 +101,7 @@ function buildWords(group) {
     pos,
     ipa,
     meaning,
+    section: group.section,
     seed: group.seedBase + i + 1,
     known: false,
   }))

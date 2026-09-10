@@ -15,11 +15,19 @@ export function loadUnits() {
   }
   // lần đầu mở app (hoặc dữ liệu hỏng): nạp sẵn unit của khóa học
   if (!Array.isArray(units)) return seedUnits()
-  return mergeSeedAdditions(units)
+  return fillSections(mergeSeedAdditions(units))
 }
 
 export function saveUnits(units) {
   localStorage.setItem(KEY, JSON.stringify(units))
+}
+
+// Unit đã lưu tương ứng với unit mẫu: ưu tiên trùng id; nếu không có
+// (người dùng tự tạo lại unit) thì lấy unit có tên khớp mẫu.
+function findSeedTarget(units, seed) {
+  let i = units.findIndex((u) => u.id === seed.id)
+  if (i < 0 && seed.nameMatch) i = units.findIndex((u) => seed.nameMatch.test(u.name || ''))
+  return i
 }
 
 // Khi app được cập nhật thêm từ mới cho unit có sẵn, nối các từ đó vào
@@ -30,11 +38,7 @@ export function saveUnits(units) {
 function mergeSeedAdditions(units) {
   const next = [...units]
   for (const seed of seedUnitUpdates()) {
-    let i = next.findIndex((u) => u.id === seed.id)
-    if (i < 0 && seed.nameMatch) {
-      // người dùng tự tạo lại unit (id khác) -> khớp theo tên
-      i = next.findIndex((u) => seed.nameMatch.test(u.name || ''))
-    }
+    const i = findSeedTarget(next, seed)
     if (i < 0) continue
 
     const u = next[i]
@@ -49,6 +53,38 @@ function mergeSeedAdditions(units) {
       .filter((w) => !ids.has(w.id) && !texts.has(w.word.trim().toLowerCase()))
     const name = seed.previousNames.includes(u.name) ? seed.name : u.name
     next[i] = { ...u, name, seedVersion: SEED_VERSION, words: [...u.words, ...fresh] }
+  }
+  return next
+}
+
+// Gán tên phần cho những từ chưa có (dữ liệu lưu từ trước khi unit được
+// chia phần): tra theo id hoặc theo chữ trong dữ liệu mẫu. Từ không khớp
+// (người dùng tự thêm) giữ nguyên.
+function fillSections(units) {
+  const next = [...units]
+  for (const seed of seedUnitUpdates()) {
+    const i = findSeedTarget(next, seed)
+    if (i < 0) continue
+    const u = next[i]
+    if (u.words.every((w) => w.section)) continue
+
+    const byId = new Map()
+    const byText = new Map()
+    for (const g of seed.groups) {
+      for (const w of g.words) {
+        byId.set(w.id, w.section)
+        byText.set(w.word.trim().toLowerCase(), w.section)
+      }
+    }
+    let changed = false
+    const words = u.words.map((w) => {
+      if (w.section) return w
+      const section = byId.get(w.id) || byText.get(w.word.trim().toLowerCase())
+      if (!section) return w
+      changed = true
+      return { ...w, section }
+    })
+    if (changed) next[i] = { ...u, words }
   }
   return next
 }

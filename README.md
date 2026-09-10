@@ -37,8 +37,15 @@ Rồi mở trình duyệt tại **http://localhost:5173**
 
 ## Dữ liệu có sẵn
 
-- **Unit 1: All About Me** (51 từ) được nạp sẵn từ `src/data/seedUnits.js`: 25 từ của
-  `NC_U1_Session 2.pdf`, 13 từ của `NC_U1_Session 3.pdf` và 13 từ ghi trên lớp.
+- **Unit 1: All About Me** (51 từ) được nạp sẵn từ `src/data/seedUnits.js`, chia làm 2 phần:
+  **Phần 1 – Session 2** (25 từ của `NC_U1_Session 2.pdf`) và **Phần 2 – Session 3 & vở ghi**
+  (13 từ của `NC_U1_Session 3.pdf` + 13 từ ghi trên lớp).
+- **Phần trong unit**: mỗi từ có thể mang tên phần (`section`). Mở một unit có chia phần sẽ
+  thấy khối "Cả unit" (thống kê + nút học toàn bộ unit + Import) ở trên, bên dưới là màn
+  **Chọn phần**: mỗi phần là một thẻ có thống kê, thanh tiến độ và nút học flashcard / từ chưa
+  thuộc / kiểm tra / kiểm tra viết riêng; bấm vào thẻ để xem danh sách từ của phần đó. Khi "Import thêm từ",
+  có ô nhập tên phần (mặc định "Phần N+1"; để trống nếu không muốn chia phần). Unit không chia
+  phần hiển thị danh sách từ phẳng như cũ.
 - Muốn thêm từ vào unit có sẵn cho mọi trình duyệt đã dùng app: thêm một nhóm từ mới vào
   `seedUnits.js` với `version` mới và tăng `SEED_VERSION`. Khi mở app, các từ mới sẽ tự được
   nối vào unit đã lưu (giữ nguyên tiến độ đã học, không thêm lại từ đã có).

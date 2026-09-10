@@ -187,6 +187,20 @@ body {
   margin: 0;
   font-size: 1.2rem;
 }
+/* ---------- các phần trong unit ---------- */
+.part-card {
+  border-left: 5px solid var(--primary);
+}
+.part-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 2px 0 0;
+}
+.unit-card .hint {
+  margin-top: 10px;
+  text-align: right;
+}
+
 .unit-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));

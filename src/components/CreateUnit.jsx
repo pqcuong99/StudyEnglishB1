@@ -6,6 +6,13 @@ import { randomSeed } from '../lib/image.js'
 
 export default function CreateUnit({ onSave, onAppend, appendTo, onCancel }) {
   const [unitName, setUnitName] = useState('')
+  // các phần đã có trong unit (khi import thêm); từ mới mặc định vào phần tiếp theo
+  const existingSections = appendTo
+    ? [...new Set(appendTo.words.map((w) => w.section).filter(Boolean))]
+    : []
+  const [section, setSection] = useState(
+    existingSections.length > 0 ? `Phần ${existingSections.length + 1}` : '',
+  )
   const [pasteText, setPasteText] = useState('')
   const [rows, setRows] = useState([])
   const [status, setStatus] = useState('')
@@ -69,6 +76,7 @@ export default function CreateUnit({ onSave, onAppend, appendTo, onCancel }) {
         pos: r.pos.trim(),
         ipa: r.ipa.trim(),
         meaning: r.meaning.trim(),
+        section: section.trim() || undefined,
         seed: randomSeed(),
         known: false,
       }))
@@ -110,8 +118,22 @@ export default function CreateUnit({ onSave, onAppend, appendTo, onCancel }) {
 
       {appendTo ? (
         <div className="card">
-          Thêm từ vào unit: <b>{appendTo.name}</b> (hiện có {appendTo.words.length} từ). Từ trùng
-          với từ đã có sẽ tự động được bỏ qua.
+          <p style={{ marginTop: 0 }}>
+            Thêm từ vào unit: <b>{appendTo.name}</b> (hiện có {appendTo.words.length} từ). Từ
+            trùng với từ đã có sẽ tự động được bỏ qua.
+          </p>
+          <label className="field-label">Phần (nhóm từ trong unit)</label>
+          <input
+            className="input"
+            placeholder="VD: Phần 3 – Session 4"
+            value={section}
+            onChange={(e) => setSection(e.target.value)}
+          />
+          <div className="hint">
+            Mỗi phần có nút học/kiểm tra riêng trong trang unit. Để trống nếu không muốn chia
+            phần.
+            {existingSections.length > 0 && ` Các phần hiện có: ${existingSections.join(', ')}.`}
+          </div>
         </div>
       ) : (
         <div className="card">
