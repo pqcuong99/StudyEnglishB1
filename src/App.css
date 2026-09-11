@@ -607,9 +607,48 @@ kbd {
   min-height: 28px;
 }
 .writing-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--warning);
   font-size: 1.05rem;
-  letter-spacing: 2px;
+}
+.hint-letters {
+  letter-spacing: 3px;
+  font-family: 'Consolas', monospace;
+  font-size: 1.15rem;
+}
+.hint-letters .hint-on {
+  color: var(--warning);
+  font-weight: 700;
+}
+.hint-letters .hint-off {
+  color: var(--muted);
+  opacity: 0.6;
+}
+.hint-letters .hint-gap {
+  display: inline-block;
+  width: 0.6em;
+}
+.hint-more {
+  border: none;
+  background: rgba(245, 158, 11, 0.14);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.hint-more:hover {
+  background: rgba(245, 158, 11, 0.28);
+}
+.hint-more:active {
+  transform: scale(0.92);
+}
+.hint-count {
+  color: var(--muted);
+  font-size: 0.8rem;
   font-family: 'Consolas', monospace;
 }
 

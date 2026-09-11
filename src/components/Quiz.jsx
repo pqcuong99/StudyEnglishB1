@@ -39,9 +39,16 @@ function buildQuestions(items) {
 }
 
 export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashcards, onStartWriting }) {
-  const [questions] = useState(() => buildQuestions(items))
+  const [questions, setQuestions] = useState(() => buildQuestions(items))
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState({}) // question index -> option đã chọn
+
+  // làm lại: xáo trộn lại thứ tự các từ (và đáp án) để tránh học vẹt
+  function restart() {
+    setQuestions(buildQuestions(shuffle(items)))
+    setAnswers({})
+    setIndex(0)
+  }
 
   if (items.length < 2) {
     return (
@@ -116,17 +123,18 @@ export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashc
             </>
           )}
 
-          <div className="finish-ask">
-            ✍️ Bạn có muốn làm <b>bài kiểm tra viết</b> với {items.length} từ này luôn không?
-          </div>
+          <div className="finish-ask">🔁 Bạn muốn làm gì tiếp theo?</div>
           <div className="btn-col">
+            <button className="btn btn-primary btn-lg" onClick={restart}>
+              🔁 Kiểm tra lại (xáo trộn từ)
+            </button>
             <button
-              className="btn btn-primary btn-lg"
+              className="btn btn-outline btn-lg"
               onClick={() =>
                 onStartWriting(shuffle(items), `✍️ Kiểm tra viết – ${plainTitle(title)}`)
               }
             >
-              ✍️ Có, làm kiểm tra viết
+              ✍️ Làm kiểm tra viết
             </button>
             {wrongItems.length > 0 && (
               <button
@@ -140,7 +148,7 @@ export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashc
               ← Xem lại các câu hỏi
             </button>
             <button className="btn btn-ghost" onClick={onExit}>
-              Không, về trang chủ
+              🏁 Kết thúc, về trang chủ
             </button>
           </div>
         </div>

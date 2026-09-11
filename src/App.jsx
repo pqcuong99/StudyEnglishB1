@@ -161,6 +161,7 @@ export default function App() {
           onUpdateWord={updateWord}
           onExit={goHome}
           onStartFlashcards={startFlashcards}
+          onStartQuiz={startQuiz}
         />
       )}
     </div>

@@ -14,25 +14,61 @@ function normalize(s) {
   return s.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[’']/g, "'")
 }
 
-export default function WritingTest({ items, title, onUpdateWord, onExit, onStartFlashcards }) {
+// số ký tự (không tính khoảng trắng) — là số lần có thể mở gợi ý
+function letterCount(word) {
+  return [...word].filter((c) => c !== ' ').length
+}
+
+// hiện dần từng chữ cái từ trái sang phải: `count` chữ đầu hiện thật, còn lại là "_"
+function renderHint(word, count) {
+  let shown = 0
+  return [...word].map((ch, i) => {
+    if (ch === ' ') return <span key={i} className="hint-gap"> </span>
+    const revealed = shown < count
+    shown += 1
+    return (
+      <span key={i} className={revealed ? 'hint-on' : 'hint-off'}>
+        {revealed ? ch : '_'}
+      </span>
+    )
+  })
+}
+
+// lấy phần "chủ đề" trong tiêu đề để dựng tiêu đề bài trắc nghiệm khi làm lại
+function topicOf(title) {
+  return (title || '')
+    .replace(/^[^\p{L}\p{N}]+/u, '')
+    .replace(/^Kiểm tra viết\s*[–:-]\s*/iu, '')
+    .trim()
+}
+
+export default function WritingTest({
+  items,
+  title,
+  onUpdateWord,
+  onExit,
+  onStartFlashcards,
+  onStartQuiz,
+}) {
+  const [queue, setQueue] = useState(items) // thứ tự các từ trong lượt hiện tại
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [checked, setChecked] = useState(null) // null | true | false
-  const [hint, setHint] = useState(false)
+  const [hintCount, setHintCount] = useState(0) // số chữ cái đang được gợi ý
   const [results, setResults] = useState({}) // wordId -> true/false
   const inputRef = useRef(null)
 
-  const done = index >= items.length
-  const current = !done ? items[index] : null
+  const done = index >= queue.length
+  const current = !done ? queue[index] : null
 
   useEffect(() => {
     setAnswer('')
     setChecked(null)
-    setHint(false)
+    setHintCount(0)
     inputRef.current?.focus()
   }, [index])
 
-  if (items.length === 0) {
+  if (queue.length === 0) {
     return (
       <div className="page study-page">
         <header className="page-header">
@@ -65,10 +101,17 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
     else next()
   }
 
+  // làm lại bài viết: xáo trộn lại thứ tự các từ để tránh học vẹt
+  function restart() {
+    setQueue((q) => shuffle(q))
+    setResults({})
+    setIndex(0)
+  }
+
   if (done) {
     const correctCount = Object.values(results).filter(Boolean).length
-    const wrongItems = items.filter(({ word }) => results[word.id] === false)
-    const pct = Math.round((correctCount / items.length) * 100)
+    const wrongItems = queue.filter(({ word }) => results[word.id] === false)
+    const pct = Math.round((correctCount / queue.length) * 100)
     return (
       <div className="page study-page">
         <header className="page-header">
@@ -79,7 +122,7 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
         </header>
         <div className="card finish-card">
           <h2>
-            {pct >= 80 ? '🏆' : pct >= 50 ? '💪' : '📖'} Kết quả: {correctCount}/{items.length} (
+            {pct >= 80 ? '🏆' : pct >= 50 ? '💪' : '📖'} Kết quả: {correctCount}/{queue.length} (
             {pct}%)
           </h2>
           {wrongItems.length === 0 ? (
@@ -100,6 +143,8 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
               </ul>
             </>
           )}
+
+          <div className="finish-ask">🔁 Bạn muốn làm gì tiếp theo?</div>
           <div className="btn-col">
             {wrongItems.length > 0 && (
               <button
@@ -109,8 +154,19 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
                 🔥 Học lại {wrongItems.length} từ sai bằng flashcard
               </button>
             )}
+            {queue.length >= 2 && (
+              <button
+                className="btn btn-outline btn-lg"
+                onClick={() => onStartQuiz(shuffle(queue), `📝 Kiểm tra – ${topicOf(title)}`)}
+              >
+                📝 Kiểm tra lại (trắc nghiệm)
+              </button>
+            )}
+            <button className="btn btn-primary btn-lg" onClick={restart}>
+              ✍️ Kiểm tra viết lại (xáo trộn từ)
+            </button>
             <button className="btn btn-ghost" onClick={onExit}>
-              Về trang chủ
+              🏁 Kết thúc, về trang chủ
             </button>
           </div>
         </div>
@@ -119,6 +175,8 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
   }
 
   const w = current.word
+  const total = letterCount(w.word)
+  const revealMore = () => setHintCount((c) => Math.min(total, c + 1))
   return (
     <div className="page study-page">
       <header className="page-header">
@@ -130,12 +188,12 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
 
       <div className="study-progress">
         <span>
-          {index + 1}/{items.length}
+          {index + 1}/{queue.length}
         </span>
         <div className="progress-bar grow">
           <div
             className="progress-fill"
-            style={{ width: `${((index + 1) / items.length) * 100}%` }}
+            style={{ width: `${((index + 1) / queue.length) * 100}%` }}
           />
         </div>
       </div>
@@ -146,18 +204,33 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
         {w.pos && <div className="pos">({w.pos})</div>}
 
         <div className="writing-hint-row">
-          {hint ? (
-            <span className="writing-hint">
-              Gợi ý: <b>{w.word[0]}</b>
-              {w.word.slice(1).replace(/[^ ]/g, ' _')}
-            </span>
-          ) : (
-            checked === null && (
-              <button className="btn btn-ghost btn-sm" onClick={() => setHint(true)}>
-                💡 Gợi ý chữ cái đầu
+          {checked === null &&
+            (hintCount === 0 ? (
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={revealMore}
+              >
+                💡 Gợi ý chữ cái
               </button>
-            )
-          )}
+            ) : (
+              <span className="writing-hint">
+                Gợi ý: <span className="hint-letters">{renderHint(w.word, hintCount)}</span>
+                {hintCount < total && (
+                  <button
+                    type="button"
+                    className="hint-more"
+                    title="Hiện thêm một chữ cái"
+                    onClick={revealMore}
+                  >
+                    💡
+                  </button>
+                )}
+                <span className="hint-count">
+                  {hintCount}/{total}
+                </span>
+              </span>
+            ))}
         </div>
 
         <form className="writing-row" onSubmit={onSubmit}>
@@ -202,7 +275,7 @@ export default function WritingTest({ items, title, onUpdateWord, onExit, onStar
               </span>
             )}
             <button className="btn btn-primary" onClick={next} autoFocus>
-              {index + 1 === items.length ? 'Xem kết quả' : 'Tiếp theo →'}
+              {index + 1 === queue.length ? 'Xem kết quả' : 'Tiếp theo →'}
             </button>
           </div>
         )}
