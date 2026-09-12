@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- head -->
+  <circle cx="200" cy="110" r="40" fill="#FFCC80"/>
+  <!-- cap -->
+  <path d="M160 88 a40 40 0 0 1 80 0 Z" fill="#EF5350"/>
+  <rect x="150" y="84" width="100" height="12" rx="6" fill="#C62828"/>
+  <!-- sunglasses -->
+  <circle cx="184" cy="112" r="13" fill="#37474F" stroke="#212121" stroke-width="3"/>
+  <circle cx="216" cy="112" r="13" fill="#37474F" stroke="#212121" stroke-width="3"/>
+  <path d="M197 112 h6" stroke="#212121" stroke-width="3"/>
+  <path d="M190 130 q10 8 20 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- body -->
+  <path d="M156 160 h88 l12 100 h-112 Z" fill="#42A5F5"/>
+  <rect x="166" y="260" width="28" height="30" rx="4" fill="#37474F"/>
+  <rect x="206" y="260" width="28" height="30" rx="4" fill="#37474F"/>
+  <!-- scarf -->
+  <path d="M158 150 q42 24 84 0 v20 q-42 24 -84 0 Z" fill="#FFCA28"/>
+  <path d="M232 166 l14 60 h-22 l-6 -54 Z" fill="#FFCA28"/>
+  <path d="M162 158 h76 M162 166 h76" stroke="#F9A825" stroke-width="3"/>
+  <!-- arms -->
+  <path d="M158 172 L110 230" stroke="#FFCC80" stroke-width="14" stroke-linecap="round"/>
+  <path d="M242 172 L290 230" stroke="#FFCC80" stroke-width="14" stroke-linecap="round"/>
+  <!-- watch on wrist -->
+  <circle cx="118" cy="220" r="11" fill="#212121"/>
+  <circle cx="118" cy="220" r="7" fill="#FFF"/>
+  <path d="M118 220 v-4 M118 220 h3" stroke="#212121" stroke-width="1.5"/>
+  <!-- pointers to the items being worn -->
+  <g fill="#E53935">
+    <circle cx="60" cy="70" r="6"/><circle cx="60" cy="110" r="6"/><circle cx="60" cy="160" r="6"/>
+  </g>
+  <path d="M66 70 L150 84 M66 110 L170 112 M66 160 L160 162" stroke="#E53935" stroke-width="2" stroke-dasharray="5 4"/>
+</svg>

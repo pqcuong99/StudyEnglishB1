@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <circle cx="340" cy="50" r="26" fill="#FFD54F"/>
+  <!-- field -->
+  <rect y="150" width="400" height="150" fill="#66BB6A"/>
+  <path d="M200 160 L300 220 L200 280 L100 220 Z" fill="#D7A86E"/>
+  <path d="M200 176 L280 220 L200 264 L120 220 Z" fill="#81C784"/>
+  <!-- bases -->
+  <rect x="192" y="152" width="16" height="16" fill="#FFF" transform="rotate(45 200 160)"/>
+  <rect x="292" y="212" width="16" height="16" fill="#FFF" transform="rotate(45 300 220)"/>
+  <rect x="92" y="212" width="16" height="16" fill="#FFF" transform="rotate(45 100 220)"/>
+  <path d="M190 272 h20 v10 l-10 8 -10 -8 Z" fill="#FFF"/>
+  <ellipse cx="200" cy="220" rx="18" ry="9" fill="#D7A86E"/>
+  <!-- bat -->
+  <path d="M40 60 L150 130" stroke="#8D6E63" stroke-width="16" stroke-linecap="round"/>
+  <path d="M40 60 L80 86" stroke="#6D4C41" stroke-width="10" stroke-linecap="round"/>
+  <!-- ball -->
+  <circle cx="230" cy="80" r="42" fill="#FFF" stroke="#BDBDBD" stroke-width="3"/>
+  <path d="M212 44 q-24 36 0 72" stroke="#E53935" stroke-width="4" fill="none"/>
+  <path d="M248 44 q24 36 0 72" stroke="#E53935" stroke-width="4" fill="none"/>
+  <g stroke="#E53935" stroke-width="3" stroke-linecap="round">
+    <path d="M204 58 l8 -3 M200 70 l8 -1 M200 82 l8 1 M202 94 l8 3"/>
+    <path d="M256 58 l-8 -3 M260 70 l-8 -1 M260 82 l-8 1 M258 94 l-8 3"/>
+  </g>
+</svg>

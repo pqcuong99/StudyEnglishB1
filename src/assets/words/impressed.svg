@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- painting on the wall -->
+  <rect x="230" y="40" width="150" height="120" fill="#8D6E63"/>
+  <rect x="242" y="52" width="126" height="96" fill="#81D4FA"/>
+  <circle cx="340" cy="78" r="14" fill="#FFD54F"/>
+  <path d="M242 148 l40 -50 30 34 20 -22 36 38 Z" fill="#66BB6A"/>
+  <g fill="#FFD54F">
+    <path d="M214 30 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 Z"/>
+    <path d="M390 24 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z"/>
+    <path d="M300 178 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z"/>
+  </g>
+  <!-- WOW bubble -->
+  <path d="M60 30 h110 a12 12 0 0 1 12 12 v34 a12 12 0 0 1 -12 12 h-60 l-12 14 v-14 h-38 a12 12 0 0 1 -12 -12 v-34 a12 12 0 0 1 12 -12 Z" fill="#FFF" stroke="#FB8C00" stroke-width="3"/>
+  <text x="115" y="70" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#EF6C00" text-anchor="middle">WOW!</text>
+  <!-- person with starry eyes -->
+  <circle cx="120" cy="150" r="36" fill="#FFCC80"/>
+  <path d="M84 144 a36 36 0 0 1 72 0 Z" fill="#6D4C41"/>
+  <g fill="#FFC107">
+    <path d="M106 146 l4 9 10 1 -7 7 2 10 -9 -5 -9 5 2 -10 -7 -7 10 -1 Z"/>
+    <path d="M134 146 l4 9 10 1 -7 7 2 10 -9 -5 -9 5 2 -10 -7 -7 10 -1 Z"/>
+  </g>
+  <ellipse cx="120" cy="176" rx="9" ry="7" fill="#3E2723"/>
+  <path d="M84 186 h72 l10 100 h-92 Z" fill="#26A69A"/>
+  <rect x="94" y="286" width="24" height="14" rx="4" fill="#37474F"/>
+  <rect x="124" y="286" width="24" height="14" rx="4" fill="#37474F"/>
+  <path d="M88 200 L60 170" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M152 200 L190 190" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="58" cy="166" r="11" fill="#FFCC80"/><circle cx="194" cy="188" r="11" fill="#FFCC80"/>
+</svg>

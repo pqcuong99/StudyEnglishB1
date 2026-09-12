@@ -8,7 +8,7 @@
 // (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Phiên bản seed đã
 // nối được lưu ngay trong unit (`seedVersion`) để luôn đi cùng dữ liệu.
 
-export const SEED_VERSION = 3
+export const SEED_VERSION = 4
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -92,6 +92,29 @@ const U1_VOCAB3_WORDS = [
   ['degree', 'n', 'dɪˈɡriː', 'bằng cấp, mức độ, độ (nhiệt, góc,...)'],
 ]
 
+// Vở ghi trên lớp – trang tiếp theo của phần 3 (từ "baseball" trở đi).
+// Ô "2" (has to / doesn't have to / should / must not) là ghi chú ngữ pháp,
+// không phải từ vựng nên không thêm.
+const U1_VOCAB3B_WORDS = [
+  ['baseball', 'n', 'ˈbeɪsbɔːl', 'bóng chày (baseball field: sân bóng chày)'],
+  ['take up', 'phr v', 'teɪk ʌp', 'bắt đầu một sở thích / thói quen mới'],
+  ['arrive', 'v', 'əˈraɪv', 'đến, tới nơi'],
+  ['attend', 'v', 'əˈtend', 'tham gia, tham dự'],
+  ['get', 'v', 'ɡet', 'lấy, nhận được'],
+  ['hand in', 'phr v', 'hænd ɪn', 'đưa, nộp (bài, đơn,...)'],
+  ['take', 'v', 'teɪk', 'cầm lấy, lấy'],
+  ['wear', 'v', 'weə', 'đeo, mặc'],
+  ['expect', 'v', 'ɪkˈspekt', 'mong đợi, kì vọng'],
+  ['charity', 'n', 'ˈtʃærəti', 'thiện nguyện, từ thiện; tổ chức từ thiện'],
+  ['strict', 'adj', 'strɪkt', 'nghiêm khắc'],
+  ['make progress', 'phr', 'meɪk ˈprəʊɡres', 'có tiến bộ, tiến triển'],
+  ['prepare', 'v', 'prɪˈpeə', 'chuẩn bị'],
+  ['scared', 'adj', 'skeəd', 'sợ hãi, hoảng sợ'],
+  ['crowd', 'n', 'kraʊd', 'đám đông'],
+  ['quiet', 'adj', 'ˈkwaɪət', 'yên tĩnh, im lặng'],
+  ['impressed', 'adj', 'ɪmˈprest', 'ấn tượng'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu trong trình duyệt
@@ -108,6 +131,7 @@ const UNITS = [
       { version: 2, prefix: 'u1s3', seedBase: 200, section: 'Phần 2 – Session 3 & vở ghi', rows: U1S3_WORDS },
       { version: 2, prefix: 'u1n', seedBase: 300, section: 'Phần 2 – Session 3 & vở ghi', rows: U1_NOTES_WORDS },
       { version: 3, prefix: 'u1v3', seedBase: 400, section: 'Phần 3 – Vocab', rows: U1_VOCAB3_WORDS },
+      { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'Phần 3 – Vocab', rows: U1_VOCAB3B_WORDS },
     ],
   },
 ]

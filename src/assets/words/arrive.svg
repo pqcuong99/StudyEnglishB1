@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <rect y="230" width="400" height="70" fill="#C8E6C9"/>
+  <!-- house -->
+  <rect x="220" y="110" width="160" height="130" fill="#FFE0B2"/>
+  <path d="M206 116 L300 40 L394 116 Z" fill="#E64A19"/>
+  <rect x="268" y="150" width="56" height="90" fill="#6D4C41"/>
+  <rect x="274" y="156" width="44" height="78" fill="#8D6E63"/>
+  <circle cx="312" cy="198" r="4" fill="#FFD54F"/>
+  <rect x="340" y="140" width="30" height="30" fill="#81D4FA" stroke="#FFF" stroke-width="3"/>
+  <!-- location pin -->
+  <path d="M300 2 a16 16 0 0 1 16 16 c0 12 -16 22 -16 22 s-16 -10 -16 -22 a16 16 0 0 1 16 -16 Z" fill="#E53935"/>
+  <circle cx="300" cy="18" r="6" fill="#FFF"/>
+  <!-- arrow to door -->
+  <path d="M150 190 h70" stroke="#43A047" stroke-width="8" stroke-linecap="round"/>
+  <path d="M206 176 L228 190 L206 204 Z" fill="#43A047"/>
+  <!-- person walking with suitcase -->
+  <circle cx="90" cy="110" r="24" fill="#FFCC80"/>
+  <path d="M66 104 a24 24 0 0 1 48 0 Z" fill="#6D4C41"/>
+  <circle cx="96" cy="112" r="3" fill="#3E2723"/><circle cx="108" cy="112" r="3" fill="#3E2723"/>
+  <path d="M96 122 q8 6 16 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M68 138 h44 l6 70 h-56 Z" fill="#26A69A"/>
+  <path d="M78 208 l-8 60 M104 208 l16 56" stroke="#37474F" stroke-width="18" stroke-linecap="round"/>
+  <path d="M112 150 L150 170" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <path d="M70 150 L52 190" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <!-- suitcase -->
+  <rect x="36" y="188" width="46" height="60" rx="6" fill="#5C6BC0"/>
+  <rect x="50" y="178" width="18" height="12" rx="3" fill="#3949AB"/>
+  <path d="M36 210 h46" stroke="#3949AB" stroke-width="3"/>
+</svg>
