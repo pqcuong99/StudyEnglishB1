@@ -44,12 +44,15 @@ function topicOf(title) {
 
 export default function WritingTest({
   items,
+  pool,
   title,
   onUpdateWord,
   onExit,
   onStartFlashcards,
   onStartQuiz,
 }) {
+  // toàn bộ từ của phần gốc; nút "làm lại" xáo trộn cả nhóm này, không chỉ lượt hiện tại
+  const fullPool = pool && pool.length ? pool : items
   const [queue, setQueue] = useState(items) // thứ tự các từ trong lượt hiện tại
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
@@ -101,9 +104,10 @@ export default function WritingTest({
     else next()
   }
 
-  // làm lại bài viết: xáo trộn lại thứ tự các từ để tránh học vẹt
+  // làm lại bài viết: xáo trộn lại TẤT CẢ các từ trong phần (không chỉ nhóm nhỏ
+  // đang mở, ví dụ nhóm từ viết sai) để tránh học vẹt
   function restart() {
-    setQueue((q) => shuffle(q))
+    setQueue(shuffle(fullPool))
     setResults({})
     setIndex(0)
   }
@@ -149,7 +153,9 @@ export default function WritingTest({
             {wrongItems.length > 0 && (
               <button
                 className="btn btn-warning btn-lg"
-                onClick={() => onStartFlashcards(shuffle(wrongItems), '🔥 Học lại từ viết sai')}
+                onClick={() =>
+                  onStartFlashcards(shuffle(wrongItems), '🔥 Học lại từ viết sai', fullPool)
+                }
               >
                 🔥 Học lại {wrongItems.length} từ sai bằng flashcard
               </button>
@@ -157,13 +163,15 @@ export default function WritingTest({
             {queue.length >= 2 && (
               <button
                 className="btn btn-outline btn-lg"
-                onClick={() => onStartQuiz(shuffle(queue), `📝 Kiểm tra – ${topicOf(title)}`)}
+                onClick={() =>
+                  onStartQuiz(shuffle(queue), `📝 Kiểm tra – ${topicOf(title)}`, fullPool)
+                }
               >
                 📝 Kiểm tra lại (trắc nghiệm)
               </button>
             )}
             <button className="btn btn-primary btn-lg" onClick={restart}>
-              ✍️ Kiểm tra viết lại (xáo trộn từ)
+              ✍️ Kiểm tra viết lại (xáo trộn {fullPool.length} từ)
             </button>
             <button className="btn btn-ghost" onClick={onExit}>
               🏁 Kết thúc, về trang chủ

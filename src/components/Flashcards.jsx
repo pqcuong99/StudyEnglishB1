@@ -13,6 +13,7 @@ function shuffle(arr) {
 
 export default function Flashcards({
   items,
+  pool,
   title,
   onUpdateWord,
   onExit,
@@ -20,6 +21,8 @@ export default function Flashcards({
   onStartWriting,
   onRestart,
 }) {
+  // toàn bộ từ của phần gốc, truyền tiếp cho các bước sau (kiểm tra viết/trắc nghiệm)
+  const fullPool = pool && pool.length ? pool : items
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   // remember the marks made during this session to show a summary
@@ -95,7 +98,9 @@ export default function Flashcards({
             {unknownItems.length > 0 && (
               <button
                 className="btn btn-warning btn-lg"
-                onClick={() => onRestart(shuffle(unknownItems), '🔥 Ôn lại từ chưa thuộc')}
+                onClick={() =>
+                  onRestart(shuffle(unknownItems), '🔥 Ôn lại từ chưa thuộc', fullPool)
+                }
               >
                 🔥 Học lại {unknownItems.length} từ chưa thuộc
               </button>
@@ -103,18 +108,21 @@ export default function Flashcards({
             {items.length >= 2 && (
               <button
                 className="btn btn-primary btn-lg"
-                onClick={() => onStartQuiz(shuffle(items), `📝 Kiểm tra: ${title}`)}
+                onClick={() => onStartQuiz(shuffle(items), `📝 Kiểm tra: ${title}`, fullPool)}
               >
                 📝 Kiểm tra lại ngay ({items.length} từ)
               </button>
             )}
             <button
               className="btn btn-outline btn-lg"
-              onClick={() => onStartWriting(shuffle(items), `✍️ Kiểm tra viết: ${title}`)}
+              onClick={() => onStartWriting(shuffle(items), `✍️ Kiểm tra viết: ${title}`, fullPool)}
             >
               ✍️ Kiểm tra viết ({items.length} từ)
             </button>
-            <button className="btn btn-outline" onClick={() => onRestart(shuffle(items), title)}>
+            <button
+              className="btn btn-outline"
+              onClick={() => onRestart(shuffle(items), title, fullPool)}
+            >
               🔁 Học lại từ đầu
             </button>
             <button className="btn btn-ghost" onClick={onExit}>

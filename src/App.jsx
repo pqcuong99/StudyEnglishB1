@@ -12,8 +12,10 @@ import Settings from './components/Settings.jsx'
 //   { name: 'home' }
 //   { name: 'create' }
 //   { name: 'unit', unitId }
-//   { name: 'flashcards', deck, title }   deck = [{unitId, wordId}]
-//   { name: 'quiz', deck, title }
+//   { name: 'flashcards', deck, pool, title }   deck/pool = [{unitId, wordId}]
+//   { name: 'quiz', deck, pool, title }
+//   { name: 'writing', deck, pool, title }
+//   pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
 export default function App() {
   const [units, setUnits] = useState(loadUnits)
   const [view, setView] = useState({ name: 'home' })
@@ -71,28 +73,22 @@ export default function App() {
       .filter(Boolean)
   }
 
-  function startFlashcards(items, title) {
-    setView({
-      name: 'flashcards',
-      deck: items.map(({ unitId, word }) => ({ unitId, wordId: word.id })),
-      title,
-    })
+  // `pool` = toàn bộ từ của "phần đang học" (unit/phần gốc). Nó đi kèm suốt các
+  // bước con (học lại từ sai, kiểm tra lại...) để nút "xáo trộn làm lại" có thể
+  // kiểm tra lại TẤT CẢ các từ trong phần đó, chứ không chỉ nhóm nhỏ đang mở.
+  // Nếu không truyền pool thì mặc định lấy chính danh sách từ đang học.
+  const toDeck = (items) => items.map(({ unitId, word }) => ({ unitId, wordId: word.id }))
+
+  function startFlashcards(items, title, pool) {
+    setView({ name: 'flashcards', deck: toDeck(items), pool: toDeck(pool ?? items), title })
   }
 
-  function startQuiz(items, title) {
-    setView({
-      name: 'quiz',
-      deck: items.map(({ unitId, word }) => ({ unitId, wordId: word.id })),
-      title,
-    })
+  function startQuiz(items, title, pool) {
+    setView({ name: 'quiz', deck: toDeck(items), pool: toDeck(pool ?? items), title })
   }
 
-  function startWriting(items, title) {
-    setView({
-      name: 'writing',
-      deck: items.map(({ unitId, word }) => ({ unitId, wordId: word.id })),
-      title,
-    })
+  function startWriting(items, title, pool) {
+    setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title })
   }
 
   const goHome = () => setView({ name: 'home' })
@@ -136,17 +132,19 @@ export default function App() {
       {view.name === 'flashcards' && (
         <Flashcards
           items={resolveDeck(view.deck)}
+          pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
           onUpdateWord={updateWord}
           onExit={goHome}
           onStartQuiz={startQuiz}
           onStartWriting={startWriting}
-          onRestart={(items, title) => startFlashcards(items, title)}
+          onRestart={(items, title, pool) => startFlashcards(items, title, pool)}
         />
       )}
       {view.name === 'quiz' && (
         <Quiz
           items={resolveDeck(view.deck)}
+          pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
           onUpdateWord={updateWord}
           onExit={goHome}
@@ -157,6 +155,7 @@ export default function App() {
       {view.name === 'writing' && (
         <WritingTest
           items={resolveDeck(view.deck)}
+          pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
           onUpdateWord={updateWord}
           onExit={goHome}

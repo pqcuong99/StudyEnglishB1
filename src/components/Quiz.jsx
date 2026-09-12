@@ -38,14 +38,24 @@ function buildQuestions(items) {
   })
 }
 
-export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashcards, onStartWriting }) {
+export default function Quiz({
+  items,
+  pool,
+  title,
+  onUpdateWord,
+  onExit,
+  onStartFlashcards,
+  onStartWriting,
+}) {
+  // toàn bộ từ của phần gốc; "làm lại" xáo trộn cả nhóm này, không chỉ lượt hiện tại
+  const fullPool = pool && pool.length ? pool : items
   const [questions, setQuestions] = useState(() => buildQuestions(items))
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState({}) // question index -> option đã chọn
 
-  // làm lại: xáo trộn lại thứ tự các từ (và đáp án) để tránh học vẹt
+  // làm lại: xáo trộn lại TẤT CẢ các từ trong phần (và đáp án) để tránh học vẹt
   function restart() {
-    setQuestions(buildQuestions(shuffle(items)))
+    setQuestions(buildQuestions(shuffle(fullPool)))
     setAnswers({})
     setIndex(0)
   }
@@ -92,7 +102,9 @@ export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashc
       if (answers[i] !== undefined) results[question.item.word.id] = answers[i] === question.answer
     })
     const correctCount = Object.values(results).filter(Boolean).length
-    const wrongItems = items.filter(({ word }) => results[word.id] === false)
+    // các từ của lượt hiện tại lấy từ câu hỏi đã dựng (có thể là cả phần sau khi làm lại)
+    const roundItems = questions.map((question) => question.item)
+    const wrongItems = roundItems.filter(({ word }) => results[word.id] === false)
     const pct = Math.round((correctCount / questions.length) * 100)
     return (
       <div className="page study-page">
@@ -126,12 +138,12 @@ export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashc
           <div className="finish-ask">🔁 Bạn muốn làm gì tiếp theo?</div>
           <div className="btn-col">
             <button className="btn btn-primary btn-lg" onClick={restart}>
-              🔁 Kiểm tra lại (xáo trộn từ)
+              🔁 Kiểm tra lại (xáo trộn {fullPool.length} từ)
             </button>
             <button
               className="btn btn-outline btn-lg"
               onClick={() =>
-                onStartWriting(shuffle(items), `✍️ Kiểm tra viết – ${plainTitle(title)}`)
+                onStartWriting(shuffle(roundItems), `✍️ Kiểm tra viết – ${plainTitle(title)}`, fullPool)
               }
             >
               ✍️ Làm kiểm tra viết
@@ -139,7 +151,9 @@ export default function Quiz({ items, title, onUpdateWord, onExit, onStartFlashc
             {wrongItems.length > 0 && (
               <button
                 className="btn btn-warning btn-lg"
-                onClick={() => onStartFlashcards(shuffle(wrongItems), '🔥 Học lại từ trả lời sai')}
+                onClick={() =>
+                  onStartFlashcards(shuffle(wrongItems), '🔥 Học lại từ trả lời sai', fullPool)
+                }
               >
                 🔥 Học lại {wrongItems.length} từ sai bằng flashcard
               </button>

@@ -71,7 +71,7 @@ function StudyButtons({
       <button
         className={`btn btn-warning${sm}`}
         disabled={unknownItems.length === 0}
-        onClick={() => onStartFlashcards(unknownItems, `🔥 Từ chưa thuộc – ${label}`)}
+        onClick={() => onStartFlashcards(unknownItems, `🔥 Từ chưa thuộc – ${label}`, items)}
       >
         🔥 Học từ chưa thuộc ({unknownItems.length})
       </button>
@@ -304,7 +304,7 @@ export default function UnitDetail({
                       className="btn btn-warning btn-sm"
                       disabled={unknown.length === 0}
                       onClick={() =>
-                        onStartFlashcards(toItems(unknown), `🔥 Từ chưa thuộc – ${label}`)
+                        onStartFlashcards(toItems(unknown), `🔥 Từ chưa thuộc – ${label}`, items)
                       }
                     >
                       🔥 Chưa thuộc ({unknown.length})
