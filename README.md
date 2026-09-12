@@ -34,12 +34,27 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Có nút 💡 gợi ý chữ cái đầu + số ký tự. Nhấn `Enter` để kiểm tra / sang câu tiếp theo.
   Viết sai thì từ tự chuyển về "chưa thuộc" như phần trắc nghiệm.
 - **Học ngẫu nhiên**: trộn từ của tất cả các unit, hoặc chỉ học các từ chưa thuộc.
+- **Luyện nghe (🎧)**: trong trang unit có khối "Luyện nghe" gồm các bài nghe ngắn kèm
+  recording script. Mỗi bài: nghe audio (có nút nghe lại từ đầu, lùi 5 giây, nghe chậm 0.75x),
+  điền các từ bị **ẩn ngẫu nhiên** trong script rồi bấm **Nộp bài**. Ba mức độ: 🌱 Dễ (ẩn 5 từ),
+  🌿 Trung bình (7 từ), 🌳 Khó (10 từ, có cả dạng rút gọn như `wasn't`). Mỗi lần làm lại ẩn
+  các từ khác nhau. Từ sai được đánh dấu đỏ kèm đáp án; có nút 💡 gợi ý từng chữ cái, nút "sửa
+  lại các từ sai", "làm lại bài này" và "bài tiếp theo". Điền đúng hết sẽ được chúc mừng và hỏi
+  muốn làm lại hay sang bài kế. Kèm câu hỏi trắc nghiệm A/B/C của đề thi (tùy chọn) và câu chứa
+  đáp án. Tiến độ (đã hoàn thành ở mức nào) lưu trong trình duyệt.
 
 ## Dữ liệu có sẵn
 
 - **Unit 1: All About Me** (51 từ) được nạp sẵn từ `src/data/seedUnits.js`, chia làm 2 phần:
   **Phần 1 – Session 2** (25 từ của `NC_U1_Session 2.pdf`) và **Phần 2 – Session 3 & vở ghi**
   (13 từ của `NC_U1_Session 3.pdf` + 13 từ ghi trên lớp).
+- **Luyện nghe – Session 3** (Unit 1): 6 bài Listening Part 2 "Being at school" lấy từ
+  `Session 3.pptx` (audio ở trang 6, script + câu hỏi ở trang 7–12). File audio gốc được tách
+  theo các khoảng lặng 5 giây thành 6 file `src/assets/listening/u1-session3-part2-q1..6.mp3`;
+  script, câu hỏi và đáp án nằm trong `src/data/listening.js`. Muốn thêm bộ bài nghe mới: thêm
+  một phần tử vào `LISTENING_SETS` (gắn với unit qua `unitId` hoặc `unitMatch`) và đặt file
+  mp3 vào thư mục trên. Thuật toán chọn từ để ẩn nằm trong `src/lib/cloze.js` (bỏ qua từ chức
+  năng, tên riêng, không ẩn hai từ liền nhau, rải đều giữa các câu).
 - **Phần trong unit**: mỗi từ có thể mang tên phần (`section`). Mở một unit có chia phần sẽ
   thấy khối "Cả unit" (thống kê + nút học toàn bộ unit + Import) ở trên, bên dưới là màn
   **Chọn phần**: mỗi phần là một thẻ có thống kê, thanh tiến độ và nút học flashcard / từ chưa

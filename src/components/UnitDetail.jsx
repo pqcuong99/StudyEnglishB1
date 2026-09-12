@@ -148,6 +148,8 @@ export default function UnitDetail({
   onStartQuiz,
   onStartWriting,
   onImportMore,
+  listeningSets = [],
+  onOpenListening,
 }) {
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
@@ -327,6 +329,32 @@ export default function UnitDetail({
                 </div>
               )
             })}
+          </div>
+        </>
+      )}
+
+      {listeningSets.length > 0 && (
+        <>
+          <div className="section-head">
+            <h2>🎧 Luyện nghe</h2>
+            <span className="hint">Nghe audio và điền từ bị ẩn trong recording script</span>
+          </div>
+          <div className="unit-grid">
+            {listeningSets.map((set) => (
+              <div key={set.id} className="unit-card card listen-set-card" onClick={() => onOpenListening(set)}>
+                <h3>🎧 {set.name}</h3>
+                <p className="unit-meta">{set.subtitle}</p>
+                <p className="unit-meta">
+                  {set.exercises.length} bài nghe · 3 mức độ (dễ / trung bình / khó)
+                </p>
+                <div className="btn-row" onClick={(e) => e.stopPropagation()}>
+                  <button className="btn btn-primary btn-sm" onClick={() => onOpenListening(set)}>
+                    🎧 Vào luyện nghe
+                  </button>
+                </div>
+                <div className="hint">Xem danh sách bài nghe →</div>
+              </div>
+            ))}
           </div>
         </>
       )}

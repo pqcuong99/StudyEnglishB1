@@ -7,6 +7,8 @@ import Flashcards from './components/Flashcards.jsx'
 import Quiz from './components/Quiz.jsx'
 import WritingTest from './components/WritingTest.jsx'
 import Settings from './components/Settings.jsx'
+import Listening from './components/Listening.jsx'
+import { findListeningSet, listeningSetsForUnit } from './data/listening.js'
 
 // view shapes:
 //   { name: 'home' }
@@ -15,6 +17,7 @@ import Settings from './components/Settings.jsx'
 //   { name: 'flashcards', deck, pool, title }   deck/pool = [{unitId, wordId}]
 //   { name: 'quiz', deck, pool, title }
 //   { name: 'writing', deck, pool, title }
+//   { name: 'listening', setId, unitId }     bài luyện nghe (điền từ vào script)
 //   pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
 export default function App() {
   const [units, setUnits] = useState(loadUnits)
@@ -127,6 +130,14 @@ export default function App() {
           onStartQuiz={startQuiz}
           onStartWriting={startWriting}
           onImportMore={() => setView({ name: 'create', appendTo: view.unitId })}
+          listeningSets={listeningSetsForUnit(units.find((u) => u.id === view.unitId))}
+          onOpenListening={(set) => setView({ name: 'listening', setId: set.id, unitId: view.unitId })}
+        />
+      )}
+      {view.name === 'listening' && (
+        <Listening
+          set={findListeningSet(view.setId)}
+          onExit={() => setView({ name: 'unit', unitId: view.unitId })}
         />
       )}
       {view.name === 'flashcards' && (
