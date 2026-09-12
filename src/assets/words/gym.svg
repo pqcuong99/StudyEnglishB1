@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <rect y="230" width="400" height="70" fill="#CFD8DC"/>
+  <!-- sign -->
+  <rect x="130" y="18" width="140" height="44" rx="8" fill="#37474F"/>
+  <text x="200" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFF" text-anchor="middle">GYM</text>
+  <!-- weight rack -->
+  <rect x="290" y="120" width="90" height="10" rx="4" fill="#546E7A"/>
+  <rect x="290" y="170" width="90" height="10" rx="4" fill="#546E7A"/>
+  <rect x="294" y="120" width="8" height="110" fill="#546E7A"/>
+  <rect x="368" y="120" width="8" height="110" fill="#546E7A"/>
+  <g>
+    <rect x="304" y="96" width="14" height="24" rx="3" fill="#EF5350"/>
+    <rect x="322" y="96" width="14" height="24" rx="3" fill="#42A5F5"/>
+    <rect x="340" y="96" width="14" height="24" rx="3" fill="#FFCA28"/>
+    <rect x="304" y="146" width="14" height="24" rx="3" fill="#66BB6A"/>
+    <rect x="322" y="146" width="14" height="24" rx="3" fill="#AB47BC"/>
+    <rect x="340" y="146" width="14" height="24" rx="3" fill="#EF5350"/>
+  </g>
+  <!-- person lifting barbell -->
+  <circle cx="150" cy="130" r="24" fill="#FFCC80"/>
+  <path d="M126 124 a24 24 0 0 1 48 0 Z" fill="#6D4C41"/>
+  <circle cx="142" cy="132" r="3" fill="#3E2723"/><circle cx="158" cy="132" r="3" fill="#3E2723"/>
+  <path d="M142 142 q8 5 16 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M120 160 h60 l6 70 h-72 Z" fill="#EF5350"/>
+  <rect x="128" y="230" width="18" height="40" fill="#37474F"/>
+  <rect x="154" y="230" width="18" height="40" fill="#37474F"/>
+  <!-- arms up -->
+  <path d="M124 165 L96 96" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <path d="M176 165 L204 96" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <!-- barbell -->
+  <rect x="40" y="86" width="220" height="10" rx="5" fill="#455A64"/>
+  <rect x="44" y="66" width="18" height="50" rx="4" fill="#212121"/>
+  <rect x="64" y="72" width="14" height="38" rx="4" fill="#424242"/>
+  <rect x="238" y="66" width="18" height="50" rx="4" fill="#212121"/>
+  <rect x="222" y="72" width="14" height="38" rx="4" fill="#424242"/>
+  <!-- dumbbell on floor -->
+  <rect x="30" y="240" width="70" height="8" rx="4" fill="#455A64"/>
+  <rect x="24" y="230" width="14" height="28" rx="3" fill="#212121"/>
+  <rect x="92" y="230" width="14" height="28" rx="3" fill="#212121"/>
+  <!-- sweat -->
+  <path d="M182 118 q6 8 0 12 q-6 -4 0 -12 Z" fill="#4FC3F7"/>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- rain cloud -->
+  <g fill="#90A4AE">
+    <circle cx="90" cy="60" r="26"/>
+    <circle cx="125" cy="48" r="32"/>
+    <circle cx="160" cy="62" r="24"/>
+    <rect x="66" y="60" width="118" height="26" rx="10"/>
+  </g>
+  <g stroke="#42A5F5" stroke-width="4" stroke-linecap="round">
+    <path d="M90 100 l-6 18 M120 100 l-6 18 M150 100 l-6 18 M105 126 l-6 18 M135 126 l-6 18 M165 126 l-6 18"/>
+  </g>
+  <!-- umbrella -->
+  <path d="M40 180 a80 80 0 0 1 160 0 Z" fill="#EF5350"/>
+  <path d="M40 180 a80 80 0 0 1 160 0" fill="none" stroke="#C62828" stroke-width="4"/>
+  <path d="M40 180 q20 -12 40 0 q20 -12 40 0 q20 -12 40 0 q20 -12 40 0" fill="none" stroke="#C62828" stroke-width="4"/>
+  <path d="M120 100 v-10" stroke="#C62828" stroke-width="4" stroke-linecap="round"/>
+  <path d="M120 180 v70 a12 12 0 0 1 -24 0" stroke="#5D4037" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- person under umbrella (dry) -->
+  <circle cx="150" cy="212" r="18" fill="#FFCC80"/>
+  <path d="M132 206 a18 18 0 0 1 36 0 Z" fill="#6D4C41"/>
+  <circle cx="144" cy="214" r="2.5" fill="#3E2723"/><circle cx="156" cy="214" r="2.5" fill="#3E2723"/>
+  <path d="M144 222 q6 4 12 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M134 232 h32 l4 48 h-40 Z" fill="#FFCA28"/>
+  <!-- shield with stop hand -->
+  <path d="M300 60 l70 22 v70 q0 60 -70 88 q-70 -28 -70 -88 v-70 Z" fill="#43A047"/>
+  <path d="M300 78 l52 16 v58 q0 46 -52 68 q-52 -22 -52 -68 v-58 Z" fill="#66BB6A"/>
+  <!-- hand -->
+  <g fill="#FFF">
+    <rect x="276" y="140" width="48" height="52" rx="12"/>
+    <rect x="278" y="106" width="10" height="46" rx="5"/>
+    <rect x="290" y="98" width="10" height="54" rx="5"/>
+    <rect x="302" y="100" width="10" height="52" rx="5"/>
+    <rect x="314" y="110" width="10" height="42" rx="5"/>
+    <rect x="266" y="150" width="14" height="30" rx="7" transform="rotate(-30 273 165)"/>
+  </g>
+  <!-- blocked arrows -->
+  <g stroke="#EF5350" stroke-width="6" stroke-linecap="round">
+    <path d="M232 110 h-30 M232 160 h-30 M232 210 h-30"/>
+  </g>
+  <g fill="#EF5350">
+    <path d="M234 110 l-14 -9 v18 Z" transform="rotate(180 227 110)"/>
+    <path d="M234 160 l-14 -9 v18 Z" transform="rotate(180 227 160)"/>
+    <path d="M234 210 l-14 -9 v18 Z" transform="rotate(180 227 210)"/>
+  </g>
+  <path d="M232 100 v20 M232 150 v20 M232 200 v20" stroke="#B71C1C" stroke-width="6" stroke-linecap="round"/>
+</svg>

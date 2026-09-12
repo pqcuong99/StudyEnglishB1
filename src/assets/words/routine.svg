@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- clock -->
+  <circle cx="130" cy="150" r="78" fill="#FFF" stroke="#1E88E5" stroke-width="8"/>
+  <circle cx="130" cy="150" r="66" fill="none" stroke="#BBDEFB" stroke-width="2"/>
+  <circle cx="130" cy="150" r="5" fill="#1E88E5"/>
+  <path d="M130 150 V100" stroke="#1E88E5" stroke-width="6" stroke-linecap="round"/>
+  <path d="M130 150 L168 172" stroke="#1E88E5" stroke-width="6" stroke-linecap="round"/>
+  <g fill="#1E88E5">
+    <rect x="127" y="90" width="6" height="12" rx="2"/>
+    <rect x="127" y="198" width="6" height="12" rx="2"/>
+    <rect x="70" y="147" width="12" height="6" rx="2"/>
+    <rect x="178" y="147" width="12" height="6" rx="2"/>
+  </g>
+  <!-- bells -->
+  <path d="M74 92 a22 22 0 0 1 30 -22" stroke="#F9A825" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M186 92 a22 22 0 0 0 -30 -22" stroke="#F9A825" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- cycle arrows -->
+  <path d="M40 150 a90 90 0 0 1 90 -90" stroke="#43A047" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M118 52 l14 8 l-10 12 Z" fill="#43A047"/>
+  <path d="M220 150 a90 90 0 0 1 -90 90" stroke="#43A047" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M142 248 l-14 -8 l10 -12 Z" fill="#43A047"/>
+  <!-- daily list -->
+  <rect x="250" y="50" width="120" height="200" rx="10" fill="#FFF" stroke="#90A4AE" stroke-width="3"/>
+  <rect x="250" y="50" width="120" height="30" rx="10" fill="#1E88E5"/>
+  <rect x="250" y="70" width="120" height="10" fill="#1E88E5"/>
+  <circle cx="275" cy="65" r="5" fill="#FFF"/><circle cx="295" cy="65" r="5" fill="#FFF"/><circle cx="315" cy="65" r="5" fill="#FFF"/>
+  <g stroke="#43A047" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="262" y="96" width="16" height="16" rx="3" stroke="#90A4AE"/>
+    <path d="M265 104 l4 4 l7 -8"/>
+    <rect x="262" y="128" width="16" height="16" rx="3" stroke="#90A4AE"/>
+    <path d="M265 136 l4 4 l7 -8"/>
+    <rect x="262" y="160" width="16" height="16" rx="3" stroke="#90A4AE"/>
+    <path d="M265 168 l4 4 l7 -8"/>
+    <rect x="262" y="192" width="16" height="16" rx="3" stroke="#90A4AE"/>
+  </g>
+  <g fill="#B0BEC5">
+    <rect x="288" y="100" width="64" height="8" rx="4"/>
+    <rect x="288" y="132" width="52" height="8" rx="4"/>
+    <rect x="288" y="164" width="60" height="8" rx="4"/>
+    <rect x="288" y="196" width="46" height="8" rx="4"/>
+  </g>
+  <!-- sun and moon -->
+  <circle cx="40" cy="250" r="16" fill="#FFCA28"/>
+  <g stroke="#FFCA28" stroke-width="4" stroke-linecap="round">
+    <path d="M40 224 v-8 M40 276 v8 M14 250 h-8 M66 250 h8"/>
+  </g>
+  <path d="M212 262 a18 18 0 1 1 -14 -30 a14 14 0 0 0 14 30 Z" fill="#7E57C2"/>
+</svg>

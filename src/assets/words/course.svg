@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- blackboard -->
+  <rect x="30" y="30" width="230" height="140" rx="8" fill="#2E7D32" stroke="#8D6E63" stroke-width="8"/>
+  <text x="145" y="86" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#FFF" text-anchor="middle">COURSE</text>
+  <g stroke="#FFF" stroke-width="4" stroke-linecap="round" opacity="0.8">
+    <path d="M60 112 h100 M60 132 h140 M60 152 h80"/>
+  </g>
+  <rect x="40" y="170" width="210" height="8" rx="3" fill="#8D6E63"/>
+  <rect x="200" y="160" width="30" height="8" rx="3" fill="#FFF"/>
+  <!-- stacked books -->
+  <rect x="290" y="170" width="90" height="22" rx="4" fill="#EF5350"/>
+  <rect x="284" y="192" width="100" height="22" rx="4" fill="#42A5F5"/>
+  <rect x="292" y="214" width="92" height="22" rx="4" fill="#FFCA28"/>
+  <rect x="286" y="236" width="98" height="22" rx="4" fill="#66BB6A"/>
+  <g fill="#FFF" opacity="0.7">
+    <rect x="300" y="178" width="50" height="5" rx="2"/>
+    <rect x="296" y="200" width="60" height="5" rx="2"/>
+    <rect x="304" y="222" width="46" height="5" rx="2"/>
+    <rect x="298" y="244" width="58" height="5" rx="2"/>
+  </g>
+  <!-- graduation cap on books -->
+  <path d="M290 150 l45 -22 l45 22 l-45 22 Z" fill="#212121"/>
+  <path d="M312 160 v14 q23 14 46 0 v-14" fill="#424242"/>
+  <path d="M380 150 v22" stroke="#FFCA28" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="380" cy="176" r="5" fill="#FFCA28"/>
+  <!-- student at desk -->
+  <circle cx="110" cy="212" r="22" fill="#FFCC80"/>
+  <path d="M88 206 a22 22 0 0 1 44 0 Z" fill="#6D4C41"/>
+  <circle cx="102" cy="214" r="3" fill="#3E2723"/><circle cx="118" cy="214" r="3" fill="#3E2723"/>
+  <path d="M102 223 q8 5 16 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M84 236 h52 l6 40 h-64 Z" fill="#7E57C2"/>
+  <rect x="50" y="262" width="150" height="12" rx="4" fill="#A1887F"/>
+  <rect x="150" y="248" width="40" height="14" rx="2" fill="#FFF" stroke="#90A4AE" stroke-width="2"/>
+  <path d="M158 255 h24" stroke="#B0BEC5" stroke-width="2"/>
+  <!-- calendar / schedule -->
+  <rect x="200" y="196" width="60" height="56" rx="6" fill="#FFF" stroke="#90A4AE" stroke-width="3"/>
+  <rect x="200" y="196" width="60" height="14" rx="6" fill="#EF5350"/>
+  <g fill="#B0BEC5">
+    <rect x="208" y="218" width="10" height="8" rx="2"/><rect x="225" y="218" width="10" height="8" rx="2"/><rect x="242" y="218" width="10" height="8" rx="2"/>
+    <rect x="208" y="234" width="10" height="8" rx="2"/><rect x="225" y="234" width="10" height="8" rx="2" fill="#43A047"/><rect x="242" y="234" width="10" height="8" rx="2"/>
+  </g>
+</svg>

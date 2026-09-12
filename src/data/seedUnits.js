@@ -1,6 +1,6 @@
 // Unit có sẵn khi mở app lần đầu (khi trình duyệt chưa có dữ liệu).
-// Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf và
-// vở ghi trên lớp (Unit 1) của khóa học.
+// Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
+// vở ghi trên lớp (Unit 1) và bảng từ vựng "II/ VOCAB" của khóa học.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1, rồi tăng SEED_VERSION. storage.js sẽ tự
@@ -8,7 +8,7 @@
 // (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Phiên bản seed đã
 // nối được lưu ngay trong unit (`seedVersion`) để luôn đi cùng dữ liệu.
 
-export const SEED_VERSION = 2
+export const SEED_VERSION = 3
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -75,6 +75,23 @@ const U1_NOTES_WORDS = [
   ['lots of', 'det', 'lɒts əv', 'nhiều'],
 ]
 
+// Bảng từ vựng "II/ VOCAB" (phần 3). "encourage" đã có ở phần 1 nên không
+// thêm lại.
+const U1_VOCAB3_WORDS = [
+  ['routine', 'n', 'ruːˈtiːn', 'thói quen, nếp sinh hoạt; thường lệ'],
+  ['organise', 'v', 'ˈɔːɡənaɪz', 'tổ chức, sắp xếp'],
+  ['gym', 'n', 'dʒɪm', 'phòng tập thể hình, phòng thể dục'],
+  ['cycling', 'n', 'ˈsaɪklɪŋ', 'môn đạp xe, việc đi xe đạp'],
+  ['confident', 'adj', 'ˈkɒnfɪdənt', 'tự tin'],
+  ['excellent', 'adj', 'ˈeksələnt', 'xuất sắc, tuyệt vời'],
+  ['case', 'n', 'keɪs', 'trường hợp, vụ việc, cái hộp'],
+  ['development', 'n', 'dɪˈveləpmənt', 'sự phát triển, sự tiến triển'],
+  ['prevent', 'v', 'prɪˈvent', 'ngăn ngừa, ngăn chặn'],
+  ['course', 'n', 'kɔːs', 'khóa học, sân chạy, hướng đi'],
+  ['ceremony', 'n', 'ˈserəməni', 'nghi lễ, buổi lễ'],
+  ['degree', 'n', 'dɪˈɡriː', 'bằng cấp, mức độ, độ (nhiệt, góc,...)'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu trong trình duyệt
@@ -90,6 +107,7 @@ const UNITS = [
       { version: 1, prefix: 'u1s2', seedBase: 100, section: 'Phần 1 – Session 2', rows: U1S2_WORDS },
       { version: 2, prefix: 'u1s3', seedBase: 200, section: 'Phần 2 – Session 3 & vở ghi', rows: U1S3_WORDS },
       { version: 2, prefix: 'u1n', seedBase: 300, section: 'Phần 2 – Session 3 & vở ghi', rows: U1_NOTES_WORDS },
+      { version: 3, prefix: 'u1v3', seedBase: 400, section: 'Phần 3 – Vocab', rows: U1_VOCAB3_WORDS },
     ],
   },
 ]

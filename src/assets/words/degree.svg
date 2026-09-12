@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- diploma -->
+  <rect x="40" y="90" width="200" height="140" rx="10" fill="#FFF8E1" stroke="#C0A060" stroke-width="4"/>
+  <rect x="54" y="104" width="172" height="112" rx="6" fill="none" stroke="#D7C48A" stroke-width="2"/>
+  <text x="140" y="140" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#5D4037" text-anchor="middle">DIPLOMA</text>
+  <g fill="#BCAAA4">
+    <rect x="80" y="154" width="120" height="6" rx="3"/>
+    <rect x="90" y="168" width="100" height="6" rx="3"/>
+    <rect x="70" y="182" width="140" height="6" rx="3"/>
+  </g>
+  <!-- seal -->
+  <circle cx="196" cy="200" r="16" fill="#EF5350"/>
+  <circle cx="196" cy="200" r="10" fill="#FFCDD2"/>
+  <path d="M188 214 l-6 24 l14 -8 l14 8 l-6 -24 Z" fill="#C62828"/>
+  <!-- rolled scroll -->
+  <rect x="60" y="238" width="150" height="26" rx="13" fill="#FFF3E0" stroke="#C0A060" stroke-width="3"/>
+  <circle cx="60" cy="251" r="13" fill="#FFE0B2" stroke="#C0A060" stroke-width="3"/>
+  <circle cx="210" cy="251" r="13" fill="#FFE0B2" stroke="#C0A060" stroke-width="3"/>
+  <path d="M120 238 v26 M150 238 v26" stroke="#EF5350" stroke-width="10"/>
+  <path d="M135 264 l-8 18 h6 l2 -6 l2 6 h6 Z" fill="#C62828"/>
+  <!-- graduation cap -->
+  <path d="M140 30 l70 30 l-70 30 l-70 -30 Z" fill="#212121"/>
+  <path d="M100 74 v18 q40 20 80 0 v-18" fill="#424242"/>
+  <path d="M210 60 v30" stroke="#FFCA28" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="210" cy="94" r="6" fill="#FFCA28"/>
+  <!-- thermometer (độ) -->
+  <rect x="300" y="40" width="26" height="170" rx="13" fill="#FFF" stroke="#78909C" stroke-width="4"/>
+  <rect x="308" y="110" width="10" height="90" rx="5" fill="#EF5350"/>
+  <circle cx="313" cy="212" r="22" fill="#EF5350" stroke="#78909C" stroke-width="4"/>
+  <g stroke="#78909C" stroke-width="3" stroke-linecap="round">
+    <path d="M330 70 h10 M330 100 h10 M330 130 h10 M330 160 h10"/>
+  </g>
+  <text x="360" y="76" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#37474F">°C</text>
+  <!-- angle (góc) -->
+  <path d="M270 270 h60 M270 270 l50 -34" stroke="#1E88E5" stroke-width="5" stroke-linecap="round"/>
+  <path d="M296 270 a26 26 0 0 0 -4 -14" stroke="#1E88E5" stroke-width="3" fill="none"/>
+  <text x="352" y="262" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1565C0">90°</text>
+</svg>
