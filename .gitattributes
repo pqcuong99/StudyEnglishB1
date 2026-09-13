@@ -1,0 +1,5 @@
+# Script Windows luôn checkout với CRLF (cmd cần), lưu trong git dạng LF để
+# core.autocrlf=true trên VPS không báo "modified" ngay sau khi checkout
+# (điều đó làm git pull từ chối ghi đè khi có bản mới).
+*.bat text eol=crlf
+*.cmd text eol=crlf

@@ -108,8 +108,10 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
    (Run as administrator) — gỡ tạm module lỗi để trang lên lại, cài VC++ Redistributable (kèm UCRT),
    gắn lại module và kiểm tra `/api`.
 4. Kiểm tra từ máy ngoài: `http://103.249.117.233:37389/api/health` → thấy `{"ok":true,...}`.
-5. Các lần cập nhật sau chỉ cần double-click `update-vps.bat` — script tự xin quyền admin,
-   `git pull`, restart IIS và khởi động lại API bằng code mới (chưa cài API thì tự cài).
+5. Các lần cập nhật sau chỉ cần double-click `update-vps.bat` — script tự xin quyền admin rồi
+   chạy `server\update-vps.ps1`: `git fetch` + `reset --hard origin/main` (bỏ mọi sửa đổi tại
+   chỗ trên VPS — repo ở đó chỉ để chạy, `server\data` không bị đụng), restart IIS và khởi động
+   lại API bằng code mới (chưa cài API thì tự cài).
    Khởi động lại thủ công: `server\restart-api.bat`. API không trả lời thì chạy
    `server\check-api.bat` (Run as administrator): in trạng thái tác vụ, `data\task.log` (lỗi khi
    Task Scheduler khởi động node), `data\api.log` và chạy thử trực tiếp để hiện lỗi.
