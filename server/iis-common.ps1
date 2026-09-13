@@ -44,18 +44,47 @@ function Test-ModuleInstalled($m) {
   return $false
 }
 
-function Get-Url([string]$Url, [string]$Method = 'GET') {
-  try {
-    $wc = New-Object System.Net.WebClient
-    $wc.Proxy = $null
-    if ($Method -eq 'GET') { return $wc.DownloadString($Url) }
-    $wc.Headers['Content-Type'] = 'application/json'
-    return $wc.UploadString($Url, $Method, '{}')
-  } catch {
-    $resp = $_.Exception.InnerException
-    if (-not $resp) { $resp = $_.Exception }
-    return "LOI: $($resp.Message)"
+# Gọi HTTP, LUÔN đọc được cả nội dung khi lỗi (để biết 404 do IIS hay do Node).
+# Trả về hashtable: status (int, 0 nếu không kết nối), body, server (header Server)
+function Invoke-Http([string]$Url, [string]$Method = 'GET', [string]$Body = '{}') {
+  $req = [System.Net.HttpWebRequest]::Create($Url)
+  $req.Method = $Method
+  $req.Proxy = $null
+  $req.Timeout = 15000
+  $req.AllowAutoRedirect = $false
+  if ($Method -ne 'GET' -and $Method -ne 'HEAD') {
+    $b = [System.Text.Encoding]::UTF8.GetBytes($Body)
+    $req.ContentType = 'application/json'
+    $req.ContentLength = $b.Length
+    try { $s = $req.GetRequestStream(); $s.Write($b, 0, $b.Length); $s.Close() }
+    catch { return @{ status = 0; body = "LOI (gui): $($_.Exception.Message)"; server = '' } }
   }
+  $resp = $null
+  try { $resp = $req.GetResponse() }
+  catch [System.Net.WebException] {
+    $resp = $_.Exception.Response
+    if (-not $resp) { return @{ status = 0; body = "LOI: $($_.Exception.Message)"; server = '' } }
+  }
+  $code = [int]$resp.StatusCode
+  $server = $resp.Headers['Server']
+  $sr = New-Object System.IO.StreamReader($resp.GetResponseStream())
+  $body = $sr.ReadToEnd(); $sr.Close(); $resp.Close()
+  return @{ status = $code; body = $body; server = $server }
+}
+
+# Chuỗi hiển thị gọn cho một lần gọi
+function Format-Http($r) {
+  $b = ($r.body -replace '\s+', ' ')
+  if ($b.Length -gt 160) { $b = $b.Substring(0, 160) + '...' }
+  $srv = if ($r.server) { " [Server: $($r.server)]" } else { ' [Server: (khong co -> Node)]' }
+  return "HTTP $($r.status)$srv $b"
+}
+
+# tương thích cũ: trả chuỗi body, hoặc "LOI: ..." nếu không kết nối được
+function Get-Url([string]$Url, [string]$Method = 'GET') {
+  $r = Invoke-Http $Url $Method
+  if ($r.status -eq 0) { return $r.body }
+  return $r.body
 }
 
 # Site IIS đang trỏ tới <repo>\dist (hoặc site duy nhất, hoặc theo tên truyền vào)
@@ -108,28 +137,44 @@ function Start-SiteAndCheck($site) {
 # Kiểm tra /api qua IIS (GET + PUT); trả về $true nếu cả hai đi qua được
 function Test-ApiViaIis($site) {
   $port = Get-SitePort $site
-  $direct = Get-Url "http://localhost:$ApiPort/api/health"
-  Write-Host "  API truc tiep  (localhost:$ApiPort): $direct"
-  if ($direct -like 'LOI*') {
+  $dGet = Invoke-Http "http://localhost:$ApiPort/api/health"
+  Write-Host "  API truc tiep GET (localhost:$ApiPort): $(Format-Http $dGet)"
+  if ($dGet.status -eq 0) {
     Write-Host '  -> API chua chay. Chay server\install-api.bat truoc.' -ForegroundColor Yellow
     return $false
   }
-  $viaGet = Get-Url "http://localhost:$port/api/health"
-  Write-Host "  Qua IIS GET    (localhost:$port): $viaGet"
-  $viaPut = Get-Url "http://localhost:$port/api/health" 'PUT'
-  Write-Host "  Qua IIS PUT    (localhost:$port): $viaPut"
-  if ($viaPut -notlike '*"method":"PUT"*') {
-    # WebDAV chặn PUT/DELETE (thường trả 405, đôi khi 404) -> gỡ WebDAV khỏi site
-    # rồi thử lại. Gỡ ở cấp site lẫn toàn máy để chắc ăn (vô hại nếu không có).
-    Write-Host '  PUT khong qua duoc (thuong do WebDAV) -> go WebDAVModule roi thu lai' -ForegroundColor Yellow
-    foreach ($scope in @(@($site.Name), @())) {
-      Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/modules', "/-[name='WebDAVModule']", '/commit:apphost')) -Quiet | Out-Null
-      Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/handlers', "/-[name='WebDAV']", '/commit:apphost')) -Quiet | Out-Null
-    }
-    # tắt hẳn WebDAV authoring nếu section này có mặt (một số bản cài bật sẵn)
-    Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/webdav/authoring', '/enabled:false', '/commit:apphost') -Quiet | Out-Null
-    $viaPut = Get-Url "http://localhost:$port/api/health" 'PUT'
-    Write-Host "  Qua IIS PUT    (localhost:$port): $viaPut"
+  $dPut = Invoke-Http "http://localhost:$ApiPort/api/health" 'PUT'
+  Write-Host "  API truc tiep PUT (localhost:$ApiPort): $(Format-Http $dPut)"
+  if ($dPut.body -notlike '*"method":"PUT"*') {
+    Write-Host '  -> Node chua nhan PUT o /api/health. Chay update-vps.bat de cap nhat server\index.js roi thu lai.' -ForegroundColor Yellow
+    return $false
   }
-  return ($viaGet -like '*"ok":true*' -and $viaPut -like '*"method":"PUT"*')
+
+  $vGet = Invoke-Http "http://localhost:$port/api/health"
+  Write-Host "  Qua IIS GET    (localhost:$port): $(Format-Http $vGet)"
+  $vPut = Invoke-Http "http://localhost:$port/api/health" 'PUT'
+  Write-Host "  Qua IIS PUT    (localhost:$port): $(Format-Http $vPut)"
+
+  if ($vPut.body -notlike '*"method":"PUT"*') {
+    # header Server cho biết ai trả 404: IIS (co "Microsoft-IIS") hay Node (khong co)
+    if ($vPut.server -like '*IIS*' -or $vPut.server -like '*HTTPAPI*') {
+      Write-Host '  PUT bi IIS chan truoc khi chuyen tiep (Server la IIS).' -ForegroundColor Yellow
+      Write-Host '  -> go WebDAV va mo verb PUT trong Request Filtering roi thu lai.'
+      foreach ($scope in @(@($site.Name), @())) {
+        Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/modules', "/-[name='WebDAVModule']", '/commit:apphost')) -Quiet | Out-Null
+        Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/handlers', "/-[name='WebDAV']", '/commit:apphost')) -Quiet | Out-Null
+      }
+      Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/webdav/authoring', '/enabled:false', '/commit:apphost') -Quiet | Out-Null
+      # cho phép mọi verb trong Request Filtering (mở PUT/DELETE nếu bị chặn)
+      Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/security/requestFiltering/verbs', '/allowUnlisted:true', '/commit:apphost') -Quiet | Out-Null
+      Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/security/requestFiltering/verbs', "/+[verb='PUT',allowed='True']", '/commit:apphost') -Quiet | Out-Null
+      $vPut = Invoke-Http "http://localhost:$port/api/health" 'PUT'
+      Write-Host "  Qua IIS PUT    (localhost:$port): $(Format-Http $vPut)"
+    } else {
+      Write-Host '  PUT da toi Node nhung Node tra 404 -> URL sau rewrite khong dung.' -ForegroundColor Yellow
+      Write-Host '  Gui man hinh nay cho Claude (kem 2 dong "Qua IIS" o tren).'
+    }
+  }
+
+  return ($vGet.body -like '*"ok":true*' -and $vPut.body -like '*"method":"PUT"*')
 }
