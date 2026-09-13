@@ -1,11 +1,11 @@
-// Gọi API tiến độ (server/index.js). Mặc định API chạy cùng máy với trang web
-// ở cổng 37390; đổi bằng biến VITE_API_BASE khi build (vd. http://1.2.3.4:4000).
-const API_BASE =
-  (import.meta.env.VITE_API_BASE || '').replace(/\/+$/, '') ||
-  `${location.protocol}//${location.hostname}:37390`
+// Gọi API tiến độ (server/index.js). Mặc định gọi cùng địa chỉ với trang web
+// (`/api/...`): trên VPS, IIS chuyển tiếp /api sang Node (server/install-proxy.bat),
+// ở máy dev Vite proxy sang cổng 37390 (vite.config.js). Muốn gọi thẳng API ở địa
+// chỉ khác thì đặt VITE_API_BASE=http://host:port khi build.
+const API_BASE = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/, '')
 
 export function apiBase() {
-  return API_BASE
+  return API_BASE || `${location.origin}/api`
 }
 
 async function request(path, options = {}) {

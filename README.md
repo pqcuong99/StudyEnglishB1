@@ -83,10 +83,12 @@ Tiến độ của mỗi người dùng do `server/index.js` quản lý — mộ
 (không cần `npm install`), mỗi người một file JSON trong `server/data/users/` (thư mục này
 không đưa lên git — nhớ **backup** khi chuyển VPS). Log ở `server/data/api.log`.
 
-Mặc định trang web gọi API ở **cùng địa chỉ với trang, cổng 37390** (trang ở
-`http://103.249.117.233:37389` thì API là `http://103.249.117.233:37390`). Muốn đổi địa chỉ:
-đặt biến `VITE_API_BASE=http://host:port` khi `npm run build`; đổi cổng API bằng biến môi
-trường `PORT` (và sửa cổng trong `server/install-api.ps1`).
+Trang web gọi API ở **cùng địa chỉ với chính nó** (`/api/...`): trên VPS, IIS chuyển tiếp
+`/api/*` sang Node đang nghe ở `localhost:37390` (nhờ URL Rewrite + ARR, cài bằng
+`server\install-proxy.bat`) — nên chỉ cần **một cổng công khai** (37389) như trước, không phải
+nhờ nhà cung cấp mở thêm cổng. Ở máy dev, Vite proxy `/api` sang cổng 37390 (`vite.config.js`).
+Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://host:port` khi `npm run build`.
+Đổi cổng API bằng biến môi trường `PORT` (và sửa cổng trong hai file `install-*.ps1`).
 
 **Cài trên VPS Windows (làm một lần):**
 
@@ -96,16 +98,19 @@ trường `PORT` (và sửa cổng trong `server/install-api.ps1`).
 2. Trong thư mục repo trên VPS, chuột phải `server\install-api.bat` → **Run as administrator**.
    Script tạo tác vụ `StudyEnglishB1-API` tự chạy khi Windows khởi động (tự khởi động lại nếu
    lỗi), mở cổng 37390 trên Windows Firewall rồi chạy API ngay.
-3. Kiểm tra: mở `http://103.249.117.233:37390/api/health` → thấy `{"ok":true,...}`. Nếu không vào
-   được từ ngoài, kiểm tra thêm firewall của nhà cung cấp VPS (security group) đã mở cổng 37390.
-4. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
+3. Chuột phải `server\install-proxy.bat` → **Run as administrator**: tự tải + cài IIS URL Rewrite
+   2.1 và Application Request Routing 3.0, bật proxy, thêm rule chuyển tiếp `/api` cho site đang
+   trỏ tới `dist` (nếu không tự tìm được site: `install-proxy.bat "Tên site"`), rồi tự kiểm tra
+   GET/PUT qua IIS. Rule nằm trong `applicationHost.config`, không đụng `web.config` của `dist`.
+4. Kiểm tra từ máy ngoài: `http://103.249.117.233:37389/api/health` → thấy `{"ok":true,...}`.
+5. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
    Khởi động lại thủ công: `server\restart-api.bat`. API không trả lời thì chạy
    `server\check-api.bat` (Run as administrator): in trạng thái tác vụ, `data\task.log` (lỗi khi
    Task Scheduler khởi động node), `data\api.log` và chạy thử trực tiếp để hiện lỗi.
    Node quá mới so với Windows (mã kết thúc 216, "not compatible with the version of Windows")
    → cài Node 16.
 
-Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev`.
+Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev` (Vite tự proxy `/api`).
 
 Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`.
 

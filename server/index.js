@@ -141,8 +141,9 @@ async function handle(req, res) {
     return
   }
 
-  if (req.method === 'GET' && pathname === '/api/health') {
-    send(res, 200, { ok: true, users: index.size })
+  // nhận mọi method để kiểm tra proxy (IIS) có chuyển tiếp cả PUT hay không
+  if (pathname === '/api/health') {
+    send(res, 200, { ok: true, users: index.size, method: req.method })
     return
   }
 
