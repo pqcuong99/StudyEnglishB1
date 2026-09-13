@@ -42,7 +42,7 @@ export default function Quiz({
   items,
   pool,
   title,
-  onUpdateWord,
+  onAnswer,
   onExit,
   onStartFlashcards,
   onStartWriting,
@@ -83,8 +83,8 @@ export default function Quiz({
     if (selected !== null) return
     const correct = option === q.answer
     setAnswers((a) => ({ ...a, [index]: option }))
-    // cập nhật trạng thái thuộc/chưa thuộc theo kết quả trả lời
-    onUpdateWord(q.item.unitId, q.item.word.id, { known: correct })
+    // cập nhật trạng thái thuộc/chưa thuộc + thống kê đúng/sai của từ
+    onAnswer(q.item.unitId, q.item.word.id, correct)
   }
 
   function next() {

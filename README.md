@@ -34,6 +34,18 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Có nút 💡 gợi ý chữ cái đầu + số ký tự. Nhấn `Enter` để kiểm tra / sang câu tiếp theo.
   Viết sai thì từ tự chuyển về "chưa thuộc" như phần trắc nghiệm.
 - **Học ngẫu nhiên**: trộn từ của tất cả các unit, hoặc chỉ học các từ chưa thuộc.
+- **Đăng nhập bằng tên (👤)**: lần đầu mở app trên một trình duyệt sẽ hỏi tên. Tiến độ (từ đã
+  thuộc, thống kê từ hay sai, bài nghe đã làm, unit tự tạo) được lưu **trên máy chủ theo tên**
+  đó, nên cùng tên ở máy/điện thoại khác vẫn thấy tiến độ. Tên được nhớ trong trình duyệt để lần
+  sau vào thẳng; nút "Đổi người dùng" ở trang chủ để đăng nhập tên khác. Không phân biệt hoa/thường.
+  Nếu mất kết nối máy chủ, app vẫn học tiếp bằng bản đệm trong trình duyệt và tự đồng bộ lại khi
+  kết nối được (huy hiệu ☁️ Đã lưu / ⏳ Đang lưu / ⚠️ Chưa lưu được ở trang chủ). Dữ liệu của
+  bản cũ (trước khi có đăng nhập) được chuyển sang cho người đầu tiên đăng nhập trên trình duyệt đó.
+- **Từ hay sai (🔥)**: mỗi câu trả lời trong trắc nghiệm / kiểm tra viết được ghi lại theo từng từ
+  (số lần sai, số lần đúng, chuỗi đúng liên tiếp). Từ sai từ **2 lần** trở lên vào nhóm "Từ hay
+  sai" ở trang chủ (kèm nút ôn flashcard / kiểm tra / viết riêng nhóm này, nhãn 🔥 trên thẻ từ).
+  **🎲 Kiểm tra ngẫu nhiên** dành ~40% đề cho nhóm này. Trả lời đúng **3 lần liên tiếp** thì từ tự
+  rời khỏi nhóm; sai lại thì quay vào. Ngưỡng chỉnh ở `src/lib/wordStats.js`.
 - **Luyện nghe (🎧)**: trong trang unit có khối "Luyện nghe" gồm các bài nghe ngắn kèm
   recording script. Mỗi bài: nghe audio (có nút nghe lại từ đầu, lùi 5 giây, nghe chậm 0.75x),
   điền các từ bị **ẩn ngẫu nhiên** trong script rồi bấm **Nộp bài**. Ba mức độ: 🌱 Dễ (ẩn 5 từ),
@@ -65,8 +77,35 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   `seedUnits.js` với `version` mới và tăng `SEED_VERSION`. Khi mở app, các từ mới sẽ tự được
   nối vào unit đã lưu (giữ nguyên tiến độ đã học, không thêm lại từ đã có).
 
+## Máy chủ lưu tiến độ (server/)
+
+Tiến độ của mỗi người dùng do `server/index.js` quản lý — một API nhỏ viết bằng Node thuần
+(không cần `npm install`), mỗi người một file JSON trong `server/data/users/` (thư mục này
+không đưa lên git — nhớ **backup** khi chuyển VPS). Log ở `server/data/api.log`.
+
+Mặc định trang web gọi API ở **cùng địa chỉ với trang, cổng 37390** (trang ở
+`http://103.249.117.233:37389` thì API là `http://103.249.117.233:37390`). Muốn đổi địa chỉ:
+đặt biến `VITE_API_BASE=http://host:port` khi `npm run build`; đổi cổng API bằng biến môi
+trường `PORT` (và sửa cổng trong `server/install-api.ps1`).
+
+**Cài trên VPS Windows (làm một lần):**
+
+1. Cài Node.js LTS từ https://nodejs.org (để mặc định "Add to PATH").
+2. Trong thư mục repo trên VPS, chuột phải `server\install-api.bat` → **Run as administrator**.
+   Script tạo tác vụ `StudyEnglishB1-API` tự chạy khi Windows khởi động (tự khởi động lại nếu
+   lỗi), mở cổng 37390 trên Windows Firewall rồi chạy API ngay.
+3. Kiểm tra: mở `http://103.249.117.233:37390/api/health` → thấy `{"ok":true,...}`. Nếu không vào
+   được từ ngoài, kiểm tra thêm firewall của nhà cung cấp VPS (security group) đã mở cổng 37390.
+4. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
+   Khởi động lại thủ công: `server\restart-api.bat`.
+
+Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev`.
+
+Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`.
+
 ## Lưu ý
 
-- Dữ liệu lưu trong trình duyệt (localStorage) — dùng cùng một trình duyệt để giữ tiến độ học.
+- Tiến độ lưu trên máy chủ theo tên đăng nhập (xem mục *Máy chủ lưu tiến độ*); cài đặt API key
+  ảnh AI và cache ảnh vẫn nằm riêng trong từng trình duyệt.
 - Ảnh AI cần mạng internet và được tạo lần lượt từng ảnh (lần đầu hơi chậm, sau đó có cache).
 - Phát âm dùng giọng đọc tiếng Anh có sẵn của trình duyệt.

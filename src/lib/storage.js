@@ -1,25 +1,31 @@
 import { SEED_VERSION, seedUnits, seedUnitUpdates } from '../data/seedUnits.js'
 
-const KEY = 'vocab-units-v1'
+// Khóa localStorage của bản cũ (trước khi có đăng nhập theo tên). Người dùng
+// đầu tiên đăng nhập trên trình duyệt đó sẽ kế thừa dữ liệu này.
+const LEGACY_KEY = 'vocab-units-v1'
 
-export function loadUnits() {
-  // khóa cũ của cơ chế cập nhật seed, không dùng nữa
-  localStorage.removeItem('vocab-seed-version')
-
-  let units = null
-  try {
-    const raw = localStorage.getItem(KEY)
-    if (raw) units = JSON.parse(raw)
-  } catch {
-    // dữ liệu hỏng -> dùng unit mặc định
-  }
-  // lần đầu mở app (hoặc dữ liệu hỏng): nạp sẵn unit của khóa học
+// Chuẩn hóa danh sách unit lấy từ máy chủ / bộ nhớ đệm: không có (người dùng
+// mới) thì nạp unit mẫu; có rồi thì nối thêm từ mới của seed và điền tên phần.
+export function normalizeUnits(units) {
   if (!Array.isArray(units)) return seedUnits()
   return fillSections(mergeSeedAdditions(units))
 }
 
-export function saveUnits(units) {
-  localStorage.setItem(KEY, JSON.stringify(units))
+// Lấy (và đánh dấu đã chuyển) dữ liệu của bản cũ; null nếu không có.
+export function takeLegacyUnits() {
+  localStorage.removeItem('vocab-seed-version')
+  let units = null
+  try {
+    const raw = localStorage.getItem(LEGACY_KEY)
+    if (raw) {
+      units = JSON.parse(raw)
+      localStorage.setItem(LEGACY_KEY + '-migrated', raw)
+      localStorage.removeItem(LEGACY_KEY)
+    }
+  } catch {
+    // dữ liệu hỏng -> coi như không có
+  }
+  return Array.isArray(units) ? units : null
 }
 
 // Unit đã lưu tương ứng với unit mẫu: ưu tiên trùng id; nếu không có

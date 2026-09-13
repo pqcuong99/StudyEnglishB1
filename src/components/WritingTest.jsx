@@ -46,7 +46,7 @@ export default function WritingTest({
   items,
   pool,
   title,
-  onUpdateWord,
+  onAnswer,
   onExit,
   onStartFlashcards,
   onStartQuiz,
@@ -90,7 +90,7 @@ export default function WritingTest({
     const correct = normalize(answer) === normalize(current.word.word)
     setChecked(correct)
     setResults((r) => ({ ...r, [current.word.id]: correct }))
-    onUpdateWord(current.unitId, current.word.id, { known: correct })
+    onAnswer(current.unitId, current.word.id, correct)
     speak(current.word.word)
   }
 

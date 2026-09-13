@@ -1,11 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LEVELS, levelById, makeCloze, isCorrect } from '../lib/cloze.js'
-import {
-  loadListeningProgress,
-  recordListeningResult,
-  loadLastLevel,
-  saveLastLevel,
-} from '../lib/listeningProgress.js'
+import { loadLastLevel, saveLastLevel } from '../lib/listeningProgress.js'
 
 const SPEAKER = {
   F: { icon: '👧', label: 'F' },
@@ -480,11 +475,11 @@ function ListeningExercise({
 }
 
 // ---------- màn luyện nghe của một bộ bài ----------
-export default function Listening({ set, onExit }) {
+// `progress` / `onResult`: tiến độ nghe nằm trong dữ liệu người dùng (App quản lý và lưu)
+export default function Listening({ set, progress, onResult, onExit }) {
   const [exerciseId, setExerciseId] = useState(null)
   const [levelId, setLevelIdRaw] = useState(loadLastLevel)
   const [attempt, setAttempt] = useState(0)
-  const [progress, setProgress] = useState(loadListeningProgress)
 
   function setLevelId(id) {
     setLevelIdRaw(id)
@@ -540,9 +535,7 @@ export default function Listening({ set, onExit }) {
       }}
       onBackToList={() => setExerciseId(null)}
       onExit={onExit}
-      onResult={(exId, lv, correct, total) =>
-        setProgress(recordListeningResult(progress, exId, lv, correct, total))
-      }
+      onResult={onResult}
     />
   )
 }

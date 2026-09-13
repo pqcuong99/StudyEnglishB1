@@ -5,11 +5,11 @@ REM Dat file nay trong thu muc repo (IIS dang tro vao <repo>\dist).
 
 cd /d "%~dp0"
 
-echo === [1/3] Dua dist ve dung ban trong git (bo file build tai cho) ===
+echo === [1/4] Dua dist ve dung ban trong git (bo file build tai cho) ===
 git checkout -- dist
 git clean -fdq dist
 
-echo === [2/3] git pull origin main ===
+echo === [2/4] git pull origin main ===
 git pull origin main
 if errorlevel 1 (
   echo.
@@ -18,8 +18,17 @@ if errorlevel 1 (
   exit /b 1
 )
 
-echo === [3/3] Restart IIS ===
+echo === [3/4] Restart IIS ===
 iisreset
+
+echo === [4/4] Restart API tien do (neu da cai bang server\install-api.bat) ===
+schtasks /query /tn "StudyEnglishB1-API" >nul 2>&1
+if errorlevel 1 (
+  echo   Chua cai API - bo qua. Xem huong dan trong README.
+) else (
+  schtasks /end /tn "StudyEnglishB1-API" >nul 2>&1
+  schtasks /run /tn "StudyEnglishB1-API"
+)
 
 echo.
 echo Cap nhat xong. Mo lai trang va bam Ctrl+F5.

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { randomSeed } from '../lib/image.js'
 import { speak } from '../lib/speech.js'
 import WordImage from './WordImage.jsx'
+import { MASTER_STREAK, isHard } from '../lib/wordStats.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -94,7 +95,9 @@ function StudyButtons({
   )
 }
 
-function WordCard({ unitId, w, onUpdateWord, onDeleteWord }) {
+// `stat`: thống kê đúng/sai của từ (lib/wordStats.js) để gắn nhãn "hay sai"
+function WordCard({ unitId, w, stat, onUpdateWord, onDeleteWord }) {
+  const hard = isHard(stat)
   return (
     <div className={`word-card card ${w.known ? 'is-known' : ''}`}>
       <div className="word-img-wrap">
@@ -112,6 +115,14 @@ function WordCard({ unitId, w, onUpdateWord, onDeleteWord }) {
           <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
             🔊
           </button>
+          {hard && (
+            <span
+              className="hard-badge"
+              title={`Đã sai ${stat.wrong} lần · đúng liên tiếp ${stat.streak}/${MASTER_STREAK}`}
+            >
+              🔥 hay sai
+            </span>
+          )}
         </div>
         {w.ipa && <div className="ipa">/{w.ipa}/</div>}
         <div className="meaning">{w.meaning}</div>
@@ -139,6 +150,7 @@ function WordCard({ unitId, w, onUpdateWord, onDeleteWord }) {
 
 export default function UnitDetail({
   unit,
+  wordStats = {},
   onBack,
   onDeleteUnit,
   onDeleteWord,
@@ -198,7 +210,7 @@ export default function UnitDetail({
 
         <div className="word-grid">
           {current.words.map((w) => (
-            <WordCard key={w.id} w={w} {...cardProps} />
+            <WordCard key={w.id} w={w} stat={wordStats[w.id]} {...cardProps} />
           ))}
         </div>
       </div>
@@ -362,7 +374,7 @@ export default function UnitDetail({
       {sections.length === 0 && (
         <div className="word-grid">
           {unit.words.map((w) => (
-            <WordCard key={w.id} w={w} {...cardProps} />
+            <WordCard key={w.id} w={w} stat={wordStats[w.id]} {...cardProps} />
           ))}
         </div>
       )}

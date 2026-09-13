@@ -977,3 +977,145 @@ kbd {
 .listen-result {
   border-left: 5px solid var(--success);
 }
+
+/* ---------- đăng nhập theo tên ---------- */
+.login-page {
+  max-width: 640px;
+}
+.login-card h2 {
+  margin: 0 0 8px;
+}
+.login-help {
+  color: var(--muted);
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+.login-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.login-row .input {
+  flex: 1;
+  min-width: 200px;
+  font-size: 1.05rem;
+}
+.login-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.login-chips-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.chip {
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.chip:hover {
+  border-color: var(--primary);
+  background: #eef1ff;
+}
+.login-note {
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ---------- thanh người dùng + trạng thái lưu ---------- */
+.user-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 0.92rem;
+}
+.user-name {
+  font-weight: 600;
+}
+.sync-badge {
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.82rem;
+  background: var(--border);
+  color: var(--muted);
+}
+.sync-badge.sync-saved {
+  background: #dcfce7;
+  color: #15803d;
+}
+.sync-badge.sync-saving {
+  background: #fef3c7;
+  color: #b45309;
+}
+.sync-badge.sync-offline {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ---------- từ hay sai ---------- */
+.hard-card {
+  border-left: 5px solid var(--danger);
+}
+.hard-help {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 6px 0 10px;
+  line-height: 1.5;
+}
+.hard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.hard-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.hard-word {
+  flex: 1;
+  min-width: 220px;
+}
+.hard-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.hard-wrong {
+  color: var(--danger);
+  font-weight: 600;
+}
+.hard-streak {
+  color: var(--primary);
+  font-weight: 600;
+}
+.hard-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.75rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
