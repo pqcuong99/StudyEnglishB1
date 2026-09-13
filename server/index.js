@@ -1,5 +1,5 @@
 // API lưu tiến độ học theo từng người dùng — chạy trên VPS cạnh IIS.
-// Không cần cài thêm gói nào (chỉ dùng module có sẵn của Node >= 18).
+// Không cần cài thêm gói nào (chỉ dùng module có sẵn của Node >= 16).
 //
 //   node server/index.js            (mặc định cổng 37390)
 //   PORT=4000 node server/index.js

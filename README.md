@@ -99,7 +99,11 @@ trường `PORT` (và sửa cổng trong `server/install-api.ps1`).
 3. Kiểm tra: mở `http://103.249.117.233:37390/api/health` → thấy `{"ok":true,...}`. Nếu không vào
    được từ ngoài, kiểm tra thêm firewall của nhà cung cấp VPS (security group) đã mở cổng 37390.
 4. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
-   Khởi động lại thủ công: `server\restart-api.bat`.
+   Khởi động lại thủ công: `server\restart-api.bat`. API không trả lời thì chạy
+   `server\check-api.bat` (Run as administrator): in trạng thái tác vụ, `data\task.log` (lỗi khi
+   Task Scheduler khởi động node), `data\api.log` và chạy thử trực tiếp để hiện lỗi.
+   Node quá mới so với Windows (mã kết thúc 216, "not compatible with the version of Windows")
+   → cài Node 16.
 
 Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev`.
 
