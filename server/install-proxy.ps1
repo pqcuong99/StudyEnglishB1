@@ -18,12 +18,24 @@ $DistPath = [System.IO.Path]::GetFullPath((Join-Path $Dir '..\dist')).TrimEnd('\
 $inetsrv = Join-Path $env:windir 'System32\inetsrv'
 $appcmd = Join-Path $inetsrv 'appcmd.exe'
 
+# Module: tên đăng ký trong globalModules của IIS + các vị trí file dll có thể có
 $Modules = @(
-  @{ Name = 'IIS URL Rewrite 2.1'; Dll = 'rewrite.dll'; File = 'rewrite_amd64_en-US.msi'
+  @{ Name = 'IIS URL Rewrite 2.1'; Module = 'RewriteModule'; File = 'rewrite_amd64_en-US.msi'
+     Dlls = @((Join-Path $inetsrv 'rewrite.dll'))
      Url = 'https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi' },
-  @{ Name = 'IIS Application Request Routing 3.0'; Dll = 'requestRouter.dll'; File = 'requestRouter_amd64.msi'
+  @{ Name = 'IIS Application Request Routing 3.0'; Module = 'ApplicationRequestRouting'; File = 'requestRouter_amd64.msi'
+     Dlls = @((Join-Path $env:ProgramFiles 'IIS\Application Request Routing\requestRouter.dll'), (Join-Path $inetsrv 'requestRouter.dll'))
      Url = 'https://download.microsoft.com/download/E/9/8/E9849D6A-020E-47E4-9FD0-A023E99B54EB/requestRouter_amd64.msi' }
 )
+
+# Đã cài chưa: có trong danh sách globalModules của IIS, hoặc thấy file dll
+function Test-ModuleInstalled($m) {
+  $list = ''
+  try { $list = (& $appcmd list config -section:system.webServer/globalModules | Out-String) } catch { $list = '' }
+  if ($list -match ('name="' + [regex]::Escape($m.Module) + '"')) { return $true }
+  foreach ($d in $m.Dlls) { if (Test-Path $d) { return $true } }
+  return $false
+}
 
 function Invoke-AppCmd {
   # chạy appcmd, in lệnh + kết quả; trả về $true nếu thành công
@@ -59,8 +71,7 @@ Import-Module WebAdministration
 Write-Host '=== [1/4] Kiem tra / cai URL Rewrite va ARR ==='
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]3072 } catch { } # TLS 1.2 cho download.microsoft.com
 foreach ($m in $Modules) {
-  $dll = Join-Path $inetsrv $m.Dll
-  if (Test-Path $dll) {
+  if (Test-ModuleInstalled $m) {
     Write-Host "  $($m.Name): da cai"
     continue
   }
@@ -74,8 +85,8 @@ foreach ($m in $Modules) {
     Write-Host "LOI: cai $($m.Name) that bai (msiexec exit $($p.ExitCode)). Thu cai tay file $dest" -ForegroundColor Red
     exit 1
   }
-  if (-not (Test-Path $dll)) {
-    Write-Host "LOI: cai xong nhung khong thay $dll" -ForegroundColor Red
+  if (-not (Test-ModuleInstalled $m)) {
+    Write-Host "LOI: msiexec bao cai xong nhung IIS chua thay module $($m.Module). Thu cai tay file $dest roi chay lai." -ForegroundColor Red
     exit 1
   }
   Write-Host "  $($m.Name): cai xong"
