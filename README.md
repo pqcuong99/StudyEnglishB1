@@ -90,7 +90,9 @@ trường `PORT` (và sửa cổng trong `server/install-api.ps1`).
 
 **Cài trên VPS Windows (làm một lần):**
 
-1. Cài Node.js LTS từ https://nodejs.org (để mặc định "Add to PATH").
+1. Cài Node.js (từ bản 16 trở lên) — https://nodejs.org. **Windows Server 2012 R2 / 8.1** chỉ
+   chạy được Node 16: tải `node-v16.x.x-x64.msi` tại https://nodejs.org/dist/latest-v16.x/.
+   Kiểm tra bằng cách mở cmd mới gõ `node -v`.
 2. Trong thư mục repo trên VPS, chuột phải `server\install-api.bat` → **Run as administrator**.
    Script tạo tác vụ `StudyEnglishB1-API` tự chạy khi Windows khởi động (tự khởi động lại nếu
    lỗi), mở cổng 37390 trên Windows Firewall rồi chạy API ngay.
