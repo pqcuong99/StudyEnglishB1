@@ -26,8 +26,8 @@ schtasks /query /tn "StudyEnglishB1-API" >nul 2>&1
 if errorlevel 1 (
   echo   Chua cai API - bo qua. Xem huong dan trong README.
 ) else (
-  schtasks /end /tn "StudyEnglishB1-API" >nul 2>&1
-  schtasks /run /tn "StudyEnglishB1-API"
+  REM dung sach tien trinh cu (nha cong 37390) roi chay lai code moi
+  powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0server\install-api.ps1" -RestartOnly
 )
 
 echo.

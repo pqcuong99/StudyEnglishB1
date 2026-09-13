@@ -3,7 +3,8 @@
 #   - mở cổng 37390 trên Windows Firewall
 # Chạy bằng install-api.bat (Run as administrator). Cần cài Node.js trước.
 # check-api.bat gọi file này với -CheckOnly: chỉ kiểm tra + chẩn đoán, không cài lại.
-param([switch]$CheckOnly)
+# restart-api.bat / update-vps.bat gọi với -RestartOnly: chỉ dừng sạch + chạy lại.
+param([switch]$CheckOnly, [switch]$RestartOnly)
 
 $ErrorActionPreference = 'Stop'
 
@@ -55,6 +56,40 @@ function Wait-Health([int]$Seconds) {
     Start-Sleep -Seconds 1
   }
   return $null
+}
+
+# PID đang nghe cổng $Port (Get-NetTCPConnection, dự phòng netstat cho Windows cũ)
+function Get-PortOwners {
+  $pids = @()
+  try {
+    $pids = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction Stop | Select-Object -ExpandProperty OwningProcess
+  } catch {
+    foreach ($line in (netstat -ano | Select-String ":$Port\s")) {
+      $parts = ($line.ToString() -split '\s+') | Where-Object { $_ }
+      if ($parts.Count -ge 5 -and $parts[1] -match ":$Port$" -and $parts[-1] -match '^\d+$') { $pids += [int]$parts[-1] }
+    }
+  }
+  return @($pids | Select-Object -Unique)
+}
+
+# Dừng sạch API: kết thúc tác vụ rồi kill tiến trình cũ còn giữ cổng (nếu không
+# thì node mới sẽ EADDRINUSE và tiến trình cũ với code cũ vẫn phục vụ).
+function Stop-Api {
+  & schtasks /end /tn $TaskName > $null 2>&1
+  Start-Sleep -Milliseconds 500
+  $owners = Get-PortOwners
+  foreach ($processId in $owners) {
+    try {
+      $p = Get-Process -Id $processId -ErrorAction Stop
+      Write-Host "  Dung tien trinh dang giu cong $Port : $($p.ProcessName) (PID $processId)"
+      Stop-Process -Id $processId -Force -ErrorAction Stop
+    } catch { }
+  }
+  # đợi cổng thực sự được nhả
+  for ($i = 0; $i -lt 10; $i++) {
+    if ((Get-PortOwners).Count -eq 0) { break }
+    Start-Sleep -Milliseconds 500
+  }
 }
 
 function Show-Tail([string]$File, [int]$Lines) {
@@ -201,8 +236,26 @@ if (-not (Test-Path $Wrapper)) {
   exit 1
 }
 
+# Khởi động lại sạch: dừng tiến trình cũ (nhả cổng), chạy lại, KHÔNG cài lại tác vụ.
+if ($RestartOnly) {
+  Write-Host '=== Khoi dong lai API (dung sach tien trinh cu) ==='
+  Stop-Api
+  Start-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue
+  $h = Wait-Health 10
+  if ($h) {
+    Write-Host "OK: API dang chay: $h" -ForegroundColor Green
+  } else {
+    Write-Host "API chua phan hoi tai $HealthUrl" -ForegroundColor Yellow
+    Show-Diagnostics
+    exit 1
+  }
+  exit 0
+}
+
 Write-Host "=== [1/3] Tao tac vu '$TaskName' (chay khi Windows khoi dong, tai khoan SYSTEM) ==="
 Register-ApiTask 'SYSTEM'
+# dừng tiến trình cũ (nếu có) để node mới không bị EADDRINUSE và phục vụ code cũ
+Stop-Api
 
 Write-Host "=== [2/3] Mo cong $Port tren Windows Firewall ==="
 Remove-NetFirewallRule -DisplayName $TaskName -ErrorAction SilentlyContinue
@@ -216,6 +269,7 @@ if (-not $h) {
   # SYSTEM không chạy được -> thử tài khoản đang đăng nhập (nơi node -v vừa chạy OK)
   $me = "$env:USERDOMAIN\$env:USERNAME"
   Write-Host "  SYSTEM khong khoi dong duoc API, thu lai bang tai khoan $me ..." -ForegroundColor Yellow
+  Stop-Api
   Register-ApiTask $me
   Start-ScheduledTask -TaskName $TaskName
   $h = Wait-Health 10
