@@ -102,6 +102,10 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
    2.1 và Application Request Routing 3.0, bật proxy, thêm rule chuyển tiếp `/api` cho site đang
    trỏ tới `dist` (nếu không tự tìm được site: `install-proxy.bat "Tên site"`), rồi tự kiểm tra
    GET/PUT qua IIS. Rule nằm trong `applicationHost.config`, không đụng `web.config` của `dist`.
+   Nếu sau đó **cả trang trả 503** (IIS tự tắt app pool vì không nạp được module mới — bản
+   URL Rewrite 2025 cần Universal CRT, Server 2012 R2 chưa vá thì thiếu): chạy `serverix-iis.bat`
+   (Run as administrator) — gỡ tạm module lỗi để trang lên lại, cài VC++ Redistributable (kèm UCRT),
+   gắn lại module và kiểm tra `/api`.
 4. Kiểm tra từ máy ngoài: `http://103.249.117.233:37389/api/health` → thấy `{"ok":true,...}`.
 5. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
    Khởi động lại thủ công: `server\restart-api.bat`. API không trả lời thì chạy

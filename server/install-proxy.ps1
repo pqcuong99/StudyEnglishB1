@@ -7,70 +7,21 @@
 #      applicationHost.config, KHÔNG đụng web.config trong dist (để không vỡ site
 #      nếu chưa cài URL Rewrite)
 # Tham số -Site "Tên site" khi script không tự tìm được site.
+# Nếu sau khi chạy cả trang trả 503 -> chạy fix-iis.bat.
 param([string]$Site)
 
 $ErrorActionPreference = 'Stop'
-
-$ApiPort = 37390
-$RuleName = 'StudyEnglishB1-API'
-$Dir = $PSScriptRoot
-$DistPath = [System.IO.Path]::GetFullPath((Join-Path $Dir '..\dist')).TrimEnd('\')
-$inetsrv = Join-Path $env:windir 'System32\inetsrv'
-$appcmd = Join-Path $inetsrv 'appcmd.exe'
-
-# Module: tên đăng ký trong globalModules của IIS + các vị trí file dll có thể có
-$Modules = @(
-  @{ Name = 'IIS URL Rewrite 2.1'; Module = 'RewriteModule'; File = 'rewrite_amd64_en-US.msi'
-     Dlls = @((Join-Path $inetsrv 'rewrite.dll'))
-     Url = 'https://download.microsoft.com/download/1/2/8/128E2E22-C1B9-44A4-BE2A-5859ED1D4592/rewrite_amd64_en-US.msi' },
-  @{ Name = 'IIS Application Request Routing 3.0'; Module = 'ApplicationRequestRouting'; File = 'requestRouter_amd64.msi'
-     Dlls = @((Join-Path $env:ProgramFiles 'IIS\Application Request Routing\requestRouter.dll'), (Join-Path $inetsrv 'requestRouter.dll'))
-     Url = 'https://download.microsoft.com/download/E/9/8/E9849D6A-020E-47E4-9FD0-A023E99B54EB/requestRouter_amd64.msi' }
-)
-
-# Đã cài chưa: có trong danh sách globalModules của IIS, hoặc thấy file dll
-function Test-ModuleInstalled($m) {
-  $list = ''
-  try { $list = (& $appcmd list config -section:system.webServer/globalModules | Out-String) } catch { $list = '' }
-  if ($list -match ('name="' + [regex]::Escape($m.Module) + '"')) { return $true }
-  foreach ($d in $m.Dlls) { if (Test-Path $d) { return $true } }
-  return $false
-}
-
-function Invoke-AppCmd {
-  # chạy appcmd, in lệnh + kết quả; trả về $true nếu thành công
-  param([string[]]$ArgList)
-  Write-Host ("  > appcmd " + ($ArgList -join ' '))
-  $out = & $appcmd @ArgList
-  $ok = ($LASTEXITCODE -eq 0)
-  if ($out) { $out | ForEach-Object { Write-Host "    $_" } }
-  return $ok
-}
-
-function Get-Url([string]$Url, [string]$Method = 'GET') {
-  try {
-    $wc = New-Object System.Net.WebClient
-    $wc.Proxy = $null
-    if ($Method -eq 'GET') { return $wc.DownloadString($Url) }
-    $wc.Headers['Content-Type'] = 'application/json'
-    return $wc.UploadString($Url, $Method, '{}')
-  } catch {
-    $resp = $_.Exception.InnerException
-    if (-not $resp) { $resp = $_.Exception }
-    return "LOI: $($resp.Message)"
-  }
-}
+. "$PSScriptRoot\iis-common.ps1"
 
 if (-not (Test-Path $appcmd)) {
   Write-Host 'LOI: May nay khong co IIS (khong thay appcmd.exe).' -ForegroundColor Red
   exit 1
 }
-Import-Module WebAdministration
 
 # ---------- 1. URL Rewrite + ARR ----------
 Write-Host '=== [1/4] Kiem tra / cai URL Rewrite va ARR ==='
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]3072 } catch { } # TLS 1.2 cho download.microsoft.com
-foreach ($m in $Modules) {
+foreach ($m in $IisModules) {
   if (Test-ModuleInstalled $m) {
     Write-Host "  $($m.Name): da cai"
     continue
@@ -99,33 +50,18 @@ if (-not (Invoke-AppCmd @('set', 'config', '-section:system.webServer/proxy', '/
   exit 1
 }
 
-# ---------- 3. tìm site ----------
+# ---------- 3. rule cho site ----------
 Write-Host '=== [3/4] Them rule chuyen tiep /api cho site ==='
-$sites = @(Get-Website)
-if ($Site) {
-  $target = $sites | Where-Object { $_.Name -eq $Site } | Select-Object -First 1
-} else {
-  $target = $sites | Where-Object {
-    [Environment]::ExpandEnvironmentVariables($_.physicalPath).TrimEnd('\') -ieq $DistPath
-  } | Select-Object -First 1
-  if (-not $target -and $sites.Count -eq 1) { $target = $sites[0] }
-}
+$target = Find-Site $Site
 if (-not $target) {
-  Write-Host "  Khong tim thay site nao tro toi $DistPath. Cac site hien co:" -ForegroundColor Yellow
-  foreach ($s in $sites) {
-    $b = ($s.bindings.Collection | ForEach-Object { $_.bindingInformation }) -join ', '
-    Write-Host ("    - {0}  [{1}]  {2}" -f $s.Name, $b, $s.physicalPath)
-  }
   Write-Host '  Chay lai:  install-proxy.bat "Ten site"' -ForegroundColor Yellow
   exit 1
 }
-$binding = ($target.bindings.Collection | Select-Object -First 1).bindingInformation # vd "*:37389:"
-$sitePort = ($binding -split ':')[1]
-if (-not $sitePort) { $sitePort = '80' }
+$sitePort = Get-SitePort $target
 Write-Host ("  Site: {0}  (cong {1}, thu muc {2})" -f $target.Name, $sitePort, $target.physicalPath)
 
 $sec = 'system.webServer/rewrite/rules'
-Invoke-AppCmd @('set', 'config', $target.Name, "-section:$sec", "/-[name='$RuleName']", '/commit:apphost') | Out-Null # xóa rule cũ nếu có
+Invoke-AppCmd @('set', 'config', $target.Name, "-section:$sec", "/-[name='$RuleName']", '/commit:apphost') -Quiet | Out-Null # xóa rule cũ nếu có
 $ok = (Invoke-AppCmd @('set', 'config', $target.Name, "-section:$sec", "/+[name='$RuleName',stopProcessing='True']", '/commit:apphost')) -and
       (Invoke-AppCmd @('set', 'config', $target.Name, "-section:$sec", "/[name='$RuleName'].match.url:^api/(.*)", '/commit:apphost')) -and
       (Invoke-AppCmd @('set', 'config', $target.Name, "-section:$sec", "/[name='$RuleName'].action.type:Rewrite", "/[name='$RuleName'].action.url:http://localhost:$ApiPort/api/{R:1}", '/commit:apphost'))
@@ -136,30 +72,13 @@ if (-not $ok) {
 
 # ---------- 4. kiểm tra ----------
 Write-Host '=== [4/4] Kiem tra ==='
-$direct = Get-Url "http://localhost:$ApiPort/api/health"
-Write-Host "  API truc tiep  (localhost:$ApiPort): $direct"
-if ($direct -like 'LOI*') {
-  Write-Host '  -> API chua chay. Chay server\install-api.bat truoc roi chay lai file nay.' -ForegroundColor Yellow
+if (-not (Start-SiteAndCheck $target)) {
+  Write-Host 'LOI: trang khong tra loi (503?) -> app pool bi dung vi module moi khong nap duoc. Chay server\fix-iis.bat.' -ForegroundColor Red
   exit 1
 }
-$viaGet = Get-Url "http://localhost:$sitePort/api/health"
-Write-Host "  Qua IIS GET    (localhost:$sitePort): $viaGet"
-$viaPut = Get-Url "http://localhost:$sitePort/api/health" 'PUT'
-Write-Host "  Qua IIS PUT    (localhost:$sitePort): $viaPut"
-
-if ($viaPut -like '*405*') {
-  # WebDAV chan PUT -> bo module WebDAV o site nay roi thu lai
-  Write-Host '  PUT bi 405 (thuong do WebDAV) -> go WebDAVModule khoi site va thu lai' -ForegroundColor Yellow
-  Invoke-AppCmd @('set', 'config', $target.Name, '-section:system.webServer/modules', "/-[name='WebDAVModule']", '/commit:apphost') | Out-Null
-  Invoke-AppCmd @('set', 'config', $target.Name, '-section:system.webServer/handlers', "/-[name='WebDAV']", '/commit:apphost') | Out-Null
-  $viaPut = Get-Url "http://localhost:$sitePort/api/health" 'PUT'
-  Write-Host "  Qua IIS PUT    (localhost:$sitePort): $viaPut"
-}
-
-if ($viaGet -like '*"ok":true*' -and $viaPut -like '*"method":"PUT"*') {
-  Write-Host "OK: IIS da chuyen tiep /api sang API. Tu ngoai: http://<ip-vps>:$sitePort/api/health" -ForegroundColor Green
+if (Test-ApiViaIis $target) {
+  Write-Host "OK: IIS da chuyen tiep /api sang API. Tu ngoai: http://<ip-vps>:<cong cong khai>/api/health" -ForegroundColor Green
 } else {
   Write-Host 'CHUA XONG: IIS chua chuyen tiep duoc /api. Gui man hinh nay cho Claude.' -ForegroundColor Red
-  Write-Host '  Goi y: mo IIS Manager -> site -> URL Rewrite de xem rule; iisreset roi chay lai check.'
   exit 1
 }
