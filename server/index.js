@@ -204,12 +204,13 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(PORT, () => {
-  log(`API tiến độ chạy tại http://0.0.0.0:${PORT}  (dữ liệu: ${USERS_DIR}, ${index.size} người dùng)`)
+  // không dấu để hiện đúng trên cửa sổ cmd của VPS (log file vẫn UTF-8)
+  log(`API tien do chay tai http://0.0.0.0:${PORT}  (du lieu: ${USERS_DIR}, ${index.size} nguoi dung)`)
 })
 
 for (const sig of ['SIGINT', 'SIGTERM']) {
   process.on(sig, () => {
-    log('Dừng API (' + sig + ')')
+    log('Dung API (' + sig + ')')
     server.close(() => process.exit(0))
     setTimeout(() => process.exit(0), 1000).unref()
   })
