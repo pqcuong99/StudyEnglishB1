@@ -118,11 +118,16 @@ function Test-ApiViaIis($site) {
   Write-Host "  Qua IIS GET    (localhost:$port): $viaGet"
   $viaPut = Get-Url "http://localhost:$port/api/health" 'PUT'
   Write-Host "  Qua IIS PUT    (localhost:$port): $viaPut"
-  if ($viaPut -like '*405*') {
-    # WebDAV chặn PUT -> bỏ module WebDAV ở site này rồi thử lại
-    Write-Host '  PUT bi 405 (thuong do WebDAV) -> go WebDAVModule khoi site va thu lai' -ForegroundColor Yellow
-    Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/modules', "/-[name='WebDAVModule']", '/commit:apphost') | Out-Null
-    Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/handlers', "/-[name='WebDAV']", '/commit:apphost') | Out-Null
+  if ($viaPut -notlike '*"method":"PUT"*') {
+    # WebDAV chặn PUT/DELETE (thường trả 405, đôi khi 404) -> gỡ WebDAV khỏi site
+    # rồi thử lại. Gỡ ở cấp site lẫn toàn máy để chắc ăn (vô hại nếu không có).
+    Write-Host '  PUT khong qua duoc (thuong do WebDAV) -> go WebDAVModule roi thu lai' -ForegroundColor Yellow
+    foreach ($scope in @(@($site.Name), @())) {
+      Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/modules', "/-[name='WebDAVModule']", '/commit:apphost')) -Quiet | Out-Null
+      Invoke-AppCmd (@('set', 'config') + $scope + @('-section:system.webServer/handlers', "/-[name='WebDAV']", '/commit:apphost')) -Quiet | Out-Null
+    }
+    # tắt hẳn WebDAV authoring nếu section này có mặt (một số bản cài bật sẵn)
+    Invoke-AppCmd @('set', 'config', $site.Name, '-section:system.webServer/webdav/authoring', '/enabled:false', '/commit:apphost') -Quiet | Out-Null
     $viaPut = Get-Url "http://localhost:$port/api/health" 'PUT'
     Write-Host "  Qua IIS PUT    (localhost:$port): $viaPut"
   }
