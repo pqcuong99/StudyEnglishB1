@@ -95,9 +95,10 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
 1. Cài Node.js (từ bản 16 trở lên) — https://nodejs.org. **Windows Server 2012 R2 / 8.1** chỉ
    chạy được Node 16: tải `node-v16.x.x-x64.msi` tại https://nodejs.org/dist/latest-v16.x/.
    Kiểm tra bằng cách mở cmd mới gõ `node -v`.
-2. Trong thư mục repo trên VPS, chuột phải `server\install-api.bat` → **Run as administrator**.
-   Script tạo tác vụ `StudyEnglishB1-API` tự chạy khi Windows khởi động (tự khởi động lại nếu
-   lỗi), mở cổng 37390 trên Windows Firewall rồi chạy API ngay.
+2. Trong thư mục repo trên VPS, double-click `update-vps.bat` (script tự xin quyền Administrator).
+   Lần đầu chưa có API, script tự gọi `server\install-api.ps1`: tạo tác vụ `StudyEnglishB1-API`
+   tự chạy khi Windows khởi động (tự khởi động lại nếu lỗi), mở cổng 37390 trên Windows Firewall
+   rồi chạy API ngay. (Cài riêng bằng tay: `server\install-api.bat` → Run as administrator.)
 3. Chuột phải `server\install-proxy.bat` → **Run as administrator**: tự tải + cài IIS URL Rewrite
    2.1 và Application Request Routing 3.0, bật proxy, thêm rule chuyển tiếp `/api` cho site đang
    trỏ tới `dist` (nếu không tự tìm được site: `install-proxy.bat "Tên site"`), rồi tự kiểm tra
@@ -107,7 +108,8 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
    (Run as administrator) — gỡ tạm module lỗi để trang lên lại, cài VC++ Redistributable (kèm UCRT),
    gắn lại module và kiểm tra `/api`.
 4. Kiểm tra từ máy ngoài: `http://103.249.117.233:37389/api/health` → thấy `{"ok":true,...}`.
-5. Các lần cập nhật sau chỉ cần chạy `update-vps.bat` như cũ — script đã tự khởi động lại API.
+5. Các lần cập nhật sau chỉ cần double-click `update-vps.bat` — script tự xin quyền admin,
+   `git pull`, restart IIS và khởi động lại API bằng code mới (chưa cài API thì tự cài).
    Khởi động lại thủ công: `server\restart-api.bat`. API không trả lời thì chạy
    `server\check-api.bat` (Run as administrator): in trạng thái tác vụ, `data\task.log` (lỗi khi
    Task Scheduler khởi động node), `data\api.log` và chạy thử trực tiếp để hiện lỗi.
@@ -123,4 +125,7 @@ Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`.
 - Tiến độ lưu trên máy chủ theo tên đăng nhập (xem mục *Máy chủ lưu tiến độ*); cài đặt API key
   ảnh AI và cache ảnh vẫn nằm riêng trong từng trình duyệt.
 - Ảnh AI cần mạng internet và được tạo lần lượt từng ảnh (lần đầu hơi chậm, sau đó có cache).
-- Phát âm dùng giọng đọc tiếng Anh có sẵn của trình duyệt.
+- Phát âm dùng giọng đọc tiếng Anh có sẵn của trình duyệt. Trả lời đúng (trắc nghiệm, kiểm tra
+  viết, điền đúng hết bài nghe) có tiếng chuông "ting-ting" tạo bằng Web Audio (`src/lib/sound.js`,
+  không cần file âm thanh); câu "từ tiếng Anh nào có nghĩa là" chọn đúng thì tự đọc từ đó và
+  hiện nút 🔊 để nghe lại.

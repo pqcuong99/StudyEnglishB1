@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { speak } from '../lib/speech.js'
+import { playCorrect, CORRECT_SOUND_MS } from '../lib/sound.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -85,6 +86,11 @@ export default function Quiz({
     setAnswers((a) => ({ ...a, [index]: option }))
     // cập nhật trạng thái thuộc/chưa thuộc + thống kê đúng/sai của từ
     onAnswer(q.item.unitId, q.item.word.id, correct)
+    if (correct) {
+      playCorrect()
+      // câu "nghĩa -> từ": vừa chọn đúng thì đọc luôn cách phát âm của từ đó
+      if (q.type === 'meaning2word') setTimeout(() => speak(q.item.word.word), CORRECT_SOUND_MS)
+    }
   }
 
   function next() {
@@ -231,10 +237,31 @@ export default function Quiz({
         <div className="quiz-feedback">
           {selected !== null ? (
             selected === q.answer ? (
-              <span className="ok">✅ Chính xác!</span>
+              <span className="ok">
+                ✅ Chính xác!
+                {/* câu "nghĩa -> từ": kèm từ + phiên âm + nút nghe phát âm */}
+                {q.type === 'meaning2word' && (
+                  <>
+                    {' '}
+                    <b>{w.word}</b>
+                    {w.ipa && <span className="ipa"> /{w.ipa}/</span>}
+                    <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
+                      🔊
+                    </button>
+                  </>
+                )}
+              </span>
             ) : (
               <span className="bad">
                 ❌ Chưa đúng. Đáp án: <b>{q.answer}</b>
+                {q.type === 'meaning2word' && (
+                  <>
+                    {w.ipa && <span className="ipa"> /{w.ipa}/</span>}
+                    <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
+                      🔊
+                    </button>
+                  </>
+                )}
               </span>
             )
           ) : (

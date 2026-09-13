@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { speak } from '../lib/speech.js'
+import { playCorrect, CORRECT_SOUND_MS } from '../lib/sound.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -91,7 +92,13 @@ export default function WritingTest({
     setChecked(correct)
     setResults((r) => ({ ...r, [current.word.id]: correct }))
     onAnswer(current.unitId, current.word.id, correct)
-    speak(current.word.word)
+    if (correct) {
+      // âm báo đúng trước, đọc từ sau khi âm báo kết thúc để không chồng tiếng
+      playCorrect()
+      setTimeout(() => speak(current.word.word), CORRECT_SOUND_MS)
+    } else {
+      speak(current.word.word)
+    }
   }
 
   function next() {

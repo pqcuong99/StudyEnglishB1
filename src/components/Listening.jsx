@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { LEVELS, levelById, makeCloze, isCorrect } from '../lib/cloze.js'
 import { loadLastLevel, saveLastLevel } from '../lib/listeningProgress.js'
+import { playCorrect } from '../lib/sound.js'
 
 const SPEAKER = {
   F: { icon: '👧', label: 'F' },
@@ -264,6 +265,7 @@ function ListeningExercise({
     const g = cloze.blanks.map((b, k) => locked[k] || isCorrect(values[k], b.answer))
     setGraded(g)
     onResult(exercise.id, levelId, g.filter(Boolean).length, n)
+    if (g.every(Boolean)) playCorrect()
   }
 
   // mở lại các ô sai, giữ nguyên ô đúng
