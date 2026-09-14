@@ -56,7 +56,6 @@ function StudyButtons({
   onStartFlashcards,
   onStartQuiz,
   onStartWriting,
-  children,
 }) {
   const unknownItems = items.filter(({ word }) => !word.known)
   const sm = size === 'sm' ? ' btn-sm' : ''
@@ -90,7 +89,6 @@ function StudyButtons({
       >
         ✍️ Kiểm tra viết
       </button>
-      {children}
     </div>
   )
 }
@@ -159,7 +157,6 @@ export default function UnitDetail({
   onStartFlashcards,
   onStartQuiz,
   onStartWriting,
-  onImportMore,
   listeningSets = [],
   onOpenListening,
 }) {
@@ -269,14 +266,7 @@ export default function UnitDetail({
           items={toItems(unit.words)}
           size={sections.length > 0 ? 'sm' : undefined}
           {...studyProps}
-        >
-          <button
-            className={`btn btn-outline${sections.length > 0 ? ' btn-sm' : ''}`}
-            onClick={onImportMore}
-          >
-            ➕ Import thêm từ
-          </button>
-        </StudyButtons>
+        />
       </div>
 
       {sections.length > 0 && (

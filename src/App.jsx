@@ -176,11 +176,6 @@ export default function App() {
     setView({ name: 'unit', unitId: unit.id })
   }
 
-  function appendWords(unitId, words) {
-    setUnits((us) => us.map((u) => (u.id !== unitId ? u : { ...u, words: [...u.words, ...words] })))
-    setView({ name: 'unit', unitId })
-  }
-
   function deleteUnit(unitId) {
     setUnits((us) => us.filter((u) => u.id !== unitId))
     setView({ name: 'home' })
@@ -330,12 +325,7 @@ export default function App() {
       )}
       {view.name === 'settings' && <Settings onBack={goHome} />}
       {view.name === 'create' && (
-        <CreateUnit
-          onSave={addUnit}
-          onAppend={appendWords}
-          appendTo={view.appendTo ? units.find((u) => u.id === view.appendTo) : null}
-          onCancel={view.appendTo ? () => setView({ name: 'unit', unitId: view.appendTo }) : goHome}
-        />
+        <CreateUnit onSave={addUnit} onCancel={goHome} />
       )}
       {view.name === 'unit' && (
         <UnitDetail
@@ -349,7 +339,6 @@ export default function App() {
           onStartFlashcards={startFlashcards}
           onStartQuiz={startQuiz}
           onStartWriting={startWriting}
-          onImportMore={() => setView({ name: 'create', appendTo: view.unitId })}
           listeningSets={listeningSetsForUnit(units.find((u) => u.id === view.unitId))}
           onOpenListening={(set) => setView({ name: 'listening', setId: set.id, unitId: view.unitId })}
         />

@@ -86,12 +86,12 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   mp3 vào thư mục trên. Thuật toán chọn từ để ẩn nằm trong `src/lib/cloze.js` (bỏ qua từ chức
   năng, tên riêng, không ẩn hai từ liền nhau, rải đều giữa các câu).
 - **Phần trong unit**: mỗi từ có thể mang tên phần (`section`). Mở một unit có chia phần sẽ
-  thấy khối "Cả unit" (thống kê + nút học toàn bộ unit + Import) ở trên, bên dưới là màn
+  thấy khối "Cả unit" (thống kê + nút học toàn bộ unit) ở trên, bên dưới là màn
   **Chọn phần**: mỗi phần là một thẻ có thống kê, thanh tiến độ và nút học flashcard / từ chưa
-  thuộc / kiểm tra / kiểm tra viết riêng; bấm vào thẻ để xem danh sách từ của phần đó. Khi "Import thêm từ",
-  có ô nhập tên phần (mặc định "Phần N+1"; để trống nếu không muốn chia phần). Unit không chia
-  phần hiển thị danh sách từ phẳng như cũ.
-- Muốn thêm từ vào unit có sẵn cho mọi trình duyệt đã dùng app: thêm một nhóm từ mới vào
+  thuộc / kiểm tra / kiểm tra viết riêng; bấm vào thẻ để xem danh sách từ của phần đó. Unit không
+  chia phần hiển thị danh sách từ phẳng như cũ. Tên phần chỉ đến từ dữ liệu mẫu (`seedUnits.js`);
+  unit tự tạo không chia phần.
+- Muốn thêm từ vào unit có sẵn (cách duy nhất, vì trang unit không còn nút "Import thêm từ"): thêm một nhóm từ mới vào
   `seedUnits.js` với `version` mới và tăng `SEED_VERSION`. Khi mở app, các từ mới sẽ tự được
   nối vào unit đã lưu (giữ nguyên tiến độ đã học, không thêm lại từ đã có).
 
