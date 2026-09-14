@@ -1,25 +1,22 @@
 import { useEffect, useState } from 'react'
 import { apiBase, listUsers } from '../lib/api.js'
-import { NAME_MAX, isAdminName, isValidName, normalizeName, userKey } from '../lib/userKey.js'
-import { getRecentUsers } from '../lib/sync.js'
+import { NAME_MAX, isAdminName, isValidName, normalizeName } from '../lib/userKey.js'
 
 // Màn hình nhập tên: tiến độ học được lưu theo tên trên máy chủ, tên được nhớ
-// trong trình duyệt để lần sau vào thẳng. Gõ tên "admin" (không phân biệt hoa
-// thường) thì hiện thêm ô mật khẩu để vào bảng điều khiển quản trị.
+// trong trình duyệt để lần sau vào thẳng. Không gợi ý tên người khác (mỗi người
+// tự gõ tên mình). Gõ tên "admin" (không phân biệt hoa thường) thì hiện thêm ô
+// mật khẩu để vào bảng điều khiển quản trị.
 export default function Login({ onLogin, onAdminLogin, error }) {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [adminError, setAdminError] = useState(null)
   const [busy, setBusy] = useState(false)
-  const [serverUsers, setServerUsers] = useState(null) // null = đang tải
   const [serverError, setServerError] = useState(null)
-  const recent = getRecentUsers()
 
+  // chỉ để báo sớm nếu không kết nối được máy chủ tiến độ
   useEffect(() => {
     let alive = true
-    listUsers()
-      .then((list) => alive && setServerUsers(list || []))
-      .catch((e) => alive && setServerError(e.message))
+    listUsers().catch((e) => alive && setServerError(e.message))
     return () => {
       alive = false
     }
@@ -44,10 +41,6 @@ export default function Login({ onLogin, onAdminLogin, error }) {
       setBusy(false)
     }
   }
-
-  // tên trên máy chủ chưa có trong "gần đây" của máy này
-  const recentKeys = new Set(recent.map(userKey))
-  const others = (serverUsers || []).filter((u) => !recentKeys.has(userKey(u.name)))
 
   return (
     <div className="page login-page">
@@ -101,29 +94,6 @@ export default function Login({ onLogin, onAdminLogin, error }) {
         </div>
         {adminError && <p className="login-note err-note">⚠️ {adminError}</p>}
 
-        {!admin && recent.length > 0 && (
-          <div className="login-chips">
-            <span className="login-chips-label">Gần đây trên máy này:</span>
-            {recent.map((n) => (
-              <button key={n} type="button" className="chip" onClick={() => onLogin(n)}>
-                👤 {n}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {!admin && others.length > 0 && (
-          <div className="login-chips">
-            <span className="login-chips-label">Đã có tiến độ trên máy chủ:</span>
-            {others.map((u) => (
-              <button key={u.name} type="button" className="chip" onClick={() => onLogin(u.name)}>
-                👤 {u.name}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {serverUsers === null && !serverError && <p className="login-note">Đang kết nối máy chủ…</p>}
         {serverError && (
           <p className="login-note err-note">
             ⚠️ Không kết nối được máy chủ tiến độ ({apiBase()}): {serverError}. Bạn vẫn có thể

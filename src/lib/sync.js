@@ -7,7 +7,7 @@
 import { saveUser } from './api.js'
 
 const CURRENT_KEY = 'current-user' // tên người đang đăng nhập trên trình duyệt này
-const RECENT_KEY = 'recent-users' // vài tên gần đây để chọn nhanh ở màn đăng nhập
+const RECENT_KEY = 'recent-users' // (bản cũ) danh sách tên gần đây — không dùng nữa, xóa đi
 const CACHE_PREFIX = 'progress:'
 
 const SAVE_DELAY = 700 // gộp các thay đổi liên tiếp trong 0.7s thành một lần lưu
@@ -43,24 +43,11 @@ export function getCurrentUser() {
 
 export function setCurrentUser(name) {
   try {
-    if (name) {
-      localStorage.setItem(CURRENT_KEY, name)
-      const recent = [name, ...getRecentUsers().filter((n) => n.toLowerCase() !== name.toLowerCase())]
-      localStorage.setItem(RECENT_KEY, JSON.stringify(recent.slice(0, 5)))
-    } else {
-      localStorage.removeItem(CURRENT_KEY)
-    }
+    if (name) localStorage.setItem(CURRENT_KEY, name)
+    else localStorage.removeItem(CURRENT_KEY)
+    localStorage.removeItem(RECENT_KEY)
   } catch {
     // không lưu được thì lần sau phải nhập lại tên
-  }
-}
-
-export function getRecentUsers() {
-  try {
-    const list = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]')
-    return Array.isArray(list) ? list.filter((n) => typeof n === 'string') : []
-  } catch {
-    return []
   }
 }
 

@@ -1027,17 +1027,6 @@ kbd {
   min-width: 200px;
   font-size: 1.05rem;
 }
-.login-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-}
-.login-chips-label {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
 .chip {
   border: 1.5px solid var(--border);
   background: var(--bg);
