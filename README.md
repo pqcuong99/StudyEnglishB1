@@ -46,6 +46,18 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Nếu mất kết nối máy chủ, app vẫn học tiếp bằng bản đệm trong trình duyệt và tự đồng bộ lại khi
   kết nối được (huy hiệu ☁️ Đã lưu / ⏳ Đang lưu / ⚠️ Chưa lưu được ở trang chủ). Dữ liệu của
   bản cũ (trước khi có đăng nhập) được chuyển sang cho người đầu tiên đăng nhập trên trình duyệt đó.
+- **Bảng điều khiển quản trị (🛡️)**: ở màn nhập tên, gõ **`admin`** (không phân biệt hoa/thường)
+  thì hiện thêm ô mật khẩu; mật khẩu do máy chủ kiểm tra (`ADMIN_PASSWORD` trong
+  `server/index.js`, đổi bằng biến môi trường cùng tên). Đúng mật khẩu thì vào **bảng điều
+  khiển** thay vì màn học: số người học, ai học hôm nay / 7 ngày qua, biểu đồ lượt học 30 ngày,
+  bảng tiến độ từng người (từ đã thuộc, tỉ lệ trả lời đúng, từ hay sai, bài nghe, hoạt động gần
+  nhất — bấm vào một dòng để xem chi tiết theo unit / phần, từ hay sai, bài nghe, 14 ngày gần nhất)
+  và **báo cáo theo ngày / theo tháng** (ai học, bao nhiêu câu, tỉ lệ đúng, từ mới thuộc, thẻ đã ôn,
+  bài nghe). Tài khoản này chỉ xem, không có tiến độ học; tên `admin` không đăng ký học được.
+  Phiên quản trị nhớ theo tab (F5 vẫn ở lại, đóng tab là phải nhập lại mật khẩu), hết hạn sau 12 giờ
+  hoặc khi API khởi động lại. Báo cáo theo ngày lấy từ **nhật ký hoạt động** (`activity` trong dữ
+  liệu mỗi người, xem `src/lib/activity.js`): số câu trả lời / đúng, thẻ đã đánh dấu, từ chuyển sang
+  đã thuộc, bài nghe đã nộp — tính theo ngày giờ máy người học, chỉ có từ khi cập nhật này trở đi.
 - **Từ hay sai (🔥)**: mỗi câu trả lời trong trắc nghiệm / kiểm tra viết được ghi lại theo từng từ
   (số lần sai, số lần đúng, chuỗi đúng liên tiếp). Từ sai từ **2 lần** trở lên vào nhóm "Từ hay
   sai" ở trang chủ (kèm nút ôn flashcard / kiểm tra / viết riêng nhóm này, nhãn 🔥 trên thẻ từ).
@@ -125,7 +137,9 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
 
 Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev` (Vite tự proxy `/api`).
 
-Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`.
+Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`. Quản trị:
+`POST /api/admin/login` (body `{ password }` → `{ token }`), rồi gửi header `X-Admin-Token` cho
+`GET /api/admin/report` (dữ liệu mọi người học, đã lược bớt) và `POST /api/admin/logout`.
 
 ## Lưu ý
 

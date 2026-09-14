@@ -12,6 +12,26 @@ const CACHE_PREFIX = 'progress:'
 
 const SAVE_DELAY = 700 // gộp các thay đổi liên tiếp trong 0.7s thành một lần lưu
 const RETRY_DELAY = 8000 // lưu lỗi (mất mạng / server tắt) -> thử lại sau 8s
+const ADMIN_TOKEN_KEY = 'admin-token' // sessionStorage: chỉ sống trong tab này
+
+// Token quản trị nhớ theo tab (F5 vẫn ở bảng điều khiển; đóng tab là hết),
+// không nhớ lâu như tên người học vì phải nhập lại mật khẩu mới an toàn.
+export function getAdminToken() {
+  try {
+    return sessionStorage.getItem(ADMIN_TOKEN_KEY) || null
+  } catch {
+    return null
+  }
+}
+
+export function setAdminToken(token) {
+  try {
+    if (token) sessionStorage.setItem(ADMIN_TOKEN_KEY, token)
+    else sessionStorage.removeItem(ADMIN_TOKEN_KEY)
+  } catch {
+    // không lưu được thì F5 phải nhập lại mật khẩu
+  }
+}
 
 export function getCurrentUser() {
   try {

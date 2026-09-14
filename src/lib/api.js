@@ -21,9 +21,25 @@ async function request(path, options = {}) {
     } catch {
       // không phải JSON
     }
-    throw new Error(msg)
+    throw Object.assign(new Error(msg), { status: res.status })
   }
   return res.json()
+}
+
+// ---------- quản trị ----------
+// Đăng nhập admin: { token, expiresAt }; sai mật khẩu -> lỗi có status 401
+export function adminLogin(password) {
+  return request('/api/admin/login', { method: 'POST', body: JSON.stringify({ password }) })
+}
+
+export function adminLogout(token) {
+  return request('/api/admin/logout', { method: 'POST', headers: { 'X-Admin-Token': token } })
+}
+
+// { generatedAt, users: [{ name, key, createdAt, updatedAt, data }] } — token hết
+// hạn (API khởi động lại / quá 12 giờ) -> lỗi có status 401
+export function fetchAdminReport(token) {
+  return request('/api/admin/report', { headers: { 'X-Admin-Token': token } })
 }
 
 // [{ name, updatedAt }] — mới hoạt động xếp trước

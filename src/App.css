@@ -1146,3 +1146,245 @@ kbd {
   font-weight: 600;
   vertical-align: middle;
 }
+
+/* ---------- đăng nhập quản trị ---------- */
+.login-admin {
+  border-left: 5px solid var(--primary);
+}
+
+/* ---------- bảng điều khiển quản trị ---------- */
+.admin-page {
+  max-width: 1100px;
+}
+.admin-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kpi {
+  margin: 0;
+  padding: 14px 16px;
+}
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 4px 0 2px;
+  font-variant-numeric: tabular-nums;
+}
+.kpi-sub {
+  color: var(--muted);
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* biểu đồ cột: một chuỗi, một màu; cột hôm nay đậm hơn */
+.chart-tip {
+  min-height: 1.5em;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 140px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.bar-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  cursor: default;
+  border-radius: 4px 4px 0 0;
+}
+.bar-col.is-hover {
+  background: #eef1ff;
+}
+.bar {
+  width: 100%;
+  min-height: 2px;
+  background: #a5b4fc;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.2s;
+}
+.bar-col.is-today .bar {
+  background: var(--primary);
+}
+.bar-col.is-hover .bar {
+  background: var(--primary-dark);
+}
+.bar-label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 3px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* bảng người học / báo cáo */
+.admin-table th.num,
+.admin-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.admin-table td {
+  padding: 8px 6px;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+.admin-table th {
+  padding: 6px;
+  white-space: nowrap;
+}
+.admin-table small {
+  color: var(--muted);
+}
+.nowrap {
+  white-space: nowrap;
+}
+.learner-row {
+  cursor: pointer;
+}
+.learner-row:hover td {
+  background: #f8faff;
+}
+.learner-row.is-open td {
+  background: #eef1ff;
+  border-bottom: none;
+}
+.learner-detail-row td {
+  border-top: none;
+  background: #f8faff;
+  padding: 4px 12px 14px;
+}
+.progress-cell {
+  min-width: 170px;
+}
+.progress-slim {
+  height: 6px;
+  margin: 4px 0 0;
+}
+.today-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.learner-chips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.chip-static {
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  cursor: default;
+}
+.chip-static:hover {
+  border-color: var(--border);
+  background: var(--bg);
+}
+.chip-static small {
+  color: var(--muted);
+}
+
+.tabs {
+  display: inline-flex;
+  background: var(--bg);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.tab {
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tab.active {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+/* chi tiết một người học */
+.learner-detail h4 {
+  margin: 14px 0 6px;
+  font-size: 0.95rem;
+}
+.learner-detail h4:first-child {
+  margin-top: 4px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0 28px;
+}
+.detail-unit {
+  margin-bottom: 8px;
+}
+.detail-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+.detail-section {
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding-left: 8px;
+}
+.detail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.detail-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  border-top: 1px solid var(--border);
+}
+.detail-levels {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}

@@ -2,10 +2,19 @@ import { useEffect, useRef, useState } from 'react'
 import { normalizeUnits, takeLegacyUnits } from './lib/storage.js'
 import { takeLegacyListeningProgress, recordListeningResult } from './lib/listeningProgress.js'
 import { recordAnswer } from './lib/wordStats.js'
-import { fetchUser } from './lib/api.js'
+import { bumpActivity } from './lib/activity.js'
+import { adminLogin, adminLogout, fetchUser } from './lib/api.js'
 import { userKey } from './lib/userKey.js'
-import { createSaver, getCurrentUser, readCache, setCurrentUser } from './lib/sync.js'
+import {
+  createSaver,
+  getAdminToken,
+  getCurrentUser,
+  readCache,
+  setAdminToken,
+  setCurrentUser,
+} from './lib/sync.js'
 import Login from './components/Login.jsx'
+import AdminDashboard from './components/AdminDashboard.jsx'
 import Home from './components/Home.jsx'
 import CreateUnit from './components/CreateUnit.jsx'
 import UnitDetail from './components/UnitDetail.jsx'
@@ -17,15 +26,19 @@ import Listening from './components/Listening.jsx'
 import { findListeningSet, listeningSetsForUnit } from './data/listening.js'
 
 // Dữ liệu của một người dùng (lưu trên máy chủ, đệm trong trình duyệt):
-//   { units, listening, wordStats }
+//   { units, listening, wordStats, activity }
 //   units     = các unit + từ (kèm cờ `known`)
 //   listening = tiến độ luyện nghe (xem lib/listeningProgress.js)
 //   wordStats = thống kê đúng/sai từng từ (xem lib/wordStats.js)
+//   activity  = số câu trả lời / từ đánh dấu thuộc / bài nghe theo từng ngày
+//               (xem lib/activity.js) — bảng điều khiển quản trị dùng để báo cáo
 function makeStore(data) {
+  const obj = (v) => (v && typeof v === 'object' ? v : {})
   return {
     units: normalizeUnits(data?.units),
-    listening: data?.listening && typeof data.listening === 'object' ? data.listening : {},
-    wordStats: data?.wordStats && typeof data.wordStats === 'object' ? data.wordStats : {},
+    listening: obj(data?.listening),
+    wordStats: obj(data?.wordStats),
+    activity: obj(data?.activity),
   }
 }
 
@@ -39,7 +52,8 @@ function makeStore(data) {
 //   { name: 'listening', setId, unitId }     bài luyện nghe (điền từ vào script)
 //   pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
 export default function App() {
-  // session: { status: 'boot' | 'login' | 'loading' | 'ready' | 'error', name?, key?, message? }
+  // session: { status: 'boot' | 'login' | 'loading' | 'ready' | 'error' | 'admin',
+  //            name?, key?, message?, token? }
   const [session, setSession] = useState({ status: 'boot' })
   const [store, setStore] = useState(null)
   const [syncStatus, setSyncStatus] = useState('saved') // 'saving' | 'saved' | 'offline'
@@ -48,14 +62,37 @@ export default function App() {
   const lastSavedRef = useRef('') // JSON của bản đã lưu (hoặc vừa tải) để không lưu thừa
   const loadSeqRef = useRef(0) // bỏ qua kết quả của lượt tải cũ nếu người dùng đổi tên giữa chừng
 
-  // mở app: đã nhớ tên trên trình duyệt này thì vào thẳng, không thì hỏi tên
+  // mở app: tab này đang ở bảng điều khiển quản trị thì vào lại đó; đã nhớ tên
+  // người học trên trình duyệt này thì vào thẳng; không thì hỏi tên
   useEffect(() => {
+    const token = getAdminToken()
     const name = getCurrentUser()
-    if (name) openUser(name)
+    if (token) setSession({ status: 'admin', token })
+    else if (name) openUser(name)
     else setSession({ status: 'login' })
     return () => saverRef.current?.dispose()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Quản trị viên: gõ tên "admin" + mật khẩu ở màn đăng nhập. Máy chủ kiểm tra
+  // mật khẩu và cấp token; sai thì ném lỗi (status 401) để Login hiện thông báo.
+  async function openAdmin(password) {
+    const result = await adminLogin(password)
+    // 404 = API đang chạy là bản cũ, chưa có endpoint quản trị
+    if (!result?.token) {
+      throw new Error('máy chủ tiến độ đang chạy bản cũ, hãy khởi động lại API (update-vps.bat / restart-api.bat)')
+    }
+    setAdminToken(result.token)
+    setSession({ status: 'admin', token: result.token })
+  }
+
+  // `message` (tùy chọn): lý do bị đưa về màn đăng nhập, vd. token hết hạn
+  function closeAdmin(message) {
+    const token = session.token
+    setAdminToken(null)
+    setSession({ status: 'login', message })
+    if (token) adminLogout(token).catch(() => {})
+  }
 
   async function openUser(name) {
     const key = userKey(name)
@@ -149,14 +186,27 @@ export default function App() {
     setView({ name: 'home' })
   }
 
+  // Sửa một từ. Đánh dấu thuộc/chưa thuộc (flashcard, ô tick ở trang unit) được
+  // ghi vào nhật ký ngày: mỗi lần đánh dấu là một lượt ôn, chưa thuộc -> thuộc
+  // tính là một từ mới học được.
   function updateWord(unitId, wordId, patch) {
-    setUnits((us) =>
-      us.map((u) =>
+    setStore((s) => {
+      let learned = 0
+      const units = s.units.map((u) =>
         u.id !== unitId
           ? u
-          : { ...u, words: u.words.map((w) => (w.id !== wordId ? w : { ...w, ...patch })) },
-      ),
-    )
+          : {
+              ...u,
+              words: u.words.map((w) => {
+                if (w.id !== wordId) return w
+                if ('known' in patch && patch.known && !w.known) learned = 1
+                return { ...w, ...patch }
+              }),
+            },
+      )
+      if (!('known' in patch)) return { ...s, units }
+      return { ...s, units, activity: bumpActivity(s.activity, { reviews: 1, learned }) }
+    })
   }
 
   // Trả lời trong bài kiểm tra (trắc nghiệm / viết): cập nhật cờ thuộc/chưa
@@ -170,6 +220,7 @@ export default function App() {
           : { ...u, words: u.words.map((w) => (w.id !== wordId ? w : { ...w, known: correct })) },
       ),
       wordStats: recordAnswer(s.wordStats, wordId, correct),
+      activity: bumpActivity(s.activity, { answers: 1, correct: correct ? 1 : 0 }),
     }))
   }
 
@@ -177,6 +228,7 @@ export default function App() {
     setStore((s) => ({
       ...s,
       listening: recordListeningResult(s.listening, exerciseId, levelId, correct, total),
+      activity: bumpActivity(s.activity, { listening: 1, listeningDone: correct === total ? 1 : 0 }),
     }))
   }
 
@@ -193,7 +245,10 @@ export default function App() {
   }
 
   if (session.status === 'boot') return null
-  if (session.status === 'login') return <Login onLogin={openUser} />
+  if (session.status === 'login') {
+    return <Login onLogin={openUser} onAdminLogin={openAdmin} error={session.message} />
+  }
+  if (session.status === 'admin') return <AdminDashboard token={session.token} onLogout={closeAdmin} />
   if (session.status === 'loading') {
     return (
       <div className="page">

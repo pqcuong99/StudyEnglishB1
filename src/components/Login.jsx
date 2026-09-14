@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
 import { apiBase, listUsers } from '../lib/api.js'
-import { NAME_MAX, isValidName, normalizeName, userKey } from '../lib/userKey.js'
+import { NAME_MAX, isAdminName, isValidName, normalizeName, userKey } from '../lib/userKey.js'
 import { getRecentUsers } from '../lib/sync.js'
 
 // Màn hình nhập tên: tiến độ học được lưu theo tên trên máy chủ, tên được nhớ
-// trong trình duyệt để lần sau vào thẳng.
-export default function Login({ onLogin, error }) {
+// trong trình duyệt để lần sau vào thẳng. Gõ tên "admin" (không phân biệt hoa
+// thường) thì hiện thêm ô mật khẩu để vào bảng điều khiển quản trị.
+export default function Login({ onLogin, onAdminLogin, error }) {
   const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const [adminError, setAdminError] = useState(null)
+  const [busy, setBusy] = useState(false)
   const [serverUsers, setServerUsers] = useState(null) // null = đang tải
   const [serverError, setServerError] = useState(null)
   const recent = getRecentUsers()
@@ -21,11 +25,24 @@ export default function Login({ onLogin, error }) {
     }
   }, [])
 
-  const valid = isValidName(name)
+  const admin = isAdminName(name)
+  const valid = admin ? password.length > 0 && !busy : isValidName(name)
 
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault()
-    if (valid) onLogin(normalizeName(name))
+    if (!valid) return
+    if (!admin) {
+      onLogin(normalizeName(name))
+      return
+    }
+    setBusy(true)
+    setAdminError(null)
+    try {
+      await onAdminLogin(password)
+    } catch (err) {
+      setAdminError(err.status === 401 ? 'Sai mật khẩu, thử lại nhé.' : `Không đăng nhập được: ${err.message}`)
+      setBusy(false)
+    }
   }
 
   // tên trên máy chủ chưa có trong "gần đây" của máy này
@@ -39,12 +56,19 @@ export default function Login({ onLogin, error }) {
         <p className="subtitle">Học từ mới theo unit với flashcard và bài kiểm tra</p>
       </header>
 
-      <form className="card login-card" onSubmit={submit}>
-        <h2>👋 Bạn là ai?</h2>
-        <p className="login-help">
-          Nhập tên để lưu <b>tiến trình học của riêng bạn</b> (từ đã thuộc, từ hay sai, bài
-          nghe đã làm). Lần sau mở lại trên trình duyệt này sẽ vào thẳng, không cần nhập lại.
-        </p>
+      <form className={`card login-card ${admin ? 'login-admin' : ''}`} onSubmit={submit}>
+        <h2>{admin ? '🔐 Quản trị viên' : '👋 Bạn là ai?'}</h2>
+        {admin ? (
+          <p className="login-help">
+            Nhập mật khẩu để mở <b>bảng điều khiển</b>: danh sách người đã học, tiến độ từng
+            người và báo cáo theo ngày / tháng. Tài khoản này không có màn học.
+          </p>
+        ) : (
+          <p className="login-help">
+            Nhập tên để lưu <b>tiến trình học của riêng bạn</b> (từ đã thuộc, từ hay sai, bài
+            nghe đã làm). Lần sau mở lại trên trình duyệt này sẽ vào thẳng, không cần nhập lại.
+          </p>
+        )}
         <div className="login-row">
           <input
             className="input"
@@ -52,14 +76,32 @@ export default function Login({ onLogin, error }) {
             maxLength={NAME_MAX}
             placeholder="Tên của bạn (vd. Hồng)"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value)
+              setAdminError(null)
+            }}
           />
+          {admin && (
+            <input
+              className="input"
+              type="password"
+              autoFocus
+              autoComplete="current-password"
+              placeholder="Mật khẩu quản trị"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value)
+                setAdminError(null)
+              }}
+            />
+          )}
           <button className="btn btn-primary btn-lg" type="submit" disabled={!valid}>
-            Bắt đầu học →
+            {admin ? (busy ? 'Đang kiểm tra…' : 'Vào bảng điều khiển →') : 'Bắt đầu học →'}
           </button>
         </div>
+        {adminError && <p className="login-note err-note">⚠️ {adminError}</p>}
 
-        {recent.length > 0 && (
+        {!admin && recent.length > 0 && (
           <div className="login-chips">
             <span className="login-chips-label">Gần đây trên máy này:</span>
             {recent.map((n) => (
@@ -70,7 +112,7 @@ export default function Login({ onLogin, error }) {
           </div>
         )}
 
-        {others.length > 0 && (
+        {!admin && others.length > 0 && (
           <div className="login-chips">
             <span className="login-chips-label">Đã có tiến độ trên máy chủ:</span>
             {others.map((u) => (

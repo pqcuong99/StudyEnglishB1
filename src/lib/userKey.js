@@ -19,3 +19,11 @@ export function isValidName(name) {
   const n = normalizeName(name)
   return n.length >= 1 && n.length <= NAME_MAX && !/[\p{C}\/\\]/u.test(n)
 }
+
+// Tên dành riêng cho quản trị viên: gõ tên này ở màn đăng nhập sẽ hỏi mật khẩu
+// và mở bảng điều khiển thay vì màn học. Không ai đăng ký học bằng tên này được.
+export const ADMIN_KEY = 'admin'
+
+export function isAdminName(name) {
+  return userKey(name) === ADMIN_KEY
+}
