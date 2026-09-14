@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { speak } from '../lib/speech.js'
+import { getExample } from '../data/examples.js'
 import WordImage from './WordImage.jsx'
 
 function shuffle(arr) {
@@ -135,6 +136,7 @@ export default function Flashcards({
   }
 
   const w = current.word
+  const example = getExample(w)
   return (
     <div className="page study-page">
       <header className="page-header">
@@ -185,6 +187,24 @@ export default function Flashcards({
             >
               🔊
             </button>
+            {example && (
+              <div className="flash-example">
+                <div className="flash-example-en">
+                  <span className="flash-example-label">Ví dụ:</span> {example.en}
+                  <button
+                    className="btn-speak"
+                    title="Nghe câu ví dụ"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      speak(example.en)
+                    }}
+                  >
+                    🔊
+                  </button>
+                </div>
+                {example.vi && <div className="flash-example-vi">{example.vi}</div>}
+              </div>
+            )}
           </div>
         </div>
       </div>

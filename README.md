@@ -28,6 +28,11 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Bấm 🔄 trên ảnh (trang unit) để tạo ảnh khác.
 - **Học flashcard**: lật thẻ xem nghĩa + phiên âm, nghe phát âm (🔊), tự đánh dấu
   ✅ đã thuộc / ❌ chưa thuộc. Phím tắt: `Space` lật thẻ, `1` chưa thuộc, `2` đã thuộc.
+  Mặt sau thẻ có thêm **một câu ví dụ đơn giản** dùng từ đó (kèm nghĩa tiếng Việt của câu và
+  nút 🔊 đọc cả câu). Câu ví dụ của các từ có sẵn nằm trong `src/data/examples.js`, tra theo
+  chữ của từ nên không cần cập nhật dữ liệu đã lưu; muốn thêm ví dụ cho từ mới thì thêm dòng
+  `[từ, câu tiếng Anh, nghĩa câu]` vào đó (từ tự tạo cũng có thể mang sẵn `example` /
+  `exampleVi`). Từ chưa có ví dụ thì mặt sau hiển thị như cũ.
 - **Kiểm tra lại**: trắc nghiệm 2 chiều (từ → nghĩa và nghĩa → từ). Trả lời sai thì từ đó
   tự chuyển về "chưa thuộc" và có nút học lại ngay các từ sai.
 - **Kiểm tra viết (✍️)**: hiện nghĩa tiếng Việt, bạn gõ từ tiếng Anh đúng chính tả.

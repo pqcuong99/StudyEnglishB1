@@ -456,6 +456,8 @@ kbd {
 .flashcard-back {
   transform: rotateY(180deg);
   background: linear-gradient(160deg, #eef2ff, #ffffff);
+  /* nghĩa dài + câu ví dụ có thể vượt chiều cao cố định của thẻ */
+  overflow-y: auto;
 }
 .flash-img {
   max-width: 100%;
@@ -484,6 +486,31 @@ kbd {
   bottom: 12px;
   color: var(--muted);
   font-size: 0.82rem;
+}
+/* câu ví dụ ở mặt sau flashcard */
+.flash-example {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  width: 100%;
+  max-width: 460px;
+  line-height: 1.45;
+}
+.flash-example-en {
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.flash-example-label {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-right: 2px;
+}
+.flash-example-vi {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
 }
 .mark-row {
   margin-top: 4px;
@@ -729,7 +756,7 @@ kbd {
 /* ---------- mobile ---------- */
 @media (max-width: 520px) {
   .flashcard {
-    height: 360px;
+    height: 400px;
   }
   .flash-img {
     max-height: 180px;
