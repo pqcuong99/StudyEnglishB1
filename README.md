@@ -59,10 +59,11 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   liệu mỗi người, xem `src/lib/activity.js`): số câu trả lời / đúng, thẻ đã đánh dấu, từ chuyển sang
   đã thuộc, bài nghe đã nộp — tính theo ngày giờ máy người học, chỉ có từ khi cập nhật này trở đi.
 - **Từ hay sai (🔥)**: mỗi câu trả lời trong trắc nghiệm / kiểm tra viết được ghi lại theo từng từ
-  (số lần sai, số lần đúng, chuỗi đúng liên tiếp). Từ sai từ **2 lần** trở lên vào nhóm "Từ hay
-  sai" ở trang chủ (kèm nút ôn flashcard / kiểm tra / viết riêng nhóm này, nhãn 🔥 trên thẻ từ).
-  **🎲 Kiểm tra ngẫu nhiên** dành ~40% đề cho nhóm này. Trả lời đúng **3 lần liên tiếp** thì từ tự
-  rời khỏi nhóm; sai lại thì quay vào. Ngưỡng chỉnh ở `src/lib/wordStats.js`.
+  (số lần sai, số lần đúng, chuỗi đúng liên tiếp). Từ sai từ **2 lần** trở lên được coi là "hay
+  sai": trang chủ chỉ hiện số lượng (🔥 Hay sai: N, rê chuột xem giải thích), thẻ từ trong trang unit
+  mang nhãn 🔥. Không có khối ôn riêng — thay vào đó **🎲 Kiểm tra ngẫu nhiên** dành ~40% đề cho
+  nhóm này (ít từ hay sai thì chúng luôn có mặt trong đề). Trả lời đúng **3 lần liên tiếp** thì từ
+  tự rời khỏi nhóm; sai lại thì quay vào. Ngưỡng chỉnh ở `src/lib/wordStats.js`.
 - **Luyện nghe (🎧)**: trong trang unit có khối "Luyện nghe" gồm các bài nghe ngắn kèm
   recording script. Mỗi bài: nghe audio (có nút nghe lại từ đầu, lùi 5 giây, nghe chậm 0.75x),
   điền các từ bị **ẩn ngẫu nhiên** trong script rồi bấm **Nộp bài**. Ba mức độ: 🌱 Dễ (ẩn 5 từ),

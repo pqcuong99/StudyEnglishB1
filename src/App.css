@@ -1082,46 +1082,8 @@ kbd {
 }
 
 /* ---------- từ hay sai ---------- */
-.hard-card {
-  border-left: 5px solid var(--danger);
-}
-.hard-help {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 6px 0 10px;
-  line-height: 1.5;
-}
-.hard-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.hard-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 8px 0;
-  border-top: 1px solid var(--border);
-}
-.hard-word {
-  flex: 1;
-  min-width: 220px;
-}
-.hard-meta {
-  display: flex;
-  gap: 12px;
-  font-size: 0.85rem;
-  color: var(--muted);
-  white-space: nowrap;
-}
 .hard-wrong {
   color: var(--danger);
-  font-weight: 600;
-}
-.hard-streak {
-  color: var(--primary);
   font-weight: 600;
 }
 .hard-badge {
