@@ -1,10 +1,12 @@
-// Nhật ký hoạt động theo ngày (nằm trong dữ liệu người dùng, lưu trên máy chủ):
+// Nhật ký hoạt động theo ngày (activity.json của mỗi người trên máy chủ):
 //   { 'YYYY-MM-DD': { answers, correct, reviews, learned, listening, listeningDone } }
 //   answers / correct : số câu trả lời trắc nghiệm + kiểm tra viết, và số câu đúng
 //   reviews / learned : số lần đánh dấu thẻ (✅/❌), và số từ chuyển từ chưa thuộc -> thuộc
 //   listening / listeningDone : số lượt nộp bài nghe, và số lượt điền đúng hết
-// Ngày tính theo giờ máy của người học. Bảng điều khiển quản trị gộp nhật ký
-// này của mọi người để báo cáo theo ngày / tháng.
+// Ngày tính theo giờ máy của người học (client gửi kèm khóa ngày, máy chủ cộng
+// dồn). Bảng điều khiển quản trị gộp nhật ký này của mọi người để báo cáo theo
+// ngày / tháng. File này dùng chung cho client và server: không import gì của
+// trình duyệt hay Node.
 
 export const ACTIVITY_FIELDS = ['answers', 'correct', 'reviews', 'learned', 'listening', 'listeningDone']
 
@@ -20,9 +22,9 @@ export function monthKey(key) {
   return key.slice(0, 7)
 }
 
-// Cộng dồn `patch` ({ answers: 1, correct: 0, ... }) vào ngày hôm nay; hàm thuần.
-export function bumpActivity(activity, patch) {
-  const key = dateKey()
+// Cộng dồn `patch` ({ answers: 1, correct: 0, ... }) vào ngày `key` (mặc định
+// hôm nay); hàm thuần.
+export function bumpActivity(activity, patch, key = dateKey()) {
   const prev = activity?.[key] || {}
   const next = { ...prev }
   for (const [k, v] of Object.entries(patch)) if (v) next[k] = (prev[k] || 0) + v

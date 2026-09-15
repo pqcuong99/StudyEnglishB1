@@ -1,100 +1,88 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { randomSeed } from '../lib/image.js'
 import { speak } from '../lib/speech.js'
 import WordImage from './WordImage.jsx'
-import { MASTER_STREAK, isHard } from '../lib/wordStats.js'
+import { MASTER_STREAK, isHard, sectionSummary, shuffle } from '../lib/wordStats.js'
 
-function shuffle(arr) {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
-// Gom từ theo phần (giữ thứ tự xuất hiện). Từ không có tên phần được xếp
-// vào nhóm "Từ khác" ở cuối. Unit không chia phần -> trả về [] để hiển thị
-// một danh sách phẳng như cũ.
-function groupBySection(words) {
-  const map = new Map()
-  for (const w of words) {
-    const key = w.section || ''
-    if (!map.has(key)) map.set(key, [])
-    map.get(key).push(w)
-  }
-  const named = [...map.entries()].filter(([name]) => name)
-  if (named.length === 0) return []
-  const groups = named.map(([name, ws]) => ({ name, words: ws }))
-  if (map.has('')) groups.push({ name: 'Từ khác', words: map.get('') })
-  return groups
-}
-
-function Stats({ words }) {
-  const known = words.filter((w) => w.known).length
+function Stats({ summary }) {
+  const { total, known } = summary
   return (
     <>
       <p>
-        <b>{words.length}</b> từ · đã thuộc <b>{known}</b> · chưa thuộc{' '}
-        <b>{words.length - known}</b>
+        <b>{total}</b> từ · đã thuộc <b>{known}</b> · chưa thuộc <b>{total - known}</b>
       </p>
       <div className="progress-bar">
-        <div
-          className="progress-fill"
-          style={{ width: `${words.length ? (known / words.length) * 100 : 0}%` }}
-        />
+        <div className="progress-fill" style={{ width: `${total ? (known / total) * 100 : 0}%` }} />
       </div>
     </>
   )
 }
 
-// Bộ nút học/kiểm tra dùng chung cho cả unit lẫn từng phần
-function StudyButtons({
-  label,
-  items,
-  size,
-  onStartFlashcards,
-  onStartQuiz,
-  onStartWriting,
-}) {
-  const unknownItems = items.filter(({ word }) => !word.known)
+// Bộ nút học/kiểm tra dùng chung cho cả unit lẫn từng phần. Từ chỉ được tải
+// khi bấm nút (`load` trả về items), số đếm để bật/tắt nút lấy từ `summary`.
+// `short`: nhãn ngắn cho thẻ phần (chỗ hẹp)
+function StudyButtons({ label, summary, load, size, short, onStartFlashcards, onStartQuiz, onStartWriting, onError }) {
+  const [loading, setLoading] = useState(false)
+  const unknown = summary.total - summary.known
   const sm = size === 'sm' ? ' btn-sm' : ''
+
+  async function run(start) {
+    setLoading(true)
+    try {
+      start(await load())
+    } catch (err) {
+      onError?.(`Không tải được từ: ${err.message}`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="btn-row">
       <button
         className={`btn btn-primary${sm}`}
-        disabled={items.length === 0}
-        onClick={() => onStartFlashcards(items, `🃏 ${label}`)}
+        disabled={loading || summary.total === 0}
+        onClick={() => run((items) => onStartFlashcards(items, `🃏 ${label}`))}
       >
-        🃏 Học flashcard
+        {loading ? '⏳' : '🃏'} {short ? 'Học' : 'Học flashcard'}
       </button>
       <button
         className={`btn btn-warning${sm}`}
-        disabled={unknownItems.length === 0}
-        onClick={() => onStartFlashcards(unknownItems, `🔥 Từ chưa thuộc – ${label}`, items)}
+        disabled={loading || unknown === 0}
+        onClick={() =>
+          run((items) =>
+            onStartFlashcards(
+              items.filter(({ word }) => !word.known),
+              `🔥 Từ chưa thuộc – ${label}`,
+              items,
+            ),
+          )
+        }
       >
-        🔥 Học từ chưa thuộc ({unknownItems.length})
+        🔥 {short ? 'Chưa thuộc' : 'Học từ chưa thuộc'} ({unknown})
       </button>
       <button
         className={`btn btn-outline${sm}`}
-        disabled={items.length < 2}
-        onClick={() => onStartQuiz(shuffle(items), `📝 ${label}`)}
+        disabled={loading || summary.total < 2}
+        onClick={() => run((items) => onStartQuiz(shuffle(items), `📝 ${label}`))}
       >
         📝 Kiểm tra
       </button>
       <button
         className={`btn btn-outline${sm}`}
-        disabled={items.length === 0}
-        onClick={() => onStartWriting(shuffle(items), `✍️ ${label}`)}
+        disabled={loading || summary.total === 0}
+        onClick={() => run((items) => onStartWriting(shuffle(items), `✍️ ${label}`))}
       >
-        ✍️ Kiểm tra viết
+        ✍️ {short ? 'Viết' : 'Kiểm tra viết'}
       </button>
     </div>
   )
 }
 
-// `stat`: thống kê đúng/sai của từ (lib/wordStats.js) để gắn nhãn "hay sai"
-function WordCard({ unitId, w, stat, onUpdateWord, onDeleteWord }) {
+// `item` = { unitId, sectionId, word } — thống kê đúng/sai nằm trong word.stats
+function WordCard({ item, onUpdateWord, onDeleteWord }) {
+  const w = item.word
+  const stat = w.stats
   const hard = isHard(stat)
   return (
     <div className={`word-card card ${w.known ? 'is-known' : ''}`}>
@@ -104,7 +92,7 @@ function WordCard({ unitId, w, stat, onUpdateWord, onDeleteWord }) {
           meaning={w.meaning}
           seed={w.seed}
           showRefresh
-          onNewSeed={() => onUpdateWord(unitId, w.id, { seed: randomSeed() })}
+          onNewSeed={() => onUpdateWord(item, { seed: randomSeed() })}
         />
       </div>
       <div className="word-info">
@@ -130,15 +118,11 @@ function WordCard({ unitId, w, stat, onUpdateWord, onDeleteWord }) {
           <input
             type="checkbox"
             checked={!!w.known}
-            onChange={(e) => onUpdateWord(unitId, w.id, { known: e.target.checked })}
+            onChange={(e) => onUpdateWord(item, { known: e.target.checked })}
           />
           Đã thuộc
         </label>
-        <button
-          className="btn btn-ghost btn-sm"
-          title="Xóa từ"
-          onClick={() => onDeleteWord(unitId, w.id)}
-        >
+        <button className="btn btn-ghost btn-sm" title="Xóa từ" onClick={() => onDeleteWord(item)}>
           🗑️
         </button>
       </div>
@@ -146,9 +130,39 @@ function WordCard({ unitId, w, stat, onUpdateWord, onDeleteWord }) {
   )
 }
 
+// Danh sách từ của một phần: tải khi mở (getSection trả null nếu chưa tải)
+function WordList({ items, loading, error, onUpdateWord, onDeleteWord }) {
+  if (error && !items) return <p className="err-note">⚠️ {error}</p>
+  if (!items) {
+    return (
+      <div className="card empty">
+        <div className="spinner" style={{ margin: '0 auto 10px' }} />
+        {loading ? 'Đang tải danh sách từ…' : ''}
+      </div>
+    )
+  }
+  return (
+    <>
+      {error && <p className="err-note">⚠️ {error}</p>}
+      <div className="word-grid">
+        {items.map((it) => (
+          <WordCard key={it.word.id} item={it} onUpdateWord={onUpdateWord} onDeleteWord={onDeleteWord} />
+        ))}
+      </div>
+    </>
+  )
+}
+
+// `unit` là mục lục: { id, name, sections: [{ id, name, total, known, hard }] }.
+// Từ của một phần chỉ được tải khi mở phần đó / bấm nút học (loadSection,
+// loadUnit); `getSection(sectionId)` trả về từ đã tải hoặc null.
 export default function UnitDetail({
   unit,
-  wordStats = {},
+  getSection,
+  loadSection,
+  loadUnit,
+  busy,
+  notice,
   onBack,
   onDeleteUnit,
   onDeleteWord,
@@ -162,8 +176,30 @@ export default function UnitDetail({
 }) {
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
-  // tên phần đang mở (null = màn chọn phần)
+  // id phần đang mở (null = màn chọn phần)
   const [openSection, setOpenSection] = useState(null)
+  const [loadingSection, setLoadingSection] = useState(null)
+  const [error, setError] = useState(null)
+
+  const sections = unit?.sections || []
+  // unit không chia phần (một phần duy nhất) -> danh sách phẳng ngay trong trang unit
+  const flat = sections.length <= 1
+  const shownSection = flat ? sections[0]?.id || null : openSection
+
+  // tải từ của phần đang mở (nếu chưa có)
+  useEffect(() => {
+    if (!unit || !shownSection || getSection(shownSection)) return
+    let alive = true
+    setLoadingSection(shownSection)
+    setError(null)
+    loadSection(shownSection)
+      .catch((err) => alive && setError(`Không tải được từ: ${err.message}`))
+      .finally(() => alive && setLoadingSection(null))
+    return () => {
+      alive = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unit?.id, shownSection])
 
   if (!unit) {
     return (
@@ -176,11 +212,21 @@ export default function UnitDetail({
     )
   }
 
-  const toItems = (words) => words.map((word) => ({ unitId: unit.id, word }))
-  const sections = groupBySection(unit.words)
-  const studyProps = { onStartFlashcards, onStartQuiz, onStartWriting }
-  const cardProps = { unitId: unit.id, onUpdateWord, onDeleteWord }
-  const current = openSection ? sections.find((s) => s.name === openSection) : null
+  // số đếm: phần đã tải thì tính từ danh sách từ (cập nhật tức thì), chưa thì lấy mục lục
+  const summaryOf = (s) => {
+    const items = getSection(s.id)
+    return items ? sectionSummary(items.map((it) => it.word)) : s
+  }
+  const unitSummary = sections.reduce(
+    (acc, s) => {
+      const t = summaryOf(s)
+      return { total: acc.total + t.total, known: acc.known + t.known }
+    },
+    { total: 0, known: 0 },
+  )
+  const studyProps = { onStartFlashcards, onStartQuiz, onStartWriting, onError: setError }
+  const listProps = { onUpdateWord, onDeleteWord }
+  const current = !flat && openSection ? sections.find((s) => s.id === openSection) : null
 
   // ---------- màn danh sách từ của một phần ----------
   if (current) {
@@ -197,19 +243,21 @@ export default function UnitDetail({
         </header>
 
         <div className="card part-card">
-          <Stats words={current.words} />
+          <Stats summary={summaryOf(current)} />
           <StudyButtons
             label={`${current.name} – ${unit.name}`}
-            items={toItems(current.words)}
+            summary={summaryOf(current)}
+            load={() => loadSection(current.id)}
             {...studyProps}
           />
         </div>
 
-        <div className="word-grid">
-          {current.words.map((w) => (
-            <WordCard key={w.id} w={w} stat={wordStats[w.id]} {...cardProps} />
-          ))}
-        </div>
+        <WordList
+          items={getSection(current.id)}
+          loading={loadingSection === current.id}
+          error={error}
+          {...listProps}
+        />
       </div>
     )
   }
@@ -253,23 +301,26 @@ export default function UnitDetail({
         )}
       </header>
 
-      {sections.length > 0 && (
+      {(notice || (error && flat)) && <p className="err-note">⚠️ {notice || error}</p>}
+
+      {!flat && (
         <div className="section-head">
           <h2>Cả unit</h2>
         </div>
       )}
 
       <div className="card">
-        <Stats words={unit.words} />
+        <Stats summary={unitSummary} />
         <StudyButtons
           label={unit.name}
-          items={toItems(unit.words)}
-          size={sections.length > 0 ? 'sm' : undefined}
+          summary={unitSummary}
+          load={loadUnit}
+          size={flat ? undefined : 'sm'}
           {...studyProps}
         />
       </div>
 
-      {sections.length > 0 && (
+      {!flat && (
         <>
           <div className="section-head">
             <h2>Chọn phần để học</h2>
@@ -277,55 +328,26 @@ export default function UnitDetail({
           </div>
           <div className="unit-grid">
             {sections.map((s) => {
-              const known = s.words.filter((w) => w.known).length
-              const unknown = s.words.filter((w) => !w.known)
-              const label = `${s.name} – ${unit.name}`
-              const items = toItems(s.words)
+              const t = summaryOf(s)
               return (
-                <div
-                  key={s.name}
-                  className="unit-card card"
-                  onClick={() => setOpenSection(s.name)}
-                >
+                <div key={s.id} className="unit-card card" onClick={() => setOpenSection(s.id)}>
                   <h3>{s.name}</h3>
                   <p className="unit-meta">
-                    {s.words.length} từ · đã thuộc {known}/{s.words.length}
+                    {t.total} từ · đã thuộc {t.known}/{t.total}
+                    {t.hard > 0 && ` · 🔥 ${t.hard}`}
                   </p>
                   <div className="progress-bar">
-                    <div
-                      className="progress-fill"
-                      style={{ width: `${s.words.length ? (known / s.words.length) * 100 : 0}%` }}
-                    />
+                    <div className="progress-fill" style={{ width: `${t.total ? (t.known / t.total) * 100 : 0}%` }} />
                   </div>
-                  <div className="btn-row" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={() => onStartFlashcards(items, `🃏 ${label}`)}
-                    >
-                      🃏 Học
-                    </button>
-                    <button
-                      className="btn btn-warning btn-sm"
-                      disabled={unknown.length === 0}
-                      onClick={() =>
-                        onStartFlashcards(toItems(unknown), `🔥 Từ chưa thuộc – ${label}`, items)
-                      }
-                    >
-                      🔥 Chưa thuộc ({unknown.length})
-                    </button>
-                    <button
-                      className="btn btn-outline btn-sm"
-                      disabled={s.words.length < 2}
-                      onClick={() => onStartQuiz(shuffle(items), `📝 ${label}`)}
-                    >
-                      📝 Kiểm tra
-                    </button>
-                    <button
-                      className="btn btn-outline btn-sm"
-                      onClick={() => onStartWriting(shuffle(items), `✍️ ${label}`)}
-                    >
-                      ✍️ Viết
-                    </button>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <StudyButtons
+                      label={`${s.name} – ${unit.name}`}
+                      summary={t}
+                      load={() => loadSection(s.id)}
+                      size="sm"
+                      short
+                      {...studyProps}
+                    />
                   </div>
                   <div className="hint">Xem danh sách từ →</div>
                 </div>
@@ -343,15 +365,15 @@ export default function UnitDetail({
           </div>
           <div className="unit-grid">
             {listeningSets.map((set) => (
-              <div key={set.id} className="unit-card card listen-set-card" onClick={() => onOpenListening(set)}>
+              <div key={set.id} className="unit-card card listen-set-card" onClick={() => !busy && onOpenListening(set)}>
                 <h3>🎧 {set.name}</h3>
                 <p className="unit-meta">{set.subtitle}</p>
                 <p className="unit-meta">
                   {set.exercises.length} bài nghe · 3 mức độ (dễ / trung bình / khó)
                 </p>
                 <div className="btn-row" onClick={(e) => e.stopPropagation()}>
-                  <button className="btn btn-primary btn-sm" onClick={() => onOpenListening(set)}>
-                    🎧 Vào luyện nghe
+                  <button className="btn btn-primary btn-sm" disabled={busy} onClick={() => onOpenListening(set)}>
+                    {busy ? '⏳' : '🎧'} Vào luyện nghe
                   </button>
                 </div>
                 <div className="hint">Xem danh sách bài nghe →</div>
@@ -361,19 +383,20 @@ export default function UnitDetail({
         </>
       )}
 
-      {sections.length === 0 && (
-        <div className="word-grid">
-          {unit.words.map((w) => (
-            <WordCard key={w.id} w={w} stat={wordStats[w.id]} {...cardProps} />
-          ))}
-        </div>
+      {flat && shownSection && (
+        <WordList
+          items={getSection(shownSection)}
+          loading={loadingSection === shownSection}
+          error={null}
+          {...listProps}
+        />
       )}
 
       <div className="danger-zone">
         <button
           className="btn btn-danger-outline"
           onClick={() => {
-            if (confirm(`Xóa unit "${unit.name}" và toàn bộ ${unit.words.length} từ?`)) {
+            if (confirm(`Xóa unit "${unit.name}" và toàn bộ ${unitSummary.total} từ?`)) {
               onDeleteUnit(unit.id)
             }
           }}

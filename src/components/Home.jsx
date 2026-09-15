@@ -1,13 +1,4 @@
-import { HARD_SHARE, HARD_WRONG_MIN, MASTER_STREAK, hardItems, pickRandomTest } from '../lib/wordStats.js'
-
-function shuffle(arr) {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
+import { HARD_SHARE, HARD_WRONG_MIN, MASTER_STREAK, shuffle } from '../lib/wordStats.js'
 
 const SYNC_LABEL = {
   saving: { icon: '⏳', text: 'Đang lưu…', title: 'Đang lưu tiến độ lên máy chủ' },
@@ -19,23 +10,44 @@ const SYNC_LABEL = {
   },
 }
 
+// Cộng số đếm các phần của một unit (mục lục do máy chủ tính, không cần tải từ)
+export function unitTotals(u) {
+  return u.sections.reduce(
+    (acc, s) => ({ total: acc.total + s.total, known: acc.known + s.known, hard: acc.hard + s.hard }),
+    { total: 0, known: 0, hard: 0 },
+  )
+}
+
+// Trang chủ chỉ có MỤC LỤC (`units`: tên + số đếm từng phần). Các nút học cần
+// từ thì gọi App tải (onRandomTest, onStudyUnknown, onQuizAll, onWritingAll,
+// onUnitStudy) — `busy` = đang tải, `notice` = lỗi tải gần nhất.
 export default function Home({
   units,
-  wordStats,
   userName,
   syncStatus,
+  busy,
+  notice,
   onLogout,
   onCreate,
   onOpenUnit,
+  onOpenSettings,
+  onRandomTest,
+  onStudyUnknown,
+  onQuizAll,
+  onWritingAll,
+  onUnitStudy,
   onStartFlashcards,
   onStartQuiz,
   onStartWriting,
-  onOpenSettings,
 }) {
-  const allItems = units.flatMap((u) => u.words.map((word) => ({ unitId: u.id, word })))
-  const unknownItems = allItems.filter(({ word }) => !word.known)
-  const totalKnown = allItems.length - unknownItems.length
-  const hardCount = hardItems(allItems, wordStats).length
+  const all = units.reduce(
+    (acc, u) => {
+      const t = unitTotals(u)
+      return { total: acc.total + t.total, known: acc.known + t.known, hard: acc.hard + t.hard }
+    },
+    { total: 0, known: 0, hard: 0 },
+  )
+  const unknown = all.total - all.known
   const sync = SYNC_LABEL[syncStatus] || SYNC_LABEL.saved
 
   return (
@@ -57,65 +69,50 @@ export default function Home({
         </div>
       </header>
 
-      {allItems.length > 0 && (
+      {notice && <p className="err-note">⚠️ {notice}</p>}
+
+      {all.total > 0 && (
         <div className="global-stats card">
           <div className="stat-row">
             <span>
-              Tổng cộng: <b>{allItems.length}</b> từ · Đã thuộc: <b>{totalKnown}</b> · Chưa thuộc:{' '}
-              <b>{unknownItems.length}</b>
-              {hardCount > 0 && (
+              Tổng cộng: <b>{all.total}</b> từ · Đã thuộc: <b>{all.known}</b> · Chưa thuộc: <b>{unknown}</b>
+              {all.hard > 0 && (
                 <>
                   {' '}
                   ·{' '}
                   <span
-                    title={`${hardCount} từ đã trả lời sai từ ${HARD_WRONG_MIN} lần trở lên (nhãn 🔥 trong trang unit). Kiểm tra ngẫu nhiên dành khoảng ${Math.round(HARD_SHARE * 100)}% đề cho các từ này; trả lời đúng ${MASTER_STREAK} lần liên tiếp thì từ rời khỏi nhóm.`}
+                    title={`${all.hard} từ đã trả lời sai từ ${HARD_WRONG_MIN} lần trở lên (nhãn 🔥 trong trang unit). Kiểm tra ngẫu nhiên dành khoảng ${Math.round(HARD_SHARE * 100)}% đề cho các từ này; trả lời đúng ${MASTER_STREAK} lần liên tiếp thì từ rời khỏi nhóm.`}
                   >
-                    🔥 Hay sai: <b>{hardCount}</b>
+                    🔥 Hay sai: <b>{all.hard}</b>
                   </span>
                 </>
               )}
+              {busy && <span className="hint"> · ⏳ đang tải từ…</span>}
             </span>
           </div>
           <div className="progress-bar">
-            <div
-              className="progress-fill"
-              style={{ width: `${allItems.length ? (totalKnown / allItems.length) * 100 : 0}%` }}
-            />
+            <div className="progress-fill" style={{ width: `${all.total ? (all.known / all.total) * 100 : 0}%` }} />
           </div>
           <div className="btn-row">
             <button
               className="btn btn-primary"
-              disabled={allItems.length < 2}
+              disabled={busy || all.total < 2}
               title={
-                hardCount > 0
-                  ? `Khoảng ${Math.round(HARD_SHARE * 100)}% đề ưu tiên lấy từ ${hardCount} từ hay sai, phần còn lại bốc ngẫu nhiên trong tất cả các unit`
+                all.hard > 0
+                  ? `Khoảng ${Math.round(HARD_SHARE * 100)}% đề ưu tiên lấy từ ${all.hard} từ hay sai, phần còn lại bốc ngẫu nhiên trong tất cả các unit`
                   : 'Bốc ngẫu nhiên 10-15 từ trong tất cả các unit'
               }
-              onClick={() => {
-                const picked = pickRandomTest(allItems, wordStats)
-                onStartQuiz(picked, `🎲 Kiểm tra ngẫu nhiên (${picked.length} từ)`)
-              }}
+              onClick={onRandomTest}
             >
               🎲 Kiểm tra ngẫu nhiên (10-15 từ)
             </button>
-            <button
-              className="btn btn-warning"
-              disabled={unknownItems.length === 0}
-              onClick={() => onStartFlashcards(shuffle(unknownItems), '🔥 Học từ chưa thuộc')}
-            >
-              🔥 Học từ chưa thuộc ({unknownItems.length})
+            <button className="btn btn-warning" disabled={busy || unknown === 0} onClick={onStudyUnknown}>
+              🔥 Học từ chưa thuộc ({unknown})
             </button>
-            <button
-              className="btn btn-outline"
-              disabled={allItems.length < 2}
-              onClick={() => onStartQuiz(shuffle(allItems), '📝 Kiểm tra tổng hợp')}
-            >
+            <button className="btn btn-outline" disabled={busy || all.total < 2} onClick={onQuizAll}>
               📝 Kiểm tra tổng hợp
             </button>
-            <button
-              className="btn btn-outline"
-              onClick={() => onStartWriting(shuffle(allItems), '✍️ Kiểm tra viết tổng hợp')}
-            >
+            <button className="btn btn-outline" disabled={busy || all.total === 0} onClick={onWritingAll}>
               ✍️ Kiểm tra viết
             </button>
           </div>
@@ -139,51 +136,36 @@ export default function Home({
       ) : (
         <div className="unit-grid">
           {units.map((u) => {
-            const known = u.words.filter((w) => w.known).length
+            const t = unitTotals(u)
             return (
               <div key={u.id} className="unit-card card" onClick={() => onOpenUnit(u.id)}>
                 <h3>{u.name}</h3>
                 <p className="unit-meta">
-                  {u.words.length} từ · đã thuộc {known}/{u.words.length}
+                  {t.total} từ · đã thuộc {t.known}/{t.total}
+                  {u.sections.length > 1 && ` · ${u.sections.length} phần`}
                 </p>
                 <div className="progress-bar">
-                  <div
-                    className="progress-fill"
-                    style={{ width: `${u.words.length ? (known / u.words.length) * 100 : 0}%` }}
-                  />
+                  <div className="progress-fill" style={{ width: `${t.total ? (t.known / t.total) * 100 : 0}%` }} />
                 </div>
                 <div className="btn-row" onClick={(e) => e.stopPropagation()}>
                   <button
                     className="btn btn-primary btn-sm"
-                    onClick={() =>
-                      onStartFlashcards(
-                        u.words.map((word) => ({ unitId: u.id, word })),
-                        `🃏 ${u.name}`,
-                      )
-                    }
+                    disabled={busy || t.total === 0}
+                    onClick={() => onUnitStudy(u.id, (items) => onStartFlashcards(items, `🃏 ${u.name}`))}
                   >
                     🃏 Học
                   </button>
                   <button
                     className="btn btn-outline btn-sm"
-                    disabled={u.words.length < 2}
-                    onClick={() =>
-                      onStartQuiz(
-                        shuffle(u.words.map((word) => ({ unitId: u.id, word }))),
-                        `📝 ${u.name}`,
-                      )
-                    }
+                    disabled={busy || t.total < 2}
+                    onClick={() => onUnitStudy(u.id, (items) => onStartQuiz(shuffle(items), `📝 ${u.name}`))}
                   >
                     📝 Kiểm tra
                   </button>
                   <button
                     className="btn btn-outline btn-sm"
-                    onClick={() =>
-                      onStartWriting(
-                        shuffle(u.words.map((word) => ({ unitId: u.id, word }))),
-                        `✍️ ${u.name}`,
-                      )
-                    }
+                    disabled={busy || t.total === 0}
+                    onClick={() => onUnitStudy(u.id, (items) => onStartWriting(shuffle(items), `✍️ ${u.name}`))}
                   >
                     ✍️ Viết
                   </button>

@@ -85,7 +85,7 @@ export default function Quiz({
     const correct = option === q.answer
     setAnswers((a) => ({ ...a, [index]: option }))
     // cập nhật trạng thái thuộc/chưa thuộc + thống kê đúng/sai của từ
-    onAnswer(q.item.unitId, q.item.word.id, correct)
+    onAnswer(q.item, correct)
     if (correct) {
       playCorrect()
       // câu "nghĩa -> từ": vừa chọn đúng thì đọc luôn cách phát âm của từ đó

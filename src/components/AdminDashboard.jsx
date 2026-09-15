@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { fetchAdminReport } from '../lib/api.js'
-import { isHard } from '../lib/wordStats.js'
 import { LEVELS } from '../lib/cloze.js'
 import { LISTENING_SETS } from '../data/listening.js'
 import {
@@ -18,8 +17,9 @@ import {
 } from '../lib/activity.js'
 
 // Bảng điều khiển quản trị: đăng nhập bằng tên "admin" + mật khẩu (App.jsx).
-// Dữ liệu lấy từ GET /api/admin/report — mọi người học kèm unit (chỉ cờ thuộc),
-// thống kê đúng/sai, tiến độ nghe và nhật ký hoạt động theo ngày (lib/activity.js).
+// Dữ liệu lấy từ GET /api/admin/report — mỗi người học gồm mục lục unit (số đếm
+// từng phần), danh sách từ hay sai, tổng đúng/sai, tiến độ nghe và nhật ký hoạt
+// động theo ngày (lib/activity.js); máy chủ tính sẵn nên không gửi toàn bộ từ.
 // Không có màn học: quản trị viên chỉ xem, không sửa được tiến độ của ai.
 
 const CHART_DAYS = 30
@@ -36,19 +36,15 @@ const isActive = (t) => !!t && effort(t) > 0
 
 // ---------- tính toán ----------
 function summarize(u) {
-  const { units, wordStats, listening, activity } = u.data
-  const words = units.flatMap((unit) => unit.words)
-  const total = words.length
-  const known = words.filter((w) => w.known).length
-  let correct = 0
-  let wrong = 0
-  for (const e of Object.values(wordStats)) {
-    correct += e.correct || 0
-    wrong += e.wrong || 0
+  const { units, listening, activity, correct, wrong } = u
+  let total = 0
+  let known = 0
+  for (const unit of units) {
+    for (const s of unit.sections) {
+      total += s.total
+      known += s.known
+    }
   }
-  const hard = words
-    .filter((w) => isHard(wordStats[w.id]))
-    .sort((a, b) => wordStats[b.id].wrong - wordStats[a.id].wrong)
 
   let listenAttempts = 0
   let listenDone = 0 // số bài đã điền đúng hết ở ít nhất một mức
@@ -71,7 +67,6 @@ function summarize(u) {
     correct,
     wrong,
     answers: correct + wrong,
-    hard,
     listenAttempts,
     listenDone,
     activeDays,
@@ -84,7 +79,7 @@ function summarize(u) {
 function groupActivity(users, keyOf) {
   const groups = new Map()
   for (const u of users) {
-    for (const [day, entry] of Object.entries(u.data.activity)) {
+    for (const [day, entry] of Object.entries(u.activity)) {
       if (!isActive(entry)) continue
       const k = keyOf(day)
       let g = groups.get(k)
@@ -139,7 +134,7 @@ function ActivityChart({ users, today }) {
       const totals = emptyTotals()
       const names = []
       for (const u of users) {
-        const e = u.data.activity[key]
+        const e = u.activity[key]
         if (!isActive(e)) continue
         addTotals(totals, e)
         names.push(u.name)
@@ -318,11 +313,11 @@ function LearnerDetail({ u, today }) {
   const recent = []
   for (let i = 13; i >= 0; i--) {
     const key = shiftDays(today, -i)
-    const e = u.data.activity[key]
+    const e = u.activity[key]
     if (isActive(e)) recent.push({ key, ...e })
   }
   const months = useMemo(() => groupActivity([u], monthKey), [u])
-  const listening = Object.entries(u.data.listening).filter(([, levels]) =>
+  const listening = Object.entries(u.listening).filter(([, levels]) =>
     Object.values(levels).some((lv) => lv.attempts > 0),
   )
 
@@ -331,31 +326,28 @@ function LearnerDetail({ u, today }) {
       <div className="detail-grid">
         <div>
           <h4>📚 Theo unit</h4>
-          {u.data.units.map((unit) => {
-            const known = unit.words.filter((w) => w.known).length
-            const sections = [...new Set(unit.words.map((w) => w.section).filter(Boolean))]
+          {u.units.map((unit) => {
+            const total = unit.sections.reduce((n, s) => n + s.total, 0)
+            const known = unit.sections.reduce((n, s) => n + s.known, 0)
             return (
               <div key={unit.id} className="detail-unit">
                 <div className="detail-line">
                   <span>{unit.name}</span>
                   <b>
-                    {known}/{unit.words.length}
+                    {known}/{total}
                   </b>
                 </div>
-                <Bar part={known} total={unit.words.length} />
-                {sections.length > 1 &&
-                  sections.map((s) => {
-                    const ws = unit.words.filter((w) => w.section === s)
-                    const k = ws.filter((w) => w.known).length
-                    return (
-                      <div key={s} className="detail-line detail-section">
-                        <span>↳ {s}</span>
-                        <span>
-                          {k}/{ws.length} ({percent(k, ws.length)}%)
-                        </span>
-                      </div>
-                    )
-                  })}
+                <Bar part={known} total={total} />
+                {unit.sections.length > 1 &&
+                  unit.sections.map((s) => (
+                    <div key={s.id} className="detail-line detail-section">
+                      <span>↳ {s.name}</span>
+                      <span>
+                        {s.known}/{s.total} ({percent(s.known, s.total)}%)
+                        {s.hard > 0 && ` · 🔥 ${s.hard}`}
+                      </span>
+                    </div>
+                  ))}
               </div>
             )
           })}
@@ -395,19 +387,16 @@ function LearnerDetail({ u, today }) {
             <p className="admin-note">Không có từ nào sai từ 2 lần trở lên.</p>
           ) : (
             <ul className="detail-list">
-              {hard.map((w) => {
-                const e = u.data.wordStats[w.id]
-                return (
-                  <li key={w.id}>
-                    <span>
-                      <b>{w.word}</b> — {w.meaning}
-                    </span>
-                    <span className="nowrap">
-                      <span className="hard-wrong">❌ {e.wrong}</span> · ✅ {e.correct}
-                    </span>
-                  </li>
-                )
-              })}
+              {hard.map((w) => (
+                <li key={w.id}>
+                  <span>
+                    <b>{w.word}</b> — {w.meaning}
+                  </span>
+                  <span className="nowrap">
+                    <span className="hard-wrong">❌ {w.wrong}</span> · ✅ {w.correct}
+                  </span>
+                </li>
+              ))}
             </ul>
           )}
           {u.hard.length > HARD_PREVIEW && (
@@ -482,7 +471,7 @@ function LearnerTable({ users, today }) {
         </thead>
         <tbody>
           {users.map((u) => {
-            const todayEntry = u.data.activity[today]
+            const todayEntry = u.activity[today]
             const expanded = open === u.key
             return [
               <tr
@@ -575,11 +564,11 @@ export default function AdminDashboard({ token, onLogout }) {
 
   const weekAgo = shiftDays(today, -6)
   const monthStart = today.slice(0, 8) + '01'
-  const activeToday = users.filter((u) => isActive(u.data.activity[today]))
-  const activeWeek = users.filter((u) => effort(sumRange(u.data.activity, weekAgo, today)) > 0)
-  const todayTotals = users.reduce((acc, u) => addTotals(acc, u.data.activity[today]), emptyTotals())
+  const activeToday = users.filter((u) => isActive(u.activity[today]))
+  const activeWeek = users.filter((u) => effort(sumRange(u.activity, weekAgo, today)) > 0)
+  const todayTotals = users.reduce((acc, u) => addTotals(acc, u.activity[today]), emptyTotals())
   const monthTotals = users.reduce(
-    (acc, u) => addTotals(acc, sumRange(u.data.activity, monthStart, today)),
+    (acc, u) => addTotals(acc, sumRange(u.activity, monthStart, today)),
     emptyTotals(),
   )
   const knownAll = users.reduce((n, u) => n + u.known, 0)

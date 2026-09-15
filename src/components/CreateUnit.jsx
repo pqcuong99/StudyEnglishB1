@@ -76,11 +76,12 @@ export default function CreateUnit({ onSave, onCancel }) {
       setStatus('⚠️ Chưa có từ nào hợp lệ để lưu (cần ít nhất Từ + Nghĩa).')
       return
     }
+    // unit tự tạo không chia phần: một phần duy nhất (trang unit hiện danh sách phẳng)
     onSave({
       id: newId(),
       name: unitName.trim() || 'Unit chưa đặt tên',
       createdAt: Date.now(),
-      words,
+      sections: [{ id: 'main', name: 'Từ vựng', words }],
     })
   }
 

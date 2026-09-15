@@ -1,18 +1,39 @@
-// Đồng bộ dữ liệu người dùng lên máy chủ (server/index.js).
+// Đồng bộ với máy chủ (server/index.js).
 //
-// Máy chủ là nguồn chính. Trình duyệt giữ thêm một bản đệm theo từng người
-// (`progress:<key>`) để: (1) vẫn học được khi mất mạng, (2) không mất những
-// thay đổi cuối cùng nếu đóng tab trước khi kịp lưu — lần mở sau, bản nào có
-// `updatedAt` mới hơn sẽ thắng.
-import { saveUser } from './api.js'
+// Máy chủ là nguồn chính, mọi thay đổi là một request nhỏ (đánh dấu một từ,
+// trả lời một câu, nộp một bài nghe...). Các request được xếp vào HÀNG ĐỢI
+// ghi trong localStorage (`ops:<key>`) rồi gửi lần lượt: mất mạng / đóng tab
+// giữa chừng thì không mất, lần mở sau gửi tiếp. Dữ liệu đã tải (tổng quan,
+// từng phần, tiến độ nghe) được đệm trong `cache:<key>:<tên>` để vẫn học được
+// khi không kết nối được máy chủ.
+import { request } from './api.js'
 
 const CURRENT_KEY = 'current-user' // tên người đang đăng nhập trên trình duyệt này
-const RECENT_KEY = 'recent-users' // (bản cũ) danh sách tên gần đây — không dùng nữa, xóa đi
-const CACHE_PREFIX = 'progress:'
-
-const SAVE_DELAY = 700 // gộp các thay đổi liên tiếp trong 0.7s thành một lần lưu
-const RETRY_DELAY = 8000 // lưu lỗi (mất mạng / server tắt) -> thử lại sau 8s
 const ADMIN_TOKEN_KEY = 'admin-token' // sessionStorage: chỉ sống trong tab này
+const OPS_PREFIX = 'ops:'
+const CACHE_PREFIX = 'cache:'
+// khóa của bản cũ (cả dữ liệu người dùng trong một khóa) — không dùng nữa, dọn đi
+const LEGACY_KEYS = ['recent-users', 'vocab-units-v1', 'vocab-units-v1-migrated', 'vocab-seed-version', 'listening-progress-v1', 'listening-progress-v1-migrated']
+
+const SEND_DELAY = 300 // gộp các thay đổi liên tiếp trong 0.3s rồi gửi
+const RETRY_DELAY = 8000 // gửi lỗi (mất mạng / server tắt) -> thử lại sau 8s
+
+function lsGet(k) {
+  try {
+    return localStorage.getItem(k)
+  } catch {
+    return null
+  }
+}
+
+function lsSet(k, v) {
+  try {
+    if (v === null) localStorage.removeItem(k)
+    else localStorage.setItem(k, v)
+  } catch {
+    // hết chỗ lưu / bị chặn -> chỉ còn bản trên máy chủ
+  }
+}
 
 // Token quản trị nhớ theo tab (F5 vẫn ở bảng điều khiển; đóng tab là hết),
 // không nhớ lâu như tên người học vì phải nhập lại mật khẩu mới an toàn.
@@ -34,84 +55,122 @@ export function setAdminToken(token) {
 }
 
 export function getCurrentUser() {
-  try {
-    return localStorage.getItem(CURRENT_KEY) || null
-  } catch {
-    return null
-  }
+  return lsGet(CURRENT_KEY)
 }
 
 export function setCurrentUser(name) {
+  lsSet(CURRENT_KEY, name || null)
+  for (const k of LEGACY_KEYS) lsSet(k, null)
+  // bản đệm cũ (cả dữ liệu trong một khóa) không còn dùng
   try {
-    if (name) localStorage.setItem(CURRENT_KEY, name)
-    else localStorage.removeItem(CURRENT_KEY)
-    localStorage.removeItem(RECENT_KEY)
+    for (const k of Object.keys(localStorage)) if (k.startsWith('progress:')) localStorage.removeItem(k)
   } catch {
-    // không lưu được thì lần sau phải nhập lại tên
+    // bỏ qua
   }
 }
 
-export function readCache(key) {
+// ---------- bộ đệm đọc ----------
+export function readCache(key, name) {
   try {
-    const raw = localStorage.getItem(CACHE_PREFIX + key)
-    const data = raw ? JSON.parse(raw) : null
-    return data && typeof data === 'object' ? data : null
+    const raw = lsGet(`${CACHE_PREFIX}${key}:${name}`)
+    return raw ? JSON.parse(raw) : null
   } catch {
     return null
   }
 }
 
-export function writeCache(key, data) {
+export function writeCache(key, name, value) {
+  lsSet(`${CACHE_PREFIX}${key}:${name}`, value === null ? null : JSON.stringify(value))
+}
+
+// Tải từ máy chủ, đệm lại; máy chủ không trả lời thì dùng bản đệm (nếu có).
+// Trả về { data, offline }; không có cả hai thì ném lỗi.
+export async function cached(key, name, fetcher) {
   try {
-    localStorage.setItem(CACHE_PREFIX + key, JSON.stringify(data))
-  } catch {
-    // hết chỗ lưu -> chỉ còn bản trên máy chủ
+    const data = await fetcher()
+    writeCache(key, name, data)
+    return { data, offline: false }
+  } catch (err) {
+    if (err.status) throw err // lỗi từ máy chủ (400/500) chứ không phải mất mạng
+    const data = readCache(key, name)
+    if (data === null) throw err
+    return { data, offline: true }
   }
 }
 
-// Bộ lưu có gộp + thử lại. `onStatus` nhận 'saving' | 'saved' | 'offline'.
-export function createSaver({ key, name, onStatus }) {
-  let pending = null // dữ liệu mới nhất chưa đẩy lên máy chủ
+// ---------- hàng đợi ghi ----------
+function readOps(key) {
+  try {
+    const v = JSON.parse(lsGet(OPS_PREFIX + key) || '[]')
+    return Array.isArray(v) ? v : []
+  } catch {
+    return []
+  }
+}
+
+export function hasPendingOps(key) {
+  return readOps(key).length > 0
+}
+
+// `onStatus` nhận 'saving' | 'saved' | 'offline'
+export function createQueue({ key, onStatus }) {
+  let ops = readOps(key)
   let timer = null
   let inflight = false
   let disposed = false
+
+  const persist = () => lsSet(OPS_PREFIX + key, ops.length ? JSON.stringify(ops) : null)
 
   function clearTimer() {
     if (timer) clearTimeout(timer)
     timer = null
   }
 
-  function schedule(data, delay = SAVE_DELAY) {
+  // op = { method, path, body? } — path là đường dẫn API (bắt đầu bằng /api)
+  function push(op) {
     if (disposed) return
-    pending = data
-    writeCache(key, data)
+    ops.push(op)
+    persist()
     onStatus?.('saving')
     clearTimer()
-    timer = setTimeout(flush, delay)
+    timer = setTimeout(flush, SEND_DELAY)
   }
 
   async function flush({ keepalive = false } = {}) {
     clearTimer()
-    if (!pending || inflight || disposed) return
-    const data = pending
-    pending = null
+    if (inflight || disposed) return
+    if (ops.length === 0) {
+      onStatus?.('saved')
+      return
+    }
     inflight = true
+    onStatus?.('saving')
     try {
-      await saveUser(key, name, data, { keepalive })
-      if (!pending) onStatus?.('saved')
+      while (ops.length) {
+        const op = ops[0]
+        try {
+          await request(op.path, { method: op.method, body: op.body, keepalive })
+        } catch (err) {
+          // máy chủ từ chối (dữ liệu đã bị xóa / không hợp lệ): bỏ qua op này,
+          // không để nó chặn cả hàng đợi. Mất mạng thì giữ lại và thử lại sau.
+          if (!err.status || err.status >= 500) throw err
+          console.warn('Bỏ qua thay đổi bị máy chủ từ chối:', op, err.message)
+        }
+        ops.shift()
+        persist()
+      }
+      onStatus?.('saved')
     } catch {
-      if (!pending) pending = data // giữ bản mới nhất để thử lại
       onStatus?.('offline')
       if (!disposed) timer = setTimeout(flush, RETRY_DELAY)
     } finally {
       inflight = false
-      // có thay đổi mới trong lúc đang lưu -> lưu tiếp
-      if (pending && !timer && !disposed) timer = setTimeout(flush, SAVE_DELAY)
+      if (ops.length && !timer && !disposed) timer = setTimeout(flush, SEND_DELAY)
     }
   }
 
   // Tab sắp bị ẩn / đóng: đẩy ngay bằng keepalive (trình duyệt vẫn gửi nốt sau
-  // khi đóng nếu dữ liệu nhỏ; nếu không được thì bản đệm sẽ đẩy lên ở lần mở sau)
+  // khi đóng; không được thì hàng đợi trong localStorage sẽ gửi ở lần mở sau)
   function onVisibility() {
     if (document.visibilityState === 'hidden') flush({ keepalive: true })
   }
@@ -129,5 +188,5 @@ export function createSaver({ key, name, onStatus }) {
     window.removeEventListener('online', onOnline)
   }
 
-  return { schedule, flush, dispose, hasPending: () => !!pending }
+  return { push, flush, dispose, hasPending: () => ops.length > 0 }
 }

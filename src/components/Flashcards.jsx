@@ -74,7 +74,7 @@ export default function Flashcards({
 
   function mark(known) {
     if (!current) return
-    onUpdateWord(current.unitId, current.word.id, { known })
+    onUpdateWord(current, { known })
     setMarks((m) => ({ ...m, [current.word.id]: known }))
     setIndex((i) => i + 1)
   }

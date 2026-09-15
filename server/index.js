@@ -4,33 +4,47 @@
 //   node server/index.js            (mặc định cổng 37390)
 //   PORT=4000 node server/index.js
 //
-// Dữ liệu: server/data/users/<tên>-<hash>.json, mỗi người một file.
-// Log:     server/data/api.log
+// Dữ liệu: server/data/users/<tên>-<hash>/ (mỗi người một thư mục, mỗi phần
+//          của unit một file — xem server/store.js). Log: server/data/api.log
 //
-// Endpoints (JSON, CORS mở vì không dùng cookie):
-//   GET  /api/health          -> { ok, users }
-//   GET  /api/users           -> [{ name, updatedAt }]
-//   GET  /api/users/:key      -> { name, key, createdAt, updatedAt, data } | 404
-//   PUT  /api/users/:key      -> body { name, data }  ->  { ok, updatedAt }
+// Endpoints (JSON, CORS mở vì không dùng cookie). `:id` = tên đăng nhập (đã
+// mã hóa URL), mọi id khác chỉ gồm chữ, số, `-`, `_`:
+//   GET    /api/health                                   -> { ok, users }
+//   GET    /api/users                                    -> [{ name, updatedAt }]
+//   PUT    /api/users/:id            body { name }       -> đăng nhập: tạo nếu chưa có (kèm unit
+//                                                           mẫu) / nối từ mẫu mới; trả về tổng quan
+//   GET    /api/users/:id                                -> tổng quan { id, name, createdAt,
+//                                                           updatedAt, units: [mục lục] } | 404
+//   GET    /api/users/:id/words[?unknown=1]              -> mọi từ [{ unitId, sectionId, word }]
+//   GET    /api/users/:id/random-test[?n=]               -> đề ngẫu nhiên (ưu tiên từ hay sai)
+//   GET    /api/users/:id/units/:unitId                  -> cả unit kèm từ của mọi phần
+//   PUT    /api/users/:id/units/:unitId  body { name, sections: [{ id, name, words }] } -> tạo / thay
+//   PATCH  /api/users/:id/units/:unitId  body { name }   -> đổi tên
+//   DELETE /api/users/:id/units/:unitId
+//   GET    /api/users/:id/units/:unitId/sections/:sectionId              -> { id, name, words }
+//   PATCH  /api/users/:id/units/:unitId/sections/:sectionId/words/:wordId
+//            body { known? | answer?, seed?, day? }      -> { word, summary }
+//   DELETE /api/users/:id/units/:unitId/sections/:sectionId/words/:wordId -> { summary }
+//   GET    /api/users/:id/listening                      -> tiến độ nghe
+//   POST   /api/users/:id/listening/:exerciseId/:levelId body { correct, total, day? }
 //
 // Quản trị (đăng nhập bằng tên "admin" + mật khẩu, xem ADMIN_PASSWORD bên dưới):
 //   POST /api/admin/login     -> body { password }  ->  { token, expiresAt } | 401
 //   POST /api/admin/logout    -> header X-Admin-Token
 //   GET  /api/admin/report    -> header X-Admin-Token -> { generatedAt, users: [...] }
-//                                (dữ liệu mọi người học, đã lược bớt để vẽ bảng điều khiển)
 import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { ADMIN_KEY, isValidName, normalizeName, userKey } from '../src/lib/userKey.js'
+import { createStore, isId } from './store.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PORT = Number(process.env.PORT) || 37390
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data')
-const USERS_DIR = path.join(DATA_DIR, 'users')
 const LOG_FILE = path.join(DATA_DIR, 'api.log')
-const MAX_BODY = 5 * 1024 * 1024 // 5 MB — dữ liệu một người chỉ vài chục KB
+const MAX_BODY = 5 * 1024 * 1024 // 5 MB — chỉ PUT cả unit mới lớn, còn lại vài chục byte
 
 // Mật khẩu vào bảng điều khiển quản trị (đổi bằng biến môi trường ADMIN_PASSWORD).
 // Đăng nhập đúng thì nhận một token tạm (giữ trong bộ nhớ, hết hạn sau 12 giờ
@@ -39,7 +53,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Cuongpham@99'
 const ADMIN_TOKEN_TTL = 12 * 60 * 60 * 1000
 const ADMIN_FAIL_DELAY = 800 // ms chờ khi sai mật khẩu, để không dò được nhanh
 
-fs.mkdirSync(USERS_DIR, { recursive: true })
+fs.mkdirSync(DATA_DIR, { recursive: true })
 
 function log(...parts) {
   const line = `[${new Date().toISOString()}] ${parts.join(' ')}`
@@ -51,29 +65,8 @@ function log(...parts) {
   }
 }
 
-// ---------- lưu trữ ----------
-// tên file dễ đọc (giữ chữ có dấu) + hash ngắn để không đụng nhau
-function fileFor(key) {
-  const slug = key.replace(/[^\p{L}\p{N}]+/gu, '_').replace(/^_+|_+$/g, '') || 'user'
-  const hash = crypto.createHash('sha1').update(key).digest('hex').slice(0, 8)
-  return path.join(USERS_DIR, `${slug}-${hash}.json`)
-}
-
-function readUser(key) {
-  try {
-    return JSON.parse(fs.readFileSync(fileFor(key), 'utf8'))
-  } catch {
-    return null
-  }
-}
-
-// ghi tạm rồi đổi tên để file không bao giờ bị hỏng nửa chừng
-function writeUser(key, doc) {
-  const file = fileFor(key)
-  const tmp = file + '.tmp'
-  fs.writeFileSync(tmp, JSON.stringify(doc))
-  fs.renameSync(tmp, file)
-}
+const store = createStore({ dataDir: DATA_DIR, log })
+store.init()
 
 // ---------- quản trị ----------
 const adminTokens = new Map() // token -> hết hạn (ms)
@@ -104,49 +97,10 @@ function adminToken(req) {
   return t
 }
 
-// Dữ liệu một người học cho bảng điều khiển: bỏ phiên âm, ảnh, ví dụ... chỉ giữ
-// những gì cần để tính tiến độ (mỗi người còn vài KB thay vì vài chục KB).
-function reportUser(doc) {
-  const d = doc.data || {}
-  const units = Array.isArray(d.units)
-    ? d.units.map((u) => ({
-        id: u.id,
-        name: u.name,
-        words: (u.words || []).map((w) => ({
-          id: w.id,
-          word: w.word,
-          meaning: w.meaning,
-          section: w.section,
-          known: !!w.known,
-        })),
-      }))
-    : []
-  const obj = (v) => (v && typeof v === 'object' ? v : {})
-  return {
-    name: doc.name,
-    key: doc.key,
-    createdAt: doc.createdAt,
-    updatedAt: doc.updatedAt,
-    data: { units, wordStats: obj(d.wordStats), listening: obj(d.listening), activity: obj(d.activity) },
-  }
-}
-
-// danh sách người dùng giữ trong bộ nhớ để GET /api/users không phải đọc hết file
-const index = new Map() // key -> { name, updatedAt }
-for (const f of fs.readdirSync(USERS_DIR)) {
-  if (!f.endsWith('.json')) continue
-  try {
-    const doc = JSON.parse(fs.readFileSync(path.join(USERS_DIR, f), 'utf8'))
-    if (doc?.key && doc?.name) index.set(doc.key, { name: doc.name, updatedAt: doc.updatedAt || 0 })
-  } catch {
-    log('WARN file hỏng, bỏ qua:', f)
-  }
-}
-
 // ---------- HTTP ----------
 const CORS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, PUT, POST, PATCH, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Token',
   'Access-Control-Max-Age': '86400',
 }
@@ -162,6 +116,9 @@ function send(res, status, body) {
   res.end(json)
 }
 
+const fail = (status, message) => Object.assign(new Error(message), { status })
+const notFound = (res) => send(res, 404, { error: 'Không tìm thấy' })
+
 function readBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = []
@@ -169,7 +126,7 @@ function readBody(req) {
     req.on('data', (c) => {
       size += c.length
       if (size > MAX_BODY) {
-        reject(Object.assign(new Error('Dữ liệu quá lớn'), { status: 413 }))
+        reject(fail(413, 'Dữ liệu quá lớn'))
         req.destroy()
         return
       }
@@ -179,25 +136,103 @@ function readBody(req) {
       try {
         resolve(chunks.length ? JSON.parse(Buffer.concat(chunks).toString('utf8')) : null)
       } catch {
-        reject(Object.assign(new Error('JSON không hợp lệ'), { status: 400 }))
+        reject(fail(400, 'JSON không hợp lệ'))
       }
     })
     req.on('error', reject)
   })
 }
 
-// /api/users/<key> -> key đã giải mã, hoặc null nếu không hợp lệ
-function keyFromPath(pathname) {
-  const m = pathname.match(/^\/api\/users\/([^/]+)$/)
-  if (!m) return null
-  let raw
-  try {
-    raw = decodeURIComponent(m[1])
-  } catch {
-    return null
+// Các endpoint của người dùng: `seg` = các đoạn đường dẫn sau /api/users/:id
+async function handleUser(req, res, key, seg, url) {
+  const m = req.method
+  const [a, unitId, b, sectionId, c, wordId] = seg
+
+  // /api/users/:id
+  if (seg.length === 0) {
+    if (m === 'GET') {
+      const ov = store.overview(key)
+      return ov ? send(res, 200, ov) : send(res, 404, { error: 'Chưa có người dùng này' })
+    }
+    if (m === 'PUT' || m === 'POST') {
+      const body = await readBody(req)
+      const name = normalizeName(body?.name)
+      if (!isValidName(name) || userKey(name) !== key) throw fail(400, 'Tên không khớp với khóa')
+      const { created, overview } = store.open(key, name)
+      log(created ? 'NEW ' : 'OPEN', name)
+      return send(res, 200, overview)
+    }
+    return notFound(res)
   }
-  if (!isValidName(raw)) return null
-  return userKey(raw)
+
+  // mọi thứ bên dưới đòi hỏi người dùng đã tồn tại
+  if (!store.exists(key)) return send(res, 404, { error: 'Chưa có người dùng này' })
+
+  if (a === 'words' && seg.length === 1 && m === 'GET') {
+    return send(res, 200, store.allItems(key, { unknownOnly: url.searchParams.get('unknown') === '1' }))
+  }
+  if (a === 'random-test' && seg.length === 1 && m === 'GET') {
+    return send(res, 200, store.randomTest(key, url.searchParams.get('n')))
+  }
+
+  if (a === 'listening') {
+    if (seg.length === 1 && m === 'GET') return send(res, 200, store.listening(key))
+    if (seg.length === 3 && m === 'POST' && isId(seg[1]) && isId(seg[2])) {
+      const body = await readBody(req)
+      return send(res, 200, store.recordListening(key, seg[1], seg[2], body))
+    }
+    return notFound(res)
+  }
+
+  if (a !== 'units' || !isId(unitId)) return notFound(res)
+
+  // /api/users/:id/units/:unitId
+  if (seg.length === 2) {
+    if (m === 'GET') {
+      const u = store.unit(key, unitId)
+      return u ? send(res, 200, u) : notFound(res)
+    }
+    if (m === 'PUT') {
+      const body = await readBody(req)
+      const entry = store.putUnit(key, unitId, body)
+      log('UNIT', key, unitId, `${entry.sections.reduce((n, s) => n + s.total, 0)} tu`)
+      return send(res, 200, entry)
+    }
+    if (m === 'PATCH') {
+      const body = await readBody(req)
+      const u = store.renameUnit(key, unitId, body?.name)
+      return u ? send(res, 200, u) : notFound(res)
+    }
+    if (m === 'DELETE') {
+      if (!store.deleteUnit(key, unitId)) return notFound(res)
+      log('DEL UNIT', key, unitId)
+      return send(res, 200, { ok: true })
+    }
+    return notFound(res)
+  }
+
+  if (b !== 'sections' || !isId(sectionId)) return notFound(res)
+
+  // /api/users/:id/units/:unitId/sections/:sectionId
+  if (seg.length === 4) {
+    if (m !== 'GET') return notFound(res)
+    const s = store.section(key, unitId, sectionId)
+    return s ? send(res, 200, s) : notFound(res)
+  }
+
+  if (c !== 'words' || !isId(wordId) || seg.length !== 6) return notFound(res)
+
+  // /api/users/:id/units/:unitId/sections/:sectionId/words/:wordId
+  if (m === 'PATCH') {
+    const body = await readBody(req)
+    const r = store.updateWord(key, unitId, sectionId, wordId, body)
+    return r ? send(res, 200, r) : notFound(res)
+  }
+  if (m === 'DELETE') {
+    const r = store.deleteWord(key, unitId, sectionId, wordId)
+    return r ? send(res, 200, r) : notFound(res)
+  }
+  return notFound(res)
 }
 
 async function handle(req, res) {
@@ -212,12 +247,12 @@ async function handle(req, res) {
 
   // nhận mọi method để kiểm tra proxy (IIS) có chuyển tiếp cả PUT hay không
   if (pathname === '/api/health') {
-    send(res, 200, { ok: true, users: index.size, method: req.method })
+    send(res, 200, { ok: true, users: store.index.size, method: req.method })
     return
   }
 
   if (req.method === 'GET' && pathname === '/api/users') {
-    const list = [...index.values()].sort((a, b) => b.updatedAt - a.updatedAt)
+    const list = [...store.index.values()].sort((a, b) => b.updatedAt - a.updatedAt)
     send(res, 200, list)
     return
   }
@@ -247,65 +282,36 @@ async function handle(req, res) {
       return
     }
     if (pathname === '/api/admin/report' && req.method === 'GET') {
-      const users = []
-      for (const k of index.keys()) {
-        const doc = readUser(k)
-        if (doc) users.push(reportUser(doc))
-      }
-      users.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0))
-      send(res, 200, { generatedAt: Date.now(), users })
+      send(res, 200, store.report())
       return
     }
-    send(res, 404, { error: 'Không tìm thấy' })
+    notFound(res)
     return
   }
 
-  const key = keyFromPath(pathname)
-  if (key === ADMIN_KEY) {
-    // tên "admin" chỉ để mở bảng điều khiển, không có tiến độ học
-    send(res, req.method === 'GET' ? 404 : 403, { error: 'Tên này dành cho quản trị viên' })
-    return
-  }
-  if (key) {
-    if (req.method === 'GET') {
-      const doc = readUser(key)
-      if (!doc) {
-        send(res, 404, { error: 'Chưa có người dùng này' })
-        return
-      }
-      send(res, 200, doc)
-      return
+  // /api/users/:id/... -> tên đã giải mã, kiểm tra hợp lệ rồi thành khóa
+  const m = pathname.match(/^\/api\/users\/([^/]+)(\/.*)?$/)
+  if (m) {
+    let raw
+    try {
+      raw = decodeURIComponent(m[1])
+    } catch {
+      raw = ''
     }
-
-    if (req.method === 'PUT' || req.method === 'POST') {
-      const body = await readBody(req)
-      if (!body || typeof body !== 'object' || !body.data || typeof body.data !== 'object') {
-        send(res, 400, { error: 'Thiếu trường data' })
+    if (isValidName(raw)) {
+      const key = userKey(raw)
+      if (key === ADMIN_KEY) {
+        // tên "admin" chỉ để mở bảng điều khiển, không có tiến độ học
+        send(res, req.method === 'GET' ? 404 : 403, { error: 'Tên này dành cho quản trị viên' })
         return
       }
-      const name = normalizeName(body.name)
-      if (!isValidName(name) || userKey(name) !== key) {
-        send(res, 400, { error: 'Tên không khớp với khóa' })
-        return
-      }
-      const prev = readUser(key)
-      const now = Date.now()
-      const doc = {
-        name,
-        key,
-        createdAt: prev?.createdAt || now,
-        updatedAt: now,
-        data: body.data,
-      }
-      writeUser(key, doc)
-      index.set(key, { name, updatedAt: now })
-      log(prev ? 'SAVE' : 'NEW ', name)
-      send(res, 200, { ok: true, updatedAt: now })
+      const seg = (m[2] || '').split('/').filter(Boolean)
+      await handleUser(req, res, key, seg, url)
       return
     }
   }
 
-  send(res, 404, { error: 'Không tìm thấy' })
+  notFound(res)
 }
 
 const server = http.createServer((req, res) => {
@@ -318,7 +324,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   // không dấu để hiện đúng trên cửa sổ cmd của VPS (log file vẫn UTF-8)
-  log(`API tien do chay tai http://0.0.0.0:${PORT}  (du lieu: ${USERS_DIR}, ${index.size} nguoi dung)`)
+  log(`API tien do chay tai http://0.0.0.0:${PORT}  (du lieu: ${store.usersDir}, ${store.index.size} nguoi dung)`)
 })
 
 for (const sig of ['SIGINT', 'SIGTERM']) {

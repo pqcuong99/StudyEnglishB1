@@ -3,10 +3,13 @@
 // vở ghi trên lớp (Unit 1) và bảng từ vựng "II/ VOCAB" của khóa học.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
-// `version` = SEED_VERSION + 1, rồi tăng SEED_VERSION. storage.js sẽ tự
-// nối các từ của nhóm mới vào unit đã lưu trong trình duyệt của người dùng
-// (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Phiên bản seed đã
-// nối được lưu ngay trong unit (`seedVersion`) để luôn đi cùng dữ liệu.
+// `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
+// phần mới vào `sections` nếu cần), rồi tăng SEED_VERSION. Máy chủ
+// (server/store.js) sẽ tự nối các từ của nhóm mới vào unit đã lưu của từng
+// người (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Phiên bản seed
+// đã nối được lưu ngay trong unit (`seedVersion`) để luôn đi cùng dữ liệu.
+//
+// File này không được import gì của trình duyệt hay Node: server dùng chung.
 
 export const SEED_VERSION = 4
 
@@ -117,7 +120,7 @@ const U1_VOCAB3B_WORDS = [
 
 const UNITS = [
   {
-    // giữ id cũ để khớp với dữ liệu đã lưu trong trình duyệt
+    // giữ id cũ để khớp với dữ liệu đã lưu
     id: 'u1s2',
     name: 'Unit 1: All About Me',
     // tên cũ; nếu người dùng chưa tự đổi tên thì được đổi sang tên mới khi cập nhật
@@ -125,13 +128,19 @@ const UNITS = [
     // nếu không có unit trùng id (người dùng tự import lại PDF) thì nối từ
     // vào unit có tên khớp mẫu này
     nameMatch: /^\s*unit\s*1\b/i,
-    // `section`: tên phần hiển thị trong unit (mỗi phần có nút học/kiểm tra riêng)
+    // các phần của unit: mỗi phần có id riêng, máy chủ lưu và trả về từng phần
+    sections: [
+      { id: 'p1', name: 'Phần 1 – Session 2' },
+      { id: 'p2', name: 'Phần 2 – Session 3 & vở ghi' },
+      { id: 'p3', name: 'Phần 3 – Vocab' },
+    ],
+    // `section`: id phần mà nhóm từ này thuộc về
     groups: [
-      { version: 1, prefix: 'u1s2', seedBase: 100, section: 'Phần 1 – Session 2', rows: U1S2_WORDS },
-      { version: 2, prefix: 'u1s3', seedBase: 200, section: 'Phần 2 – Session 3 & vở ghi', rows: U1S3_WORDS },
-      { version: 2, prefix: 'u1n', seedBase: 300, section: 'Phần 2 – Session 3 & vở ghi', rows: U1_NOTES_WORDS },
-      { version: 3, prefix: 'u1v3', seedBase: 400, section: 'Phần 3 – Vocab', rows: U1_VOCAB3_WORDS },
-      { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'Phần 3 – Vocab', rows: U1_VOCAB3B_WORDS },
+      { version: 1, prefix: 'u1s2', seedBase: 100, section: 'p1', rows: U1S2_WORDS },
+      { version: 2, prefix: 'u1s3', seedBase: 200, section: 'p2', rows: U1S3_WORDS },
+      { version: 2, prefix: 'u1n', seedBase: 300, section: 'p2', rows: U1_NOTES_WORDS },
+      { version: 3, prefix: 'u1v3', seedBase: 400, section: 'p3', rows: U1_VOCAB3_WORDS },
+      { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'p3', rows: U1_VOCAB3B_WORDS },
     ],
   },
 ]
@@ -143,31 +152,36 @@ function buildWords(group) {
     pos,
     ipa,
     meaning,
-    section: group.section,
     seed: group.seedBase + i + 1,
     known: false,
   }))
 }
 
-// Toàn bộ unit mẫu (dùng khi trình duyệt chưa có dữ liệu)
+// Toàn bộ unit mẫu cho người dùng mới:
+//   [{ id, name, createdAt, seedVersion, sections: [{ id, name, words }] }]
 export function seedUnits() {
   return UNITS.map((u) => ({
     id: u.id,
     name: u.name,
     createdAt: Date.now(),
     seedVersion: SEED_VERSION,
-    words: u.groups.flatMap(buildWords),
+    sections: u.sections.map((s) => ({
+      id: s.id,
+      name: s.name,
+      words: u.groups.filter((g) => g.section === s.id).flatMap(buildWords),
+    })),
   }))
 }
 
-// Mô tả các unit mẫu kèm từng nhóm từ theo phiên bản
-// (để storage.js nối từ mới vào unit đã lưu trong trình duyệt)
+// Mô tả các unit mẫu kèm từng nhóm từ theo phiên bản: máy chủ dùng để nối từ
+// mới vào unit đã lưu của người dùng và để chuyển dữ liệu cũ sang cấu trúc phần
 export function seedUnitUpdates() {
   return UNITS.map((u) => ({
     id: u.id,
     name: u.name,
     previousNames: u.previousNames || [],
     nameMatch: u.nameMatch || null,
-    groups: u.groups.map((g) => ({ version: g.version, words: buildWords(g) })),
+    sections: u.sections.map((s) => ({ id: s.id, name: s.name })),
+    groups: u.groups.map((g) => ({ version: g.version, sectionId: g.section, words: buildWords(g) })),
   }))
 }

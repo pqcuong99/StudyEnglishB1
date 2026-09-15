@@ -1,17 +1,31 @@
 import { useEffect, useRef, useState } from 'react'
-import { normalizeUnits, takeLegacyUnits } from './lib/storage.js'
-import { takeLegacyListeningProgress, recordListeningResult } from './lib/listeningProgress.js'
-import { recordAnswer } from './lib/wordStats.js'
-import { bumpActivity } from './lib/activity.js'
-import { adminLogin, adminLogout, fetchUser } from './lib/api.js'
+import { recordListeningResult } from './lib/listeningProgress.js'
+import { isHard, recordAnswer, sectionSummary } from './lib/wordStats.js'
+import { dateKey } from './lib/activity.js'
+import {
+  adminLogin,
+  adminLogout,
+  fetchAllItems,
+  fetchListening,
+  fetchOverview,
+  fetchRandomTest,
+  fetchSection,
+  fetchUnit,
+  openUser as apiOpenUser,
+  userPath,
+  wordPath,
+} from './lib/api.js'
 import { userKey } from './lib/userKey.js'
 import {
-  createSaver,
+  cached,
+  createQueue,
   getAdminToken,
   getCurrentUser,
+  hasPendingOps,
   readCache,
   setAdminToken,
   setCurrentUser,
+  writeCache,
 } from './lib/sync.js'
 import Login from './components/Login.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
@@ -25,32 +39,60 @@ import Settings from './components/Settings.jsx'
 import Listening from './components/Listening.jsx'
 import { findListeningSet, listeningSetsForUnit } from './data/listening.js'
 
-// Dữ liệu của một người dùng (lưu trên máy chủ, đệm trong trình duyệt):
-//   { units, listening, wordStats, activity }
-//   units     = các unit + từ (kèm cờ `known`)
-//   listening = tiến độ luyện nghe (xem lib/listeningProgress.js)
-//   wordStats = thống kê đúng/sai từng từ (xem lib/wordStats.js)
-//   activity  = số câu trả lời / từ đánh dấu thuộc / bài nghe theo từng ngày
-//               (xem lib/activity.js) — bảng điều khiển quản trị dùng để báo cáo
-function makeStore(data) {
-  const obj = (v) => (v && typeof v === 'object' ? v : {})
-  return {
-    units: normalizeUnits(data?.units),
-    listening: obj(data?.listening),
-    wordStats: obj(data?.wordStats),
-    activity: obj(data?.activity),
-  }
+// Dữ liệu người dùng nằm trên máy chủ, chia nhỏ theo unit / phần (server/store.js).
+// Trình duyệt chỉ giữ những gì đã tải:
+//   units     = MỤC LỤC: [{ id, name, sections: [{ id, name, total, known, hard }] }]
+//               (tải khi đăng nhập; số đếm cập nhật tại chỗ khi học)
+//   words     = từ đã tải, khóa `unitId/sectionId/wordId` -> word (kèm `known`, `stats`)
+//   loaded    = phần đã tải trọn vẹn: khóa `unitId/sectionId` -> [wordId] theo thứ tự
+//   listening = tiến độ nghe (tải khi mở bài nghe; xem lib/listeningProgress.js)
+// Mỗi thay đổi (đánh dấu từ, trả lời, nộp bài nghe...) áp dụng ngay tại chỗ rồi
+// xếp vào hàng đợi gửi lên máy chủ (lib/sync.js).
+const emptyStore = (units) => ({ units, words: {}, loaded: {}, listening: null })
+
+const sKey = (unitId, sectionId) => `${unitId}/${sectionId}`
+const wKey = (unitId, sectionId, wordId) => `${unitId}/${sectionId}/${wordId}`
+const itemKey = (item) => wKey(item.unitId, item.sectionId, item.word.id)
+// item: { unitId, sectionId, word } — đơn vị đi qua mọi màn học / kiểm tra
+const toItems = (unitId, sectionId, words) => words.map((word) => ({ unitId, sectionId, word }))
+
+// Đưa danh sách từ (của một phần hoặc một đề) vào store; `full` = đây là trọn
+// vẹn phần đó (ghi thứ tự vào `loaded`)
+function mergeItems(s, items, full = null) {
+  const words = { ...s.words }
+  for (const it of items) words[itemKey(it)] = it.word
+  const loaded = full ? { ...s.loaded, [sKey(full.unitId, full.sectionId)]: items.map((it) => it.word.id) } : s.loaded
+  return { ...s, words, loaded }
+}
+
+// Cộng chênh lệch số đếm vào mục lục
+function bumpSummary(units, unitId, sectionId, delta) {
+  return units.map((u) =>
+    u.id !== unitId
+      ? u
+      : {
+          ...u,
+          sections: u.sections.map((sec) =>
+            sec.id !== sectionId
+              ? sec
+              : {
+                  ...sec,
+                  total: sec.total + (delta.total || 0),
+                  known: sec.known + (delta.known || 0),
+                  hard: sec.hard + (delta.hard || 0),
+                },
+          ),
+        },
+  )
 }
 
 // view shapes:
-//   { name: 'home' }
-//   { name: 'create' }
+//   { name: 'home' } | { name: 'create' } | { name: 'settings' }
 //   { name: 'unit', unitId }
-//   { name: 'flashcards', deck, pool, title }   deck/pool = [{unitId, wordId}]
-//   { name: 'quiz', deck, pool, title }
-//   { name: 'writing', deck, pool, title }
-//   { name: 'listening', setId, unitId }     bài luyện nghe (điền từ vào script)
-//   pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
+//   { name: 'flashcards' | 'quiz' | 'writing', deck, pool, title }
+//       deck/pool = [{ unitId, sectionId, wordId }], từ được tra sống trong store
+//       pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
+//   { name: 'listening', setId, unitId }   bài luyện nghe (điền từ vào script)
 export default function App() {
   // session: { status: 'boot' | 'login' | 'loading' | 'ready' | 'error' | 'admin',
   //            name?, key?, message?, token? }
@@ -58,9 +100,12 @@ export default function App() {
   const [store, setStore] = useState(null)
   const [syncStatus, setSyncStatus] = useState('saved') // 'saving' | 'saved' | 'offline'
   const [view, setView] = useState({ name: 'home' })
-  const saverRef = useRef(null)
-  const lastSavedRef = useRef('') // JSON của bản đã lưu (hoặc vừa tải) để không lưu thừa
+  const [busy, setBusy] = useState(false) // đang tải từ cho một màn học
+  const [notice, setNotice] = useState(null) // lỗi tải gần nhất (hiện ở trang chủ / unit)
+  const queueRef = useRef(null)
+  const storeRef = useRef(null) // bản mới nhất của store cho các hàm async
   const loadSeqRef = useRef(0) // bỏ qua kết quả của lượt tải cũ nếu người dùng đổi tên giữa chừng
+  storeRef.current = store
 
   // mở app: tab này đang ở bảng điều khiển quản trị thì vào lại đó; đã nhớ tên
   // người học trên trình duyệt này thì vào thẳng; không thì hỏi tên
@@ -70,7 +115,7 @@ export default function App() {
     if (token) setSession({ status: 'admin', token })
     else if (name) openUser(name)
     else setSession({ status: 'login' })
-    return () => saverRef.current?.dispose()
+    return () => queueRef.current?.dispose()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -98,145 +143,240 @@ export default function App() {
     const key = userKey(name)
     const seq = ++loadSeqRef.current
     setSession({ status: 'loading', name })
-    saverRef.current?.dispose()
-    saverRef.current = null
+    queueRef.current?.dispose()
+    queueRef.current = null
 
-    let doc = null
-    let offline = false
+    // thay đổi còn dồn từ lần trước (đóng tab khi chưa kịp gửi) -> gửi trước
+    const queue = createQueue({ key, onStatus: setSyncStatus })
+    if (hasPendingOps(key)) await queue.flush()
+    if (seq !== loadSeqRef.current) {
+      queue.dispose()
+      return
+    }
+
+    let overview
+    let offline
     try {
-      doc = await fetchUser(key)
-    } catch {
-      offline = true
+      ;({ data: overview, offline } = await cached(key, 'overview', () => apiOpenUser(key, name)))
+    } catch (err) {
+      queue.dispose()
+      if (seq !== loadSeqRef.current) return
+      setSession({
+        status: 'error',
+        name,
+        message: err.status
+          ? `Máy chủ tiến độ báo lỗi: ${err.message}`
+          : 'Không kết nối được máy chủ tiến độ và trình duyệt này chưa có dữ liệu của tên này.',
+      })
+      return
     }
-    if (seq !== loadSeqRef.current) return
-    const cached = readCache(key)
-
-    let data = null
-    let displayName = name
-    let mustPush = false // bản đang dùng chưa có trên máy chủ -> đẩy lên ngay
-    if (offline) {
-      if (!cached) {
-        setSession({
-          status: 'error',
-          name,
-          message: 'Không kết nối được máy chủ tiến độ và trình duyệt này chưa có dữ liệu của tên này.',
-        })
-        return
-      }
-      data = cached
-    } else if (doc) {
-      displayName = doc.name
-      // lần trước đóng tab khi chưa kịp lưu -> bản đệm trong máy mới hơn bản máy chủ
-      const cacheNewer = cached && (cached.updatedAt || 0) > (doc.data?.updatedAt || 0)
-      data = cacheNewer ? cached : doc.data
-      mustPush = !!cacheNewer
-    } else {
-      // người dùng mới: kế thừa dữ liệu của bản cũ (trước khi có đăng nhập) nếu
-      // trình duyệt này còn giữ, không thì bắt đầu với unit mẫu
-      const legacyUnits = takeLegacyUnits()
-      const legacyListening = takeLegacyListeningProgress()
-      data = cached || (legacyUnits ? { units: legacyUnits, listening: legacyListening } : null)
-      mustPush = true
+    if (seq !== loadSeqRef.current) {
+      queue.dispose()
+      return
+    }
+    if (!overview) {
+      // 404: API đang chạy là bản cũ, chưa có endpoint mới
+      queue.dispose()
+      setSession({ status: 'error', name, message: 'Máy chủ tiến độ đang chạy bản cũ, hãy khởi động lại API (update-vps.bat).' })
+      return
     }
 
-    const next = makeStore(data)
-    lastSavedRef.current = JSON.stringify(next)
-    saverRef.current = createSaver({ key, name: displayName, onStatus: setSyncStatus })
-    setSyncStatus(offline ? 'offline' : 'saved')
-    setStore(next)
+    queueRef.current = queue
+    setSyncStatus(offline ? 'offline' : queue.hasPending() ? 'saving' : 'saved')
+    setStore(emptyStore(overview.units))
     setView({ name: 'home' })
-    setCurrentUser(displayName)
-    setSession({ status: 'ready', name: displayName, key })
-    if (mustPush) saverRef.current.schedule({ ...next, updatedAt: Date.now() }, 0)
+    setNotice(null)
+    setCurrentUser(overview.name)
+    setSession({ status: 'ready', name: overview.name, key })
   }
 
-  // mọi thay đổi dữ liệu -> đệm trong máy + lưu lên máy chủ (gộp, tự thử lại)
-  useEffect(() => {
-    if (session.status !== 'ready' || !store || !saverRef.current) return
-    const json = JSON.stringify(store)
-    if (json === lastSavedRef.current) return
-    lastSavedRef.current = json
-    saverRef.current.schedule({ ...store, updatedAt: Date.now() })
-  }, [store, session.status])
-
   function logout() {
-    saverRef.current?.flush()
-    saverRef.current?.dispose()
-    saverRef.current = null
+    queueRef.current?.flush()
+    queueRef.current?.dispose()
+    queueRef.current = null
     setCurrentUser(null)
     setStore(null)
     setView({ name: 'home' })
     setSession({ status: 'login' })
   }
 
-  const setUnits = (fn) => setStore((s) => ({ ...s, units: typeof fn === 'function' ? fn(s.units) : fn }))
+  const key = session.key
+  const push = (op) => queueRef.current?.push(op)
 
+  // Tải lại mục lục (số đếm) từ máy chủ — chỉ khi không còn thay đổi chờ gửi,
+  // để không ghi đè số đếm vừa cập nhật tại chỗ
+  async function refreshOverview() {
+    if (!key || queueRef.current?.hasPending()) return
+    try {
+      const ov = await fetchOverview(key)
+      if (ov && storeRef.current) {
+        writeCache(key, 'overview', ov)
+        setStore((s) => (s ? { ...s, units: ov.units } : s))
+      }
+    } catch {
+      // mất mạng: giữ mục lục đang có
+    }
+  }
+
+  // ---------- tải từ ----------
+  // Từ của một phần (tải một lần, sau đó lấy trong store); mất mạng thì dùng bản đệm
+  async function loadSection(unitId, sectionId) {
+    const s = storeRef.current
+    const ids = s?.loaded[sKey(unitId, sectionId)]
+    if (ids) return ids.map((id) => ({ unitId, sectionId, word: s.words[wKey(unitId, sectionId, id)] }))
+    const { data } = await cached(key, `sec:${sKey(unitId, sectionId)}`, () => fetchSection(key, unitId, sectionId))
+    if (!data) throw new Error('Phần này không còn trên máy chủ')
+    const items = toItems(unitId, sectionId, data.words)
+    setStore((st) => mergeItems(st, items, { unitId, sectionId }))
+    return items
+  }
+
+  // Toàn bộ từ của một unit (mọi phần)
+  async function loadUnit(unitId) {
+    const s = storeRef.current
+    const unit = s.units.find((u) => u.id === unitId)
+    if (!unit) throw new Error('Không tìm thấy unit')
+    const missing = unit.sections.filter((sec) => !s.loaded[sKey(unitId, sec.id)])
+    if (missing.length === 0) return unit.sections.flatMap((sec) => sectionItems(s, unitId, sec.id))
+    if (missing.length === 1) {
+      await loadSection(unitId, missing[0].id)
+      return loadUnit(unitId)
+    }
+    let full
+    try {
+      full = await fetchUnit(key, unitId)
+      if (!full) throw new Error('Unit này không còn trên máy chủ')
+      for (const sec of full.sections) writeCache(key, `sec:${sKey(unitId, sec.id)}`, { words: sec.words })
+    } catch (err) {
+      if (err.status) throw err
+      // mất mạng: gom từ bản đệm của từng phần
+      full = {
+        sections: unit.sections.map((sec) => {
+          const c = readCache(key, `sec:${sKey(unitId, sec.id)}`)
+          if (!c) throw err
+          return { id: sec.id, words: c.words }
+        }),
+      }
+    }
+    const bySection = full.sections.map((sec) => ({ sectionId: sec.id, items: toItems(unitId, sec.id, sec.words) }))
+    setStore((st) => bySection.reduce((next, b) => mergeItems(next, b.items, { unitId, sectionId: b.sectionId }), st))
+    return bySection.flatMap((b) => b.items)
+  }
+
+  function sectionItems(s, unitId, sectionId) {
+    const ids = s.loaded[sKey(unitId, sectionId)]
+    if (!ids) return null
+    return ids.map((id) => ({ unitId, sectionId, word: s.words[wKey(unitId, sectionId, id)] }))
+  }
+
+  // Từ của mọi unit (học tổng hợp) / đề ngẫu nhiên do máy chủ bốc
+  async function loadAll({ unknownOnly = false } = {}) {
+    const items = await fetchAllItems(key, { unknownOnly })
+    setStore((st) => mergeItems(st, items))
+    return items
+  }
+
+  async function loadRandomTest() {
+    const items = await fetchRandomTest(key)
+    setStore((st) => mergeItems(st, items))
+    return items
+  }
+
+  async function loadListening() {
+    if (storeRef.current?.listening) return
+    const { data } = await cached(key, 'listening', () => fetchListening(key))
+    setStore((st) => ({ ...st, listening: data || {} }))
+  }
+
+  // Chạy một lượt tải rồi mở màn học; lỗi thì hiện thông báo thay vì treo
+  async function withItems(load, then) {
+    setBusy(true)
+    setNotice(null)
+    try {
+      then(await load())
+    } catch (err) {
+      setNotice(`Không tải được từ: ${err.message}`)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  // ---------- thay đổi dữ liệu ----------
+  const today = () => dateKey()
+
+  // Sửa tại chỗ một từ đã tải + cập nhật số đếm trong mục lục
+  function applyWord(item, next) {
+    setStore((s) => {
+      const k = itemKey(item)
+      const prev = s.words[k] || item.word
+      const delta = { known: (next.known ? 1 : 0) - (prev.known ? 1 : 0), hard: (isHard(next.stats) ? 1 : 0) - (isHard(prev.stats) ? 1 : 0) }
+      return { ...s, words: { ...s.words, [k]: next }, units: bumpSummary(s.units, item.unitId, item.sectionId, delta) }
+    })
+  }
+
+  // Đánh dấu thuộc / chưa thuộc (flashcard, ô tick) hoặc đổi ảnh: { known } | { seed }
+  function updateWord(item, patch) {
+    const prev = storeRef.current.words[itemKey(item)] || item.word
+    applyWord(item, { ...prev, ...patch })
+    push({ method: 'PATCH', path: wordPath(key, item.unitId, item.sectionId, item.word.id), body: { ...patch, day: today() } })
+  }
+
+  // Trả lời trong bài kiểm tra (trắc nghiệm / viết): cờ thuộc + thống kê đúng/sai
+  function answerWord(item, correct) {
+    const prev = storeRef.current.words[itemKey(item)] || item.word
+    applyWord(item, { ...prev, known: correct, stats: recordAnswer(prev.stats, correct) })
+    push({ method: 'PATCH', path: wordPath(key, item.unitId, item.sectionId, item.word.id), body: { answer: correct, day: today() } })
+  }
+
+  function deleteWord(item) {
+    setStore((s) => {
+      const k = itemKey(item)
+      const w = s.words[k]
+      const words = { ...s.words }
+      delete words[k]
+      const lk = sKey(item.unitId, item.sectionId)
+      const loaded = s.loaded[lk] ? { ...s.loaded, [lk]: s.loaded[lk].filter((id) => id !== item.word.id) } : s.loaded
+      const delta = { total: -1, known: w?.known ? -1 : 0, hard: isHard(w?.stats) ? -1 : 0 }
+      return { ...s, words, loaded, units: bumpSummary(s.units, item.unitId, item.sectionId, delta) }
+    })
+    push({ method: 'DELETE', path: wordPath(key, item.unitId, item.sectionId, item.word.id) })
+  }
+
+  // unit mới từ CreateUnit: { id, name, createdAt, sections: [{ id, name, words }] }
   function addUnit(unit) {
-    setUnits((us) => [...us, unit])
+    const entry = {
+      id: unit.id,
+      name: unit.name,
+      createdAt: unit.createdAt,
+      sections: unit.sections.map((sec) => ({ id: sec.id, name: sec.name, ...sectionSummary(sec.words) })),
+    }
+    setStore((s) => {
+      let next = { ...s, units: [...s.units, entry] }
+      for (const sec of unit.sections) next = mergeItems(next, toItems(unit.id, sec.id, sec.words), { unitId: unit.id, sectionId: sec.id })
+      return next
+    })
+    push({ method: 'PUT', path: `${userPath(key)}/units/${encodeURIComponent(unit.id)}`, body: unit })
     setView({ name: 'unit', unitId: unit.id })
   }
 
   function deleteUnit(unitId) {
-    setUnits((us) => us.filter((u) => u.id !== unitId))
+    setStore((s) => ({ ...s, units: s.units.filter((u) => u.id !== unitId) }))
+    push({ method: 'DELETE', path: `${userPath(key)}/units/${encodeURIComponent(unitId)}` })
     setView({ name: 'home' })
   }
 
-  // Sửa một từ. Đánh dấu thuộc/chưa thuộc (flashcard, ô tick ở trang unit) được
-  // ghi vào nhật ký ngày: mỗi lần đánh dấu là một lượt ôn, chưa thuộc -> thuộc
-  // tính là một từ mới học được.
-  function updateWord(unitId, wordId, patch) {
-    setStore((s) => {
-      let learned = 0
-      const units = s.units.map((u) =>
-        u.id !== unitId
-          ? u
-          : {
-              ...u,
-              words: u.words.map((w) => {
-                if (w.id !== wordId) return w
-                if ('known' in patch && patch.known && !w.known) learned = 1
-                return { ...w, ...patch }
-              }),
-            },
-      )
-      if (!('known' in patch)) return { ...s, units }
-      return { ...s, units, activity: bumpActivity(s.activity, { reviews: 1, learned }) }
-    })
-  }
-
-  // Trả lời trong bài kiểm tra (trắc nghiệm / viết): cập nhật cờ thuộc/chưa
-  // thuộc và ghi thống kê đúng/sai để tìm ra các từ hay sai.
-  function answerWord(unitId, wordId, correct) {
-    setStore((s) => ({
-      ...s,
-      units: s.units.map((u) =>
-        u.id !== unitId
-          ? u
-          : { ...u, words: u.words.map((w) => (w.id !== wordId ? w : { ...w, known: correct })) },
-      ),
-      wordStats: recordAnswer(s.wordStats, wordId, correct),
-      activity: bumpActivity(s.activity, { answers: 1, correct: correct ? 1 : 0 }),
-    }))
+  function renameUnit(unitId, name) {
+    setStore((s) => ({ ...s, units: s.units.map((u) => (u.id !== unitId ? u : { ...u, name })) }))
+    push({ method: 'PATCH', path: `${userPath(key)}/units/${encodeURIComponent(unitId)}`, body: { name } })
   }
 
   function recordListening(exerciseId, levelId, correct, total) {
-    setStore((s) => ({
-      ...s,
-      listening: recordListeningResult(s.listening, exerciseId, levelId, correct, total),
-      activity: bumpActivity(s.activity, { listening: 1, listeningDone: correct === total ? 1 : 0 }),
-    }))
-  }
-
-  function deleteWord(unitId, wordId) {
-    setUnits((us) =>
-      us.map((u) =>
-        u.id !== unitId ? u : { ...u, words: u.words.filter((w) => w.id !== wordId) },
-      ),
-    )
-  }
-
-  function renameUnit(unitId, name) {
-    setUnits((us) => us.map((u) => (u.id !== unitId ? u : { ...u, name })))
+    setStore((s) => ({ ...s, listening: recordListeningResult(s.listening || {}, exerciseId, levelId, correct, total) }))
+    push({
+      method: 'POST',
+      path: `${userPath(key)}/listening/${encodeURIComponent(exerciseId)}/${encodeURIComponent(levelId)}`,
+      body: { correct, total, day: today() },
+    })
   }
 
   if (session.status === 'boot') return null
@@ -272,16 +412,14 @@ export default function App() {
     )
   }
 
-  const { units, listening, wordStats } = store
+  const { units } = store
 
-  // Build a study deck: list of {unitId, word} resolved live from state
+  // Tra sống các từ của một đề từ store (để cờ thuộc / thống kê luôn mới)
   function resolveDeck(deck) {
-    const byUnit = new Map(units.map((u) => [u.id, u]))
     return deck
-      .map(({ unitId, wordId }) => {
-        const u = byUnit.get(unitId)
-        const w = u?.words.find((w) => w.id === wordId)
-        return w ? { unitId, word: w } : null
+      .map(({ unitId, sectionId, wordId }) => {
+        const word = store.words[wKey(unitId, sectionId, wordId)]
+        return word ? { unitId, sectionId, word } : null
       })
       .filter(Boolean)
   }
@@ -290,7 +428,7 @@ export default function App() {
   // bước con (học lại từ sai, kiểm tra lại...) để nút "xáo trộn làm lại" có thể
   // kiểm tra lại TẤT CẢ các từ trong phần đó, chứ không chỉ nhóm nhỏ đang mở.
   // Nếu không truyền pool thì mặc định lấy chính danh sách từ đang học.
-  const toDeck = (items) => items.map(({ unitId, word }) => ({ unitId, wordId: word.id }))
+  const toDeck = (items) => items.map(({ unitId, sectionId, word }) => ({ unitId, sectionId, wordId: word.id }))
 
   function startFlashcards(items, title, pool) {
     setView({ name: 'flashcards', deck: toDeck(items), pool: toDeck(pool ?? items), title })
@@ -304,49 +442,68 @@ export default function App() {
     setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title })
   }
 
-  const goHome = () => setView({ name: 'home' })
+  function goHome() {
+    setView({ name: 'home' })
+    refreshOverview()
+  }
+
+  const studyProps = { onStartFlashcards: startFlashcards, onStartQuiz: startQuiz, onStartWriting: startWriting }
+  const currentUnit = view.unitId ? units.find((u) => u.id === view.unitId) : null
 
   return (
     <div className="app">
       {view.name === 'home' && (
         <Home
           units={units}
-          wordStats={wordStats}
           userName={session.name}
           syncStatus={syncStatus}
+          busy={busy}
+          notice={notice}
           onLogout={logout}
           onCreate={() => setView({ name: 'create' })}
           onOpenUnit={(unitId) => setView({ name: 'unit', unitId })}
-          onStartFlashcards={startFlashcards}
-          onStartQuiz={startQuiz}
-          onStartWriting={startWriting}
           onOpenSettings={() => setView({ name: 'settings' })}
+          onRandomTest={() =>
+            withItems(loadRandomTest, (items) => startQuiz(items, `🎲 Kiểm tra ngẫu nhiên (${items.length} từ)`))
+          }
+          onStudyUnknown={() =>
+            withItems(
+              () => loadAll({ unknownOnly: true }),
+              (items) => startFlashcards(items, '🔥 Học từ chưa thuộc'),
+            )
+          }
+          onQuizAll={() => withItems(loadAll, (items) => startQuiz(items, '📝 Kiểm tra tổng hợp'))}
+          onWritingAll={() => withItems(loadAll, (items) => startWriting(items, '✍️ Kiểm tra viết tổng hợp'))}
+          onUnitStudy={(unitId, start) => withItems(() => loadUnit(unitId), start)}
+          {...studyProps}
         />
       )}
       {view.name === 'settings' && <Settings onBack={goHome} />}
-      {view.name === 'create' && (
-        <CreateUnit onSave={addUnit} onCancel={goHome} />
-      )}
+      {view.name === 'create' && <CreateUnit onSave={addUnit} onCancel={goHome} />}
       {view.name === 'unit' && (
         <UnitDetail
-          unit={units.find((u) => u.id === view.unitId)}
-          wordStats={wordStats}
+          unit={currentUnit}
+          getSection={(sectionId) => sectionItems(store, view.unitId, sectionId)}
+          loadSection={(sectionId) => loadSection(view.unitId, sectionId)}
+          loadUnit={() => loadUnit(view.unitId)}
           onBack={goHome}
           onDeleteUnit={deleteUnit}
           onDeleteWord={deleteWord}
           onUpdateWord={updateWord}
           onRename={renameUnit}
-          onStartFlashcards={startFlashcards}
-          onStartQuiz={startQuiz}
-          onStartWriting={startWriting}
-          listeningSets={listeningSetsForUnit(units.find((u) => u.id === view.unitId))}
-          onOpenListening={(set) => setView({ name: 'listening', setId: set.id, unitId: view.unitId })}
+          listeningSets={listeningSetsForUnit(currentUnit)}
+          onOpenListening={(set) =>
+            withItems(loadListening, () => setView({ name: 'listening', setId: set.id, unitId: view.unitId }))
+          }
+          busy={busy}
+          notice={notice}
+          {...studyProps}
         />
       )}
       {view.name === 'listening' && (
         <Listening
           set={findListeningSet(view.setId)}
-          progress={listening}
+          progress={store.listening || {}}
           onResult={recordListening}
           onExit={() => setView({ name: 'unit', unitId: view.unitId })}
         />

@@ -1,21 +1,7 @@
-// Tiến độ luyện nghe (nằm trong dữ liệu của người dùng, lưu trên máy chủ):
+// Tiến độ luyện nghe (listening.json của mỗi người trên máy chủ):
 // { [exerciseId]: { [levelId]: { best, total, done, attempts } } }
-const LEGACY_KEY = 'listening-progress-v1'
+// recordListeningResult dùng chung với server (server/store.js).
 const LEVEL_KEY = 'listening-level'
-
-// Lấy (và đánh dấu đã chuyển) tiến độ nghe của bản cũ lưu trong trình duyệt.
-export function takeLegacyListeningProgress() {
-  try {
-    const raw = localStorage.getItem(LEGACY_KEY)
-    if (!raw) return null
-    localStorage.setItem(LEGACY_KEY + '-migrated', raw)
-    localStorage.removeItem(LEGACY_KEY)
-    const data = JSON.parse(raw)
-    return data && typeof data === 'object' ? data : null
-  } catch {
-    return null
-  }
-}
 
 // Ghi kết quả một lượt làm; trả về tiến độ mới (hàm thuần, không tự lưu).
 // `done` giữ true nếu đã từng điền đúng hết ở mức đó.

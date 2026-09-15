@@ -91,7 +91,7 @@ export default function WritingTest({
     const correct = normalize(answer) === normalize(current.word.word)
     setChecked(correct)
     setResults((r) => ({ ...r, [current.word.id]: correct }))
-    onAnswer(current.unitId, current.word.id, correct)
+    onAnswer(current, correct)
     if (correct) {
       // âm báo đúng trước, đọc từ sau khi âm báo kết thúc để không chồng tiếng
       playCorrect()

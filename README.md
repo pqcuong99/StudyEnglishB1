@@ -43,9 +43,12 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   thuộc, thống kê từ hay sai, bài nghe đã làm, unit tự tạo) được lưu **trên máy chủ theo tên**
   đó, nên cùng tên ở máy/điện thoại khác vẫn thấy tiến độ. Tên được nhớ trong trình duyệt để lần
   sau vào thẳng; nút "Đổi người dùng" ở trang chủ để đăng nhập tên khác. Không phân biệt hoa/thường.
-  Nếu mất kết nối máy chủ, app vẫn học tiếp bằng bản đệm trong trình duyệt và tự đồng bộ lại khi
-  kết nối được (huy hiệu ☁️ Đã lưu / ⏳ Đang lưu / ⚠️ Chưa lưu được ở trang chủ). Dữ liệu của
-  bản cũ (trước khi có đăng nhập) được chuyển sang cho người đầu tiên đăng nhập trên trình duyệt đó.
+  Dữ liệu được **chia nhỏ**: đăng nhập chỉ tải mục lục (tên unit / phần + số đếm), từ của một
+  phần chỉ tải khi mở phần đó, và mỗi thao tác (tick một từ, trả lời một câu, nộp một bài nghe)
+  là một request vài chục byte — nên có bao nhiêu unit / người học cũng không nặng hơn. Các thay
+  đổi xếp vào hàng đợi trong trình duyệt rồi gửi lần lượt: mất kết nối máy chủ thì vẫn học tiếp
+  (những phần đã mở có bản đệm) và tự gửi lại khi kết nối được (huy hiệu ☁️ Đã lưu / ⏳ Đang lưu /
+  ⚠️ Chưa lưu được ở trang chủ).
 - **Bảng điều khiển quản trị (🛡️)**: ở màn nhập tên, gõ **`admin`** (không phân biệt hoa/thường)
   thì hiện thêm ô mật khẩu; mật khẩu do máy chủ kiểm tra (`ADMIN_PASSWORD` trong
   `server/index.js`, đổi bằng biến môi trường cùng tên). Đúng mật khẩu thì vào **bảng điều
@@ -85,21 +88,37 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   một phần tử vào `LISTENING_SETS` (gắn với unit qua `unitId` hoặc `unitMatch`) và đặt file
   mp3 vào thư mục trên. Thuật toán chọn từ để ẩn nằm trong `src/lib/cloze.js` (bỏ qua từ chức
   năng, tên riêng, không ẩn hai từ liền nhau, rải đều giữa các câu).
-- **Phần trong unit**: mỗi từ có thể mang tên phần (`section`). Mở một unit có chia phần sẽ
+- **Phần trong unit**: mỗi unit gồm một hay nhiều phần, mỗi phần có id riêng và được máy chủ
+  lưu / trả về riêng (`server/store.js`). Mở một unit có chia phần sẽ
   thấy khối "Cả unit" (thống kê + nút học toàn bộ unit) ở trên, bên dưới là màn
   **Chọn phần**: mỗi phần là một thẻ có thống kê, thanh tiến độ và nút học flashcard / từ chưa
   thuộc / kiểm tra / kiểm tra viết riêng; bấm vào thẻ để xem danh sách từ của phần đó. Unit không
-  chia phần hiển thị danh sách từ phẳng như cũ. Tên phần chỉ đến từ dữ liệu mẫu (`seedUnits.js`);
-  unit tự tạo không chia phần.
+  chia phần (chỉ có một phần) hiển thị danh sách từ phẳng như cũ. Tên phần chỉ đến từ dữ liệu
+  mẫu (`seedUnits.js`, mục `sections`); unit tự tạo có đúng một phần `main`.
 - Muốn thêm từ vào unit có sẵn (cách duy nhất, vì trang unit không còn nút "Import thêm từ"): thêm một nhóm từ mới vào
-  `seedUnits.js` với `version` mới và tăng `SEED_VERSION`. Khi mở app, các từ mới sẽ tự được
-  nối vào unit đã lưu (giữ nguyên tiến độ đã học, không thêm lại từ đã có).
+  `seedUnits.js` với `version` mới (và `section` = id phần muốn nối vào) rồi tăng
+  `SEED_VERSION`. Lần đăng nhập sau, máy chủ tự nối các từ mới vào unit đã lưu của từng người
+  (giữ nguyên tiến độ đã học, không thêm lại từ đã có).
 
 ## Máy chủ lưu tiến độ (server/)
 
-Tiến độ của mỗi người dùng do `server/index.js` quản lý — một API nhỏ viết bằng Node thuần
-(không cần `npm install`), mỗi người một file JSON trong `server/data/users/` (thư mục này
-không đưa lên git — nhớ **backup** khi chuyển VPS). Log ở `server/data/api.log`.
+Tiến độ của mỗi người dùng do `server/index.js` (HTTP) + `server/store.js` (đọc/ghi đĩa) quản
+lý — một API nhỏ viết bằng Node thuần (không cần `npm install`). Mỗi người một **thư mục**
+trong `server/data/users/` (không đưa lên git — nhớ **backup** khi chuyển VPS):
+
+```
+server/data/users/<tên>-<hash>/
+  profile.json                     { id, name, createdAt, updatedAt }
+  units.json                       mục lục: [{ id, name, sections: [{ id, name, total, known, hard }] }]
+  units/<unitId>/<sectionId>.json  từ của một phần: { words: [{ id, word, pos, ipa, meaning, seed, known, stats }] }
+  activity.json                    nhật ký theo ngày (src/lib/activity.js)
+  listening.json                   tiến độ nghe (src/lib/listeningProgress.js)
+```
+
+Số đếm trong mục lục được máy chủ tính lại mỗi khi ghi một phần, nên trang chủ và bảng điều
+khiển chỉ đọc mục lục. Thống kê đúng/sai (`stats`) nằm ngay trong từng từ. Dữ liệu kiểu cũ
+(một file `<tên>-<hash>.json` cho cả người dùng) được **tự chuyển** sang cấu trúc này khi API khởi
+động (file cũ dời sang `server/data/legacy/`). Log ở `server/data/api.log`.
 
 Trang web gọi API ở **cùng địa chỉ với chính nó** (`/api/...`): trên VPS, IIS chuyển tiếp
 `/api/*` sang Node đang nghe ở `localhost:37390` (nhờ URL Rewrite + ARR, cài bằng
@@ -138,9 +157,14 @@ Muốn gọi thẳng API ở địa chỉ khác: đặt `VITE_API_BASE=http://ho
 
 Chạy thử ở máy dev: `node server/index.js` (cổng 37390) song song với `npm run dev` (Vite tự proxy `/api`).
 
-Endpoints: `GET /api/health`, `GET /api/users`, `GET|PUT /api/users/:tên`. Quản trị:
+Endpoints (`:id` = tên đăng nhập; danh sách đầy đủ ở đầu `server/index.js`):
+`PUT /api/users/:id` (đăng nhập: tạo nếu chưa có, trả về mục lục), `GET .../units/:unitId`,
+`GET .../units/:unitId/sections/:sectionId` (từ của một phần), `PATCH .../words/:wordId`
+(`{ known }` / `{ answer }` / `{ seed }`), `PUT|PATCH|DELETE .../units/:unitId`,
+`GET .../words`, `GET .../random-test`, `GET|POST .../listening`. Quản trị:
 `POST /api/admin/login` (body `{ password }` → `{ token }`), rồi gửi header `X-Admin-Token` cho
-`GET /api/admin/report` (dữ liệu mọi người học, đã lược bớt) và `POST /api/admin/logout`.
+`GET /api/admin/report` (mục lục + từ hay sai + nhật ký của mọi người, không kèm toàn bộ từ) và
+`POST /api/admin/logout`.
 
 ## Lưu ý
 
