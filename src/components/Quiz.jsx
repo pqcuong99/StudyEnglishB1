@@ -47,6 +47,7 @@ export default function Quiz({
   onExit,
   onStartFlashcards,
   onStartWriting,
+  onRestart, // đề ngẫu nhiên: bốc lại đề mới (số câu + từ khác) thay vì xáo trộn bộ cũ
 }) {
   // toàn bộ từ của phần gốc; "làm lại" xáo trộn cả nhóm này, không chỉ lượt hiện tại
   const fullPool = pool && pool.length ? pool : items
@@ -143,9 +144,15 @@ export default function Quiz({
 
           <div className="finish-ask">🔁 Bạn muốn làm gì tiếp theo?</div>
           <div className="btn-col">
-            <button className="btn btn-primary btn-lg" onClick={restart}>
-              🔁 Kiểm tra lại (xáo trộn {fullPool.length} từ)
-            </button>
+            {onRestart ? (
+              <button className="btn btn-primary btn-lg" onClick={onRestart}>
+                🎲 Kiểm tra lại (bốc đề ngẫu nhiên mới)
+              </button>
+            ) : (
+              <button className="btn btn-primary btn-lg" onClick={restart}>
+                🔁 Kiểm tra lại (xáo trộn {fullPool.length} từ)
+              </button>
+            )}
             <button
               className="btn btn-outline btn-lg"
               onClick={() =>

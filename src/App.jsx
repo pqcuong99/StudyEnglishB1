@@ -436,6 +436,22 @@ export default function App() {
     setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title })
   }
 
+  // Đề ngẫu nhiên: máy chủ bốc lại cả số câu lẫn từ mỗi lần; `random` đánh dấu để
+  // nút "kiểm tra lại" bốc đề mới thay vì xáo trộn lại đúng bộ từ cũ, `round` để
+  // React dựng lại Quiz với bộ câu hỏi mới.
+  function startRandomTest() {
+    withItems(loadRandomTest, (items) =>
+      setView({
+        name: 'quiz',
+        deck: toDeck(items),
+        pool: toDeck(items),
+        title: `🎲 Kiểm tra ngẫu nhiên (${items.length} từ)`,
+        random: true,
+        round: Date.now(),
+      }),
+    )
+  }
+
   function goHome() {
     setView({ name: 'home' })
     refreshOverview()
@@ -457,9 +473,7 @@ export default function App() {
           onCreate={() => setView({ name: 'create' })}
           onOpenUnit={(unitId) => setView({ name: 'unit', unitId })}
           onOpenSettings={() => setView({ name: 'settings' })}
-          onRandomTest={() =>
-            withItems(loadRandomTest, (items) => startQuiz(items, `🎲 Kiểm tra ngẫu nhiên (${items.length} từ)`))
-          }
+          onRandomTest={startRandomTest}
           onStudyUnknown={() =>
             withItems(
               () => loadAll({ unknownOnly: true }),
@@ -515,6 +529,7 @@ export default function App() {
       )}
       {view.name === 'quiz' && (
         <Quiz
+          key={view.round}
           items={resolveDeck(view.deck)}
           pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
@@ -522,6 +537,7 @@ export default function App() {
           onExit={goHome}
           onStartFlashcards={startFlashcards}
           onStartWriting={startWriting}
+          onRestart={view.random ? startRandomTest : undefined}
         />
       )}
       {view.name === 'writing' && (
