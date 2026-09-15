@@ -1,6 +1,7 @@
 // Unit có sẵn khi mở app lần đầu (khi trình duyệt chưa có dữ liệu).
 // Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
-// vở ghi trên lớp (Unit 1) và bảng từ vựng "II/ VOCAB" của khóa học.
+// vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
+// Writing Part 1) của khóa học.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -11,7 +12,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 4
+export const SEED_VERSION = 5
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -118,6 +119,16 @@ const U1_VOCAB3B_WORDS = [
   ['impressed', 'adj', 'ɪmˈprest', 'ấn tượng'],
 ]
 
+// Bảng từ vựng "I/ VOCAB" – Session 5: Writing Part 1 (phần 4)
+const U1_VOCAB4_WORDS = [
+  ['apologise', 'v', 'əˈpɒlədʒaɪz', 'xin lỗi'],
+  ['please', 'v', 'pliːz', 'làm hài lòng, làm vui lòng'],
+  ['transport', 'n/v', 'ˈtrænspɔːt', 'phương tiện giao thông, vận chuyển'],
+  ['offer', 'n/v', 'ˈɒfə(r)', 'đề nghị, cung cấp, mời'],
+  ['suggest', 'v', 'səˈdʒest', 'gợi ý, đề xuất'],
+  ['advise', 'v', 'ədˈvaɪz', 'khuyên bảo, tư vấn'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -133,6 +144,7 @@ const UNITS = [
       { id: 'p1', name: 'Phần 1 – Session 2' },
       { id: 'p2', name: 'Phần 2 – Session 3 & vở ghi' },
       { id: 'p3', name: 'Phần 3 – Vocab' },
+      { id: 'p4', name: 'Phần 4 – Session 5: Writing Part 1' },
     ],
     // `section`: id phần mà nhóm từ này thuộc về
     groups: [
@@ -141,6 +153,7 @@ const UNITS = [
       { version: 2, prefix: 'u1n', seedBase: 300, section: 'p2', rows: U1_NOTES_WORDS },
       { version: 3, prefix: 'u1v3', seedBase: 400, section: 'p3', rows: U1_VOCAB3_WORDS },
       { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'p3', rows: U1_VOCAB3B_WORDS },
+      { version: 5, prefix: 'u1v4', seedBase: 600, section: 'p4', rows: U1_VOCAB4_WORDS },
     ],
   },
 ]

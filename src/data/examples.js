@@ -96,6 +96,14 @@ const ROWS = [
   ['crowd', 'A big crowd watched the match.', 'Một đám đông lớn xem trận đấu.'],
   ['quiet', 'Please be quiet in the library.', 'Vui lòng giữ yên lặng trong thư viện.'],
   ['impressed', 'I was impressed by her singing.', 'Tôi rất ấn tượng với giọng hát của cô ấy.'],
+
+  // Phần 4 – Session 5: Writing Part 1
+  ['apologise', 'I apologise for being late.', 'Tôi xin lỗi vì đến muộn.'],
+  ['please', 'It is hard to please everyone.', 'Thật khó để làm hài lòng tất cả mọi người.'],
+  ['transport', 'The bus is the cheapest form of transport here.', 'Xe buýt là phương tiện giao thông rẻ nhất ở đây.'],
+  ['offer', 'She offered me a cup of tea.', 'Cô ấy mời tôi một tách trà.'],
+  ['suggest', 'I suggest we go by train.', 'Tôi đề xuất chúng ta đi bằng tàu.'],
+  ['advise', 'The doctor advised me to rest.', 'Bác sĩ khuyên tôi nên nghỉ ngơi.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- big lightbulb idea -->
+  <path d="M250 30 a50 50 0 0 1 30 90 v18 h-60 v-18 a50 50 0 0 1 30 -90 Z" fill="#FFEB3B" stroke="#F9A825" stroke-width="4"/>
+  <rect x="226" y="138" width="48" height="10" rx="3" fill="#90A4AE"/>
+  <rect x="228" y="150" width="44" height="10" rx="3" fill="#90A4AE"/>
+  <rect x="236" y="162" width="28" height="8" rx="3" fill="#607D8B"/>
+  <path d="M240 118 l10 -24 l10 24" stroke="#F9A825" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <g stroke="#F9A825" stroke-width="4" stroke-linecap="round">
+    <path d="M250 12 v-4 M310 40 l6 -6 M190 40 l-6 -6 M322 90 h8 M178 90 h-8"/>
+  </g>
+  <!-- person pointing to idea -->
+  <circle cx="100" cy="120" r="28" fill="#FFCC80"/>
+  <path d="M72 114 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <circle cx="92" cy="124" r="3.5" fill="#3E2723"/><circle cx="112" cy="124" r="3.5" fill="#3E2723"/>
+  <path d="M90 134 q12 8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M70 152 h60 l10 100 h-80 Z" fill="#42A5F5"/>
+  <rect x="80" y="252" width="24" height="44" rx="4" fill="#37474F"/>
+  <rect x="110" y="252" width="24" height="44" rx="4" fill="#37474F"/>
+  <path d="M126 164 L190 120" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="192" cy="118" r="10" fill="#FFCC80"/>
+  <path d="M198 112 l14 -8" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+  <!-- speech bubble -->
+  <path d="M140 30 h100 a10 10 0 0 1 10 10 v26 a10 10 0 0 1 -10 10 h-60 l-12 14 v-14 h-28 a10 10 0 0 1 -10 -10 v-26 a10 10 0 0 1 10 -10 Z" fill="#FFF" stroke="#FB8C00" stroke-width="3"/>
+  <text x="190" y="59" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FB8C00">How about...?</text>
+  <!-- listener -->
+  <circle cx="330" cy="210" r="24" fill="#FFCC80"/>
+  <path d="M306 204 a24 24 0 0 1 48 0 Z" fill="#8D6E63"/>
+  <circle cx="322" cy="214" r="3" fill="#3E2723"/><circle cx="338" cy="214" r="3" fill="#3E2723"/>
+  <path d="M322 224 q8 5 16 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M306 234 h48 l6 66 h-60 Z" fill="#EF5350"/>
+</svg>

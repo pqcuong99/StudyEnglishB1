@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- giver holding a bouquet -->
+  <circle cx="110" cy="90" r="28" fill="#FFCC80"/>
+  <path d="M82 84 a28 28 0 0 1 56 0 Z" fill="#6D4C41"/>
+  <circle cx="102" cy="94" r="3.5" fill="#3E2723"/><circle cx="122" cy="94" r="3.5" fill="#3E2723"/>
+  <path d="M100 104 q12 8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M80 122 h60 l10 100 h-80 Z" fill="#42A5F5"/>
+  <rect x="90" y="222" width="24" height="70" rx="4" fill="#37474F"/>
+  <rect x="120" y="222" width="24" height="70" rx="4" fill="#37474F"/>
+  <path d="M136 136 L196 150" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <!-- bouquet -->
+  <path d="M196 150 l14 40 h-28 Z" fill="#8BC34A"/>
+  <g fill="#F06292"><circle cx="186" cy="132" r="12"/><circle cx="212" cy="126" r="12"/><circle cx="200" cy="108" r="12"/></g>
+  <g fill="#FFEB3B"><circle cx="186" cy="132" r="4"/><circle cx="212" cy="126" r="4"/><circle cx="200" cy="108" r="4"/></g>
+  <!-- receiver, delighted -->
+  <circle cx="300" cy="90" r="28" fill="#FFCC80"/>
+  <path d="M272 84 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <path d="M272 84 v30 q6 -6 8 -30 M328 84 v30 q-6 -6 -8 -30" fill="#3E2723"/>
+  <path d="M286 92 q6 -6 12 0 M312 92 q6 -6 12 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M286 102 q14 14 28 0 Z" fill="#E53935"/>
+  <circle cx="282" cy="104" r="5" fill="#F8BBD0"/><circle cx="318" cy="104" r="5" fill="#F8BBD0"/>
+  <path d="M270 122 h60 l10 100 h-80 Z" fill="#EF5350"/>
+  <rect x="280" y="222" width="24" height="70" rx="4" fill="#37474F"/>
+  <rect x="310" y="222" width="24" height="70" rx="4" fill="#37474F"/>
+  <path d="M276 136 L240 160" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <!-- hearts -->
+  <g fill="#EF5350">
+    <path d="M340 40 q-8 -10 -15 -2 q-4 6 6 14 l9 9 9 -9 q10 -8 6 -14 q-7 -8 -15 2 Z"/>
+    <path d="M365 78 q-6 -8 -11 -1 q-3 5 4 10 l7 7 7 -7 q7 -5 4 -10 q-5 -7 -11 1 Z"/>
+  </g>
+</svg>
