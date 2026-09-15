@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <rect x="40" y="200" width="320" height="16" rx="6" fill="#8D6E63"/>
+  <path d="M150 60 h100 l-10 140 h-80 Z" fill="#E3F2FD" stroke="#90CAF9" stroke-width="4"/>
+  <path d="M164 170 h72 l-3 30 h-66 Z" fill="#FFF"/>
+  <path d="M164 172 h72" stroke="#B0BEC5" stroke-width="3"/>
+  <path d="M290 100 h60 v100 h-60 Z" fill="#FFF" stroke="#78909C" stroke-width="3"/>
+  <path d="M290 100 l10 -24 h40 l10 24" fill="#42A5F5"/>
+  <circle cx="320" cy="150" r="14" fill="#42A5F5"/>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#1565C0">a little milk</text>
+  <text x="200" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#8D6E63">only a bit left</text>
+</svg>

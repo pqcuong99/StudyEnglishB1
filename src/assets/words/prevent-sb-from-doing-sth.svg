@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <circle cx="110" cy="110" r="28" fill="#FFCC80"/>
+  <path d="M82 104 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <circle cx="102" cy="114" r="3.5" fill="#3E2723"/><circle cx="122" cy="114" r="3.5" fill="#3E2723"/>
+  <path d="M100 124 q12 -8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M80 142 h60 l10 100 h-80 Z" fill="#42A5F5"/>
+  <rect x="90" y="242" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="120" y="242" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M80 158 L50 190 M140 158 L190 140" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <rect x="230" y="70" width="90" height="180" rx="4" fill="#8D6E63"/>
+  <rect x="242" y="82" width="66" height="156" rx="3" fill="#A1887F"/>
+  <circle cx="298" cy="165" r="5" fill="#FFEB3B"/>
+  <path d="M330 30 l30 0 21 21 0 30 -21 21 -30 0 -21 -21 0 -30 Z" fill="#E53935"/>
+  <text x="345" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFF">STOP</text>
+  <path d="M328 130 a22 22 0 0 1 42 -10 a20 20 0 0 1 24 30 h-64 a16 16 0 0 1 -2 -20 Z" fill="#90A4AE"/>
+  <path d="M340 160 l-6 18 M360 160 l-6 18 M380 160 l-6 18 M350 195 l-6 18 M370 195 l-6 18" stroke="#42A5F5" stroke-width="5" stroke-linecap="round"/>
+  <text x="120" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#455A64">Can't go out</text>
+</svg>

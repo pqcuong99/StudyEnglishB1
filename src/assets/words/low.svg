@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F2F1"/>
+  <path d="M60 80 h120 l40 40 -40 40 h-120 Z" fill="#FFEB3B" stroke="#F9A825" stroke-width="3"/>
+  <circle cx="80" cy="120" r="8" fill="#FFF" stroke="#F9A825" stroke-width="3"/>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#E65100">$1</text>
+  <rect x="250" y="80" width="30" height="140" rx="4" fill="#B0BEC5"/>
+  <rect x="295" y="130" width="30" height="90" rx="4" fill="#B0BEC5"/>
+  <rect x="340" y="190" width="30" height="30" rx="4" fill="#26A69A"/>
+  <path d="M355 100 v70" stroke="#00897B" stroke-width="6" stroke-linecap="round"/>
+  <path d="M340 158 l15 16 15 -16" stroke="#00897B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="240" y="220" width="140" height="6" rx="3" fill="#78909C"/>
+  <text x="210" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#00695C">low price · low level</text>
+</svg>

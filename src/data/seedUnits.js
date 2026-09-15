@@ -1,7 +1,7 @@
 // Unit có sẵn khi mở app lần đầu (khi trình duyệt chưa có dữ liệu).
 // Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
 // vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
-// Writing Part 1) của khóa học.
+// Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -12,7 +12,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 5
+export const SEED_VERSION = 6
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -129,6 +129,27 @@ const U1_VOCAB4_WORDS = [
   ['advise', 'v', 'ədˈvaɪz', 'khuyên bảo, tư vấn'],
 ]
 
+// Vở ghi trên lớp – Speaking Part 1 (nối vào phần 4)
+const U1_SPEAK1_WORDS = [
+  ['probably', 'adv', 'ˈprɒbəbli', 'có lẽ, có thể'],
+  ['correct', 'adj', 'kəˈrekt', 'chính xác, đúng'],
+  ['unfortunately', 'adv', 'ʌnˈfɔːtʃənətli', 'không may, kém may mắn'],
+  ["can't stand", 'phr', 'kɑːnt stænd', 'không thể chịu được'],
+  ['consider', 'v', 'kənˈsɪdə(r)', 'coi (cái gì đó là), cân nhắc'],
+  ['few', 'det', 'fjuː', 'một vài (danh từ đếm được)'],
+  ['low', 'adj', 'ləʊ', 'thấp'],
+  ['little', 'det', 'ˈlɪtl', 'một chút (danh từ không đếm được)'],
+  ['situation', 'n', 'ˌsɪtʃuˈeɪʃn', 'tình huống'],
+  ['refuse', 'v', 'rɪˈfjuːz', 'từ chối'],
+  ['avoid', 'v', 'əˈvɔɪd', 'tránh'],
+  ['gain', 'v', 'ɡeɪn', 'nhận được, đạt được'],
+  ['possibility', 'n', 'ˌpɒsəˈbɪləti', 'khả năng'],
+  ['benefit', 'n', 'ˈbenɪfɪt', 'lợi ích'],
+  ['experienced', 'adj', 'ɪkˈspɪəriənst', 'có kinh nghiệm'],
+  ['involved', 'adj', 'ɪnˈvɒlvd', 'có liên quan, tham gia vào'],
+  ['prevent sb from doing sth', 'phr', 'prɪˈvent', 'ngăn cản ai đó làm gì'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -154,6 +175,7 @@ const UNITS = [
       { version: 3, prefix: 'u1v3', seedBase: 400, section: 'p3', rows: U1_VOCAB3_WORDS },
       { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'p3', rows: U1_VOCAB3B_WORDS },
       { version: 5, prefix: 'u1v4', seedBase: 600, section: 'p4', rows: U1_VOCAB4_WORDS },
+      { version: 6, prefix: 'u1s1', seedBase: 700, section: 'p4', rows: U1_SPEAK1_WORDS },
     ],
   },
 ]

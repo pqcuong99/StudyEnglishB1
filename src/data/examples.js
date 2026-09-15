@@ -104,6 +104,25 @@ const ROWS = [
   ['offer', 'She offered me a cup of tea.', 'Cô ấy mời tôi một tách trà.'],
   ['suggest', 'I suggest we go by train.', 'Tôi đề xuất chúng ta đi bằng tàu.'],
   ['advise', 'The doctor advised me to rest.', 'Bác sĩ khuyên tôi nên nghỉ ngơi.'],
+
+  // Phần 4 – vở ghi Speaking Part 1
+  ['probably', 'It will probably rain tomorrow.', 'Ngày mai có lẽ trời sẽ mưa.'],
+  ['correct', 'All your answers are correct.', 'Tất cả câu trả lời của bạn đều chính xác.'],
+  ['unfortunately', 'Unfortunately, I missed the bus.', 'Không may là tôi đã lỡ xe buýt.'],
+  ["can't stand", "I can't stand hot weather.", 'Tôi không thể chịu được thời tiết nóng.'],
+  ['consider', 'I consider him a good friend.', 'Tôi coi anh ấy là một người bạn tốt.'],
+  ['few', 'I have a few books about history.', 'Tôi có một vài cuốn sách về lịch sử.'],
+  ['low', 'Prices are low in this shop.', 'Giá ở cửa hàng này thấp.'],
+  ['little', 'There is a little milk left.', 'Còn lại một chút sữa.'],
+  ['situation', 'It was a difficult situation.', 'Đó là một tình huống khó khăn.'],
+  ['refuse', 'He refused to help me.', 'Anh ấy từ chối giúp tôi.'],
+  ['avoid', 'I avoid eating too much sugar.', 'Tôi tránh ăn quá nhiều đường.'],
+  ['gain', 'She gained a lot of experience at work.', 'Cô ấy nhận được nhiều kinh nghiệm ở chỗ làm.'],
+  ['possibility', 'There is a possibility of snow tonight.', 'Có khả năng tối nay có tuyết.'],
+  ['benefit', 'Exercise has many benefits for your health.', 'Tập thể dục có nhiều lợi ích cho sức khỏe.'],
+  ['experienced', 'She is an experienced teacher.', 'Cô ấy là một giáo viên có kinh nghiệm.'],
+  ['involved', 'Many students were involved in the project.', 'Nhiều học sinh đã tham gia vào dự án.'],
+  ['prevent sb from doing sth', 'The rain prevented us from going out.', 'Cơn mưa ngăn chúng tôi ra ngoài.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()
