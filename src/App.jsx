@@ -359,12 +359,6 @@ export default function App() {
     setView({ name: 'unit', unitId: unit.id })
   }
 
-  function deleteUnit(unitId) {
-    setStore((s) => ({ ...s, units: s.units.filter((u) => u.id !== unitId) }))
-    push({ method: 'DELETE', path: `${userPath(key)}/units/${encodeURIComponent(unitId)}` })
-    setView({ name: 'home' })
-  }
-
   function renameUnit(unitId, name) {
     setStore((s) => ({ ...s, units: s.units.map((u) => (u.id !== unitId ? u : { ...u, name })) }))
     push({ method: 'PATCH', path: `${userPath(key)}/units/${encodeURIComponent(unitId)}`, body: { name } })
@@ -487,7 +481,6 @@ export default function App() {
           loadSection={(sectionId) => loadSection(view.unitId, sectionId)}
           loadUnit={() => loadUnit(view.unitId)}
           onBack={goHome}
-          onDeleteUnit={deleteUnit}
           onDeleteWord={deleteWord}
           onUpdateWord={updateWord}
           onRename={renameUnit}

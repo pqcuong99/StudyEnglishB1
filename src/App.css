@@ -406,11 +406,6 @@ kbd {
   height: 16px;
   accent-color: var(--success);
 }
-.danger-zone {
-  margin-top: 24px;
-  text-align: center;
-}
-
 /* ---------- flashcards ---------- */
 .study-page {
   max-width: 640px;

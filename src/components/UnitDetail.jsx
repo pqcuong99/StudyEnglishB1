@@ -164,7 +164,6 @@ export default function UnitDetail({
   busy,
   notice,
   onBack,
-  onDeleteUnit,
   onDeleteWord,
   onUpdateWord,
   onRename,
@@ -391,19 +390,6 @@ export default function UnitDetail({
           {...listProps}
         />
       )}
-
-      <div className="danger-zone">
-        <button
-          className="btn btn-danger-outline"
-          onClick={() => {
-            if (confirm(`Xóa unit "${unit.name}" và toàn bộ ${unitSummary.total} từ?`)) {
-              onDeleteUnit(unit.id)
-            }
-          }}
-        >
-          🗑️ Xóa unit này
-        </button>
-      </div>
     </div>
   )
 }
