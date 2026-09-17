@@ -129,7 +129,7 @@ export default function Flashcards({
               🔁 Học lại từ đầu
             </button>
             <button className="btn btn-ghost" onClick={onExit}>
-              Về trang chủ
+              ← Thoát
             </button>
           </div>
         </div>

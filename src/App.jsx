@@ -88,8 +88,9 @@ function bumpSummary(units, unitId, sectionId, delta) {
 
 // view shapes:
 //   { name: 'home' } | { name: 'create' } | { name: 'settings' }
-//   { name: 'unit', unitId }
-//   { name: 'flashcards' | 'quiz' | 'writing', deck, pool, title, startAt? }
+//   { name: 'unit', unitId, sectionId? }   sectionId = phần đang mở trong unit
+//   { name: 'flashcards' | 'quiz' | 'writing', deck, pool, title, startAt?, back? }
+//       back = màn quay về khi bấm Thoát (unit/phần vừa học); không có -> trang chủ
 //       deck/pool = [{ unitId, sectionId, wordId }], từ được tra sống trong store
 //       pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
 //       startAt = vị trí thẻ mở đầu (bấm vào một từ trong danh sách)
@@ -425,17 +426,35 @@ export default function App() {
   // Nếu không truyền pool thì mặc định lấy chính danh sách từ đang học.
   const toDeck = (items) => items.map(({ unitId, sectionId, word }) => ({ unitId, sectionId, wordId: word.id }))
 
+  // Màn quay về khi thoát: suy ra từ các từ đang học — cùng một phần -> mở lại
+  // đúng phần đó, cùng unit -> trang unit, còn lại (nhiều unit / bốc ngẫu nhiên) -> trang chủ
+  function backOf(items) {
+    if (!items.length) return undefined
+    const { unitId, sectionId } = items[0]
+    if (!items.every((it) => it.unitId === unitId)) return undefined
+    const sameSection = items.every((it) => it.sectionId === sectionId)
+    return { name: 'unit', unitId, sectionId: sameSection ? sectionId : undefined }
+  }
+
   // `round` để React dựng lại Flashcards (về thẻ đầu / thẻ `startAt`) mỗi lần bắt đầu
   function startFlashcards(items, title, pool, startAt = 0) {
-    setView({ name: 'flashcards', deck: toDeck(items), pool: toDeck(pool ?? items), title, startAt, round: Date.now() })
+    setView({
+      name: 'flashcards',
+      deck: toDeck(items),
+      pool: toDeck(pool ?? items),
+      title,
+      startAt,
+      round: Date.now(),
+      back: backOf(pool ?? items),
+    })
   }
 
   function startQuiz(items, title, pool) {
-    setView({ name: 'quiz', deck: toDeck(items), pool: toDeck(pool ?? items), title })
+    setView({ name: 'quiz', deck: toDeck(items), pool: toDeck(pool ?? items), title, back: backOf(pool ?? items) })
   }
 
   function startWriting(items, title, pool) {
-    setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title })
+    setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title, back: backOf(pool ?? items) })
   }
 
   // Đề ngẫu nhiên: máy chủ bốc lại cả số câu lẫn từ mỗi lần; `random` đánh dấu để
@@ -456,6 +475,12 @@ export default function App() {
 
   function goHome() {
     setView({ name: 'home' })
+    refreshOverview()
+  }
+
+  // thoát khỏi màn học: về unit/phần vừa học nếu biết, không thì về trang chủ
+  function exitStudy() {
+    setView(view.back ?? { name: 'home' })
     refreshOverview()
   }
 
@@ -493,6 +518,7 @@ export default function App() {
       {view.name === 'unit' && (
         <UnitDetail
           unit={currentUnit}
+          initialSection={view.sectionId}
           getSection={(sectionId) => sectionItems(store, view.unitId, sectionId)}
           loadSection={(sectionId) => loadSection(view.unitId, sectionId)}
           loadUnit={() => loadUnit(view.unitId)}
@@ -525,7 +551,7 @@ export default function App() {
           title={view.title}
           startIndex={view.startAt}
           onUpdateWord={updateWord}
-          onExit={goHome}
+          onExit={exitStudy}
           onStartQuiz={startQuiz}
           onStartWriting={startWriting}
           onRestart={(items, title, pool) => startFlashcards(items, title, pool)}
@@ -538,7 +564,7 @@ export default function App() {
           pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
           onAnswer={answerWord}
-          onExit={goHome}
+          onExit={exitStudy}
           onStartFlashcards={startFlashcards}
           onStartWriting={startWriting}
           onRestart={view.random ? startRandomTest : undefined}
@@ -550,7 +576,7 @@ export default function App() {
           pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
           onAnswer={answerWord}
-          onExit={goHome}
+          onExit={exitStudy}
           onStartFlashcards={startFlashcards}
           onStartQuiz={startQuiz}
         />

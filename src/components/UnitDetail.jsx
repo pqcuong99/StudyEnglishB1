@@ -171,8 +171,10 @@ function WordList({ items, loading, error, onUpdateWord, onDeleteWord, onOpenWor
 // `unit` là mục lục: { id, name, sections: [{ id, name, total, known, hard }] }.
 // Từ của một phần chỉ được tải khi mở phần đó / bấm nút học (loadSection,
 // loadUnit); `getSection(sectionId)` trả về từ đã tải hoặc null.
+// `initialSection`: phần mở sẵn khi vào (quay lại từ màn học)
 export default function UnitDetail({
   unit,
+  initialSection = null,
   getSection,
   loadSection,
   loadUnit,
@@ -191,7 +193,7 @@ export default function UnitDetail({
   const [editingName, setEditingName] = useState(false)
   const [nameDraft, setNameDraft] = useState('')
   // id phần đang mở (null = màn chọn phần)
-  const [openSection, setOpenSection] = useState(null)
+  const [openSection, setOpenSection] = useState(initialSection)
   const [loadingSection, setLoadingSection] = useState(null)
   const [error, setError] = useState(null)
 
