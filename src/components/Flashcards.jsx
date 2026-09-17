@@ -21,10 +21,12 @@ export default function Flashcards({
   onStartQuiz,
   onStartWriting,
   onRestart,
+  // thẻ mở đầu (mở flashcard từ danh sách từ của phần)
+  startIndex = 0,
 }) {
   // toàn bộ từ của phần gốc, truyền tiếp cho các bước sau (kiểm tra viết/trắc nghiệm)
   const fullPool = pool && pool.length ? pool : items
-  const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(() => Math.min(Math.max(0, startIndex), items.length))
   const [flipped, setFlipped] = useState(false)
   // remember the marks made during this session to show a summary
   const [marks, setMarks] = useState({}) // wordId -> true/false

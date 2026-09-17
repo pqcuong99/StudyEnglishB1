@@ -80,13 +80,14 @@ function StudyButtons({ label, summary, load, size, short, onStartFlashcards, on
 }
 
 // `item` = { unitId, sectionId, word } — thống kê đúng/sai nằm trong word.stats
-function WordCard({ item, onUpdateWord, onDeleteWord }) {
+// Bấm vào ảnh/từ (`onOpen`) mở flashcard của từ đó; hàng nút bên dưới thì không.
+function WordCard({ item, onUpdateWord, onDeleteWord, onOpen }) {
   const w = item.word
   const stat = w.stats
   const hard = isHard(stat)
   return (
     <div className={`word-card card ${w.known ? 'is-known' : ''}`}>
-      <div className="word-img-wrap">
+      <div className="word-img-wrap clickable" title="Bấm để mở flashcard" onClick={onOpen}>
         <WordImage
           word={w.word}
           meaning={w.meaning}
@@ -95,10 +96,17 @@ function WordCard({ item, onUpdateWord, onDeleteWord }) {
           onNewSeed={() => onUpdateWord(item, { seed: randomSeed() })}
         />
       </div>
-      <div className="word-info">
+      <div className="word-info clickable" title="Bấm để mở flashcard" onClick={onOpen}>
         <div className="word-line">
           <b>{w.word}</b> {w.pos && <span className="pos">({w.pos})</span>}
-          <button className="btn-speak" title="Nghe phát âm" onClick={() => speak(w.word)}>
+          <button
+            className="btn-speak"
+            title="Nghe phát âm"
+            onClick={(e) => {
+              e.stopPropagation()
+              speak(w.word)
+            }}
+          >
             🔊
           </button>
           {hard && (
@@ -130,8 +138,9 @@ function WordCard({ item, onUpdateWord, onDeleteWord }) {
   )
 }
 
-// Danh sách từ của một phần: tải khi mở (getSection trả null nếu chưa tải)
-function WordList({ items, loading, error, onUpdateWord, onDeleteWord }) {
+// Danh sách từ của một phần: tải khi mở (getSection trả null nếu chưa tải).
+// `onOpenWord(index)`: bấm vào một thẻ -> mở flashcard bắt đầu từ từ đó
+function WordList({ items, loading, error, onUpdateWord, onDeleteWord, onOpenWord }) {
   if (error && !items) return <p className="err-note">⚠️ {error}</p>
   if (!items) {
     return (
@@ -145,8 +154,14 @@ function WordList({ items, loading, error, onUpdateWord, onDeleteWord }) {
     <>
       {error && <p className="err-note">⚠️ {error}</p>}
       <div className="word-grid">
-        {items.map((it) => (
-          <WordCard key={it.word.id} item={it} onUpdateWord={onUpdateWord} onDeleteWord={onDeleteWord} />
+        {items.map((it, i) => (
+          <WordCard
+            key={it.word.id}
+            item={it}
+            onUpdateWord={onUpdateWord}
+            onDeleteWord={onDeleteWord}
+            onOpen={() => onOpenWord(items, i)}
+          />
         ))}
       </div>
     </>
@@ -224,8 +239,9 @@ export default function UnitDetail({
     { total: 0, known: 0 },
   )
   const studyProps = { onStartFlashcards, onStartQuiz, onStartWriting, onError: setError }
-  const listProps = { onUpdateWord, onDeleteWord }
   const current = !flat && openSection ? sections.find((s) => s.id === openSection) : null
+  // bấm vào một thẻ từ: học flashcard cả phần (theo thứ tự danh sách) bắt đầu từ từ đó
+  const openWord = (label) => (items, index) => onStartFlashcards(items, `🃏 ${label}`, items, index)
 
   // ---------- màn danh sách từ của một phần ----------
   if (current) {
@@ -255,7 +271,9 @@ export default function UnitDetail({
           items={getSection(current.id)}
           loading={loadingSection === current.id}
           error={error}
-          {...listProps}
+          onUpdateWord={onUpdateWord}
+          onDeleteWord={onDeleteWord}
+          onOpenWord={openWord(`${current.name} – ${unit.name}`)}
         />
       </div>
     )
@@ -387,7 +405,9 @@ export default function UnitDetail({
           items={getSection(shownSection)}
           loading={loadingSection === shownSection}
           error={null}
-          {...listProps}
+          onUpdateWord={onUpdateWord}
+          onDeleteWord={onDeleteWord}
+          onOpenWord={openWord(unit.name)}
         />
       )}
     </div>

@@ -89,9 +89,10 @@ function bumpSummary(units, unitId, sectionId, delta) {
 // view shapes:
 //   { name: 'home' } | { name: 'create' } | { name: 'settings' }
 //   { name: 'unit', unitId }
-//   { name: 'flashcards' | 'quiz' | 'writing', deck, pool, title }
+//   { name: 'flashcards' | 'quiz' | 'writing', deck, pool, title, startAt? }
 //       deck/pool = [{ unitId, sectionId, wordId }], từ được tra sống trong store
 //       pool = toàn bộ từ của phần gốc (để "xáo trộn làm lại" phủ hết cả phần)
+//       startAt = vị trí thẻ mở đầu (bấm vào một từ trong danh sách)
 //   { name: 'listening', setId, unitId }   bài luyện nghe (điền từ vào script)
 export default function App() {
   // session: { status: 'boot' | 'login' | 'loading' | 'ready' | 'error' | 'admin',
@@ -424,8 +425,9 @@ export default function App() {
   // Nếu không truyền pool thì mặc định lấy chính danh sách từ đang học.
   const toDeck = (items) => items.map(({ unitId, sectionId, word }) => ({ unitId, sectionId, wordId: word.id }))
 
-  function startFlashcards(items, title, pool) {
-    setView({ name: 'flashcards', deck: toDeck(items), pool: toDeck(pool ?? items), title })
+  // `round` để React dựng lại Flashcards (về thẻ đầu / thẻ `startAt`) mỗi lần bắt đầu
+  function startFlashcards(items, title, pool, startAt = 0) {
+    setView({ name: 'flashcards', deck: toDeck(items), pool: toDeck(pool ?? items), title, startAt, round: Date.now() })
   }
 
   function startQuiz(items, title, pool) {
@@ -517,9 +519,11 @@ export default function App() {
       )}
       {view.name === 'flashcards' && (
         <Flashcards
+          key={view.round}
           items={resolveDeck(view.deck)}
           pool={view.pool ? resolveDeck(view.pool) : undefined}
           title={view.title}
+          startIndex={view.startAt}
           onUpdateWord={updateWord}
           onExit={goHome}
           onStartQuiz={startQuiz}
