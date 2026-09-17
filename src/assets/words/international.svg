@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- globe -->
+  <circle cx="200" cy="140" r="84" fill="#42A5F5"/>
+  <path d="M150 100 q30 -22 54 -4 q12 20 -10 34 q-32 12 -44 -8 Z" fill="#66BB6A"/>
+  <path d="M214 150 q28 -10 40 12 q6 26 -16 36 q-26 4 -30 -20 Z" fill="#66BB6A"/>
+  <path d="M158 160 q18 -4 22 14 q-4 16 -20 12 q-12 -12 -2 -26 Z" fill="#66BB6A"/>
+  <path d="M238 82 q14 -6 22 6 q-4 12 -18 10 q-10 -6 -4 -16 Z" fill="#66BB6A"/>
+  <ellipse cx="200" cy="140" rx="36" ry="84" fill="none" stroke="#FFF" stroke-width="3" opacity="0.6"/>
+  <path d="M116 140 h168 M124 104 h152 M124 176 h152" stroke="#FFF" stroke-width="3" opacity="0.6"/>
+  <circle cx="200" cy="140" r="84" fill="none" stroke="#1E88E5" stroke-width="5"/>
+  <!-- flags of different countries -->
+  <g stroke="#5D4037" stroke-width="4" stroke-linecap="round">
+    <path d="M50 60 v70 M350 60 v70 M50 170 v70 M350 170 v70"/>
+  </g>
+  <rect x="52" y="60" width="44" height="28" fill="#E53935"/><rect x="52" y="74" width="44" height="14" fill="#FFF"/>
+  <rect x="304" y="60" width="44" height="28" fill="#1565C0"/><rect x="304" y="60" width="15" height="28" fill="#FDD835"/>
+  <rect x="52" y="170" width="44" height="28" fill="#2E7D32"/><circle cx="74" cy="184" r="7" fill="#FFF"/>
+  <rect x="304" y="170" width="44" height="28" fill="#D32F2F"/><path d="M326 176 l3 6 6 1 -4 4 1 6 -6 -3 -6 3 1 -6 -4 -4 6 -1 Z" fill="#FDD835"/>
+  <text x="200" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0">around the world</text>
+</svg>

@@ -1,7 +1,9 @@
 // Unit có sẵn khi mở app lần đầu (khi trình duyệt chưa có dữ liệu).
-// Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
+// Unit 1 lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
 // vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
 // Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
+// Unit 2 lấy từ bảng từ vựng "I/ VOCABULARY" của Session 6 (Vocabulary +
+// Reading Part 4).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -9,10 +11,12 @@
 // (server/store.js) sẽ tự nối các từ của nhóm mới vào unit đã lưu của từng
 // người (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Phiên bản seed
 // đã nối được lưu ngay trong unit (`seedVersion`) để luôn đi cùng dữ liệu.
+// Thêm cả một unit mới cũng vậy: thêm vào `UNITS` với nhóm từ mang `version`
+// mới — người dùng cũ chưa có unit đó sẽ được máy chủ tạo cho khi đăng nhập.
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 7
+export const SEED_VERSION = 8
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -172,6 +176,24 @@ const U1_NOTES5_WORDS = [
   ['horse riding', 'n', 'hɔːs ˈraɪdɪŋ', 'cưỡi ngựa'],
 ]
 
+// Unit 2 – bảng từ vựng "I/ VOCABULARY", Session 6: Vocabulary + Reading Part 4
+const U2S6_WORDS = [
+  ['gymnastics', 'n', 'dʒɪmˈnæstɪks', 'môn thể dục dụng cụ'],
+  ['cycling', 'n', 'ˈsaɪklɪŋ', 'môn đạp xe, việc đạp xe'],
+  ['athlete', 'n', 'ˈæθliːt', 'vận động viên'],
+  ['competition', 'n', 'ˌkɒmpəˈtɪʃən', 'cuộc thi, sự cạnh tranh'],
+  ['amateur', 'n/adj', 'ˈæmətə(r)', 'nghiệp dư'],
+  ['participate', 'v', 'pɑːˈtɪsɪpeɪt', 'tham gia'],
+  ['majority', 'n', 'məˈdʒɒrəti', 'phần lớn, đa số'],
+  ['opportunity', 'n', 'ˌɒpəˈtjuːnəti', 'cơ hội'],
+  ['defeat', 'v/n', 'dɪˈfiːt', 'đánh bại, đánh thắng; sự thất bại'],
+  ['medal', 'n', 'ˈmedəl', 'huy chương'],
+  ['huge', 'adj', 'hjuːdʒ', 'khổng lồ, rất lớn'],
+  ['as a result', 'phr', 'æz ə rɪˈzʌlt', 'kết quả là, vì vậy'],
+  ['impress', 'v', 'ɪmˈpres', 'gây ấn tượng'],
+  ['international', 'adj', 'ˌɪntəˈnæʃənəl', 'quốc tế'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -201,6 +223,13 @@ const UNITS = [
       { version: 6, prefix: 'u1s1', seedBase: 700, section: 'p4', rows: U1_SPEAK1_WORDS },
       { version: 7, prefix: 'u1n5', seedBase: 800, section: 'p5', rows: U1_NOTES5_WORDS },
     ],
+  },
+  {
+    id: 'u2',
+    name: 'Unit 2: Winning & Losing',
+    nameMatch: /^\s*unit\s*2\b/i,
+    sections: [{ id: 'p1', name: 'Phần 1 – Session 6: Vocabulary' }],
+    groups: [{ version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS }],
   },
 ]
 

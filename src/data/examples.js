@@ -143,6 +143,21 @@ const ROWS = [
   ['appointment', 'I have an appointment with the dentist at 3 p.m.', 'Tôi có lịch hẹn với nha sĩ lúc 3 giờ chiều.'],
   ['remind', 'Please remind me to call my mum.', 'Làm ơn nhắc tôi gọi cho mẹ.'],
   ['horse riding', 'Horse riding is my favourite hobby.', 'Cưỡi ngựa là sở thích yêu thích của tôi.'],
+
+  // Unit 2 – Phần 1 – Session 6 ("competition", "cycling" đã có ở Unit 1;
+  // tra theo chữ nên dùng chung, không thêm lại)
+  ['gymnastics', 'My sister does gymnastics twice a week.', 'Chị tôi tập thể dục dụng cụ hai lần một tuần.'],
+  ['athlete', 'The athlete runs ten kilometres every morning.', 'Vận động viên ấy chạy mười ki-lô-mét mỗi sáng.'],
+  ['amateur', 'He plays football for an amateur team.', 'Anh ấy chơi bóng đá cho một đội nghiệp dư.'],
+  ['participate', 'Everyone can participate in the race.', 'Mọi người đều có thể tham gia cuộc đua.'],
+  ['majority', 'The majority of students walk to school.', 'Phần lớn học sinh đi bộ đến trường.'],
+  ['opportunity', 'This is a great opportunity to learn English.', 'Đây là một cơ hội tuyệt vời để học tiếng Anh.'],
+  ['defeat', 'Our team defeated the champions last night.', 'Tối qua đội chúng tôi đã đánh bại nhà vô địch.'],
+  ['medal', 'She won a gold medal at the Olympics.', 'Cô ấy đã giành huy chương vàng tại Thế vận hội.'],
+  ['huge', 'The new stadium is huge.', 'Sân vận động mới rất lớn.'],
+  ['as a result', 'He trained hard, and as a result he won the race.', 'Anh ấy tập luyện chăm chỉ, và kết quả là anh ấy đã thắng cuộc đua.'],
+  ['impress', 'Her speech impressed everyone in the room.', 'Bài phát biểu của cô ấy đã gây ấn tượng với mọi người trong phòng.'],
+  ['international', 'It is an international competition with 40 countries.', 'Đó là một cuộc thi quốc tế với 40 quốc gia.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

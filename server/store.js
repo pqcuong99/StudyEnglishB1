@@ -129,8 +129,9 @@ export function createStore({ dataDir, log = () => {} }) {
     return s
   }
 
-  // Ghi cả unit (tạo mới / thay thế): { id, name, createdAt, seedVersion?, sections: [{ id, name, words }] }
-  function writeUnit(key, unit) {
+  // Ghi các file phần của một unit (xóa thư mục cũ nếu có), trả về mục của
+  // unit đó cho units.json — chưa ghi vào mục lục
+  function writeUnitFiles(key, unit) {
     const dir = unitDir(key, unit.id)
     fs.rmSync(dir, { recursive: true, force: true })
     const entry = {
@@ -144,6 +145,12 @@ export function createStore({ dataDir, log = () => {} }) {
       writeJson(sectionFile(key, unit.id, s.id), { words: s.words })
       entry.sections.push({ id: s.id, name: s.name, ...sectionSummary(s.words) })
     }
+    return entry
+  }
+
+  // Ghi cả unit (tạo mới / thay thế): { id, name, createdAt, seedVersion?, sections: [{ id, name, words }] }
+  function writeUnit(key, unit) {
+    const entry = writeUnitFiles(key, unit)
     const units = readUnits(key)
     const i = units.findIndex((x) => x.id === unit.id)
     if (i < 0) units.push(entry)
@@ -240,15 +247,29 @@ export function createStore({ dataDir, log = () => {} }) {
 
   // ---------- unit mẫu ----------
   // Nối từ mới của seed vào unit tương ứng của người dùng (giữ tiến độ, không
-  // thêm lại từ đã có theo id hoặc chữ). Hàm thuần theo dữ liệu trên đĩa: gọi
-  // bao nhiêu lần cũng cho cùng kết quả.
+  // thêm lại từ đã có theo id hoặc chữ). Unit mẫu ra đời sau khi người này
+  // đăng ký (chưa có trong mục lục) thì tạo cả unit. Hàm thuần theo dữ liệu
+  // trên đĩa: gọi bao nhiêu lần cũng cho cùng kết quả.
   function syncSeed(key) {
     const units = readUnits(key)
     let changed = false
-    for (const seed of seedUnitUpdates()) {
-      let u = units.find((x) => x.id === seed.id)
-      if (!u && seed.nameMatch) u = units.find((x) => seed.nameMatch.test(x.name || ''))
-      if (!u) continue
+    const seeds = seedUnitUpdates()
+    const findUnit = (seed) =>
+      units.find((x) => x.id === seed.id) ||
+      (seed.nameMatch ? units.find((x) => seed.nameMatch.test(x.name || '')) : undefined)
+    for (const seed of seeds) {
+      const u = findUnit(seed)
+      if (!u) {
+        const fresh = seedUnits().find((x) => x.id === seed.id)
+        if (!fresh) continue
+        // xếp ngay sau unit mẫu đứng trước nó để thứ tự giống người dùng mới
+        const at = seeds
+          .slice(0, seeds.indexOf(seed))
+          .reduce((max, s) => Math.max(max, units.indexOf(findUnit(s))), -1)
+        units.splice(at + 1, 0, writeUnitFiles(key, fresh))
+        changed = true
+        continue
+      }
       const have = Number(u.seedVersion) || 1
       if (have >= SEED_VERSION) continue
 

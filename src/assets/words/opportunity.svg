@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <rect y="240" width="400" height="60" fill="#B0BEC5"/>
+  <!-- light on the floor -->
+  <path d="M200 240 L300 240 L380 300 L110 300 Z" fill="#FFF59D" opacity="0.9"/>
+  <!-- door frame and bright opening -->
+  <rect x="188" y="46" width="124" height="196" fill="#5D4037"/>
+  <rect x="200" y="58" width="100" height="182" fill="#FFF176"/>
+  <!-- open door leaf -->
+  <path d="M200 58 L138 88 L138 252 L200 240 Z" fill="#8D6E63"/>
+  <path d="M148 100 L190 80 M148 236 L190 226" stroke="#6D4C41" stroke-width="3"/>
+  <circle cx="188" cy="160" r="5" fill="#FFD54F"/>
+  <!-- rays -->
+  <g stroke="#FFEE58" stroke-width="6" stroke-linecap="round">
+    <path d="M322 90 l28 -22 M326 150 h40 M322 210 l28 22"/>
+  </g>
+  <path d="M250 124 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6 Z" fill="#FFB300"/>
+  <path d="M60 70 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#FFD54F"/>
+  <text x="200" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#F57F17">a chance to do it!</text>
+</svg>

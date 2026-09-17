@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- stands -->
+  <rect y="110" width="400" height="70" fill="#B0BEC5"/>
+  <path d="M0 130 h400 M0 150 h400 M0 170 h400" stroke="#90A4AE" stroke-width="3"/>
+  <!-- track -->
+  <rect y="180" width="400" height="120" fill="#EF6C00"/>
+  <path d="M0 220 h400 M0 260 h400" stroke="#FFF" stroke-width="4"/>
+  <!-- finish line -->
+  <g fill="#FFF">
+    <rect x="336" y="180" width="12" height="120"/>
+  </g>
+  <g fill="#212121">
+    <rect x="336" y="180" width="6" height="15"/><rect x="342" y="195" width="6" height="15"/>
+    <rect x="336" y="210" width="6" height="15"/><rect x="342" y="225" width="6" height="15"/>
+    <rect x="336" y="240" width="6" height="15"/><rect x="342" y="255" width="6" height="15"/>
+    <rect x="336" y="270" width="6" height="15"/><rect x="342" y="285" width="6" height="15"/>
+  </g>
+  <!-- runner -->
+  <g stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M200 200 L164 226 L140 258" stroke="#FFCC80" stroke-width="12"/>
+    <path d="M200 200 L240 222 L262 262" stroke="#FFCC80" stroke-width="12"/>
+    <path d="M186 198 L216 198" stroke="#1565C0" stroke-width="22"/>
+    <path d="M200 198 L214 140" stroke="#1E88E5" stroke-width="24"/>
+    <path d="M210 150 L172 166 L150 144" stroke="#FFCC80" stroke-width="10"/>
+    <path d="M214 150 L252 138 L272 156" stroke="#FFCC80" stroke-width="10"/>
+  </g>
+  <rect x="199" y="154" width="24" height="18" rx="2" fill="#FFF"/>
+  <text x="211" y="168" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#212121">7</text>
+  <circle cx="222" cy="118" r="18" fill="#FFCC80"/>
+  <path d="M204 116 a18 16 0 0 1 36 0 v2 h-36 Z" fill="#3E2723"/>
+  <circle cx="230" cy="120" r="2" fill="#3E2723"/>
+  <path d="M132 262 h22" stroke="#43A047" stroke-width="8" stroke-linecap="round"/>
+  <path d="M256 266 h22" stroke="#43A047" stroke-width="8" stroke-linecap="round"/>
+  <!-- speed lines -->
+  <g stroke="#FFE0B2" stroke-width="4" stroke-linecap="round">
+    <path d="M60 196 h50 M40 226 h40 M70 250 h36"/>
+  </g>
+</svg>

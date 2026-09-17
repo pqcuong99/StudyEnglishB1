@@ -20,8 +20,8 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   1. Ảnh AI tạo bằng **API key của bạn** (nếu đã cài trong ⚙️ Cài đặt) — cache trong máy,
      mỗi từ chỉ tốn 1 lần gọi API. Hỗ trợ **Gemini** (`gemini-2.5-flash-image`, có hạn mức
      miễn phí tại aistudio.google.com) và **OpenAI** (gpt-image-1 / DALL-E 3, tính phí).
-  2. Bộ **ảnh SVG vẽ sẵn** đóng gói trong app (`src/assets/words/`) — hiện có đủ 51 từ của
-     Unit 1 (Session 2, Session 3 và vở ghi). Muốn thêm ảnh cho từ mới: nhờ Claude vẽ thêm
+  2. Bộ **ảnh SVG vẽ sẵn** đóng gói trong app (`src/assets/words/`) — hiện có đủ cho mọi từ
+     của các unit có sẵn (Unit 1 và Unit 2). Muốn thêm ảnh cho từ mới: nhờ Claude vẽ thêm
      file SVG vào thư mục đó (tên file = từ viết thường, khoảng trắng thành `-`, ví dụ
      `be-keen-on.svg`).
   3. Pollinations.ai (AI miễn phí, không cần key) cho các từ còn lại.
@@ -78,9 +78,13 @@ Rồi mở trình duyệt tại **http://localhost:5173**
 
 ## Dữ liệu có sẵn
 
-- **Unit 1: All About Me** (51 từ) được nạp sẵn từ `src/data/seedUnits.js`, chia làm 2 phần:
-  **Phần 1 – Session 2** (25 từ của `NC_U1_Session 2.pdf`) và **Phần 2 – Session 3 & vở ghi**
-  (13 từ của `NC_U1_Session 3.pdf` + 13 từ ghi trên lớp).
+- **Unit 1: All About Me** (121 từ) được nạp sẵn từ `src/data/seedUnits.js`, chia làm 5 phần:
+  **Phần 1 – Session 2** (25 từ của `NC_U1_Session 2.pdf`), **Phần 2 – Session 3 & vở ghi**
+  (13 từ của `NC_U1_Session 3.pdf` + 13 từ ghi trên lớp), **Phần 3 – Vocab** (bảng "II/ VOCAB"
+  + vở ghi), **Phần 4 – Session 5: Writing Part 1** (bảng "I/ VOCAB" + vở ghi Speaking Part 1)
+  và **Phần 5 – Vở ghi trên lớp (tiếp)**.
+- **Unit 2: Winning & Losing** (14 từ) cũng nằm trong `seedUnits.js`: **Phần 1 – Session 6:
+  Vocabulary** (bảng "I/ VOCABULARY" của Session 6: Vocabulary + Reading Part 4).
 - **Luyện nghe – Session 3** (Unit 1): 6 bài Listening Part 2 "Being at school" lấy từ
   `Session 3.pptx` (audio ở trang 6, script + câu hỏi ở trang 7–12). File audio gốc được tách
   theo các khoảng lặng 5 giây thành 6 file `src/assets/listening/u1-session3-part2-q1..6.mp3`;
@@ -98,7 +102,9 @@ Rồi mở trình duyệt tại **http://localhost:5173**
 - Muốn thêm từ vào unit có sẵn (cách duy nhất, vì trang unit không còn nút "Import thêm từ"): thêm một nhóm từ mới vào
   `seedUnits.js` với `version` mới (và `section` = id phần muốn nối vào) rồi tăng
   `SEED_VERSION`. Lần đăng nhập sau, máy chủ tự nối các từ mới vào unit đã lưu của từng người
-  (giữ nguyên tiến độ đã học, không thêm lại từ đã có).
+  (giữ nguyên tiến độ đã học, không thêm lại từ đã có). Thêm cả một **unit mới** cũng tương tự:
+  thêm phần tử vào `UNITS` (id riêng, `sections`, `groups` với `version` mới) — người dùng cũ
+  chưa có unit đó sẽ được máy chủ tạo cho ngay khi đăng nhập, xếp sau các unit có sẵn khác.
 
 ## Máy chủ lưu tiến độ (server/)
 
