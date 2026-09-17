@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FBE9E7"/>
+  <rect x="0" y="150" width="400" height="90" fill="#616161"/>
+  <path d="M20 195 h40 M90 195 h40 M160 195 h40 M230 195 h40 M300 195 h40" stroke="#FFEB3B" stroke-width="5" stroke-linecap="round"/>
+  <g>
+    <rect x="30" y="160" width="60" height="30" rx="6" fill="#E53935"/><circle cx="42" cy="192" r="6" fill="#212121"/><circle cx="78" cy="192" r="6" fill="#212121"/>
+    <rect x="110" y="160" width="60" height="30" rx="6" fill="#1E88E5"/><circle cx="122" cy="192" r="6" fill="#212121"/><circle cx="158" cy="192" r="6" fill="#212121"/>
+    <rect x="190" y="160" width="60" height="30" rx="6" fill="#FDD835"/><circle cx="202" cy="192" r="6" fill="#212121"/><circle cx="238" cy="192" r="6" fill="#212121"/>
+    <rect x="270" y="160" width="60" height="30" rx="6" fill="#43A047"/><circle cx="282" cy="192" r="6" fill="#212121"/><circle cx="318" cy="192" r="6" fill="#212121"/>
+  </g>
+  <rect x="150" y="30" width="100" height="70" rx="8" fill="#FFFFFF" stroke="#37474F" stroke-width="4"/>
+  <text x="200" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#37474F">9:00</text>
+  <path d="M40 90 l14 14 24 -28" fill="none" stroke="#43A047" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#BF360C">in spite of the traffic → on time</text>
+</svg>

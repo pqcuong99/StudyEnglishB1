@@ -1,7 +1,7 @@
 // Unit có sẵn khi mở app lần đầu (khi trình duyệt chưa có dữ liệu).
 // Dữ liệu lấy từ các file NC_U1_Session 2.pdf, NC_U1_Session 3.pdf,
 // vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
-// Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1.
+// Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -12,7 +12,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 6
+export const SEED_VERSION = 7
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -150,6 +150,28 @@ const U1_SPEAK1_WORDS = [
   ['prevent sb from doing sth', 'phr', 'prɪˈvent', 'ngăn cản ai đó làm gì'],
 ]
 
+// Vở ghi trên lớp – trang tiếp theo (phần 5)
+const U1_NOTES5_WORDS = [
+  ['wait for', 'phr', 'weɪt fɔː(r)', 'chờ đợi cái gì / chờ đợi ai'],
+  ['match', 'n', 'mætʃ', 'trận đấu'],
+  ['glad', 'adj', 'ɡlæd', 'vui mừng, hài lòng'],
+  ['be able to', 'phr', 'bi ˈeɪbl tuː', 'có thể, có khả năng'],
+  ["I'd rather + V1 than + V2", 'phr', 'aɪd ˈrɑːðə(r)', 'thà ... hơn ... (thích làm gì hơn làm gì)'],
+  ['instead', 'adv', 'ɪnˈsted', 'thay vào đó, thay vì'],
+  ['describing', 'n', 'dɪˈskraɪbɪŋ', 'mô tả'],
+  ['explaining', 'n', 'ɪkˈspleɪnɪŋ', 'giải thích'],
+  ['persuading', 'n', 'pəˈsweɪdɪŋ', 'thuyết phục'],
+  ['If I were you', 'phr', 'ɪf aɪ wɜː juː', 'nếu tôi là bạn'],
+  ['straight', 'adj/adv', 'streɪt', 'thẳng'],
+  ['although', 'conj', 'ɔːlˈðəʊ', 'mặc dù'],
+  ['despite', 'prep', 'dɪˈspaɪt', 'mặc dù (= in spite of)'],
+  ['in spite of', 'prep', 'ɪn spaɪt ɒv', 'mặc dù (= despite)'],
+  ['forgotten', 'adj', 'fəˈɡɒtn', 'bị lãng quên'],
+  ['appointment', 'n', 'əˈpɔɪntmənt', 'cuộc hẹn, lịch hẹn'],
+  ['remind', 'v', 'rɪˈmaɪnd', 'nhắc, nhắc nhở'],
+  ['horse riding', 'n', 'hɔːs ˈraɪdɪŋ', 'cưỡi ngựa'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -166,6 +188,7 @@ const UNITS = [
       { id: 'p2', name: 'Phần 2 – Session 3 & vở ghi' },
       { id: 'p3', name: 'Phần 3 – Vocab' },
       { id: 'p4', name: 'Phần 4 – Session 5: Writing Part 1' },
+      { id: 'p5', name: 'Phần 5 – Vở ghi trên lớp (tiếp)' },
     ],
     // `section`: id phần mà nhóm từ này thuộc về
     groups: [
@@ -176,6 +199,7 @@ const UNITS = [
       { version: 4, prefix: 'u1v3b', seedBase: 500, section: 'p3', rows: U1_VOCAB3B_WORDS },
       { version: 5, prefix: 'u1v4', seedBase: 600, section: 'p4', rows: U1_VOCAB4_WORDS },
       { version: 6, prefix: 'u1s1', seedBase: 700, section: 'p4', rows: U1_SPEAK1_WORDS },
+      { version: 7, prefix: 'u1n5', seedBase: 800, section: 'p5', rows: U1_NOTES5_WORDS },
     ],
   },
 ]

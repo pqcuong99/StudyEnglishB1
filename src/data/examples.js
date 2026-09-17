@@ -123,6 +123,26 @@ const ROWS = [
   ['experienced', 'She is an experienced teacher.', 'Cô ấy là một giáo viên có kinh nghiệm.'],
   ['involved', 'Many students were involved in the project.', 'Nhiều học sinh đã tham gia vào dự án.'],
   ['prevent sb from doing sth', 'The rain prevented us from going out.', 'Cơn mưa ngăn chúng tôi ra ngoài.'],
+
+  // Phần 5 – vở ghi trên lớp (tiếp)
+  ['wait for', 'I am waiting for the bus.', 'Tôi đang chờ xe buýt.'],
+  ['match', 'We watched a football match last night.', 'Tối qua chúng tôi đã xem một trận bóng đá.'],
+  ['glad', "I'm glad to see you again.", 'Tôi rất vui khi gặp lại bạn.'],
+  ['be able to', 'She is able to speak three languages.', 'Cô ấy có thể nói ba thứ tiếng.'],
+  ["I'd rather + V1 than + V2", "I'd rather stay at home than go out tonight.", 'Tối nay tôi thà ở nhà còn hơn đi ra ngoài.'],
+  ['instead', "It was raining, so we stayed in instead.", 'Trời mưa nên thay vào đó chúng tôi ở trong nhà.'],
+  ['describing', 'She is good at describing places.', 'Cô ấy giỏi mô tả các địa điểm.'],
+  ['explaining', 'Thank you for explaining the rules.', 'Cảm ơn bạn đã giải thích các quy tắc.'],
+  ['persuading', 'He is persuading me to join the club.', 'Anh ấy đang thuyết phục tôi tham gia câu lạc bộ.'],
+  ['If I were you', "If I were you, I'd take the job.", 'Nếu tôi là bạn, tôi sẽ nhận công việc đó.'],
+  ['straight', 'Go straight and turn left at the bank.', 'Đi thẳng rồi rẽ trái ở ngân hàng.'],
+  ['although', 'Although it was cold, we went swimming.', 'Mặc dù trời lạnh, chúng tôi vẫn đi bơi.'],
+  ['despite', 'Despite the rain, the match went on.', 'Mặc dù trời mưa, trận đấu vẫn diễn ra.'],
+  ['in spite of', 'In spite of the traffic, we arrived on time.', 'Mặc dù tắc đường, chúng tôi vẫn đến đúng giờ.'],
+  ['forgotten', 'It is an old, forgotten village.', 'Đó là một ngôi làng cũ, bị lãng quên.'],
+  ['appointment', 'I have an appointment with the dentist at 3 p.m.', 'Tôi có lịch hẹn với nha sĩ lúc 3 giờ chiều.'],
+  ['remind', 'Please remind me to call my mum.', 'Làm ơn nhắc tôi gọi cho mẹ.'],
+  ['horse riding', 'Horse riding is my favourite hobby.', 'Cưỡi ngựa là sở thích yêu thích của tôi.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()
