@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { speak } from '../lib/speech.js'
-import { playCorrect, CORRECT_SOUND_MS } from '../lib/sound.js'
+import { playCorrect, playFinish, CORRECT_SOUND_MS } from '../lib/sound.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -64,6 +64,13 @@ export default function WritingTest({
 
   const done = index >= queue.length
   const current = !done ? queue[index] : null
+
+  // nhạc hiệu chúc mừng khi vừa làm xong lượt (kể cả khi làm lại)
+  useEffect(() => {
+    if (!done) return
+    const correctCount = Object.values(results).filter(Boolean).length
+    playFinish(Math.round((correctCount / queue.length) * 100))
+  }, [done]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setAnswer('')

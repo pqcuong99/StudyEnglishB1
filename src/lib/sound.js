@@ -40,3 +40,28 @@ export function playCorrect() {
     /* trình duyệt không hỗ trợ Web Audio -> bỏ qua */
   }
 }
+
+// Nhạc hiệu khi hoàn thành bài kiểm tra: kết quả tốt (>= 80%) thì chơi đoạn
+// fanfare chúc mừng, còn lại chơi tiếng chuông "đã xong" nhẹ nhàng hơn.
+export function playFinish(pct) {
+  try {
+    if (!getContext()) return
+    const t = ctx.currentTime
+    if (pct >= 80) {
+      // fanfare: C5 - E5 - G5 - C6 rồi ngân hợp âm C6 + E6 + G6
+      note(523.3, t, 0.16, 0.2)
+      note(659.3, t + 0.14, 0.16, 0.2)
+      note(784.0, t + 0.28, 0.16, 0.2)
+      note(1046.5, t + 0.42, 0.45, 0.24)
+      note(1318.5, t + 0.7, 0.7, 0.16)
+      note(1568.0, t + 0.7, 0.7, 0.12)
+      note(1046.5, t + 0.7, 0.7, 0.16)
+    } else {
+      // chuông "đã xong": G5 -> C6
+      note(784.0, t, 0.22, 0.18)
+      note(1046.5, t + 0.16, 0.4, 0.18)
+    }
+  } catch {
+    /* trình duyệt không hỗ trợ Web Audio -> bỏ qua */
+  }
+}

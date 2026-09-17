@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { speak } from '../lib/speech.js'
-import { playCorrect, CORRECT_SOUND_MS } from '../lib/sound.js'
+import { playCorrect, playFinish, CORRECT_SOUND_MS } from '../lib/sound.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -80,6 +80,13 @@ export default function Quiz({
   const q = !done ? questions[index] : null
   const selected = !done && answers[index] !== undefined ? answers[index] : null
   const answeredCount = Object.keys(answers).length
+
+  // nhạc hiệu chúc mừng khi vừa làm xong lượt (kể cả khi làm lại)
+  useEffect(() => {
+    if (!done) return
+    const correctCount = questions.filter((question, i) => answers[i] === question.answer).length
+    playFinish(Math.round((correctCount / questions.length) * 100))
+  }, [done]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function choose(option) {
     if (selected !== null) return
