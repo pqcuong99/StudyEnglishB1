@@ -198,8 +198,10 @@ export default function UnitDetail({
   const [error, setError] = useState(null)
 
   const sections = unit?.sections || []
-  // unit không chia phần (một phần duy nhất) -> danh sách phẳng ngay trong trang unit
-  const flat = sections.length <= 1
+  // unit không chia phần (chỉ có phần mặc định `main` do người dùng tự tạo /
+  // import PDF) -> danh sách phẳng ngay trong trang unit. Unit có sẵn dù mới
+  // có một phần (như Unit 2) vẫn hiện thẻ "Phần 1" như các unit khác.
+  const flat = sections.length === 0 || (sections.length === 1 && sections[0].id === 'main')
   const shownSection = flat ? sections[0]?.id || null : openSection
 
   // tải từ của phần đang mở (nếu chưa có)
