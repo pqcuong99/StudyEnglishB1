@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <g id="pin">
+      <circle cy="-30" r="13" fill="currentColor"/>
+      <rect x="-15" y="-16" width="30" height="36" rx="9" fill="currentColor"/>
+    </g>
+  </defs>
+  <rect width="400" height="300" fill="#E0F2F1"/>
+  <!-- a crowd of grey people, one red person in the middle -->
+  <g color="#90A4AE">
+    <use href="#pin" x="70" y="110"/><use href="#pin" x="130" y="110"/><use href="#pin" x="190" y="110"/><use href="#pin" x="250" y="110"/><use href="#pin" x="310" y="110"/>
+    <use href="#pin" x="100" y="180"/><use href="#pin" x="160" y="180"/><use href="#pin" x="280" y="180"/><use href="#pin" x="340" y="180"/>
+    <use href="#pin" x="70" y="250"/><use href="#pin" x="130" y="250"/><use href="#pin" x="190" y="250"/><use href="#pin" x="250" y="250"/><use href="#pin" x="310" y="250"/>
+  </g>
+  <use href="#pin" x="220" y="180" color="#E53935"/>
+  <!-- arrow pointing to the one in the middle -->
+  <path d="M220 80 v50" stroke="#00796B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M208 120 l12 14 l12 -14" stroke="#00796B" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#00796B">in the middle of many</text>
+</svg>

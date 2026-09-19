@@ -158,6 +158,17 @@ const ROWS = [
   ['as a result', 'He trained hard, and as a result he won the race.', 'Anh ấy tập luyện chăm chỉ, và kết quả là anh ấy đã thắng cuộc đua.'],
   ['impress', 'Her speech impressed everyone in the room.', 'Bài phát biểu của cô ấy đã gây ấn tượng với mọi người trong phòng.'],
   ['international', 'It is an international competition with 40 countries.', 'Đó là một cuộc thi quốc tế với 40 quốc gia.'],
+
+  // Unit 2 – Phần 2 – Vocab
+  ['expensive', 'This phone is too expensive for me.', 'Chiếc điện thoại này quá đắt với tôi.'],
+  ['positive', 'Try to stay positive before the exam.', 'Hãy cố giữ tinh thần lạc quan trước kỳ thi.'],
+  ['negative', "Don't be so negative about the trip.", 'Đừng tiêu cực về chuyến đi như vậy.'],
+  ['interrupt', "Please don't interrupt me while I am talking.", 'Làm ơn đừng ngắt lời tôi khi tôi đang nói.'],
+  ['incomplete', 'Your homework is incomplete.', 'Bài tập về nhà của bạn chưa hoàn thành.'],
+  ['among', 'She is the best player among her friends.', 'Cô ấy là người chơi giỏi nhất trong số bạn bè của mình.'],
+  ['ambition', 'His ambition is to become a doctor.', 'Hoài bão của anh ấy là trở thành bác sĩ.'],
+  ['difficulty', 'I have difficulty remembering names.', 'Tôi gặp khó khăn trong việc nhớ tên.'],
+  ['arrange', "Let's arrange a meeting for Monday.", 'Hãy sắp xếp một cuộc họp vào thứ Hai.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

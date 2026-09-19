@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- sun -->
+  <circle cx="330" cy="60" r="28" fill="#FFD54F"/>
+  <g stroke="#FFD54F" stroke-width="5" stroke-linecap="round">
+    <path d="M330 14 v12 M330 94 v12 M284 60 h12 M364 60 h12 M298 28 l8 8 M354 84 l8 8 M298 92 l8 -8 M354 36 l8 -8"/>
+  </g>
+  <!-- smiling face with thumbs up -->
+  <circle cx="150" cy="140" r="80" fill="#FFB74D"/>
+  <circle cx="122" cy="122" r="8" fill="#5D4037"/>
+  <circle cx="178" cy="122" r="8" fill="#5D4037"/>
+  <path d="M108 160 q42 40 84 0" stroke="#5D4037" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="98" cy="150" r="10" fill="#FF8A65" opacity="0.7"/>
+  <circle cx="202" cy="150" r="10" fill="#FF8A65" opacity="0.7"/>
+  <!-- thumbs up -->
+  <g transform="translate(270 120)">
+    <rect x="0" y="40" width="26" height="60" rx="6" fill="#43A047"/>
+    <path d="M30 100 h50 q14 0 14 -14 v-36 q0 -14 -14 -14 h-28 l8 -26 q4 -14 -8 -16 q-8 -2 -12 8 l-16 34 z" fill="#66BB6A"/>
+  </g>
+  <!-- plus sign -->
+  <rect x="40" y="42" width="40" height="12" rx="4" fill="#43A047"/>
+  <rect x="54" y="28" width="12" height="40" rx="4" fill="#43A047"/>
+  <text x="200" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#2E7D32">good &amp; hopeful</text>
+</svg>

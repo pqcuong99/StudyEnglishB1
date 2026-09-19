@@ -3,7 +3,7 @@
 // vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
 // Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
 // Unit 2 lấy từ bảng từ vựng "I/ VOCABULARY" của Session 6 (Vocabulary +
-// Reading Part 4).
+// Reading Part 4) và bảng "II/ VOCAB" tiếp theo.
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -16,7 +16,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 8
+export const SEED_VERSION = 9
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -194,6 +194,19 @@ const U2S6_WORDS = [
   ['international', 'adj', 'ˌɪntəˈnæʃənəl', 'quốc tế'],
 ]
 
+// Unit 2 – bảng từ vựng "II/ VOCAB" (phần 2)
+const U2_VOCAB2_WORDS = [
+  ['expensive', 'adj', 'ɪkˈspensɪv', 'đắt, tốn kém'],
+  ['positive', 'adj', 'ˈpɒzətɪv', 'tích cực, lạc quan'],
+  ['negative', 'adj', 'ˈneɡətɪv', 'tiêu cực, phủ định'],
+  ['interrupt', 'v', 'ˌɪntəˈrʌpt', 'gián đoạn, ngắt lời'],
+  ['incomplete', 'adj', 'ˌɪnkəmˈpliːt', 'chưa hoàn thành, không đầy đủ'],
+  ['among', 'prep', 'əˈmʌŋ', 'trong số, giữa (nhiều người/vật)'],
+  ['ambition', 'n', 'æmˈbɪʃən', 'tham vọng, hoài bão'],
+  ['difficulty', 'n', 'ˈdɪfɪkəlti', 'sự khó khăn'],
+  ['arrange', 'v', 'əˈreɪndʒ', 'sắp xếp, thu xếp'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -228,8 +241,14 @@ const UNITS = [
     id: 'u2',
     name: 'Unit 2: Winning & Losing',
     nameMatch: /^\s*unit\s*2\b/i,
-    sections: [{ id: 'p1', name: 'Phần 1 – Session 6: Vocabulary' }],
-    groups: [{ version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS }],
+    sections: [
+      { id: 'p1', name: 'Phần 1 – Session 6: Vocabulary' },
+      { id: 'p2', name: 'Phần 2 – Vocab' },
+    ],
+    groups: [
+      { version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS },
+      { version: 9, prefix: 'u2v2', seedBase: 1000, section: 'p2', rows: U2_VOCAB2_WORDS },
+    ],
   },
 ]
 

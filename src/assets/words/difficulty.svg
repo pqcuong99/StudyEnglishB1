@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FBE9E7"/>
+  <rect y="240" width="400" height="60" fill="#BCAAA4"/>
+  <!-- person pushing a huge boulder uphill -->
+  <polygon points="0,240 400,240 400,150" fill="#A1887F"/>
+  <circle cx="260" cy="150" r="70" fill="#8D6E63"/>
+  <circle cx="240" cy="130" r="18" fill="#A1887F"/>
+  <circle cx="284" cy="170" r="12" fill="#A1887F"/>
+  <!-- person leaning -->
+  <g transform="translate(150 190) rotate(-25)">
+    <circle cx="0" cy="-60" r="16" fill="#FFCC80"/>
+    <rect x="-12" y="-44" width="24" height="46" rx="8" fill="#42A5F5"/>
+    <path d="M12 -34 l34 -10 M12 -22 l34 -2" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-6 2 l-14 36 M6 2 l10 36" stroke="#3E2723" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <!-- sweat drops -->
+  <g fill="#4FC3F7">
+    <path d="M118 96 q6 10 0 14 q-6 -4 0 -14"/>
+    <path d="M104 116 q6 10 0 14 q-6 -4 0 -14"/>
+  </g>
+  <!-- tangled problem lines -->
+  <path d="M40 40 q30 30 -10 50 q40 10 20 40" stroke="#E64A19" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="70" y="40" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#BF360C">?!</text>
+  <text x="200" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#4E342E">hard to do</text>
+</svg>
