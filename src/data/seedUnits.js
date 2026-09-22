@@ -3,7 +3,8 @@
 // vở ghi trên lớp (Unit 1), bảng từ vựng "II/ VOCAB" và "I/ VOCAB" (Session 5:
 // Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
 // Unit 2 lấy từ bảng từ vựng "I/ VOCABULARY" của Session 6 (Vocabulary +
-// Reading Part 4) và bảng "II/ VOCAB" tiếp theo.
+// Reading Part 4), bảng "II/ VOCAB" tiếp theo, và bảng từ vựng + cụm động từ
+// với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -16,7 +17,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 9
+export const SEED_VERSION = 10
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -207,6 +208,32 @@ const U2_VOCAB2_WORDS = [
   ['arrange', 'v', 'əˈreɪndʒ', 'sắp xếp, thu xếp'],
 ]
 
+// Unit 2 – Vocabulary + Reading Part 5 (phần 3): bảng từ vựng, bảng cụm động
+// từ với "in" và 4 từ ghi trong vở trên lớp
+const U2_VOCAB3_WORDS = [
+  ['attitude', 'n', 'ˈætɪtjuːd', 'thái độ, quan điểm'],
+  ['defeat', 'v/n', 'dɪˈfiːt', 'đánh bại; sự thất bại'],
+  ['succeed', 'v', 'səkˈsiːd', 'thành công'],
+  ['achieve', 'v', 'əˈtʃiːv', 'đạt được, giành được'],
+  ['respect', 'v/n', 'rɪˈspekt', 'tôn trọng'],
+  ['record', 'n', 'ˈrekɔːd', 'kỷ lục; hồ sơ'],
+  ['opportunity', 'n', 'ˌɒpəˈtjuːnəti', 'cơ hội'],
+  ['support', 'v/n', 'səˈpɔːt', 'hỗ trợ, ủng hộ'],
+  ['accord', 'n', 'əˈkɔːd', 'sự đồng thuận, hiệp định'],
+  ['opponent', 'n', 'əˈpəʊnənt', 'đối thủ'],
+  ['important', 'adj', 'ɪmˈpɔːtənt', 'quan trọng'],
+  ['burst into tears', 'phr', 'bɜːst ˈɪntə tɪəz', 'bật khóc'],
+  ['believe in', 'phr v', 'bɪˈliːv ɪn', 'tin vào'],
+  ['get in', 'phr v', 'ɡet ɪn', 'vào; lên (xe); gia nhập'],
+  ['give in', 'phr v', 'ɡɪv ɪn', 'đầu hàng; nhượng bộ'],
+  ['join in', 'phr v', 'dʒɔɪn ɪn', 'tham gia cùng'],
+  ['stay in', 'phr v', 'steɪ ɪn', 'ở trong (nhà); không ra ngoài'],
+  ['essay', 'n', 'ˈeseɪ', 'bài luận'],
+  ['report', 'n/v', 'rɪˈpɔːt', 'báo cáo'],
+  ['diving', 'n', 'ˈdaɪvɪŋ', 'môn lặn'],
+  ['particular', 'adj', 'pəˈtɪkjələ', 'cụ thể, đặc biệt'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -244,10 +271,12 @@ const UNITS = [
     sections: [
       { id: 'p1', name: 'Phần 1 – Session 6: Vocabulary' },
       { id: 'p2', name: 'Phần 2 – Vocab' },
+      { id: 'p3', name: 'Phần 3 – Vocabulary + Reading Part 5' },
     ],
     groups: [
       { version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS },
       { version: 9, prefix: 'u2v2', seedBase: 1000, section: 'p2', rows: U2_VOCAB2_WORDS },
+      { version: 10, prefix: 'u2v3', seedBase: 1100, section: 'p3', rows: U2_VOCAB3_WORDS },
     ],
   },
 ]

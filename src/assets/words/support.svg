@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- fans cheer for a runner -->
+  <rect x="278" y="132" width="44" height="70" rx="12" fill="#1E88E5"/>
+  <circle cx="300" cy="110" r="22" fill="#FFCC80"/>
+  <path d="M278 108 a22 17.6 0 0 1 44 0 Z" fill="#4E342E"/>
+  <circle cx="293" cy="112" r="2.5" fill="#3E2723"/><circle cx="307" cy="112" r="2.5" fill="#3E2723"/>
+  <path d="M292 120 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M288 202 v48 M312 202 v48" stroke="#37474F" stroke-width="12" stroke-linecap="round"/>
+  <rect x="58" y="162" width="44" height="70" rx="12" fill="#8E24AA"/>
+  <circle cx="80" cy="140" r="22" fill="#FFCC80"/>
+  <path d="M58 138 a22 17.6 0 0 1 44 0 Z" fill="#4E342E"/>
+  <circle cx="73" cy="142" r="2.5" fill="#3E2723"/><circle cx="87" cy="142" r="2.5" fill="#3E2723"/>
+  <path d="M72 150 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <rect x="138" y="162" width="44" height="70" rx="12" fill="#43A047"/>
+  <circle cx="160" cy="140" r="22" fill="#FFCC80"/>
+  <path d="M138 138 a22 17.6 0 0 1 44 0 Z" fill="#212121"/>
+  <circle cx="153" cy="142" r="2.5" fill="#3E2723"/><circle cx="167" cy="142" r="2.5" fill="#3E2723"/>
+  <path d="M152 150 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M58 172 l-16 -40 M182 172 l16 -40" stroke="#FFCC80" stroke-width="9" stroke-linecap="round"/>
+  <rect x="40" y="30" width="160" height="56" rx="8" fill="#FFF" stroke="#8E24AA" stroke-width="4"/>
+  <text x="120" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#8E24AA">GO GO!</text>
+  <path d="M120 86 v26" stroke="#8D6E63" stroke-width="5"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#6A1B9A">help &amp; cheer for someone</text>
+</svg>

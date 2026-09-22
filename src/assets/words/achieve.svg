@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- arrow in the bullseye + gold medal -->
+  <circle cx="140" cy="140" r="90" fill="#E53935"/><circle cx="140" cy="140" r="66" fill="#FFF"/>
+  <circle cx="140" cy="140" r="42" fill="#E53935"/><circle cx="140" cy="140" r="18" fill="#FFF"/>
+  <path d="M140 140 L250 50" stroke="#5D4037" stroke-width="6" stroke-linecap="round"/>
+  <path d="M250 50 l22 -4 -10 18 Z M244 44 l8 -20 8 14 Z" fill="#1E88E5"/>
+  <circle cx="140" cy="140" r="7" fill="#212121"/>
+  <path d="M290 100 l22 44 M346 100 l-22 44" stroke="#1E88E5" stroke-width="12"/>
+  <circle cx="318" cy="180" r="38" fill="#FFC107" stroke="#FF8F00" stroke-width="5"/>
+  <text x="318" y="192" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#FFF">1</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#F57F17">reach your goal</text>
+</svg>

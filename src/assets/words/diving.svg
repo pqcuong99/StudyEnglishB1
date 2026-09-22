@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#0288D1"/>
+  <rect width="400" height="40" fill="#81D4FA"/>
+  <path d="M0 40 q25 -10 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" fill="#81D4FA"/>
+  <!-- diver under the sea -->
+  <g transform="rotate(-15 200 150)">
+    <rect x="130" y="130" width="130" height="40" rx="20" fill="#212121"/>
+    <rect x="150" y="112" width="70" height="20" rx="8" fill="#FFC107"/>
+    <circle cx="280" cy="150" r="26" fill="#FFCC80"/>
+    <rect x="268" y="134" width="30" height="20" rx="6" fill="#B3E5FC" stroke="#212121" stroke-width="4"/>
+    <path d="M130 140 l-60 -24 v30 Z M130 160 l-60 20 v-30 Z" fill="#FF7043"/>
+  </g>
+  <g fill="none" stroke="#E1F5FE" stroke-width="3"><circle cx="310" cy="90" r="8"/><circle cx="324" cy="64" r="6"/><circle cx="316" cy="46" r="4"/></g>
+  <path d="M60 240 q20 -16 40 0 q-20 16 -40 0 Z M100 240 l14 -10 v20 Z" fill="#FFEB3B"/>
+  <path d="M320 300 q-14 -30 0 -60 q14 -30 0 -60 M350 300 q14 -26 0 -52" stroke="#66BB6A" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M0 290 q100 -20 200 0 t200 0 V300 H0 Z" fill="#FFE0B2"/>
+</svg>

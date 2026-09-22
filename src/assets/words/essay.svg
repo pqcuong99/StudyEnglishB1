@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- a written essay + pencil -->
+  <rect x="100" y="20" width="200" height="260" rx="6" fill="#FFF" stroke="#BDBDBD" stroke-width="3"/>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#5D4037">MY ESSAY</text>
+  <g stroke="#90A4AE" stroke-width="5" stroke-linecap="round">
+    <path d="M136 90 h140 M122 106 h154 M122 122 h154 M122 138 h100"/>
+    <path d="M136 164 h140 M122 180 h154 M122 196 h154 M122 212 h120"/>
+    <path d="M136 238 h140 M122 254 h90"/>
+  </g>
+  <g transform="rotate(35 330 170)">
+    <rect x="316" y="80" width="28" height="150" fill="#FFC107"/>
+    <path d="M316 230 l14 30 14 -30 Z" fill="#FFE0B2"/><path d="M326 252 l4 8 4 -8 Z" fill="#37474F"/>
+    <rect x="316" y="70" width="28" height="14" fill="#EC407A"/>
+  </g>
+</svg>

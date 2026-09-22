@@ -169,6 +169,27 @@ const ROWS = [
   ['ambition', 'His ambition is to become a doctor.', 'Hoài bão của anh ấy là trở thành bác sĩ.'],
   ['difficulty', 'I have difficulty remembering names.', 'Tôi gặp khó khăn trong việc nhớ tên.'],
   ['arrange', "Let's arrange a meeting for Monday.", 'Hãy sắp xếp một cuộc họp vào thứ Hai.'],
+
+  // Unit 2 – Phần 3 – Vocabulary + Reading Part 5
+  ['attitude', 'She has a great attitude to learning.', 'Cô ấy có thái độ học tập rất tốt.'],
+  ['succeed', 'If you work hard, you will succeed.', 'Nếu bạn chăm chỉ, bạn sẽ thành công.'],
+  ['achieve', 'He achieved his goal of running a marathon.', 'Anh ấy đã đạt được mục tiêu chạy marathon.'],
+  ['respect', 'You should respect your teachers.', 'Bạn nên tôn trọng thầy cô của mình.'],
+  ['record', 'She broke the world record in the 100 metres.', 'Cô ấy đã phá kỷ lục thế giới ở nội dung 100 mét.'],
+  ['support', 'My family always supports me.', 'Gia đình tôi luôn ủng hộ tôi.'],
+  ['accord', 'The two countries signed a peace accord.', 'Hai nước đã ký một hiệp định hòa bình.'],
+  ['opponent', 'Her opponent in the final was very strong.', 'Đối thủ của cô ấy trong trận chung kết rất mạnh.'],
+  ['important', 'Sleep is important for your health.', 'Giấc ngủ rất quan trọng cho sức khỏe của bạn.'],
+  ['burst into tears', 'When she lost the match, she burst into tears.', 'Khi thua trận, cô ấy đã bật khóc.'],
+  ['believe in', 'I believe in you - you can do it!', 'Tôi tin vào bạn - bạn làm được mà!'],
+  ['get in', 'Get in the car, we are late!', 'Lên xe đi, chúng ta muộn rồi!'],
+  ['give in', "Don't give in - keep trying!", 'Đừng bỏ cuộc - hãy tiếp tục cố gắng!'],
+  ['join in', "The children are playing. Why don't you join in?", 'Bọn trẻ đang chơi. Sao bạn không tham gia cùng?'],
+  ['stay in', "It's raining, so let's stay in tonight.", 'Trời đang mưa, nên tối nay mình ở nhà nhé.'],
+  ['essay', 'I have to write an essay about my hometown.', 'Tôi phải viết một bài luận về quê hương mình.'],
+  ['report', 'She wrote a report on the school trip.', 'Cô ấy đã viết một bản báo cáo về chuyến đi của trường.'],
+  ['diving', 'We went diving in the sea near Nha Trang.', 'Chúng tôi đã đi lặn biển gần Nha Trang.'],
+  ['particular', 'Is there any particular book you want?', 'Có cuốn sách cụ thể nào bạn muốn không?'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

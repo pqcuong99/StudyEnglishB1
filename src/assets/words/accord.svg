@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- two people shake hands over a signed paper -->
+  <rect x="68" y="112" width="44" height="70" rx="12" fill="#37474F"/>
+  <circle cx="90" cy="90" r="22" fill="#FFCC80"/>
+  <path d="M68 88 a22 17.6 0 0 1 44 0 Z" fill="#4E342E"/>
+  <circle cx="83" cy="92" r="2.5" fill="#3E2723"/><circle cx="97" cy="92" r="2.5" fill="#3E2723"/>
+  <path d="M82 100 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <rect x="288" y="112" width="44" height="70" rx="12" fill="#3949AB"/>
+  <circle cx="310" cy="90" r="22" fill="#FFCC80"/>
+  <path d="M288 88 a22 17.6 0 0 1 44 0 Z" fill="#212121"/>
+  <circle cx="303" cy="92" r="2.5" fill="#3E2723"/><circle cx="317" cy="92" r="2.5" fill="#3E2723"/>
+  <path d="M302 100 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M110 140 L190 168 M290 140 L210 168" stroke="#FFCC80" stroke-width="14" stroke-linecap="round"/>
+  <ellipse cx="200" cy="170" rx="18" ry="12" fill="#FFB74D"/>
+  <rect x="140" y="200" width="120" height="70" rx="6" fill="#FFF" stroke="#90A4AE" stroke-width="3"/>
+  <path d="M156 222 h88 M156 238 h70" stroke="#B0BEC5" stroke-width="4"/>
+  <path d="M160 258 q10 -12 20 0 t20 0 M210 258 q10 -12 20 0 t14 0" stroke="#1565C0" stroke-width="2.5" fill="none"/>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#00838F">AGREEMENT</text>
+</svg>

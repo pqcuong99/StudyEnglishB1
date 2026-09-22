@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- someone getting into a car -->
+  <rect y="250" width="400" height="50" fill="#9FA8DA"/>
+  <path d="M30 240 v-50 q0 -16 16 -16 h50 l40 -44 h120 l40 44 h30 q24 0 24 24 v42 Z" fill="#E53935"/>
+  <path d="M146 138 h48 v36 h-80 Z M206 138 h50 l30 36 h-80 Z" fill="#B3E5FC"/>
+  <circle cx="100" cy="244" r="24" fill="#263238"/><circle cx="290" cy="244" r="24" fill="#263238"/>
+  <circle cx="100" cy="244" r="9" fill="#B0BEC5"/><circle cx="290" cy="244" r="9" fill="#B0BEC5"/>
+  <circle cx="170" cy="156" r="16" fill="#FFCC80"/>
+  <path d="M154 154 a16 12.8 0 0 1 32 0 Z" fill="#4E342E"/>
+  <circle cx="163" cy="158" r="2.5" fill="#3E2723"/><circle cx="177" cy="158" r="2.5" fill="#3E2723"/>
+  <path d="M162 166 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M380 110 h-40" stroke="#3949AB" stroke-width="6" stroke-linecap="round"/>
+  <path d="M352 98 l-14 12 14 12" stroke="#3949AB" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#283593">get in the car</text>
+</svg>
