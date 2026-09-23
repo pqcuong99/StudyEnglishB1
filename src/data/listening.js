@@ -16,6 +16,11 @@ import q3 from '../assets/listening/u1-session3-part2-q3.mp3'
 import q4 from '../assets/listening/u1-session3-part2-q4.mp3'
 import q5 from '../assets/listening/u1-session3-part2-q5.mp3'
 import q6 from '../assets/listening/u1-session3-part2-q6.mp3'
+import u2q1 from '../assets/listening/u2-wb03-part3-q1.mp3'
+import u2q2 from '../assets/listening/u2-wb03-part3-q2.mp3'
+import u2q3 from '../assets/listening/u2-wb03-part3-q3.mp3'
+import u2q4 from '../assets/listening/u2-wb03-part3-q4.mp3'
+import u2q5 from '../assets/listening/u2-wb03-part3-q5.mp3'
 
 const U1_SESSION3_PART2 = [
   {
@@ -177,6 +182,118 @@ const U1_SESSION3_PART2 = [
   },
 ]
 
+// Unit 2 – Workbook audio COMPACT_PFS_WB_03.mp3 (Listening Part 3, 2:34): một
+// người nói (W = Susan Chapman). Audio được cắt tại các khoảng lặng thành 5
+// đoạn trong src/assets/listening/, mỗi đoạn là một bài; `lines` là các đoạn
+// văn của bài nói, không có `page`.
+const U2_WB03_PART3 = [
+  {
+    id: 'u2wb3-p3-q1',
+    title: 'Bài 1 – The centre reopens',
+    audio: u2q1,
+    intro:
+      'You will hear a woman called Susan Chapman telling a group of secondary school pupils about a sports centre.',
+    lines: [
+      {
+        s: 'W',
+        t: "Good morning. My name's Susan Chapman. I'm the manager of the Westfield Sports Centre, and I'm here today to tell you all about it.",
+      },
+      {
+        s: 'W',
+        t: 'Now, as some of you may know, the centre was closed for a few months for improvements. We were hoping to be able to open again last July, but the work took longer than planned, and we have only just opened now, in September.',
+      },
+    ],
+    question: 'When did the sports centre open again?',
+    options: ['last July', 'in September', 'a few months ago'],
+    answer: 1,
+    key: 'We were hoping to be able to open again last July, but the work took longer than planned, and we have only just opened now, in September.',
+  },
+  {
+    id: 'u2wb3-p3-q2',
+    title: 'Bài 2 – New gym & indoor pool',
+    audio: u2q2,
+    intro: 'Susan talks about what the centre built with its new money.',
+    lines: [
+      {
+        s: 'W',
+        t: 'We were lucky, as we got a grant from the local council. And, with this money, we were able to build a separate gym just for young people aged twelve to sixteen.',
+      },
+      {
+        s: 'W',
+        t: "And now, as well as the old outdoor swimming pool for the summer, we have a new indoor one. It's fifty metres long and twenty five metres wide, so perfect for serious swimmers to practise for competitions.",
+      },
+    ],
+    question: 'What did the centre use the money from the local council for?',
+    options: ['a new indoor swimming pool', 'a gym for young people', 'a pool for competitions'],
+    answer: 1,
+    key: 'With this money, we were able to build a separate gym just for young people aged twelve to sixteen.',
+  },
+  {
+    id: 'u2wb3-p3-q3',
+    title: 'Bài 3 – Team sports',
+    audio: u2q3,
+    intro: 'Susan talks about the team sports at the centre.',
+    lines: [
+      {
+        s: 'W',
+        t: 'As well as the gym and the pool, we have a whole range of other sports and activities that you might be interested in.',
+      },
+      {
+        s: 'W',
+        t: "We have several team sports. In addition to basketball and football, which we've always had, we are now offering hockey on Saturday mornings.",
+      },
+    ],
+    question: 'Which team sport is new at the centre?',
+    options: ['basketball', 'football', 'hockey'],
+    answer: 2,
+    key: 'We are now offering hockey on Saturday mornings.',
+  },
+  {
+    id: 'u2wb3-p3-q4',
+    title: 'Bài 4 – Individual sports & classes',
+    audio: u2q4,
+    intro: 'Susan talks about individual sports, volleyball and dance classes.',
+    lines: [
+      {
+        s: 'W',
+        t: "We also have individual sports. We're continuing our programme of classes for badminton, tennis and squash, and we've just opened a new one for gymnastics.",
+      },
+      {
+        s: 'W',
+        t: 'Oh, and I forgot to mention before that, next to our tennis courts, we now have a couple of courts for volleyball, a game which is becoming very popular.',
+      },
+      {
+        s: 'W',
+        t: 'And we have various dance and fitness classes for people of all ages, both young and old.',
+      },
+    ],
+    question: 'What has the centre just started a new class for?',
+    options: ['squash', 'gymnastics', 'volleyball'],
+    answer: 1,
+    key: "We're continuing our programme of classes for badminton, tennis and squash, and we've just opened a new one for gymnastics.",
+  },
+  {
+    id: 'u2wb3-p3-q5',
+    title: 'Bài 5 – Membership prices',
+    audio: u2q5,
+    intro: 'Susan talks about how much it costs to join the centre.',
+    lines: [
+      {
+        s: 'W',
+        t: "In case you're wondering how much it costs to sign up to Westfield, the good news is it's not very much.",
+      },
+      {
+        s: 'W',
+        t: "To encourage young people to get fit, there is currently a fifty percent discount on membership for anyone under eighteen. And it's twenty five percent for over eighteens, so tell your parents.",
+      },
+    ],
+    question: 'How much discount do people under eighteen get on membership?',
+    options: ['18%', '25%', '50%'],
+    answer: 2,
+    key: 'There is currently a fifty percent discount on membership for anyone under eighteen.',
+  },
+]
+
 export const LISTENING_SETS = [
   {
     id: 'u1-session3-part2',
@@ -188,6 +305,15 @@ export const LISTENING_SETS = [
     subtitle: 'Listening Part 2: Being at school (trang 7–12)',
     source: 'Session 3.pptx',
     exercises: U1_SESSION3_PART2,
+  },
+  {
+    id: 'u2-wb03-part3',
+    unitId: 'u2',
+    unitMatch: /^\s*unit\s*2\b/i,
+    name: 'Luyện nghe – Listening Part 3',
+    subtitle: 'Westfield Sports Centre (bài nói của Susan Chapman)',
+    source: 'COMPACT_PFS_WB_03.mp3',
+    exercises: U2_WB03_PART3,
   },
 ]
 

@@ -6,6 +6,7 @@ import { playCorrect, playFinish } from '../lib/sound.js'
 const SPEAKER = {
   F: { icon: '👧', label: 'F' },
   M: { icon: '👦', label: 'M' },
+  W: { icon: '👩', label: 'W', title: 'Woman' },
 }
 
 // ---------- chọn mức độ ----------
@@ -66,7 +67,10 @@ function ExerciseList({ set, levelId, onChangeLevel, progress, onOpen, onExit })
           return (
             <div key={ex.id} className="unit-card card listen-card" onClick={() => onOpen(ex.id)}>
               <h3>{ex.title}</h3>
-              <p className="unit-meta">Trang {ex.page} · {ex.lines.length} lượt thoại</p>
+              <p className="unit-meta">
+                {ex.page ? `Trang ${ex.page} · ` : ''}
+                {ex.lines.length} {ex.lines.every((l) => l.s === ex.lines[0].s) ? 'đoạn' : 'lượt thoại'}
+              </p>
               <p className="listen-intro-preview">“{ex.intro}”</p>
               <div className="listen-badges">
                 {LEVELS.map((l) => {
@@ -291,7 +295,8 @@ function ListeningExercise({
         <div>
           <h1>🎧 {exercise.title}</h1>
           <p className="part-sub">
-            {set.name} · trang {exercise.page} · mức {level.icon} {level.label} ({n} từ ẩn)
+            {set.name}
+            {exercise.page ? ` · trang ${exercise.page}` : ''} · mức {level.icon} {level.label} ({n} từ ẩn)
           </p>
         </div>
       </header>
@@ -327,7 +332,7 @@ function ListeningExercise({
             const sp = SPEAKER[line.s] || { icon: '🗣️', label: line.s }
             return (
               <div key={li} className={`script-line sp-${line.s}`}>
-                <span className="speaker" title={line.s === 'F' ? 'Female' : 'Male'}>
+                <span className="speaker" title={sp.title || (line.s === 'F' ? 'Female' : 'Male')}>
                   {sp.icon} {sp.label}:
                 </span>
                 <span className="script-text">

@@ -90,7 +90,11 @@ Rồi mở trình duyệt tại **http://localhost:5173**
 - **Luyện nghe – Session 3** (Unit 1): 6 bài Listening Part 2 "Being at school" lấy từ
   `Session 3.pptx` (audio ở trang 6, script + câu hỏi ở trang 7–12). File audio gốc được tách
   theo các khoảng lặng 5 giây thành 6 file `src/assets/listening/u1-session3-part2-q1..6.mp3`;
-  script, câu hỏi và đáp án nằm trong `src/data/listening.js`. Muốn thêm bộ bài nghe mới: thêm
+  script, câu hỏi và đáp án nằm trong `src/data/listening.js`.
+- **Luyện nghe – Listening Part 3** (Unit 2): bài nói của Susan Chapman về Westfield Sports
+  Centre (audio workbook `COMPACT_PFS_WB_03.mp3`, 2:34, một người nói). Audio được cắt tại các
+  khoảng lặng thành 5 bài `src/assets/listening/u2-wb03-part3-q1..5.mp3`, mỗi bài kèm một câu
+  hỏi trắc nghiệm A/B/C. Muốn thêm bộ bài nghe mới: thêm
   một phần tử vào `LISTENING_SETS` (gắn với unit qua `unitId` hoặc `unitMatch`) và đặt file
   mp3 vào thư mục trên. Thuật toán chọn từ để ẩn nằm trong `src/lib/cloze.js` (bỏ qua từ chức
   năng, tên riêng, không ẩn hai từ liền nhau, rải đều giữa các câu).
