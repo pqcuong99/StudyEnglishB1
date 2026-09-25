@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F2F1"/>
+  <!-- mixed shapes sorted into two boxes -->
+  <rect x="34" y="110" width="130" height="130" rx="10" fill="#FFF" stroke="#26A69A" stroke-width="4"/>
+  <circle cx="70" cy="146" r="18" fill="#EF5350"/>
+  <circle cx="122" cy="152" r="18" fill="#EF5350"/>
+  <circle cx="90" cy="198" r="18" fill="#EF5350"/>
+  <rect x="236" y="110" width="130" height="130" rx="10" fill="#FFF" stroke="#26A69A" stroke-width="4"/>
+  <rect x="256" y="130" width="34" height="34" fill="#42A5F5"/>
+  <rect x="308" y="140" width="34" height="34" fill="#42A5F5"/>
+  <rect x="276" y="186" width="34" height="34" fill="#42A5F5"/>
+  <path d="M200 96 V254" stroke="#00897B" stroke-width="5" stroke-dasharray="14 10"/>
+  <path d="M188 72 l-40 22 M212 72 l40 22" stroke="#00695C" stroke-width="5" stroke-linecap="round"/>
+  <path d="M148 94 l14 -12 l4 20 Z" fill="#00695C"/>
+  <path d="M252 94 l-14 -12 l-4 20 Z" fill="#00695C"/>
+  <text x="200" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#00695C">SEPARATE</text>
+  <text x="200" y="284" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#00796B">tách ra, chia ra; riêng biệt</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#EFEBE9"/>
+  <!-- a big circle "sport in general" holding particular sports -->
+  <circle cx="200" cy="186" r="100" fill="#D7CCC8" stroke="#8D6E63" stroke-width="5"/>
+  <circle cx="158" cy="160" r="32" fill="#FFF" stroke="#37474F" stroke-width="3"/>
+  <path d="M158 128 v64 M126 160 h64 M136 138 l44 44 M180 138 l-44 44" stroke="#37474F" stroke-width="2.5"/>
+  <circle cx="244" cy="160" r="32" fill="#FFAB91"/>
+  <path d="M218 150 q26 22 52 0 M218 170 q26 -22 52 0" stroke="#BF360C" stroke-width="3" fill="none"/>
+  <circle cx="200" cy="234" r="32" fill="#FFF59D" stroke="#F9A825" stroke-width="3"/>
+  <path d="M182 234 h36 M200 216 v36" stroke="#F9A825" stroke-width="3"/>
+  <text x="200" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#4E342E">GENERAL</text>
+  <text x="200" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6D4C41">chung, tổng quát (≠ particular)</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFEBEE"/>
+  <!-- a fallen bike and a hurt leg -->
+  <circle cx="120" cy="212" r="42" fill="none" stroke="#37474F" stroke-width="7"/>
+  <circle cx="244" cy="212" r="42" fill="none" stroke="#37474F" stroke-width="7"/>
+  <path d="M120 212 L176 150 L244 212 M176 150 L206 212 M120 212 L176 212" stroke="#1E88E5" stroke-width="7" fill="none"/>
+  <path d="M168 142 h34" stroke="#37474F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M300 130 l24 -34 l10 30 l26 -16" stroke="#E53935" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M60 128 l-22 -30 l30 4 l-8 -30" stroke="#E53935" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M292 200 l26 42 h-52 Z" fill="#FFCA28" stroke="#F57F17" stroke-width="4"/>
+  <text x="292" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#5D4037">!</text>
+  <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#C62828">ACCIDENT</text>
+  <text x="200" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#B71C1C">tai nạn</text>
+</svg>

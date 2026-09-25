@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F1F8E9"/>
+  <!-- three stages of a plant growing -->
+  <path d="M20 254 h360" stroke="#8D6E63" stroke-width="12"/>
+  <path d="M80 248 v-26" stroke="#558B2F" stroke-width="5" stroke-linecap="round"/>
+  <path d="M80 226 q-16 -12 -22 2 q16 10 22 -2 Z" fill="#7CB342"/>
+  <path d="M200 248 v-80" stroke="#558B2F" stroke-width="6" stroke-linecap="round"/>
+  <path d="M200 208 q-26 -18 -34 4 q26 16 34 -4 Z" fill="#7CB342"/>
+  <path d="M200 182 q26 -18 34 4 q-26 16 -34 -4 Z" fill="#8BC34A"/>
+  <path d="M320 248 v-150" stroke="#5D4037" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="320" cy="90" r="52" fill="#66BB6A"/>
+  <circle cx="284" cy="112" r="30" fill="#7CB342"/>
+  <circle cx="356" cy="112" r="30" fill="#7CB342"/>
+  <circle cx="306" cy="76" r="5" fill="#E53935"/><circle cx="338" cy="96" r="5" fill="#E53935"/>
+  <path d="M110 218 h50" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="8 8"/>
+  <path d="M244 160 h44" stroke="#9E9E9E" stroke-width="4" stroke-dasharray="8 8"/>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#33691E">GROW = lớn lên</text>
+</svg>

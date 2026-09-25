@@ -190,6 +190,31 @@ const ROWS = [
   ['report', 'She wrote a report on the school trip.', 'Cô ấy đã viết một bản báo cáo về chuyến đi của trường.'],
   ['diving', 'We went diving in the sea near Nha Trang.', 'Chúng tôi đã đi lặn biển gần Nha Trang.'],
   ['particular', 'Is there any particular book you want?', 'Có cuốn sách cụ thể nào bạn muốn không?'],
+
+  // Unit 2 – Phần 4 – Vocab (tiếp)
+  ['supply', 'The shop supplies sports clothes to our school.', 'Cửa hàng cung cấp quần áo thể thao cho trường tôi.'],
+  ['admit', 'He admitted that he had made a mistake.', 'Anh ấy đã thừa nhận rằng mình mắc lỗi.'],
+  ['accident', 'She hurt her leg in a bike accident.', 'Cô ấy bị thương ở chân trong một vụ tai nạn xe đạp.'],
+  ['rude', 'It is rude to talk when someone else is speaking.', 'Nói chuyện khi người khác đang nói là bất lịch sự.'],
+  ['polite', 'The waiter was very polite to us.', 'Người phục vụ rất lịch sự với chúng tôi.'],
+  ['beat', 'Our team beat them 3-1 last Sunday.', 'Đội chúng tôi đã thắng họ 3-1 vào Chủ nhật tuần trước.'],
+  ['beat a record', 'He beat the world record in the 200 metres.', 'Anh ấy đã phá kỷ lục thế giới ở nội dung 200 mét.'],
+  ['defeat sb', 'She defeated her opponent in the final.', 'Cô ấy đã đánh bại đối thủ trong trận chung kết.'],
+  ['increase', 'The number of members increased last year.', 'Số lượng thành viên đã tăng lên năm ngoái.'],
+  ['grow', 'My little brother is growing very fast.', 'Em trai tôi đang lớn rất nhanh.'],
+  ['fantastic', 'You played a fantastic match today!', 'Hôm nay bạn đã có một trận đấu tuyệt vời!'],
+  ['teenagers', 'Many teenagers play football after school.', 'Nhiều bạn thanh thiếu niên chơi bóng đá sau giờ học.'],
+  ['dreams', 'Never stop following your dreams.', 'Đừng bao giờ ngừng theo đuổi ước mơ của bạn.'],
+  ['individual', 'Tennis is an individual sport.', 'Quần vợt là một môn thể thao cá nhân.'],
+  ['activity', 'Swimming is my favourite activity.', 'Bơi lội là hoạt động tôi yêu thích nhất.'],
+  ['embarrassed', 'I felt embarrassed when I forgot his name.', 'Tôi thấy ngượng khi quên mất tên anh ấy.'],
+  ['reach', 'We reached the top of the hill at noon.', 'Chúng tôi lên tới đỉnh đồi vào buổi trưa.'],
+  ['effort', 'She won the medal after a lot of effort.', 'Cô ấy giành huy chương sau rất nhiều nỗ lực.'],
+  ['separate', 'The teacher separated us into two teams.', 'Giáo viên chia chúng tôi thành hai đội.'],
+  ['general', 'In general, I train three times a week.', 'Nói chung, tôi tập ba lần một tuần.'],
+  ['produce', 'This factory produces football shirts.', 'Nhà máy này sản xuất áo bóng đá.'],
+  ['deliver', 'The postman delivers letters every morning.', 'Người đưa thư giao thư mỗi buổi sáng.'],
+  ['challenge', 'Running a marathon is a big challenge.', 'Chạy marathon là một thử thách lớn.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- four activity icons: football, swimming, running, reading -->
+  <rect x="30" y="70" width="160" height="100" rx="12" fill="#FFF" stroke="#4DD0E1" stroke-width="4"/>
+  <circle cx="110" cy="120" r="30" fill="#FFF" stroke="#37474F" stroke-width="4"/>
+  <path d="M110 90 v60 M80 120 h60 M88 98 l44 44 M132 98 l-44 44" stroke="#37474F" stroke-width="3"/>
+  <rect x="210" y="70" width="160" height="100" rx="12" fill="#FFF" stroke="#4DD0E1" stroke-width="4"/>
+  <path d="M232 140 q24 -18 48 0 q24 18 48 0" stroke="#29B6F6" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="268" cy="106" r="14" fill="#FFCC80"/>
+  <path d="M282 112 l30 -12" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+  <rect x="30" y="186" width="160" height="94" rx="12" fill="#FFF" stroke="#4DD0E1" stroke-width="4"/>
+  <circle cx="106" cy="212" r="13" fill="#66BB6A"/>
+  <path d="M106 226 l-6 26" stroke="#66BB6A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M100 252 l-18 16 M100 244 l24 20" stroke="#66BB6A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M104 232 l-22 -6 M106 230 l24 -12" stroke="#66BB6A" stroke-width="8" stroke-linecap="round"/>
+  <path d="M54 266 h112" stroke="#B0BEC5" stroke-width="5"/>
+  <rect x="210" y="186" width="160" height="94" rx="12" fill="#FFF" stroke="#4DD0E1" stroke-width="4"/>
+  <path d="M290 212 q-20 -12 -38 -6 v50 q18 -6 38 6 Z" fill="#FFB74D" stroke="#EF6C00" stroke-width="4"/>
+  <path d="M290 212 q20 -12 38 -6 v50 q-18 -6 -38 6 Z" fill="#FFCC80" stroke="#EF6C00" stroke-width="4"/>
+  <text x="200" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#00838F">ACTIVITY = hoạt động</text>
+</svg>

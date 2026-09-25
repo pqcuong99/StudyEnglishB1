@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- scoreboard: our team wins -->
+  <rect x="50" y="60" width="300" height="150" rx="14" fill="#263238"/>
+  <text x="125" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#81D4FA">US</text>
+  <text x="275" y="108" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#81D4FA">THEM</text>
+  <text x="125" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="62" font-weight="bold" fill="#66BB6A">3</text>
+  <text x="200" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="#B0BEC5">-</text>
+  <text x="275" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="62" font-weight="bold" fill="#EF5350">1</text>
+  <path d="M120 240 l18 -18 l14 30 l16 -40 l18 26 l16 -34 l20 40 l16 -22" stroke="#1565C0" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="200" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#1565C0">WE BEAT THEM!</text>
+  <text x="200" y="286" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1565C0">beat = đánh bại, thắng</text>
+</svg>

@@ -4,7 +4,8 @@
 // Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
 // Unit 2 lấy từ bảng từ vựng "I/ VOCABULARY" của Session 6 (Vocabulary +
 // Reading Part 4), bảng "II/ VOCAB" tiếp theo, và bảng từ vựng + cụm động từ
-// với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp).
+// với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp), và bảng từ
+// mới tiếp theo (phần 4).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -17,7 +18,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 10
+export const SEED_VERSION = 11
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -234,6 +235,33 @@ const U2_VOCAB3_WORDS = [
   ['particular', 'adj', 'pəˈtɪkjələ', 'cụ thể, đặc biệt'],
 ]
 
+// Unit 2 – bảng từ mới tiếp theo (phần 4)
+const U2_VOCAB4_WORDS = [
+  ['supply', 'v/n', 'səˈplaɪ', 'cung cấp; nguồn cung cấp'],
+  ['admit', 'v', 'ədˈmɪt', 'thừa nhận, công nhận'],
+  ['accident', 'n', 'ˈæksɪdənt', 'tai nạn; sự tình cờ'],
+  ['rude', 'adj', 'ruːd', 'thô lỗ, bất lịch sự'],
+  ['polite', 'adj', 'pəˈlaɪt', 'lịch sự, lễ độ'],
+  ['beat', 'v', 'biːt', 'đánh bại, thắng; đập (tim), đánh (trứng)'],
+  ['beat a record', 'phr', 'biːt ə ˈrekɔːd', 'phá kỷ lục'],
+  ['defeat sb', 'phr', 'dɪˈfiːt ˌsʌmbədi', 'đánh bại ai đó'],
+  ['increase', 'v/n', 'ɪnˈkriːs', 'tăng, tăng lên; sự tăng'],
+  ['grow', 'v', 'ɡrəʊ', 'mọc, lớn lên, phát triển'],
+  ['fantastic', 'adj', 'fænˈtæstɪk', 'tuyệt vời, xuất sắc'],
+  ['teenagers', 'n', 'ˈtiːneɪdʒəz', 'thanh thiếu niên (13–19 tuổi)'],
+  ['dreams', 'n', 'driːmz', 'giấc mơ; ước mơ, mơ ước'],
+  ['individual', 'n/adj', 'ˌɪndɪˈvɪdʒuəl', 'cá nhân; riêng lẻ, từng người'],
+  ['activity', 'n', 'ækˈtɪvəti', 'hoạt động'],
+  ['embarrassed', 'adj', 'ɪmˈbærəst', 'bối rối, ngượng, xấu hổ'],
+  ['reach', 'v', 'riːtʃ', 'đến, tới; với tới, đạt tới'],
+  ['effort', 'n', 'ˈefət', 'sự nỗ lực, sự cố gắng'],
+  ['separate', 'v/adj', 'ˈsepəreɪt', 'tách ra, chia ra; riêng biệt'],
+  ['general', 'adj/n', 'ˈdʒenrəl', 'chung, tổng quát; (n) tướng (quân đội)'],
+  ['produce', 'v', 'prəˈdjuːs', 'sản xuất, tạo ra'],
+  ['deliver', 'v', 'dɪˈlɪvə(r)', 'giao, chuyển phát'],
+  ['challenge', 'n/v', 'ˈtʃælɪndʒ', 'thử thách; thách thức'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -272,11 +300,13 @@ const UNITS = [
       { id: 'p1', name: 'Phần 1 – Session 6: Vocabulary' },
       { id: 'p2', name: 'Phần 2 – Vocab' },
       { id: 'p3', name: 'Phần 3 – Vocabulary + Reading Part 5' },
+      { id: 'p4', name: 'Phần 4 – Vocab (tiếp)' },
     ],
     groups: [
       { version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS },
       { version: 9, prefix: 'u2v2', seedBase: 1000, section: 'p2', rows: U2_VOCAB2_WORDS },
       { version: 10, prefix: 'u2v3', seedBase: 1100, section: 'p3', rows: U2_VOCAB3_WORDS },
+      { version: 11, prefix: 'u2v4', seedBase: 1200, section: 'p4', rows: U2_VOCAB4_WORDS },
     ],
   },
 ]
