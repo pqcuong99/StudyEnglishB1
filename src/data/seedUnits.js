@@ -4,8 +4,9 @@
 // Writing Part 1) của khóa học, cùng vở ghi Speaking Part 1 và vở ghi tiếp theo.
 // Unit 2 lấy từ bảng từ vựng "I/ VOCABULARY" của Session 6 (Vocabulary +
 // Reading Part 4), bảng "II/ VOCAB" tiếp theo, và bảng từ vựng + cụm động từ
-// với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp), và bảng từ
-// mới tiếp theo (phần 4).
+// với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp), bảng từ
+// mới tiếp theo (phần 4) và bảng "I/ VOCAB" của Session 9: Writing Part 2 +
+// Speaking Part 3 (phần 5).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -18,7 +19,7 @@
 //
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 11
+export const SEED_VERSION = 12
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -262,6 +263,24 @@ const U2_VOCAB4_WORDS = [
   ['challenge', 'n/v', 'ˈtʃælɪndʒ', 'thử thách; thách thức'],
 ]
 
+// Unit 2 – bảng "I/ VOCAB", Session 9: Writing Part 2 + Speaking Part 3 (phần 5)
+const U2_VOCAB5_WORDS = [
+  ['curious', 'adj', 'ˈkjʊə.ri.əs', 'tò mò'],
+  ['sleepover', 'n', 'ˈsliːp.əʊ.və(r)', 'buổi ngủ lại nhà bạn'],
+  ['unusual', 'adj', 'ʌnˈjuː.ʒu.əl', 'khác thường'],
+  ['receive', 'v', 'rɪˈsiːv', 'nhận'],
+  ['adventurous', 'adj', 'ədˈven.tʃər.əs', 'thích phiêu lưu'],
+  ['description', 'n', 'dɪˈskrɪp.ʃən', 'sự mô tả'],
+  ['nervous', 'adj', 'ˈnɜː.vəs', 'lo lắng, hồi hộp'],
+  ['embarrass', 'v', 'ɪmˈbær.əs', 'làm xấu hổ'],
+  ['delight', 'n/v', 'dɪˈlaɪt', 'niềm vui; làm ai vui thích'],
+  ['introduction', 'n', 'ˌɪn.trəˈdʌk.ʃən', 'phần giới thiệu'],
+  ['spelling', 'n', 'ˈspel.ɪŋ', 'chính tả'],
+  ['category', 'n', 'ˈkæt.ə.ɡə.ri', 'loại, hạng mục'],
+  ['statement', 'n', 'ˈsteɪt.mənt', 'câu phát biểu, tuyên bố'],
+  ['agree / disagree', 'v', 'əˈɡriː / ˌdɪs.əˈɡriː', 'đồng ý / không đồng ý'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -301,12 +320,14 @@ const UNITS = [
       { id: 'p2', name: 'Phần 2 – Vocab' },
       { id: 'p3', name: 'Phần 3 – Vocabulary + Reading Part 5' },
       { id: 'p4', name: 'Phần 4 – Vocab (tiếp)' },
+      { id: 'p5', name: 'Phần 5 – Session 9: Writing Part 2 + Speaking Part 3' },
     ],
     groups: [
       { version: 8, prefix: 'u2s6', seedBase: 900, section: 'p1', rows: U2S6_WORDS },
       { version: 9, prefix: 'u2v2', seedBase: 1000, section: 'p2', rows: U2_VOCAB2_WORDS },
       { version: 10, prefix: 'u2v3', seedBase: 1100, section: 'p3', rows: U2_VOCAB3_WORDS },
       { version: 11, prefix: 'u2v4', seedBase: 1200, section: 'p4', rows: U2_VOCAB4_WORDS },
+      { version: 12, prefix: 'u2v5', seedBase: 1300, section: 'p5', rows: U2_VOCAB5_WORDS },
     ],
   },
 ]

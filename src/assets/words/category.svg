@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- three labelled boxes holding items of one kind -->
+  <rect x="24" y="106" width="108" height="150" rx="8" fill="#FFF" stroke="#FB8C00" stroke-width="4"/>
+  <rect x="24" y="106" width="108" height="30" fill="#FFB74D"/>
+  <text x="78" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#5D4037">SPORT</text>
+  <circle cx="60" cy="176" r="18" fill="none" stroke="#37474F" stroke-width="3"/>
+  <path d="M60 158 v36 M42 176 h36" stroke="#37474F" stroke-width="2.5"/>
+  <circle cx="102" cy="176" r="18" fill="#FFAB91"/>
+  <circle cx="78" cy="222" r="18" fill="#FFF59D" stroke="#F9A825" stroke-width="3"/>
+  <rect x="146" y="106" width="108" height="150" rx="8" fill="#FFF" stroke="#FB8C00" stroke-width="4"/>
+  <rect x="146" y="106" width="108" height="30" fill="#FFB74D"/>
+  <text x="200" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#5D4037">FOOD</text>
+  <circle cx="180" cy="178" r="18" fill="#EF5350"/>
+  <path d="M212 196 a18 18 0 1 1 18 -18 Z" fill="#FFCA28"/>
+  <path d="M170 220 q30 -18 60 0 q-30 18 -60 0 Z" fill="#8BC34A"/>
+  <rect x="268" y="106" width="108" height="150" rx="8" fill="#FFF" stroke="#FB8C00" stroke-width="4"/>
+  <rect x="268" y="106" width="108" height="30" fill="#FFB74D"/>
+  <text x="322" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#5D4037">MUSIC</text>
+  <path d="M296 218 v-56 l34 -10 v56" stroke="#7E57C2" stroke-width="5" fill="none"/>
+  <circle cx="288" cy="218" r="11" fill="#7E57C2"/><circle cx="322" cy="208" r="11" fill="#7E57C2"/>
+  <text x="200" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#E65100">CATEGORY = loại, hạng mục</text>
+</svg>

@@ -83,11 +83,12 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   (13 từ của `NC_U1_Session 3.pdf` + 13 từ ghi trên lớp), **Phần 3 – Vocab** (bảng "II/ VOCAB"
   + vở ghi), **Phần 4 – Session 5: Writing Part 1** (bảng "I/ VOCAB" + vở ghi Speaking Part 1)
   và **Phần 5 – Vở ghi trên lớp (tiếp)**.
-- **Unit 2: Winning & Losing** (67 từ) cũng nằm trong `seedUnits.js`, chia làm 4 phần:
+- **Unit 2: Winning & Losing** (81 từ) cũng nằm trong `seedUnits.js`, chia làm 5 phần:
   **Phần 1 – Session 6: Vocabulary** (14 từ của bảng "I/ VOCABULARY", Session 6: Vocabulary +
   Reading Part 4), **Phần 2 – Vocab** (9 từ của bảng "II/ VOCAB"), **Phần 3 – Vocabulary +
-  Reading Part 5** (12 từ vựng + 5 cụm động từ với "in" + 4 từ ghi trong vở) và
-  **Phần 4 – Vocab (tiếp)** (23 từ của bảng từ mới tiếp theo).
+  Reading Part 5** (12 từ vựng + 5 cụm động từ với "in" + 4 từ ghi trong vở),
+  **Phần 4 – Vocab (tiếp)** (23 từ của bảng từ mới tiếp theo) và **Phần 5 – Session 9:
+  Writing Part 2 + Speaking Part 3** (14 từ của bảng "I/ VOCAB").
 - **Luyện nghe – Session 3** (Unit 1): 6 bài Listening Part 2 "Being at school" lấy từ
   `Session 3.pptx` (audio ở trang 6, script + câu hỏi ở trang 7–12). File audio gốc được tách
   theo các khoảng lặng 5 giây thành 6 file `src/assets/listening/u1-session3-part2-q1..6.mp3`;

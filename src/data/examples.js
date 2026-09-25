@@ -215,6 +215,21 @@ const ROWS = [
   ['produce', 'This factory produces football shirts.', 'Nhà máy này sản xuất áo bóng đá.'],
   ['deliver', 'The postman delivers letters every morning.', 'Người đưa thư giao thư mỗi buổi sáng.'],
   ['challenge', 'Running a marathon is a big challenge.', 'Chạy marathon là một thử thách lớn.'],
+
+  // Unit 2 – Phần 5 – Session 9: Writing Part 2 + Speaking Part 3
+  ['curious', 'The children were curious about the new teacher.', 'Bọn trẻ tò mò về thầy giáo mới.'],
+  ['sleepover', "I had a sleepover at my best friend's house.", 'Tôi đã ngủ lại nhà người bạn thân nhất.'],
+  ['unusual', 'It is unusual to see snow in this city.', 'Thật khác thường khi thấy tuyết ở thành phố này.'],
+  ['receive', 'I received a letter from my e-pal yesterday.', 'Hôm qua tôi đã nhận được một lá thư từ bạn qua mạng.'],
+  ['adventurous', 'My sister is very adventurous - she loves climbing.', 'Chị tôi rất thích phiêu lưu - chị ấy mê leo núi.'],
+  ['description', 'Write a short description of your hometown.', 'Hãy viết một đoạn mô tả ngắn về quê bạn.'],
+  ['embarrass', "Please don't embarrass me in front of my friends.", 'Xin đừng làm tôi xấu hổ trước mặt bạn bè.'],
+  ['delight', 'To my delight, our team won the cup.', 'Tôi rất vui khi đội của chúng tôi giành cúp.'],
+  ['introduction', 'The introduction of your essay should be short.', 'Phần giới thiệu của bài luận nên ngắn gọn.'],
+  ['spelling', 'Check your spelling before you hand in the test.', 'Hãy kiểm tra chính tả trước khi nộp bài kiểm tra.'],
+  ['category', 'Books in this category are for teenagers.', 'Sách ở hạng mục này dành cho thanh thiếu niên.'],
+  ['statement', 'Do you agree with this statement?', 'Bạn có đồng ý với câu phát biểu này không?'],
+  ['agree / disagree', 'I agree with you, but my brother disagrees.', 'Tôi đồng ý với bạn, nhưng anh tôi thì không đồng ý.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

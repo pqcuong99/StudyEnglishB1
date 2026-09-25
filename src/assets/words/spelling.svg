@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- a word written letter by letter, one wrong and one right -->
+  <rect x="30" y="96" width="290" height="60" rx="8" fill="#FFF" stroke="#EF9A9A" stroke-width="4"/>
+  <text x="175" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#C62828" letter-spacing="6">S C O O L</text>
+  <text x="356" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#C62828">✗</text>
+  <rect x="30" y="176" width="290" height="60" rx="8" fill="#FFF" stroke="#81C784" stroke-width="4"/>
+  <text x="175" y="218" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#2E7D32" letter-spacing="6">S C H O O L</text>
+  <text x="356" y="214" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#2E7D32">✓</text>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#2E7D32">SPELLING</text>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#1B5E20">chính tả – viết đúng từng chữ cái</text>
+</svg>
