@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import FeedbackModal from './FeedbackModal.jsx'
 import { HARD_SHARE, HARD_WRONG_MIN, MASTER_STREAK, shuffle } from '../lib/wordStats.js'
 
 const SYNC_LABEL = {
@@ -49,6 +51,7 @@ export default function Home({
   )
   const unknown = all.total - all.known
   const sync = SYNC_LABEL[syncStatus] || SYNC_LABEL.saved
+  const [showFeedback, setShowFeedback] = useState(false)
 
   return (
     <div className="page">
@@ -66,8 +69,13 @@ export default function Home({
           <button className="btn btn-ghost btn-sm" onClick={onLogout} title="Đăng nhập bằng tên khác">
             Đổi người dùng
           </button>
+          <button className="btn btn-outline btn-sm" onClick={() => setShowFeedback(true)} title="Liên hệ / gửi góp ý">
+            💬 Góp ý
+          </button>
         </div>
       </header>
+
+      {showFeedback && <FeedbackModal userName={userName} onClose={() => setShowFeedback(false)} />}
 
       {notice && <p className="err-note">⚠️ {notice}</p>}
 

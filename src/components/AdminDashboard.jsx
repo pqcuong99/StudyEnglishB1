@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { fetchAdminReport } from '../lib/api.js'
+import { deleteAdminFeedback, fetchAdminFeedback, fetchAdminReport } from '../lib/api.js'
 import { LEVELS } from '../lib/cloze.js'
 import { LISTENING_SETS } from '../data/listening.js'
 import {
@@ -534,8 +534,62 @@ function LearnerTable({ users, today }) {
   )
 }
 
+// Góp ý người dùng gửi từ nút "💬 Góp ý" ở trang chủ — chỉ quản trị viên xem được
+function FeedbackPanel({ items, token, onChanged, onExpired }) {
+  const [busy, setBusy] = useState(null)
+
+  async function remove(f) {
+    if (!confirm(`Xóa góp ý của ${f.name || f.contact}?`)) return
+    setBusy(f.id)
+    try {
+      await deleteAdminFeedback(token, f.id)
+      onChanged(items.filter((x) => x.id !== f.id))
+    } catch (e) {
+      if (e.status === 401) return onExpired()
+      alert('Không xóa được: ' + e.message)
+    }
+    setBusy(null)
+  }
+
+  return (
+    <div className="card">
+      <div className="section-head" style={{ margin: '0 0 10px' }}>
+        <h2>💬 Góp ý ({items.length})</h2>
+        <span className="admin-note">Chỉ quản trị viên xem được</span>
+      </div>
+      {items.length === 0 ? (
+        <p className="empty">Chưa có góp ý nào.</p>
+      ) : (
+        <ul className="feedback-list">
+          {items.map((f) => {
+            const isMail = f.contact.includes('@')
+            return (
+              <li key={f.id} className="feedback-item">
+                <div className="feedback-meta">
+                  <b>👤 {f.name || 'Không tên'}</b>
+                  <a href={isMail ? `mailto:${f.contact}` : `tel:${f.contact.replace(/[ .-]/g, '')}`}>
+                    {isMail ? '✉️' : '📞'} {f.contact}
+                  </a>
+                  <span className="admin-note" title={formatDateTime(f.createdAt)}>
+                    {relativeTime(f.createdAt)}
+                  </span>
+                  <button className="btn btn-ghost btn-sm" disabled={busy === f.id} onClick={() => remove(f)}>
+                    🗑️ Xóa
+                  </button>
+                </div>
+                <p className="feedback-message">{f.message}</p>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 export default function AdminDashboard({ token, onLogout }) {
   const [report, setReport] = useState(null)
+  const [feedback, setFeedback] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -543,7 +597,9 @@ export default function AdminDashboard({ token, onLogout }) {
     setLoading(true)
     setError(null)
     try {
-      setReport(await fetchAdminReport(token))
+      const [r, fb] = await Promise.all([fetchAdminReport(token), fetchAdminFeedback(token)])
+      setReport(r)
+      setFeedback(fb || [])
     } catch (e) {
       if (e.status === 401) {
         onLogout('Phiên quản trị đã hết hạn, hãy đăng nhập lại.')
@@ -622,6 +678,7 @@ export default function AdminDashboard({ token, onLogout }) {
               sub={activeToday.map((u) => u.name).join(', ') || 'chưa có ai'}
             />
             <Kpi icon="📅" label="Học trong 7 ngày qua" value={activeWeek.length} />
+            <Kpi icon="💬" label="Góp ý" value={feedback.length} />
             <Kpi
               icon="✍️"
               label="Câu trả lời hôm nay"
@@ -647,6 +704,13 @@ export default function AdminDashboard({ token, onLogout }) {
           </div>
 
           <Reports users={users} today={today} />
+
+          <FeedbackPanel
+            items={feedback}
+            token={token}
+            onChanged={setFeedback}
+            onExpired={() => onLogout('Phiên quản trị đã hết hạn, hãy đăng nhập lại.')}
+          />
         </>
       )}
     </div>

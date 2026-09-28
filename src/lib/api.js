@@ -53,6 +53,21 @@ export function fetchAdminReport(token) {
   return request('/api/admin/report', { headers: { 'X-Admin-Token': token } })
 }
 
+// góp ý: [{ id, name, contact, message, createdAt }] — mới nhất trước
+export function fetchAdminFeedback(token) {
+  return request('/api/admin/feedback', { headers: { 'X-Admin-Token': token } })
+}
+
+export function deleteAdminFeedback(token, id) {
+  return request(`/api/admin/feedback/${enc(id)}`, { method: 'DELETE', headers: { 'X-Admin-Token': token } })
+}
+
+// ---------- góp ý ----------
+// ai cũng gửi được: { name?, contact (sđt hoặc email), message } -> { ok, id }
+export function sendFeedback(body) {
+  return request('/api/feedback', { method: 'POST', body })
+}
+
 // ---------- người dùng ----------
 // [{ name, updatedAt }] — mới hoạt động xếp trước
 export function listUsers() {

@@ -32,6 +32,11 @@
 //   POST /api/admin/login     -> body { password }  ->  { token, expiresAt } | 401
 //   POST /api/admin/logout    -> header X-Admin-Token
 //   GET  /api/admin/report    -> header X-Admin-Token -> { generatedAt, users: [...] }
+//   GET    /api/admin/feedback      -> header X-Admin-Token -> [góp ý, mới nhất trước]
+//   DELETE /api/admin/feedback/:id  -> header X-Admin-Token -> { ok }
+//
+// Góp ý (ai cũng gửi được, chỉ quản trị viên xem): server/data/feedback.json
+//   POST /api/feedback  body { name?, contact, message } -> { ok, id }
 import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -95,6 +100,53 @@ function adminToken(req) {
     return null
   }
   return t
+}
+
+// ---------- góp ý ----------
+const FEEDBACK_FILE = path.join(DATA_DIR, 'feedback.json')
+const FEEDBACK_MAX = 2000 // ký tự nội dung
+const FEEDBACK_LIMIT = 5 // lần gửi / IP / 10 phút
+const FEEDBACK_WINDOW = 10 * 60 * 1000
+const feedbackHits = new Map() // ip -> [thời điểm gửi]
+
+function readFeedback() {
+  try {
+    return JSON.parse(fs.readFileSync(FEEDBACK_FILE, 'utf8'))
+  } catch {
+    return []
+  }
+}
+
+function writeFeedback(list) {
+  const tmp = FEEDBACK_FILE + '.tmp'
+  fs.writeFileSync(tmp, JSON.stringify(list, null, 2))
+  fs.renameSync(tmp, FEEDBACK_FILE)
+}
+
+const PHONE_RE = /^\+?[0-9 .-]{8,15}$/
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function addFeedback(body, ip) {
+  const now = Date.now()
+  const hits = (feedbackHits.get(ip) || []).filter((t) => now - t < FEEDBACK_WINDOW)
+  if (hits.length >= FEEDBACK_LIMIT) throw fail(429, 'Bạn gửi nhiều quá, hãy thử lại sau ít phút')
+
+  const contact = String(body?.contact ?? '').trim().slice(0, 120)
+  const message = String(body?.message ?? '').trim()
+  const name = String(body?.name ?? '').trim().slice(0, 60)
+  if (!PHONE_RE.test(contact) && !EMAIL_RE.test(contact)) {
+    throw fail(400, 'Hãy nhập số điện thoại hoặc email hợp lệ để mình liên hệ lại')
+  }
+  if (message.length < 3) throw fail(400, 'Hãy nhập nội dung góp ý')
+  if (message.length > FEEDBACK_MAX) throw fail(400, `Góp ý dài tối đa ${FEEDBACK_MAX} ký tự`)
+
+  hits.push(now)
+  feedbackHits.set(ip, hits)
+  const item = { id: crypto.randomBytes(8).toString('hex'), name, contact, message, createdAt: now }
+  const list = readFeedback()
+  list.push(item)
+  writeFeedback(list)
+  return item
 }
 
 // ---------- HTTP ----------
@@ -257,6 +309,15 @@ async function handle(req, res) {
     return
   }
 
+  if (pathname === '/api/feedback' && req.method === 'POST') {
+    const body = await readBody(req)
+    const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '?').split(',')[0].trim()
+    const item = addFeedback(body, ip)
+    log('FEEDBACK', item.name || '?', item.contact)
+    send(res, 200, { ok: true, id: item.id })
+    return
+  }
+
   if (pathname === '/api/admin/login' && req.method === 'POST') {
     const body = await readBody(req)
     if (!passwordMatches(body?.password)) {
@@ -283,6 +344,20 @@ async function handle(req, res) {
     }
     if (pathname === '/api/admin/report' && req.method === 'GET') {
       send(res, 200, store.report())
+      return
+    }
+    if (pathname === '/api/admin/feedback' && req.method === 'GET') {
+      send(res, 200, readFeedback().sort((a, b) => b.createdAt - a.createdAt))
+      return
+    }
+    const fb = pathname.match(/^\/api\/admin\/feedback\/([0-9a-f]+)$/)
+    if (fb && req.method === 'DELETE') {
+      const list = readFeedback()
+      const next = list.filter((f) => f.id !== fb[1])
+      if (next.length === list.length) return notFound(res)
+      writeFeedback(next)
+      log('DEL FEEDBACK', fb[1])
+      send(res, 200, { ok: true })
       return
     }
     notFound(res)
