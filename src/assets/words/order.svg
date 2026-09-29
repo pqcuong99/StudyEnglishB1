@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- phone showing a shopping app with an "ORDER" button -->
+  <rect x="60" y="30" width="140" height="240" rx="20" fill="#263238"/>
+  <rect x="72" y="50" width="116" height="196" rx="6" fill="#FFFFFF"/>
+  <rect x="84" y="62" width="92" height="70" rx="6" fill="#FFCC80"/>
+  <path d="M110 76 L100 82 L92 104 L102 108 L108 96 L108 124 L152 124 L152 96 L158 108 L168 104 L160 82 L150 76 Q130 90 110 76 Z" fill="#EF5350"/>
+  <rect x="84" y="142" width="70" height="8" rx="3" fill="#9E9E9E"/>
+  <text x="84" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32">£19.99</text>
+  <rect x="84" y="192" width="92" height="34" rx="17" fill="#43A047"/>
+  <text x="130" y="215" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">ORDER</text>
+  <!-- tap -->
+  <circle cx="154" cy="210" r="22" fill="none" stroke="#FFB300" stroke-width="3" opacity="0.8"/>
+  <!-- arrow to a delivery box -->
+  <path d="M214 150 H270" stroke="#2E7D32" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 12"/>
+  <path d="M268 138 l16 12 l-16 12 z" fill="#2E7D32"/>
+  <g transform="translate(290 110)">
+    <path d="M0 20 L40 0 L80 20 L40 40 Z" fill="#D7A86E"/>
+    <path d="M0 20 V70 L40 90 V40 Z" fill="#C49358"/>
+    <path d="M80 20 V70 L40 90 V40 Z" fill="#A87B45"/>
+    <path d="M20 10 L60 30 V44" stroke="#F5F5F5" stroke-width="6" fill="none"/>
+  </g>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1B5E20">order</text>
+</svg>

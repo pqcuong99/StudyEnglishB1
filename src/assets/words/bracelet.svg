@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- wrist with a charm bracelet -->
+  <path d="M-10 110 Q120 100 230 118 Q300 110 350 130 Q380 150 350 170 Q300 190 230 182 Q120 200 -10 190 Z" fill="#FFCCBC"/>
+  <path d="M330 136 q30 -6 44 10 q-10 12 -40 12" fill="#FFAB91"/>
+  <!-- bracelet chain -->
+  <ellipse cx="200" cy="150" rx="26" ry="52" fill="none" stroke="#FFC107" stroke-width="10"/>
+  <ellipse cx="200" cy="150" rx="26" ry="52" fill="none" stroke="#FFE082" stroke-width="4" stroke-dasharray="6 6"/>
+  <!-- charms -->
+  <circle cx="176" cy="200" r="10" fill="#E91E63"/>
+  <polygon points="214,196 226,210 214,224 202,210" fill="#29B6F6"/>
+  <path d="M194 230 c-8 -8 -16 0 -8 8 l8 8 l8 -8 c8 -8 0 -16 -8 -8 z" fill="#EF5350"/>
+  <path d="M190 92 v-10 M200 92 v-12 M210 92 v-10" stroke="#FFC107" stroke-width="3" stroke-linecap="round"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F57F17">bracelet</text>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- fabric swatches: cotton, denim, leather, wool -->
+  <g>
+    <rect x="40" y="40" width="150" height="100" rx="8" fill="#FFFFFF" stroke="#BDBDBD" stroke-width="3"/>
+    <path d="M40 70 h150 M40 100 h150 M70 40 v100 M100 40 v100 M130 40 v100 M160 40 v100" stroke="#EEEEEE" stroke-width="3"/>
+    <text x="115" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5D4037">cotton</text>
+  </g>
+  <g>
+    <rect x="210" y="40" width="150" height="100" rx="8" fill="#3F51B5"/>
+    <path d="M210 60 l40 -20 M210 90 l100 -50 M210 120 l150 -75 M250 140 l110 -55 M310 140 l50 -25" stroke="#5C6BC0" stroke-width="4"/>
+    <text x="285" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#5D4037">denim</text>
+  </g>
+  <g>
+    <rect x="40" y="170" width="150" height="70" rx="8" fill="#795548"/>
+    <path d="M52 182 h126 v46 h-126 z" fill="none" stroke="#D7CCC8" stroke-width="2" stroke-dasharray="6 5"/>
+  </g>
+  <g>
+    <rect x="210" y="170" width="150" height="70" rx="8" fill="#E57373"/>
+    <path d="M220 190 q10 -10 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M220 210 q10 -10 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 M220 230 q10 -10 20 0 t20 0 t20 0 t20 0 t20 0 t20 0" fill="none" stroke="#FFCDD2" stroke-width="3"/>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#E65100">material</text>
+</svg>

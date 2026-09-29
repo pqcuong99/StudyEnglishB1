@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <!-- a pair of five-finger gloves -->
+  <g id="g">
+    <path d="M70 250 V200 Q60 170 40 150 Q30 136 44 130 Q58 126 74 150 L84 164 V80 Q84 66 96 66 Q108 66 108 80 V140 V64 Q108 50 120 50 Q132 50 132 64 V140 V70 Q132 56 144 56 Q156 56 156 70 V140 V88 Q156 76 168 76 Q180 76 180 88 V200 Q180 220 170 230 V250 Z" fill="#1976D2"/>
+    <rect x="66" y="236" width="108" height="22" rx="6" fill="#0D47A1"/>
+    <path d="M78 242 v10 M90 242 v10 M102 242 v10 M114 242 v10 M126 242 v10 M138 242 v10 M150 242 v10 M162 242 v10" stroke="#42A5F5" stroke-width="3"/>
+  </g>
+  <g transform="translate(400 0) scale(-1 1)">
+    <path d="M70 250 V200 Q60 170 40 150 Q30 136 44 130 Q58 126 74 150 L84 164 V80 Q84 66 96 66 Q108 66 108 80 V140 V64 Q108 50 120 50 Q132 50 132 64 V140 V70 Q132 56 144 56 Q156 56 156 70 V140 V88 Q156 76 168 76 Q180 76 180 88 V200 Q180 220 170 230 V250 Z" fill="#1E88E5"/>
+    <rect x="66" y="236" width="108" height="22" rx="6" fill="#0D47A1"/>
+    <path d="M78 242 v10 M90 242 v10 M102 242 v10 M114 242 v10 M126 242 v10 M138 242 v10 M150 242 v10 M162 242 v10" stroke="#42A5F5" stroke-width="3"/>
+  </g>
+  <!-- snowflakes -->
+  <g stroke="#90CAF9" stroke-width="3" stroke-linecap="round">
+    <path d="M200 60 v24 M188 72 h24 M191 63 l18 18 M209 63 l-18 18"/>
+    <path d="M200 150 v16 M192 158 h16"/>
+  </g>
+  <text x="200" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0D47A1">gloves</text>
+</svg>

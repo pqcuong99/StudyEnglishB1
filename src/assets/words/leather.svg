@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#EFEBE9"/>
+  <!-- leather hide with stitching, and a leather bag -->
+  <path d="M40 80 Q30 50 60 44 Q100 30 120 50 Q150 30 170 60 Q190 90 176 120 Q196 160 170 200 Q150 230 120 216 Q90 240 60 216 Q30 200 44 160 Q24 120 40 80 Z" fill="#8D6E63"/>
+  <path d="M60 80 Q70 60 100 62 M70 180 Q100 200 140 184" fill="none" stroke="#6D4C41" stroke-width="3"/>
+  <!-- bag -->
+  <path d="M240 110 Q240 60 290 60 Q340 60 340 110" fill="none" stroke="#5D4037" stroke-width="10"/>
+  <rect x="210" y="104" width="160" height="120" rx="14" fill="#6D4C41"/>
+  <rect x="222" y="116" width="136" height="96" rx="10" fill="none" stroke="#D7CCC8" stroke-width="2" stroke-dasharray="6 5"/>
+  <path d="M210 150 H370" stroke="#5D4037" stroke-width="4"/>
+  <rect x="276" y="140" width="28" height="22" rx="4" fill="#FFC107"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4E342E">leather</text>
+</svg>

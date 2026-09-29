@@ -230,6 +230,22 @@ const ROWS = [
   ['category', 'Books in this category are for teenagers.', 'Sách ở hạng mục này dành cho thanh thiếu niên.'],
   ['statement', 'Do you agree with this statement?', 'Bạn có đồng ý với câu phát biểu này không?'],
   ['agree / disagree', 'I agree with you, but my brother disagrees.', 'Tôi đồng ý với bạn, nhưng anh tôi thì không đồng ý.'],
+  // Unit 3 – Phần 1 – Session 11: Listening Part 4 + Speaking Part 4
+  ['sweatshirt', 'I wear a warm sweatshirt when I go jogging.', 'Tôi mặc một chiếc áo nỉ ấm khi đi chạy bộ.'],
+  ['trainers', 'I bought a new pair of trainers for the gym.', 'Tôi đã mua một đôi giày thể thao mới để đi tập gym.'],
+  ['jewellery', 'She keeps her jewellery in a small box.', 'Cô ấy cất đồ trang sức trong một chiếc hộp nhỏ.'],
+  ['material', 'What material is this bag made of?', 'Chiếc túi này được làm bằng chất liệu gì?'],
+  ['range', 'The shop sells a wide range of shoes.', 'Cửa hàng bán rất nhiều loại giày.'],
+  ['magazine', 'I read a fashion magazine on the bus.', 'Tôi đọc một tạp chí thời trang trên xe buýt.'],
+  ['department store', 'You can buy clothes and toys in a department store.', 'Bạn có thể mua quần áo và đồ chơi ở cửa hàng bách hóa.'],
+  ['order', 'I ordered a new jacket online yesterday.', 'Hôm qua tôi đã đặt mua một chiếc áo khoác mới trên mạng.'],
+  ['jumper', 'Put on your jumper. It is cold outside.', 'Mặc áo len vào đi. Bên ngoài trời lạnh.'],
+  ['bracelet', 'My mum gave me a silver bracelet for my birthday.', 'Mẹ tặng tôi một chiếc vòng tay bạc vào ngày sinh nhật.'],
+  ['gloves', 'Wear your gloves or your hands will get cold.', 'Hãy đeo găng tay vào, nếu không tay bạn sẽ bị lạnh.'],
+  ['collar', 'This shirt has a white collar.', 'Chiếc áo sơ mi này có cổ áo màu trắng.'],
+  ['sleeve', 'The sleeves of this jumper are too long.', 'Tay áo của chiếc áo len này quá dài.'],
+  ['leather', 'He wants a pair of leather shoes.', 'Anh ấy muốn một đôi giày da.'],
+  ['wool', 'This scarf is made of wool.', 'Chiếc khăn quàng này được làm bằng len.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

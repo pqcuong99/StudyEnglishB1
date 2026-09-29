@@ -7,6 +7,8 @@
 // với "in" của Vocabulary + Reading Part 5 (kèm vở ghi trên lớp), bảng từ
 // mới tiếp theo (phần 4) và bảng "I/ VOCAB" của Session 9: Writing Part 2 +
 // Speaking Part 3 (phần 5).
+// Unit 3 lấy từ bảng "I/ VOCAB" của Session 11: Listening Part 4 + Speaking
+// Part 4 (phần 1).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -25,7 +27,7 @@
 
 import { TOPICS } from './topicUnits.js'
 
-export const SEED_VERSION = 13
+export const SEED_VERSION = 14
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -287,6 +289,26 @@ const U2_VOCAB5_WORDS = [
   ['agree / disagree', 'v', 'əˈɡriː / ˌdɪs.əˈɡriː', 'đồng ý / không đồng ý'],
 ]
 
+// Unit 3 – bảng "I/ VOCAB", Session 11: Listening Part 4 + Speaking Part 4 (phần 1)
+const U3S11_WORDS = [
+  ['sweatshirt', 'n', 'ˈswet.ʃɜːt', 'áo len/áo nỉ chui đầu'],
+  ['trainers', 'n', 'ˈtreɪ.nəz', 'giày thể thao'],
+  ['jewellery', 'n', 'ˈdʒuː.əl.ri', 'trang sức'],
+  ['material', 'n', 'məˈtɪə.ri.əl', 'chất liệu'],
+  ['range', 'n', 'reɪndʒ', 'loạt, dòng sản phẩm; phạm vi'],
+  ['magazine', 'n', 'ˌmæɡ.əˈziːn', 'tạp chí'],
+  ['department store', 'n', 'dɪˈpɑːt.mənt stɔː(r)', 'cửa hàng bách hóa'],
+  ['order', 'v/n', 'ˈɔː.də(r)', 'đặt hàng; đơn hàng'],
+  ['expensive', 'adj', 'ɪkˈspen.sɪv', 'đắt'],
+  ['jumper', 'n', 'ˈdʒʌm.pə(r)', 'áo len chui đầu'],
+  ['bracelet', 'n', 'ˈbreɪ.slət', 'vòng đeo tay, lắc tay'],
+  ['gloves', 'n', 'ɡlʌvz', 'găng tay'],
+  ['collar', 'n', 'ˈkɒl.ə(r)', 'cổ áo'],
+  ['sleeve', 'n', 'sliːv', 'tay áo, ống tay áo'],
+  ['leather', 'n', 'ˈleð.ə(r)', 'da (thuộc)'],
+  ['wool', 'n', 'wʊl', 'len, sợi len'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -335,6 +357,13 @@ const UNITS = [
       { version: 11, prefix: 'u2v4', seedBase: 1200, section: 'p4', rows: U2_VOCAB4_WORDS },
       { version: 12, prefix: 'u2v5', seedBase: 1300, section: 'p5', rows: U2_VOCAB5_WORDS },
     ],
+  },
+  {
+    id: 'u3',
+    name: 'Unit 3: Let’s Shop',
+    nameMatch: /^\s*unit\s*3\b/i,
+    sections: [{ id: 'p1', name: 'Phần 1 – Session 11: Listening Part 4 + Speaking Part 4' }],
+    groups: [{ version: 14, prefix: 'u3s11', seedBase: 1400, section: 'p1', rows: U3S11_WORDS }],
   },
   ...TOPICS.map(topicUnit),
 ]

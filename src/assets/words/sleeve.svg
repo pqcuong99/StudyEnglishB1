@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- T-shirt body faded, one sleeve highlighted -->
+  <path d="M150 50 L110 64 L120 130 L120 250 L280 250 L280 130 L290 64 L250 50 Q200 80 150 50 Z" fill="#CE93D8" opacity="0.55"/>
+  <path d="M290 64 L250 50 L280 130 L290 64 Z" fill="#CE93D8" opacity="0.55"/>
+  <path d="M290 64 L360 150 L316 180 L280 130 Z" fill="#CE93D8" opacity="0.55"/>
+  <!-- highlighted sleeve -->
+  <path d="M110 64 L40 150 L84 180 L120 130 Z" fill="#8E24AA" stroke="#FF6F00" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M40 150 L84 180 L76 192 L32 162 Z" fill="#6A1B9A" stroke="#FF6F00" stroke-width="5" stroke-linejoin="round"/>
+  <!-- arrow -->
+  <path d="M40 60 Q60 80 70 110" fill="none" stroke="#FF6F00" stroke-width="4" stroke-linecap="round"/>
+  <path d="M58 104 l12 10 l6 -16" fill="none" stroke="#FF6F00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#6A1B9A">sleeve</text>
+</svg>

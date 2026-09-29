@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- shirt close-up with the collar highlighted -->
+  <path d="M60 260 L90 100 L160 70 L200 120 L240 70 L310 100 L340 260 Z" fill="#90CAF9"/>
+  <path d="M200 120 V260" stroke="#64B5F6" stroke-width="4"/>
+  <circle cx="200" cy="160" r="5" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="5" fill="#FFFFFF"/>
+  <circle cx="200" cy="240" r="5" fill="#FFFFFF"/>
+  <!-- collar -->
+  <path d="M160 70 L200 120 L150 132 L132 84 Z" fill="#FFFFFF" stroke="#E53935" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M240 70 L200 120 L250 132 L268 84 Z" fill="#FFFFFF" stroke="#E53935" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M160 70 Q200 56 240 70" fill="none" stroke="#E53935" stroke-width="4"/>
+  <!-- pointer -->
+  <path d="M330 40 Q300 60 272 88" fill="none" stroke="#E53935" stroke-width="4" stroke-linecap="round"/>
+  <path d="M268 74 l4 18 l16 -6" fill="none" stroke="#E53935" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C62828">collar</text>
+</svg>
