@@ -782,6 +782,39 @@ kbd {
   width: 100%;
   height: 240px;
 }
+/* ảnh minh họa bằng emoji (src/lib/emojiImage.js) */
+.img-emoji {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+.word-img-wrap .img-emoji {
+  border-radius: 0;
+}
+.img-emoji.flash-img {
+  height: 240px;
+}
+.img-emoji img,
+.word-img-wrap .img-emoji img {
+  width: auto;
+  height: 62%;
+  max-height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(15, 23, 42, 0.15));
+}
+.img-emoji-native {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+@media (max-width: 520px) {
+  .img-emoji.flash-img {
+    height: 180px;
+  }
+}
 .spinner {
   width: 26px;
   height: 26px;

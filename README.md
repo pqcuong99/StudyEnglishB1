@@ -24,7 +24,12 @@ Rồi mở trình duyệt tại **http://localhost:5173**
      của các unit có sẵn (Unit 1 và Unit 2). Muốn thêm ảnh cho từ mới: nhờ Claude vẽ thêm
      file SVG vào thư mục đó (tên file = từ viết thường, khoảng trắng thành `-`, ví dụ
      `be-keen-on.svg`).
-  3. Pollinations.ai (AI miễn phí, không cần key) cho các từ còn lại.
+  3. **Emoji minh họa** cho 2000 từ theo chủ đề (`src/data/wordEmoji.js`, tra theo chữ của từ),
+     vẽ bằng bộ Twemoji qua CDN jsDelivr (`src/lib/emojiImage.js`) để giống nhau trên mọi máy;
+     CDN lỗi thì dùng emoji của hệ điều hành.
+  4. Pollinations.ai cho các từ còn lại — lưu ý: dịch vụ này giờ trả **402** (bắt trả phí) cho
+     ảnh chưa có trong cache của họ, nên thường chỉ ra nút "Tải lại ảnh"; nên thêm SVG hoặc
+     emoji cho từ mới.
   Bấm 🔄 trên ảnh (trang unit) để tạo ảnh khác.
 - **Học flashcard**: lật thẻ xem nghĩa + phiên âm, nghe phát âm (🔊), tự đánh dấu
   ✅ đã thuộc / ❌ chưa thuộc. Phím tắt: `Space` lật thẻ, `1` chưa thuộc, `2` đã thuộc.
