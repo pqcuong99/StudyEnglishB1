@@ -226,6 +226,55 @@ body {
   font-size: 0.95rem;
 }
 
+/* ---------- từ vựng theo chủ đề ---------- */
+.topic-section {
+  margin-top: 36px;
+  padding-top: 8px;
+  border-top: 2px solid var(--border);
+}
+.topic-summary .progress-bar {
+  margin: 10px 0 12px;
+}
+.topic-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.topic-search {
+  flex: 1 1 240px;
+  width: auto;
+}
+.topic-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.topic-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  margin-top: 14px;
+}
+.topic-card {
+  border-top: 4px solid var(--warning);
+}
+.topic-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.topic-title h3 {
+  margin: 0;
+}
+.topic-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+.topic-en {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 /* ---------- create unit ---------- */
 .field-label {
   display: block;

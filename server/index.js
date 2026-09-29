@@ -15,8 +15,9 @@
 //                                                           mẫu) / nối từ mẫu mới; trả về tổng quan
 //   GET    /api/users/:id                                -> tổng quan { id, name, createdAt,
 //                                                           updatedAt, units: [mục lục] } | 404
-//   GET    /api/users/:id/words[?unknown=1]              -> mọi từ [{ unitId, sectionId, word }]
-//   GET    /api/users/:id/random-test[?n=]               -> đề ngẫu nhiên (ưu tiên từ hay sai)
+//   GET    /api/users/:id/words[?unknown=1][&scope=topics] -> mọi từ [{ unitId, sectionId, word }]
+//          (mặc định chỉ các unit khóa học; scope=topics = chỉ các unit chủ đề)
+//   GET    /api/users/:id/random-test[?n=][&scope=topics] -> đề ngẫu nhiên (ưu tiên từ hay sai)
 //   GET    /api/users/:id/units/:unitId                  -> cả unit kèm từ của mọi phần
 //   PUT    /api/users/:id/units/:unitId  body { name, sections: [{ id, name, words }] } -> tạo / thay
 //   PATCH  /api/users/:id/units/:unitId  body { name }   -> đổi tên
@@ -221,10 +222,11 @@ async function handleUser(req, res, key, seg, url) {
   if (!store.exists(key)) return send(res, 404, { error: 'Chưa có người dùng này' })
 
   if (a === 'words' && seg.length === 1 && m === 'GET') {
-    return send(res, 200, store.allItems(key, { unknownOnly: url.searchParams.get('unknown') === '1' }))
+    const unknownOnly = url.searchParams.get('unknown') === '1'
+    return send(res, 200, store.allItems(key, { unknownOnly, scope: url.searchParams.get('scope') || undefined }))
   }
   if (a === 'random-test' && seg.length === 1 && m === 'GET') {
-    return send(res, 200, store.randomTest(key, url.searchParams.get('n')))
+    return send(res, 200, store.randomTest(key, url.searchParams.get('n'), url.searchParams.get('scope') || undefined))
   }
 
   if (a === 'listening') {

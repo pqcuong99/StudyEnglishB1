@@ -278,8 +278,8 @@ export default function App() {
     return items
   }
 
-  async function loadRandomTest() {
-    const items = await fetchRandomTest(key)
+  async function loadRandomTest(scope) {
+    const items = await fetchRandomTest(key, { scope })
     setStore((st) => mergeItems(st, items))
     return items
   }
@@ -457,19 +457,21 @@ export default function App() {
     setView({ name: 'writing', deck: toDeck(items), pool: toDeck(pool ?? items), title, back: backOf(pool ?? items) })
   }
 
-  // Đề ngẫu nhiên: máy chủ bốc lại cả số câu lẫn từ mỗi lần; `random` đánh dấu để
-  // nút "kiểm tra lại" bốc đề mới thay vì xáo trộn lại đúng bộ từ cũ, `round` để
-  // React dựng lại Quiz với bộ câu hỏi mới.
-  function startRandomTest() {
-    withItems(loadRandomTest, (items) =>
-      setView({
-        name: 'quiz',
-        deck: toDeck(items),
-        pool: toDeck(items),
-        title: `🎲 Kiểm tra ngẫu nhiên (${items.length} từ)`,
-        random: true,
-        round: Date.now(),
-      }),
+  // Đề ngẫu nhiên: máy chủ bốc lại cả số câu lẫn từ mỗi lần; `random` = phạm vi
+  // bốc ('units' | 'topics'), đánh dấu để nút "kiểm tra lại" bốc đề mới thay vì
+  // xáo trộn lại đúng bộ từ cũ, `round` để React dựng lại Quiz với bộ câu hỏi mới.
+  function startRandomTest(scope = 'units') {
+    withItems(
+      () => loadRandomTest(scope),
+      (items) =>
+        setView({
+          name: 'quiz',
+          deck: toDeck(items),
+          pool: toDeck(items),
+          title: `🎲 Kiểm tra ngẫu nhiên${scope === 'topics' ? ' theo chủ đề' : ''} (${items.length} từ)`,
+          random: scope,
+          round: Date.now(),
+        }),
     )
   }
 
@@ -500,7 +502,8 @@ export default function App() {
           onCreate={() => setView({ name: 'create' })}
           onOpenUnit={(unitId) => setView({ name: 'unit', unitId })}
           onOpenSettings={() => setView({ name: 'settings' })}
-          onRandomTest={startRandomTest}
+          onRandomTest={() => startRandomTest('units')}
+          onTopicRandomTest={() => startRandomTest('topics')}
           onStudyUnknown={() =>
             withItems(
               () => loadAll({ unknownOnly: true }),
@@ -567,7 +570,7 @@ export default function App() {
           onExit={exitStudy}
           onStartFlashcards={startFlashcards}
           onStartWriting={startWriting}
-          onRestart={view.random ? startRandomTest : undefined}
+          onRestart={view.random ? () => startRandomTest(view.random) : undefined}
         />
       )}
       {view.name === 'writing' && (

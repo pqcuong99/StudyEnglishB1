@@ -326,7 +326,7 @@ export default function UnitDetail({
 
       {!flat && (
         <div className="section-head">
-          <h2>Cả unit</h2>
+          <h2>{unit.kind === 'topic' ? 'Cả chủ đề' : 'Cả unit'}</h2>
         </div>
       )}
 

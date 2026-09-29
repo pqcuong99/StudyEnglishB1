@@ -20,9 +20,30 @@ export function unitTotals(u) {
   )
 }
 
+const sumTotals = (units) =>
+  units.reduce(
+    (acc, u) => {
+      const t = unitTotals(u)
+      return { total: acc.total + t.total, known: acc.known + t.known, hard: acc.hard + t.hard }
+    },
+    { total: 0, known: 0, hard: 0 },
+  )
+
+const isTopic = (u) => u.kind === 'topic'
+
+// bỏ dấu để ô tìm chủ đề gõ "gia dinh" / "family" đều ra
+const fold = (s) =>
+  s
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/đ/gi, 'd')
+    .toLowerCase()
+
 // Trang chủ chỉ có MỤC LỤC (`units`: tên + số đếm từng phần). Các nút học cần
 // từ thì gọi App tải (onRandomTest, onStudyUnknown, onQuizAll, onWritingAll,
 // onUnitStudy) — `busy` = đang tải, `notice` = lỗi tải gần nhất.
+// Unit chủ đề (`kind: 'topic'`) nằm ở khối riêng "Từ vựng theo chủ đề" bên dưới
+// và không tính vào thống kê / các nút tổng hợp của các unit khóa học.
 export default function Home({
   units,
   userName,
@@ -34,6 +55,7 @@ export default function Home({
   onOpenUnit,
   onOpenSettings,
   onRandomTest,
+  onTopicRandomTest,
   onStudyUnknown,
   onQuizAll,
   onWritingAll,
@@ -42,16 +64,39 @@ export default function Home({
   onStartQuiz,
   onStartWriting,
 }) {
-  const all = units.reduce(
-    (acc, u) => {
-      const t = unitTotals(u)
-      return { total: acc.total + t.total, known: acc.known + t.known, hard: acc.hard + t.hard }
-    },
-    { total: 0, known: 0, hard: 0 },
-  )
+  const courseUnits = units.filter((u) => !isTopic(u))
+  const topics = units.filter(isTopic)
+  const all = sumTotals(courseUnits)
   const unknown = all.total - all.known
   const sync = SYNC_LABEL[syncStatus] || SYNC_LABEL.saved
   const [showFeedback, setShowFeedback] = useState(false)
+
+  // 3 nút học cả unit — dùng chung cho thẻ unit và thẻ chủ đề
+  const studyButtons = (u, t) => (
+    <div className="btn-row" onClick={(e) => e.stopPropagation()}>
+      <button
+        className="btn btn-primary btn-sm"
+        disabled={busy || t.total === 0}
+        onClick={() => onUnitStudy(u.id, (items) => onStartFlashcards(items, `🃏 ${u.name}`))}
+      >
+        🃏 Học
+      </button>
+      <button
+        className="btn btn-outline btn-sm"
+        disabled={busy || t.total < 2}
+        onClick={() => onUnitStudy(u.id, (items) => onStartQuiz(shuffle(items), `📝 ${u.name}`))}
+      >
+        📝 Kiểm tra
+      </button>
+      <button
+        className="btn btn-outline btn-sm"
+        disabled={busy || t.total === 0}
+        onClick={() => onUnitStudy(u.id, (items) => onStartWriting(shuffle(items), `✍️ ${u.name}`))}
+      >
+        ✍️ Viết
+      </button>
+    </div>
+  )
 
   return (
     <div className="page">
@@ -134,7 +179,7 @@ export default function Home({
         </button>
       </div>
 
-      {units.length === 0 ? (
+      {courseUnits.length === 0 ? (
         <div className="empty card">
           <p>
             Chưa có unit nào. Bấm <b>＋ Tạo Unit mới</b> rồi import file từ vựng (PDF) của bạn để
@@ -143,7 +188,7 @@ export default function Home({
         </div>
       ) : (
         <div className="unit-grid">
-          {units.map((u) => {
+          {courseUnits.map((u) => {
             const t = unitTotals(u)
             return (
               <div key={u.id} className="unit-card card" onClick={() => onOpenUnit(u.id)}>
@@ -155,34 +200,123 @@ export default function Home({
                 <div className="progress-bar">
                   <div className="progress-fill" style={{ width: `${t.total ? (t.known / t.total) * 100 : 0}%` }} />
                 </div>
-                <div className="btn-row" onClick={(e) => e.stopPropagation()}>
-                  <button
-                    className="btn btn-primary btn-sm"
-                    disabled={busy || t.total === 0}
-                    onClick={() => onUnitStudy(u.id, (items) => onStartFlashcards(items, `🃏 ${u.name}`))}
-                  >
-                    🃏 Học
-                  </button>
-                  <button
-                    className="btn btn-outline btn-sm"
-                    disabled={busy || t.total < 2}
-                    onClick={() => onUnitStudy(u.id, (items) => onStartQuiz(shuffle(items), `📝 ${u.name}`))}
-                  >
-                    📝 Kiểm tra
-                  </button>
-                  <button
-                    className="btn btn-outline btn-sm"
-                    disabled={busy || t.total === 0}
-                    onClick={() => onUnitStudy(u.id, (items) => onStartWriting(shuffle(items), `✍️ ${u.name}`))}
-                  >
-                    ✍️ Viết
-                  </button>
-                </div>
+                {studyButtons(u, t)}
               </div>
             )
           })}
         </div>
       )}
+
+      {topics.length > 0 && (
+        <TopicSection
+          topics={topics}
+          busy={busy}
+          onOpenUnit={onOpenUnit}
+          onRandomTest={onTopicRandomTest}
+          studyButtons={studyButtons}
+        />
+      )}
     </div>
+  )
+}
+
+const TOPIC_FILTERS = [
+  ['all', 'Tất cả'],
+  ['new', 'Chưa học'],
+  ['learning', 'Đang học'],
+  ['done', 'Đã thuộc hết'],
+]
+
+// Khối "Từ vựng theo chủ đề": mỗi chủ đề là một unit (src/data/topicUnits.js),
+// học / kiểm tra y như unit, có ô tìm và lọc theo tiến độ
+function TopicSection({ topics, busy, onOpenUnit, onRandomTest, studyButtons }) {
+  const [query, setQuery] = useState('')
+  const [filter, setFilter] = useState('all')
+  const all = sumTotals(topics)
+  const q = fold(query.trim())
+  const shown = topics
+    .map((u) => ({ u, t: unitTotals(u) }))
+    .filter(({ u, t }) => {
+      if (q && !fold(u.name).includes(q)) return false
+      if (filter === 'new') return t.known === 0
+      if (filter === 'learning') return t.known > 0 && t.known < t.total
+      if (filter === 'done') return t.total > 0 && t.known === t.total
+      return true
+    })
+
+  return (
+    <section className="topic-section">
+      <div className="section-head">
+        <h2>🗂️ Từ vựng theo chủ đề</h2>
+        <button className="btn btn-primary" disabled={busy || all.total < 2} onClick={onRandomTest}>
+          🎲 Kiểm tra ngẫu nhiên chủ đề
+        </button>
+      </div>
+      <div className="card topic-summary">
+        <div className="stat-row">
+          <span>
+            {topics.length} chủ đề · <b>{all.total}</b> từ · Đã thuộc: <b>{all.known}</b>
+            {all.hard > 0 && (
+              <>
+                {' '}
+                · 🔥 Hay sai: <b>{all.hard}</b>
+              </>
+            )}
+          </span>
+        </div>
+        <div className="progress-bar">
+          <div className="progress-fill" style={{ width: `${all.total ? (all.known / all.total) * 100 : 0}%` }} />
+        </div>
+        <div className="topic-tools">
+          <input
+            className="input topic-search"
+            type="search"
+            placeholder="🔍 Tìm chủ đề (vd: gia đình, food…)"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <div className="topic-filters">
+            {TOPIC_FILTERS.map(([id, label]) => (
+              <button
+                key={id}
+                className={`btn btn-sm ${filter === id ? 'btn-primary' : 'btn-outline'}`}
+                onClick={() => setFilter(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {shown.length === 0 ? (
+        <p className="hint center">Không có chủ đề nào khớp.</p>
+      ) : (
+        <div className="unit-grid topic-grid">
+          {shown.map(({ u, t }) => {
+            const [vi, en] = u.name.split(' – ')
+            return (
+              <div key={u.id} className="unit-card card topic-card" onClick={() => onOpenUnit(u.id)}>
+                <div className="topic-title">
+                  <span className="topic-icon">{u.icon || '📘'}</span>
+                  <div>
+                    <h3>{vi}</h3>
+                    {en && <div className="topic-en">{en}</div>}
+                  </div>
+                </div>
+                <p className="unit-meta">
+                  {t.total} từ · đã thuộc {t.known}/{t.total}
+                  {t.hard > 0 && ` · 🔥 ${t.hard}`}
+                </p>
+                <div className="progress-bar">
+                  <div className="progress-fill" style={{ width: `${t.total ? (t.known / t.total) * 100 : 0}%` }} />
+                </div>
+                {studyButtons(u, t)}
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </section>
   )
 }

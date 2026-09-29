@@ -89,6 +89,14 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Reading Part 5** (12 từ vựng + 5 cụm động từ với "in" + 4 từ ghi trong vở),
   **Phần 4 – Vocab (tiếp)** (23 từ của bảng từ mới tiếp theo) và **Phần 5 – Session 9:
   Writing Part 2 + Speaking Part 3** (14 từ của bảng "I/ VOCAB").
+- **Từ vựng theo chủ đề (🗂️)**: 2000 từ thông dụng chia theo 39 chủ đề (Tính cách, Gia đình,
+  Thức ăn, Du lịch…) lấy từ file `2000_tu_vung_tieng_Anh_theo_chu_de.xlsx`, dữ liệu nằm trong
+  `src/data/topicUnits.js` (chỉ có từ + nghĩa, chưa có loại từ / phiên âm). Mỗi chủ đề là một
+  unit `kind: 'topic'` chia 2 phần ~25 từ, học / kiểm tra y như unit thường. Trang chủ hiển thị
+  riêng ở khối **"Từ vựng theo chủ đề"** bên dưới các Unit (tìm chủ đề không cần gõ dấu, lọc
+  Chưa học / Đang học / Đã thuộc hết, nút 🎲 kiểm tra ngẫu nhiên chỉ trong các chủ đề). Thống kê
+  và các nút tổng hợp ở đầu trang chủ chỉ tính các unit của khóa học (API `words` /
+  `random-test` nhận `?scope=topics` để lấy riêng các chủ đề).
 - **Luyện nghe – Session 3** (Unit 1): 6 bài Listening Part 2 "Being at school" lấy từ
   `Session 3.pptx` (audio ở trang 6, script + câu hỏi ở trang 7–12). File audio gốc được tách
   theo các khoảng lặng 5 giây thành 6 file `src/assets/listening/u1-session3-part2-q1..6.mp3`;

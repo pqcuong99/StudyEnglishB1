@@ -17,9 +17,15 @@
 // Thêm cả một unit mới cũng vậy: thêm vào `UNITS` với nhóm từ mang `version`
 // mới — người dùng cũ chưa có unit đó sẽ được máy chủ tạo cho khi đăng nhập.
 //
+// Ngoài các unit của khóa học còn có 39 "unit chủ đề" (`kind: 'topic'`, dữ
+// liệu ở topicUnits.js): trang chủ hiển thị riêng ở khối "Từ vựng theo chủ đề",
+// thống kê / kiểm tra tổng hợp của các unit không tính các từ này.
+//
 // File này không được import gì của trình duyệt hay Node: server dùng chung.
 
-export const SEED_VERSION = 12
+import { TOPICS } from './topicUnits.js'
+
+export const SEED_VERSION = 13
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -330,7 +336,29 @@ const UNITS = [
       { version: 12, prefix: 'u2v5', seedBase: 1300, section: 'p5', rows: U2_VOCAB5_WORDS },
     ],
   },
+  ...TOPICS.map(topicUnit),
 ]
+
+// Một chủ đề -> unit chủ đề, chia thành các phần khoảng 25-30 từ để học vừa sức
+function topicUnit(t, i) {
+  const parts = Math.ceil(t.rows.length / 30)
+  const size = Math.ceil(t.rows.length / parts)
+  const sections = []
+  const groups = []
+  for (let p = 0; p < parts; p++) {
+    const rows = t.rows.slice(p * size, (p + 1) * size)
+    const from = p * size + 1
+    sections.push({ id: `p${p + 1}`, name: `Phần ${p + 1} (từ ${from}–${from + rows.length - 1})` })
+    groups.push({
+      version: 13,
+      prefix: `${t.id}p${p + 1}`,
+      seedBase: 10000 + i * 100 + p * size,
+      section: `p${p + 1}`,
+      rows: rows.map(([word, meaning]) => [word, '', '', meaning]),
+    })
+  }
+  return { id: t.id, name: `${t.name} – ${t.en}`, kind: 'topic', icon: t.icon, sections, groups }
+}
 
 function buildWords(group) {
   return group.rows.map(([word, pos, ipa, meaning], i) => ({
@@ -350,6 +378,7 @@ export function seedUnits() {
   return UNITS.map((u) => ({
     id: u.id,
     name: u.name,
+    ...(u.kind && { kind: u.kind, icon: u.icon }),
     createdAt: Date.now(),
     seedVersion: SEED_VERSION,
     sections: u.sections.map((s) => ({

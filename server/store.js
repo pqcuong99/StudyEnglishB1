@@ -3,8 +3,9 @@
 //
 //   server/data/users/<tên>-<hash>/
 //     profile.json                    { id, name, createdAt, updatedAt }
-//     units.json                      MỤC LỤC: [{ id, name, createdAt, seedVersion,
+//     units.json                      MỤC LỤC: [{ id, name, createdAt, seedVersion, kind?, icon?,
 //                                       sections: [{ id, name, total, known, hard }] }]
+//                                     (kind = 'topic': unit chủ đề, xem seedUnits.js)
 //     units/<unitId>/<sectionId>.json { words: [{ id, word, pos, ipa, meaning, seed, known, stats? }] }
 //     activity.json                   nhật ký theo ngày (src/lib/activity.js)
 //     listening.json                  tiến độ nghe (src/lib/listeningProgress.js)
@@ -141,6 +142,7 @@ export function createStore({ dataDir, log = () => {} }) {
       sections: [],
     }
     if (unit.seedVersion) entry.seedVersion = unit.seedVersion
+    if (unit.kind) Object.assign(entry, { kind: unit.kind, icon: unit.icon })
     for (const s of unit.sections) {
       writeJson(sectionFile(key, unit.id, s.id), { words: s.words })
       entry.sections.push({ id: s.id, name: s.name, ...sectionSummary(s.words) })
@@ -380,6 +382,8 @@ export function createStore({ dataDir, log = () => {} }) {
       name,
       createdAt: prev?.createdAt || Number(body.createdAt) || Date.now(),
       seedVersion: prev?.seedVersion,
+      kind: prev?.kind,
+      icon: prev?.icon,
       sections,
     })
     touch(key)
@@ -456,10 +460,12 @@ export function createStore({ dataDir, log = () => {} }) {
   }
 
   // Mọi từ của người dùng: [{ unitId, sectionId, word }] (chỉ khi cần học
-  // tổng hợp / bốc đề ngẫu nhiên)
-  function allItems(key, { unknownOnly = false } = {}) {
+  // tổng hợp / bốc đề ngẫu nhiên). `scope`: 'units' = các unit của khóa học
+  // (mặc định, không tính unit chủ đề), 'topics' = chỉ các unit chủ đề
+  function allItems(key, { unknownOnly = false, scope = 'units' } = {}) {
     const out = []
     for (const u of readUnits(key)) {
+      if ((u.kind === 'topic') !== (scope === 'topics')) continue
       for (const s of u.sections) {
         for (const w of readWords(key, u.id, s.id) || []) {
           if (unknownOnly && w.known) continue
@@ -470,8 +476,8 @@ export function createStore({ dataDir, log = () => {} }) {
     return out
   }
 
-  function randomTest(key, n) {
-    const items = allItems(key)
+  function randomTest(key, n, scope) {
+    const items = allItems(key, { scope })
     const size = Math.max(2, Math.min(50, Number(n) || 0))
     return n ? pickRandomTest(items, size, size) : pickRandomTest(items)
   }
@@ -518,7 +524,7 @@ export function createStore({ dataDir, log = () => {} }) {
       key: p.id,
       createdAt: p.createdAt,
       updatedAt: p.updatedAt,
-      units: units.map((u) => ({ id: u.id, name: u.name, sections: u.sections })),
+      units: units.map((u) => ({ id: u.id, name: u.name, kind: u.kind, sections: u.sections })),
       hard,
       correct,
       wrong,

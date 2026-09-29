@@ -95,13 +95,14 @@ export function fetchUnit(key, unitId) {
 }
 
 // mọi từ (hoặc chỉ từ chưa thuộc): [{ unitId, sectionId, word }]
-export function fetchAllItems(key, { unknownOnly = false } = {}) {
-  return request(`${userPath(key)}/words${unknownOnly ? '?unknown=1' : ''}`)
+// `scope`: 'units' (các unit khóa học) | 'topics' (các unit chủ đề)
+export function fetchAllItems(key, { unknownOnly = false, scope = 'units' } = {}) {
+  return request(`${userPath(key)}/words?scope=${scope}${unknownOnly ? '&unknown=1' : ''}`)
 }
 
 // đề kiểm tra ngẫu nhiên 10-15 từ do máy chủ bốc (ưu tiên từ hay sai)
-export function fetchRandomTest(key) {
-  return request(`${userPath(key)}/random-test`)
+export function fetchRandomTest(key, { scope = 'units' } = {}) {
+  return request(`${userPath(key)}/random-test?scope=${scope}`)
 }
 
 export function fetchListening(key) {

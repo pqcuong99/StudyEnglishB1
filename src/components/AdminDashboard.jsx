@@ -37,12 +37,20 @@ const isActive = (t) => !!t && effort(t) > 0
 // ---------- tính toán ----------
 function summarize(u) {
   const { units, listening, activity, correct, wrong } = u
+  // số từ đã thuộc chỉ tính các unit khóa học; unit chủ đề cộng riêng
   let total = 0
   let known = 0
+  let topicTotal = 0
+  let topicKnown = 0
   for (const unit of units) {
     for (const s of unit.sections) {
-      total += s.total
-      known += s.known
+      if (unit.kind === 'topic') {
+        topicTotal += s.total
+        topicKnown += s.known
+      } else {
+        total += s.total
+        known += s.known
+      }
     }
   }
 
@@ -64,6 +72,8 @@ function summarize(u) {
     ...u,
     total,
     known,
+    topicTotal,
+    topicKnown,
     correct,
     wrong,
     answers: correct + wrong,
@@ -306,6 +316,45 @@ function Reports({ users, today }) {
   )
 }
 
+// Từ vựng theo chủ đề: tổng + các chủ đề đã bắt đầu học (39 chủ đề, không liệt kê hết)
+function TopicProgress({ u }) {
+  const started = u.units
+    .filter((unit) => unit.kind === 'topic')
+    .map((unit) => ({
+      id: unit.id,
+      name: unit.name,
+      total: unit.sections.reduce((n, s) => n + s.total, 0),
+      known: unit.sections.reduce((n, s) => n + s.known, 0),
+      hard: unit.sections.reduce((n, s) => n + s.hard, 0),
+    }))
+    .filter((t) => t.known > 0 || t.hard > 0)
+  return (
+    <div className="detail-unit">
+      <h4>🗂️ Từ vựng theo chủ đề</h4>
+      <div className="detail-line">
+        <span>Tất cả chủ đề</span>
+        <b>
+          {u.topicKnown}/{u.topicTotal}
+        </b>
+      </div>
+      <Bar part={u.topicKnown} total={u.topicTotal} />
+      {started.length === 0 ? (
+        <p className="admin-note">Chưa học chủ đề nào.</p>
+      ) : (
+        started.map((t) => (
+          <div key={t.id} className="detail-line detail-section">
+            <span>↳ {t.name}</span>
+            <span>
+              {t.known}/{t.total} ({percent(t.known, t.total)}%)
+              {t.hard > 0 && ` · 🔥 ${t.hard}`}
+            </span>
+          </div>
+        ))
+      )}
+    </div>
+  )
+}
+
 // Chi tiết một người học: từng unit / phần, từ hay sai, bài nghe, 14 ngày gần nhất
 function LearnerDetail({ u, today }) {
   const [showAllHard, setShowAllHard] = useState(false)
@@ -326,7 +375,7 @@ function LearnerDetail({ u, today }) {
       <div className="detail-grid">
         <div>
           <h4>📚 Theo unit</h4>
-          {u.units.map((unit) => {
+          {u.units.filter((unit) => unit.kind !== 'topic').map((unit) => {
             const total = unit.sections.reduce((n, s) => n + s.total, 0)
             const known = unit.sections.reduce((n, s) => n + s.known, 0)
             return (
@@ -351,6 +400,8 @@ function LearnerDetail({ u, today }) {
               </div>
             )
           })}
+
+          {u.topicTotal > 0 && <TopicProgress u={u} />}
 
           <h4>🎧 Luyện nghe</h4>
           {listening.length === 0 ? (
