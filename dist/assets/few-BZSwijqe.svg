@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <rect x="40" y="200" width="320" height="16" rx="6" fill="#8D6E63"/>
+  <rect x="60" y="216" width="14" height="70" fill="#6D4C41"/><rect x="326" y="216" width="14" height="70" fill="#6D4C41"/>
+  <g>
+    <circle cx="150" cy="170" r="28" fill="#EF5350"/><path d="M150 142 q4 -14 12 -18" stroke="#6D4C41" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M152 136 q14 -10 22 2 q-14 8 -22 -2 Z" fill="#66BB6A"/>
+    <circle cx="210" cy="170" r="28" fill="#EF5350"/><path d="M210 142 q4 -14 12 -18" stroke="#6D4C41" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M212 136 q14 -10 22 2 q-14 8 -22 -2 Z" fill="#66BB6A"/>
+    <circle cx="270" cy="170" r="28" fill="#EF5350"/><path d="M270 142 q4 -14 12 -18" stroke="#6D4C41" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M272 136 q14 -10 22 2 q-14 8 -22 -2 Z" fill="#66BB6A"/>
+  </g>
+  <text x="210" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#E65100">a few apples</text>
+  <text x="210" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#8D6E63">1 · 2 · 3</text>
+</svg>

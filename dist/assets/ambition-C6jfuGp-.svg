@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- mountain with a star at the top -->
+  <polygon points="60,260 200,60 340,260" fill="#78909C"/>
+  <polygon points="160,118 200,60 240,118 222,108 200,120 178,108" fill="#ECEFF1"/>
+  <polygon points="200,20 209,42 232,42 214,56 220,78 200,65 180,78 186,56 168,42 191,42" fill="#FFC107"/>
+  <!-- climber -->
+  <circle cx="120" cy="196" r="12" fill="#FFCC80"/>
+  <rect x="112" y="208" width="16" height="30" rx="6" fill="#E53935"/>
+  <path d="M112 236 l-8 20 M128 236 l10 18" stroke="#3E2723" stroke-width="6" stroke-linecap="round"/>
+  <path d="M128 214 l18 -20" stroke="#FFCC80" stroke-width="6" stroke-linecap="round"/>
+  <!-- flag -->
+  <path d="M146 194 v-40" stroke="#5D4037" stroke-width="4"/>
+  <polygon points="146,154 178,164 146,174" fill="#E53935"/>
+  <!-- dreamy thought bubble -->
+  <circle cx="260" cy="130" r="8" fill="#FFF"/>
+  <circle cx="280" cy="112" r="12" fill="#FFF"/>
+  <ellipse cx="320" cy="80" rx="52" ry="34" fill="#FFF"/>
+  <text x="320" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1565C0">my goal</text>
+  <rect y="260" width="400" height="40" fill="#A5D6A7"/>
+  <text x="200" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1B5E20">a strong wish to succeed</text>
+</svg>

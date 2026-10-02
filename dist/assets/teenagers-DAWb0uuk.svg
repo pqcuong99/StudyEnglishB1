@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <!-- three young people with school bags -->
+  <g>
+    <rect x="66" y="150" width="48" height="80" rx="13" fill="#EC407A"/>
+    <circle cx="90" cy="126" r="24" fill="#FFCC80"/>
+    <path d="M66 126 a24 22 0 0 1 48 0 q-6 18 -24 14 q-18 4 -24 -14 Z" fill="#4E342E"/>
+    <circle cx="83" cy="132" r="3" fill="#3E2723"/><circle cx="97" cy="132" r="3" fill="#3E2723"/>
+    <path d="M82 142 q8 8 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M74 230 v44 M106 230 v44" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="176" y="146" width="48" height="84" rx="13" fill="#42A5F5"/>
+    <circle cx="200" cy="120" r="24" fill="#FFCC80"/>
+    <path d="M176 120 a24 19 0 0 1 48 0 Z" fill="#3E2723"/>
+    <circle cx="193" cy="126" r="3" fill="#3E2723"/><circle cx="207" cy="126" r="3" fill="#3E2723"/>
+    <path d="M192 136 q8 8 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M184 230 v44 M216 230 v44" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="286" y="152" width="48" height="78" rx="13" fill="#66BB6A"/>
+    <circle cx="310" cy="128" r="24" fill="#FFCC80"/>
+    <path d="M286 128 a24 19 0 0 1 48 0 Z" fill="#6D4C41"/>
+    <circle cx="303" cy="134" r="3" fill="#3E2723"/><circle cx="317" cy="134" r="3" fill="#3E2723"/>
+    <path d="M302 144 q8 8 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M294 230 v44 M326 230 v44" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <text x="200" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#0277BD">TEENAGERS</text>
+  <text x="200" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#01579B">13 – 19 tuổi</text>
+</svg>

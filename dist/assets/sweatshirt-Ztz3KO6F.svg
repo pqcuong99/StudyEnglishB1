@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- sweatshirt with hood-less round neck, ribbed cuffs and hem -->
+  <path d="M150 50 L110 64 L50 150 L86 172 L120 126 L120 250 L280 250 L280 126 L314 172 L350 150 L290 64 L250 50 Q200 84 150 50 Z" fill="#5C6BC0"/>
+  <path d="M150 50 Q200 84 250 50 Q200 70 150 50 Z" fill="#3949AB"/>
+  <rect x="120" y="236" width="160" height="16" fill="#3949AB"/>
+  <path d="M50 150 L86 172 L78 184 L42 162 Z" fill="#3949AB"/>
+  <path d="M350 150 L314 172 L322 184 L358 162 Z" fill="#3949AB"/>
+  <!-- front pocket -->
+  <path d="M150 190 h100 l12 40 h-124 z" fill="#7986CB"/>
+  <circle cx="200" cy="130" r="22" fill="#FFF" opacity="0.85"/>
+  <text x="200" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#3949AB">B1</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#283593">sweatshirt</text>
+</svg>

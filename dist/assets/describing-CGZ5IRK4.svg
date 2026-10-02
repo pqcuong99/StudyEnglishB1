@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <rect x="30" y="60" width="160" height="120" rx="8" fill="#FFFFFF" stroke="#0277BD" stroke-width="4"/>
+  <rect x="40" y="70" width="140" height="100" fill="#81D4FA"/>
+  <path d="M40 170 l40 -50 30 30 25 -40 45 60 Z" fill="#2E7D32"/>
+  <circle cx="150" cy="95" r="14" fill="#FFEB3B"/>
+  
+  <circle cx="290" cy="110" r="28" fill="#FFCC80"/>
+  <path d="M262 104 a28 28 0 0 1 56 0 Z" fill="#5D4037"/>
+  <circle cx="282" cy="114" r="3.5" fill="#3E2723"/><circle cx="302" cy="114" r="3.5" fill="#3E2723"/>
+  <ellipse cx="292" cy="128" rx="5" ry="7" fill="#3E2723"/>
+  <path d="M260 142 h60 l10 100 h-80 Z" fill="#0288D1"/>
+  <rect x="270" y="242" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="300" y="242" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M260 156 L210 130" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M230 40 q60 -30 100 20 q-20 30 -60 10 Z" fill="#FFFFFF" stroke="#0277BD" stroke-width="3"/>
+  <text x="280" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0277BD">green, sunny...</text>
+  <text x="110" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0277BD">describing</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F1F8E9"/>
+  <!-- many grey apples, one red apple under a magnifier -->
+  <g fill="#B0BEC5">
+    <circle cx="50" cy="80" r="24"/><circle cx="120" cy="80" r="24"/><circle cx="190" cy="60" r="20"/>
+    <circle cx="50" cy="160" r="24"/><circle cx="120" cy="160" r="24"/>
+    <circle cx="50" cy="240" r="24"/><circle cx="120" cy="240" r="24"/><circle cx="190" cy="260" r="20"/>
+  </g>
+  <circle cx="220" cy="160" r="28" fill="#E53935"/>
+  <path d="M220 132 q4 -14 14 -16" stroke="#5D4037" stroke-width="4" fill="none"/>
+  <path d="M226 128 q14 -10 22 0 q-12 8 -22 0 Z" fill="#43A047"/>
+  <circle cx="220" cy="160" r="52" fill="none" stroke="#37474F" stroke-width="8"/>
+  <path d="M258 198 L320 260" stroke="#37474F" stroke-width="16" stroke-linecap="round"/>
+  <text x="320" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#C62828">this one!</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- person talking -->
+  <circle cx="110" cy="130" r="32" fill="#FFCC80"/>
+  <path d="M60 240 q0 -60 50 -60 q50 0 50 60 z" fill="#42A5F5"/>
+  <path d="M96 140 q14 10 28 0" stroke="#5D4037" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="100" cy="124" r="4" fill="#5D4037"/>
+  <circle cx="120" cy="124" r="4" fill="#5D4037"/>
+  <!-- speech bubble being cut -->
+  <path d="M150 60 h110 a14 14 0 0 1 14 14 v40 a14 14 0 0 1 -14 14 h-80 l-20 18 v-18 h-10 a14 14 0 0 1 -14 -14 v-40 a14 14 0 0 1 14 -14 z" fill="#FFF" stroke="#42A5F5" stroke-width="4"/>
+  <text x="212" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#1565C0">bla bla</text>
+  <!-- second person butting in -->
+  <circle cx="300" cy="150" r="32" fill="#FFCC80"/>
+  <path d="M250 260 q0 -60 50 -60 q50 0 50 60 z" fill="#EF5350"/>
+  <ellipse cx="300" cy="164" rx="8" ry="6" fill="#5D4037"/>
+  <circle cx="290" cy="144" r="4" fill="#5D4037"/>
+  <circle cx="310" cy="144" r="4" fill="#5D4037"/>
+  <!-- raised hand -->
+  <rect x="236" y="170" width="16" height="50" rx="8" fill="#FFCC80" transform="rotate(-30 244 195)"/>
+  <!-- loud bubble -->
+  <polygon points="250,40 300,26 330,52 370,44 356,80 384,104 344,110 330,140 302,116 260,124 272,92 240,76" fill="#EF5350"/>
+  <text x="312" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FFF">WAIT!</text>
+  <!-- cut mark -->
+  <path d="M188 128 l40 -48" stroke="#E53935" stroke-width="6" stroke-linecap="round"/>
+  <path d="M188 80 l40 48" stroke="#E53935" stroke-width="6" stroke-linecap="round"/>
+  <text x="200" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#BF360C">stop someone talking</text>
+</svg>

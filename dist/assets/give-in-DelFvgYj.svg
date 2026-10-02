@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- one player waves a white flag -->
+  <rect x="78" y="132" width="44" height="70" rx="12" fill="#43A047"/>
+  <circle cx="100" cy="110" r="22" fill="#FFCC80"/>
+  <path d="M78 108 a22 17.6 0 0 1 44 0 Z" fill="#4E342E"/>
+  <circle cx="93" cy="112" r="2.5" fill="#3E2723"/><circle cx="107" cy="112" r="2.5" fill="#3E2723"/>
+  <path d="M92 120 q8 7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M88 202 v48 M112 202 v48" stroke="#37474F" stroke-width="12" stroke-linecap="round"/>
+  <path d="M78 140 l-16 -34 M122 140 l16 -34" stroke="#FFCC80" stroke-width="9" stroke-linecap="round"/>
+  <rect x="268" y="142" width="44" height="70" rx="12" fill="#78909C"/>
+  <circle cx="290" cy="120" r="22" fill="#FFCC80"/>
+  <path d="M268 118 a22 17.6 0 0 1 44 0 Z" fill="#4E342E"/>
+  <circle cx="283" cy="122" r="2.5" fill="#3E2723"/><circle cx="297" cy="122" r="2.5" fill="#3E2723"/>
+  <path d="M282 134 q8 -7 16 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M278 212 v48 M302 212 v48" stroke="#37474F" stroke-width="12" stroke-linecap="round"/>
+  <path d="M312 150 L336 60" stroke="#5D4037" stroke-width="5" stroke-linecap="round"/>
+  <path d="M336 60 h44 v32 h-44 Z" fill="#FFF" stroke="#B0BEC5" stroke-width="2"/>
+  <text x="100" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">I win!</text>
+  <text x="290" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#546E7A">OK, I give in...</text>
+  <text x="200" y="288" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#37474F">stop trying / accept defeat</text>
+</svg>

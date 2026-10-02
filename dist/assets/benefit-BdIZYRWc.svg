@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <circle cx="110" cy="100" r="28" fill="#FFCC80"/>
+  <path d="M82 94 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <circle cx="102" cy="104" r="3.5" fill="#3E2723"/><circle cx="122" cy="104" r="3.5" fill="#3E2723"/>
+  <path d="M100 114 q12 8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M80 132 h60 l10 100 h-80 Z" fill="#66BB6A"/>
+  <rect x="90" y="232" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="120" y="232" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M80 148 L50 120 M140 148 L170 120" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M280 120 q-20 -26 -38 -6 q-10 16 16 36 l22 22 22 -22 q26 -20 16 -36 q-18 -20 -38 6 Z" fill="#EF5350"/>
+  <g fill="#43A047"><rect x="220" y="40" width="10" height="34" rx="3"/><rect x="208" y="52" width="34" height="10" rx="3"/>
+  <rect x="330" y="50" width="10" height="34" rx="3"/><rect x="318" y="62" width="34" height="10" rx="3"/>
+  <rect x="340" y="200" width="10" height="34" rx="3"/><rect x="328" y="212" width="34" height="10" rx="3"/></g>
+  <rect x="220" y="236" width="80" height="10" rx="4" fill="#546E7A"/>
+  <rect x="208" y="222" width="18" height="38" rx="4" fill="#37474F"/><rect x="294" y="222" width="18" height="38" rx="4" fill="#37474F"/>
+  <text x="280" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">good for you</text>
+</svg>

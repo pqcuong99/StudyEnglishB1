@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- a pair of running shoes -->
+  <g>
+    <path d="M40 200 Q40 140 90 130 L130 120 Q150 150 190 158 L230 168 Q262 176 262 208 L262 214 L40 214 Z" fill="#FFF" stroke="#37474F" stroke-width="4"/>
+    <path d="M36 214 h230 v14 q0 8 -8 8 h-214 q-8 0 -8 -8 z" fill="#FF7043"/>
+    <path d="M90 130 L130 120 Q150 150 190 158 L180 176 Q140 170 110 150 Z" fill="#26C6DA"/>
+    <path d="M118 140 l18 -8 M128 152 l18 -8 M140 162 l18 -8" stroke="#37474F" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60 190 Q120 180 200 196" fill="none" stroke="#26C6DA" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(130 -40)">
+    <path d="M40 200 Q40 140 90 130 L130 120 Q150 150 190 158 L230 168 Q262 176 262 208 L262 214 L40 214 Z" fill="#FAFAFA" stroke="#37474F" stroke-width="4"/>
+    <path d="M36 214 h230 v14 q0 8 -8 8 h-214 q-8 0 -8 -8 z" fill="#FF7043"/>
+    <path d="M90 130 L130 120 Q150 150 190 158 L180 176 Q140 170 110 150 Z" fill="#26C6DA"/>
+    <path d="M118 140 l18 -8 M128 152 l18 -8 M140 162 l18 -8" stroke="#37474F" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60 190 Q120 180 200 196" fill="none" stroke="#26C6DA" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#00838F">trainers</text>
+</svg>

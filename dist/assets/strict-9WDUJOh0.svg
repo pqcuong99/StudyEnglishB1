@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- rules board -->
+  <rect x="230" y="30" width="150" height="120" rx="6" fill="#FFF" stroke="#455A64" stroke-width="4"/>
+  <text x="305" y="62" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#C62828" text-anchor="middle">RULES</text>
+  <path d="M262 84 h98 M262 104 h98 M262 124 h70" stroke="#90A4AE" stroke-width="5" stroke-linecap="round"/>
+  <path d="M244 82 l5 6 8 -12 M244 102 l5 6 8 -12 M244 122 l5 6 8 -12" stroke="#43A047" stroke-width="3" fill="none"/>
+  <!-- stern teacher -->
+  <circle cx="130" cy="90" r="34" fill="#FFCC80"/>
+  <path d="M96 86 a34 34 0 0 1 68 0 Z" fill="#37474F"/>
+  <path d="M108 78 l16 8 M152 78 l-16 8" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="118" cy="94" r="9" fill="none" stroke="#37474F" stroke-width="3"/>
+  <circle cx="142" cy="94" r="9" fill="none" stroke="#37474F" stroke-width="3"/>
+  <path d="M127 94 h6" stroke="#37474F" stroke-width="3"/>
+  <circle cx="118" cy="94" r="3" fill="#3E2723"/><circle cx="142" cy="94" r="3" fill="#3E2723"/>
+  <path d="M116 114 h28" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+  <path d="M94 124 h72 l10 110 h-92 Z" fill="#37474F"/>
+  <path d="M130 124 v30" stroke="#C62828" stroke-width="8"/>
+  <rect x="104" y="234" width="24" height="60" rx="4" fill="#263238"/>
+  <rect x="134" y="234" width="24" height="60" rx="4" fill="#263238"/>
+  <!-- pointing at the rules -->
+  <path d="M166 140 L230 110" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M226 112 L250 100" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+  <!-- holding a ruler -->
+  <path d="M96 140 L60 200" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <g transform="rotate(-60 60 200)">
+    <rect x="20" y="192" width="90" height="18" rx="3" fill="#FFCA28"/>
+    <path d="M30 192 v8 M40 192 v6 M50 192 v8 M60 192 v6 M70 192 v8 M80 192 v6 M90 192 v8 M100 192 v6" stroke="#795548" stroke-width="2"/>
+  </g>
+  <text x="196" y="200" font-family="Arial, sans-serif" font-size="44" font-weight="bold" fill="#C62828">!</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <path id="star5" d="M0 -30 L7.1 -9.7 L28.5 -9.3 L11.4 3.7 L17.6 24.3 L0 12 L-17.6 24.3 L-11.4 3.7 L-28.5 -9.3 L-7.1 -9.7 Z"/>
+  </defs>
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- ribbon -->
+  <path d="M150 -10 L200 140" stroke="#E53935" stroke-width="34"/>
+  <path d="M250 -10 L200 140" stroke="#1E88E5" stroke-width="34"/>
+  <path d="M170 -10 L206 100" stroke="#FFF" stroke-width="6" opacity="0.6"/>
+  <path d="M230 -10 L194 100" stroke="#FFF" stroke-width="6" opacity="0.6"/>
+  <circle cx="200" cy="138" r="11" fill="none" stroke="#FFA000" stroke-width="7"/>
+  <!-- medal -->
+  <circle cx="200" cy="204" r="70" fill="#FFB300"/>
+  <circle cx="200" cy="204" r="56" fill="#FFD54F" stroke="#FFA000" stroke-width="4"/>
+  <use href="#star5" transform="translate(200 206) scale(1.3)" fill="#FFA000"/>
+  <path d="M172 174 a40 40 0 0 1 20 -14" stroke="#FFF9C4" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- sparkles -->
+  <path d="M90 90 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#FFD54F"/>
+  <path d="M310 110 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#FFD54F"/>
+  <path d="M320 230 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="#FFB300"/>
+  <path d="M70 220 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="#FFB300"/>
+</svg>

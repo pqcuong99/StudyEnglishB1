@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <rect y="230" width="400" height="70" fill="#FFE0B2"/>
+  <!-- checklist -->
+  <rect x="40" y="40" width="150" height="190" rx="8" fill="#FFF" stroke="#90A4AE" stroke-width="4"/>
+  <rect x="90" y="28" width="50" height="24" rx="6" fill="#5C6BC0"/>
+  <g stroke="#43A047" stroke-width="4" fill="none">
+    <rect x="58" y="72" width="20" height="20" rx="3"/>
+    <rect x="58" y="112" width="20" height="20" rx="3"/>
+    <rect x="58" y="152" width="20" height="20" rx="3" stroke="#90A4AE"/>
+    <rect x="58" y="192" width="20" height="20" rx="3" stroke="#90A4AE"/>
+    <path d="M62 82 l6 6 12 -14 M62 122 l6 6 12 -14"/>
+  </g>
+  <path d="M90 82 h80 M90 122 h70 M90 162 h80 M90 202 h60" stroke="#B0BEC5" stroke-width="5" stroke-linecap="round"/>
+  <!-- backpack -->
+  <rect x="230" y="110" width="110" height="130" rx="24" fill="#EF5350"/>
+  <rect x="250" y="170" width="70" height="50" rx="10" fill="#C62828"/>
+  <path d="M260 110 v-20 a25 25 0 0 1 50 0 v20" stroke="#B71C1C" stroke-width="10" fill="none"/>
+  <rect x="240" y="126" width="90" height="10" rx="5" fill="#B71C1C"/>
+  <!-- books -->
+  <rect x="330" y="200" width="60" height="14" fill="#42A5F5"/>
+  <rect x="336" y="186" width="54" height="14" fill="#66BB6A"/>
+  <rect x="332" y="172" width="58" height="14" fill="#FFCA28"/>
+  <!-- pencil -->
+  <path d="M220 60 L300 60" stroke="#FFCA28" stroke-width="12"/>
+  <path d="M300 54 l14 6 -14 6 Z" fill="#FFCC80"/>
+  <path d="M310 58 l4 2 -4 2 Z" fill="#212121"/>
+  <rect x="214" y="54" width="10" height="12" fill="#F48FB1"/>
+  <!-- alarm clock -->
+  <circle cx="350" cy="60" r="28" fill="#FFF" stroke="#37474F" stroke-width="5"/>
+  <path d="M350 60 v-16 M350 60 l10 8" stroke="#37474F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M330 34 l-10 -8 M370 34 l10 -8" stroke="#37474F" stroke-width="5" stroke-linecap="round"/>
+</svg>

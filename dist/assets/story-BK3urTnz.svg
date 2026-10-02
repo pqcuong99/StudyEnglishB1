@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <path d="M200 252 Q110 230 74 244 L74 148 Q130 132 200 154 Z" fill="#FFFFFF"/>
+  <path d="M200 252 Q290 230 326 244 L326 148 Q270 132 200 154 Z" fill="#F5F5F5"/>
+  <path d="M200 154 L200 252" stroke="#C5CAE9" stroke-width="3"/>
+  <path d="M92 166 q44 -10 88 4 M92 186 q44 -10 88 4 M92 206 q34 -8 66 0 M220 170 q44 -14 86 -6 M220 190 q44 -14 86 -6 M220 210 q34 -10 64 -4" stroke="#C5CAE9" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M148 118 a52 40 0 1 1 84 8 L252 150 L216 138 a52 40 0 0 1 -68 -20 Z" fill="#7986CB"/>
+  <path d="M182 82 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#FFF59D"/>
+  <circle cx="222" cy="96" r="12" fill="#FFF59D"/>
+  <path d="M217 88 a12 12 0 1 0 14 15 a10 10 0 0 1 -14 -15" fill="#7986CB"/>
+  <path d="M110 84 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5 Z" fill="#FFD54F"/>
+  <path d="M296 66 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5 Z" fill="#FFD54F"/>
+  <path d="M322 108 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="#F48FB1"/>
+</svg>

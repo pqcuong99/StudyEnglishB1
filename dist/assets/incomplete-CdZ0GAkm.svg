@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- puzzle with a missing piece -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="90" height="90" fill="#7E57C2"/>
+    <rect x="90" y="0" width="90" height="90" fill="#9575CD"/>
+    <rect x="0" y="90" width="90" height="90" fill="#9575CD"/>
+    <!-- missing bottom-right piece drawn as dashed outline -->
+    <rect x="90" y="90" width="90" height="90" fill="none" stroke="#B39DDB" stroke-width="4" stroke-dasharray="10 8"/>
+    <circle cx="90" cy="45" r="14" fill="#9575CD"/>
+    <circle cx="45" cy="90" r="14" fill="#7E57C2"/>
+    <circle cx="135" cy="90" r="14" fill="#9575CD"/>
+    <circle cx="90" cy="135" r="14" fill="#9575CD"/>
+    <text x="135" y="142" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#B39DDB">?</text>
+  </g>
+  <!-- progress bar not full -->
+  <rect x="270" y="80" width="100" height="24" rx="12" fill="#FFF" stroke="#7E57C2" stroke-width="3"/>
+  <rect x="273" y="83" width="60" height="18" rx="9" fill="#7E57C2"/>
+  <text x="320" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#4527A0">60%</text>
+  <!-- unfinished checklist -->
+  <g font-family="Arial, sans-serif" font-size="16" fill="#4527A0">
+    <rect x="272" y="160" width="18" height="18" rx="3" fill="#FFF" stroke="#4527A0" stroke-width="2"/>
+    <path d="M276 169 l5 5 l8 -10" stroke="#43A047" stroke-width="3" fill="none"/>
+    <text x="298" y="175">done</text>
+    <rect x="272" y="190" width="18" height="18" rx="3" fill="#FFF" stroke="#4527A0" stroke-width="2"/>
+    <text x="298" y="205">not yet</text>
+  </g>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4527A0">not finished</text>
+</svg>

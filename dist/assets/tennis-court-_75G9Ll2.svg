@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <rect x="60" y="40" width="280" height="220" fill="#4CAF50" stroke="#FFF" stroke-width="4"/>
+  <path d="M88 40 V260 M312 40 V260 M88 100 H312 M88 200 H312 M200 100 V200" stroke="#FFF" stroke-width="3"/>
+  <rect x="52" y="146" width="296" height="8" fill="#ECEFF1"/>
+  <path d="M60 146 V154 M80 146 V154 M100 146 V154 M120 146 V154 M140 146 V154 M160 146 V154 M180 146 V154 M200 146 V154 M220 146 V154 M240 146 V154 M260 146 V154 M280 146 V154 M300 146 V154 M320 146 V154 M340 146 V154" stroke="#90A4AE" stroke-width="1.5"/>
+  <circle cx="52" cy="150" r="5" fill="#37474F"/>
+  <circle cx="348" cy="150" r="5" fill="#37474F"/>
+  <ellipse cx="120" cy="212" rx="18" ry="22" fill="#FFF" stroke="#EF5350" stroke-width="5"/>
+  <path d="M108 200 H132 M108 212 H132 M108 224 H132 M112 194 V230 M120 192 V232 M128 194 V230" stroke="#B0BEC5" stroke-width="1.5"/>
+  <path d="M120 234 V264" stroke="#8D6E63" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="262" cy="222" r="13" fill="#D4E157" stroke="#AFB42B" stroke-width="2"/>
+  <path d="M252 215 q10 7 20 0 M252 229 q10 -7 20 0" stroke="#FFF" stroke-width="2" fill="none"/>
+</svg>

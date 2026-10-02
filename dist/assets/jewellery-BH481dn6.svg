@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FCE4EC"/>
+  <!-- open jewellery box -->
+  <path d="M90 150 L110 60 H290 L310 150 Z" fill="#AD1457"/>
+  <path d="M104 146 L120 72 H280 L296 146 Z" fill="#F8BBD0"/>
+  <rect x="80" y="150" width="240" height="100" rx="8" fill="#C2185B"/>
+  <rect x="96" y="160" width="208" height="36" rx="6" fill="#880E4F"/>
+  <circle cx="200" cy="222" r="8" fill="#FFD54F"/>
+  <!-- pearl necklace spilling out -->
+  <g fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1">
+    <circle cx="112" cy="178" r="7"/><circle cx="128" cy="186" r="7"/><circle cx="146" cy="190" r="7"/>
+    <circle cx="164" cy="190" r="7"/><circle cx="182" cy="186" r="7"/><circle cx="198" cy="178" r="7"/>
+  </g>
+  <!-- ring -->
+  <circle cx="250" cy="178" r="14" fill="none" stroke="#FFC107" stroke-width="6"/>
+  <polygon points="250,150 260,160 250,168 240,160" fill="#81D4FA"/>
+  <!-- earrings -->
+  <circle cx="150" cy="104" r="8" fill="#FFC107"/><polygon points="150,112 158,130 142,130" fill="#4FC3F7"/>
+  <circle cx="250" cy="104" r="8" fill="#FFC107"/><polygon points="250,112 258,130 242,130" fill="#4FC3F7"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#880E4F">jewellery</text>
+</svg>

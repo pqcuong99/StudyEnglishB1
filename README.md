@@ -23,8 +23,11 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   2. Bộ **ảnh SVG vẽ sẵn** đóng gói trong app (`src/assets/words/`) — hiện có đủ cho mọi từ
      của các unit có sẵn (Unit 1 và Unit 2). Muốn thêm ảnh cho từ mới: nhờ Claude vẽ thêm
      file SVG vào thư mục đó (tên file = từ viết thường, khoảng trắng thành `-`, ví dụ
-     `be-keen-on.svg`).
-  3. **Emoji minh họa** cho 2000 từ theo chủ đề (`src/data/wordEmoji.js`, tra theo chữ của từ),
+     `be-keen-on.svg`). Từ theo chủ đề dùng **ảnh AI tạo sẵn** (`src/assets/topics/*.webp`,
+     cùng cách đặt tên), tạo bằng Pollinations.ai từ một câu mô tả cảnh tiếng Anh cho từng từ,
+     gọi chậm khoảng 1 ảnh/phút (gọi nhanh hơn bị trả 402 nhiều hơn), cắt bỏ dải logo phía dưới.
+     Ảnh luôn là file riêng (`assetsInlineLimit` trong `vite.config.js`) để không làm nặng JS.
+  3. **Emoji minh họa** cho từ theo chủ đề chưa có ảnh (`src/data/wordEmoji.js`, tra theo chữ của từ),
      vẽ bằng bộ Twemoji qua CDN jsDelivr (`src/lib/emojiImage.js`) để giống nhau trên mọi máy;
      CDN lỗi thì dùng emoji của hệ điều hành.
   4. Pollinations.ai cho các từ còn lại — lưu ý: dịch vụ này giờ trả **402** (bắt trả phí) cho

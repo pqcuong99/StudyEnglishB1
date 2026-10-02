@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <path id="star5" d="M0 -30 L7.1 -9.7 L28.5 -9.3 L11.4 3.7 L17.6 24.3 L0 12 L-17.6 24.3 L-11.4 3.7 L-28.5 -9.3 L-7.1 -9.7 Z"/>
+  </defs>
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <use href="#star5" transform="translate(70 186) scale(0.7)" fill="#B0BEC5"/>
+  <use href="#star5" transform="translate(130 178) scale(0.7)" fill="#B0BEC5"/>
+  <use href="#star5" transform="translate(270 178) scale(0.7)" fill="#B0BEC5"/>
+  <use href="#star5" transform="translate(330 186) scale(0.7)" fill="#B0BEC5"/>
+  <circle cx="200" cy="156" r="58" fill="#FFF59D" opacity="0.7"/>
+  <use href="#star5" transform="translate(200 158) scale(1.6)" fill="#FFD54F" stroke="#FBC02D" stroke-width="2"/>
+  <path d="M256 96 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#FFB300"/>
+  <path d="M146 100 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="#FFB300"/>
+  <path d="M200 30 V72" stroke="#EF5350" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="184,68 200,90 216,68" fill="#EF5350"/>
+</svg>

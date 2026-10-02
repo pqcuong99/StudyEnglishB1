@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <rect y="236" width="400" height="64" fill="#A1887F"/>
+  <!-- pots -->
+  <g fill="#E64A19">
+    <path d="M40 200 h50 l-6 40 h-38 Z"/>
+    <path d="M120 200 h50 l-6 40 h-38 Z"/>
+    <path d="M200 200 h50 l-6 40 h-38 Z"/>
+    <path d="M280 200 h50 l-6 40 h-38 Z"/>
+  </g>
+  <g fill="#BF360C">
+    <rect x="36" y="194" width="58" height="10" rx="3"/>
+    <rect x="116" y="194" width="58" height="10" rx="3"/>
+    <rect x="196" y="194" width="58" height="10" rx="3"/>
+    <rect x="276" y="194" width="58" height="10" rx="3"/>
+  </g>
+  <!-- stage 1: seed -->
+  <ellipse cx="65" cy="192" rx="8" ry="5" fill="#795548"/>
+  <!-- stage 2: sprout -->
+  <path d="M145 194 v-24" stroke="#43A047" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="136" cy="168" rx="10" ry="5" fill="#66BB6A" transform="rotate(-30 136 168)"/>
+  <ellipse cx="154" cy="168" rx="10" ry="5" fill="#66BB6A" transform="rotate(30 154 168)"/>
+  <!-- stage 3: small plant -->
+  <path d="M225 194 v-60" stroke="#43A047" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="212" cy="160" rx="14" ry="7" fill="#66BB6A" transform="rotate(-35 212 160)"/>
+  <ellipse cx="238" cy="150" rx="14" ry="7" fill="#66BB6A" transform="rotate(35 238 150)"/>
+  <ellipse cx="214" cy="140" rx="12" ry="6" fill="#81C784" transform="rotate(-35 214 140)"/>
+  <!-- stage 4: tree -->
+  <path d="M305 194 v-90" stroke="#5D4037" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="305" cy="90" r="34" fill="#43A047"/>
+  <circle cx="280" cy="110" r="24" fill="#66BB6A"/>
+  <circle cx="330" cy="110" r="24" fill="#66BB6A"/>
+  <circle cx="305" cy="70" r="22" fill="#81C784"/>
+  <circle cx="292" cy="98" r="5" fill="#EF5350"/><circle cx="322" cy="92" r="5" fill="#EF5350"/><circle cx="310" cy="118" r="5" fill="#EF5350"/>
+  <!-- growth arrow -->
+  <path d="M40 150 Q150 130 250 90 T360 40" stroke="#1E88E5" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="10 8"/>
+  <path d="M362 30 l6 22 l-22 -4 Z" fill="#1E88E5"/>
+  <!-- sun -->
+  <circle cx="50" cy="50" r="22" fill="#FFCA28"/>
+  <g stroke="#FFCA28" stroke-width="4" stroke-linecap="round">
+    <path d="M50 18 v-8 M50 82 v8 M18 50 h-8 M82 50 h8 M27 27 l-6 -6 M73 73 l6 6 M73 27 l6 -6 M27 73 l-6 6"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- a picture on the left described by words on the right -->
+  <rect x="26" y="90" width="150" height="150" rx="8" fill="#FFF" stroke="#64B5F6" stroke-width="4"/>
+  <circle cx="64" cy="128" r="14" fill="#FFD54F"/>
+  <path d="M30 216 l40 -52 l30 34 l26 -26 l46 44 Z" fill="#81C784"/>
+  <rect x="112" y="166" width="34" height="50" fill="#EF9A9A" stroke="#C62828" stroke-width="3"/>
+  <path d="M110 166 l17 -18 l19 18 Z" fill="#C62828"/>
+  <path d="M188 160 h26" stroke="#1565C0" stroke-width="5"/>
+  <path d="M214 160 l-12 -9 v18 Z" fill="#1565C0"/>
+  <rect x="224" y="90" width="150" height="150" rx="8" fill="#FFF" stroke="#64B5F6" stroke-width="4"/>
+  <path d="M244 122 h110 M244 148 h110 M244 174 h110 M244 200 h74" stroke="#90A4AE" stroke-width="7" stroke-linecap="round"/>
+  <text x="200" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#1565C0">DESCRIPTION</text>
+  <text x="200" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#1976D2">tả lại bằng lời: sự mô tả</text>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#1976D2">describe (v) → description (n)</text>
+</svg>

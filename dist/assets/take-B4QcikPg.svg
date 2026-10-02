@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <rect y="240" width="400" height="60" fill="#D7CCC8"/>
+  <!-- fruit bowl -->
+  <path d="M60 200 h200 q0 44 -100 44 q-100 0 -100 -44 Z" fill="#5C6BC0"/>
+  <circle cx="110" cy="188" r="22" fill="#FFA726"/>
+  <circle cx="160" cy="184" r="24" fill="#EF5350"/>
+  <circle cx="212" cy="188" r="22" fill="#66BB6A"/>
+  <ellipse cx="160" cy="200" rx="100" ry="14" fill="#7986CB"/>
+  <!-- arm from top right -->
+  <path d="M400 40 L300 110" stroke="#FFCC80" stroke-width="30" stroke-linecap="round"/>
+  <path d="M400 40 L340 82" stroke="#42A5F5" stroke-width="40" stroke-linecap="round"/>
+  <!-- apple being taken -->
+  <circle cx="272" cy="126" r="30" fill="#E53935"/>
+  <path d="M272 98 q4 -12 12 -14" stroke="#6D4C41" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M274 96 q14 -12 24 -2 q-12 8 -24 2 Z" fill="#43A047"/>
+  <path d="M262 110 q-6 8 -4 16" stroke="#FFCDD2" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M300 110 L262 100 M302 118 L250 124 M300 128 L258 148" stroke="#FFCC80" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <!-- lift arrow -->
+  <path d="M230 90 v-50" stroke="#43A047" stroke-width="7" stroke-linecap="round"/>
+  <path d="M216 50 L230 28 L244 50 Z" fill="#43A047"/>
+</svg>

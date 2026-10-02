@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- one person alone on the left, a group on the right -->
+  <rect x="58" y="152" width="50" height="80" rx="13" fill="#8E24AA"/>
+  <circle cx="83" cy="126" r="25" fill="#FFCC80"/>
+  <path d="M58 124 a25 20 0 0 1 50 0 Z" fill="#4E342E"/>
+  <circle cx="75" cy="132" r="3" fill="#3E2723"/><circle cx="91" cy="132" r="3" fill="#3E2723"/>
+  <path d="M74 144 q9 8 18 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M58 164 l-20 32 M108 164 l20 32" stroke="#FFCC80" stroke-width="10" stroke-linecap="round"/>
+  <path d="M68 232 v42 M98 232 v42" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  <path d="M170 92 V274" stroke="#CE93D8" stroke-width="4" stroke-dasharray="12 10"/>
+  <g fill="#B39DDB">
+    <circle cx="228" cy="142" r="22"/><rect x="206" y="168" width="44" height="70" rx="12"/>
+    <circle cx="290" cy="142" r="22"/><rect x="268" y="168" width="44" height="70" rx="12"/>
+    <circle cx="352" cy="142" r="22"/><rect x="332" y="168" width="40" height="70" rx="12"/>
+  </g>
+  <g stroke="#37474F" stroke-width="12" stroke-linecap="round">
+    <path d="M216 238 v36 M240 238 v36 M278 238 v36 M302 238 v36 M342 238 v36 M362 238 v36"/>
+  </g>
+  <text x="83" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#6A1B9A">INDIVIDUAL</text>
+  <text x="83" y="66" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#7B1FA2">một người / cá nhân</text>
+  <text x="285" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#9575CD">GROUP</text>
+  <text x="285" y="66" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#9575CD">cả nhóm</text>
+</svg>

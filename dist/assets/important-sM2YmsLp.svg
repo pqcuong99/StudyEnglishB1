@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFEBEE"/>
+  <!-- warning sign with a big "!" -->
+  <path d="M200 30 L360 270 H40 Z" fill="#FFCA28" stroke="#F57F17" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="188" y="100" width="24" height="100" rx="12" fill="#C62828"/>
+  <circle cx="200" cy="232" r="15" fill="#C62828"/>
+  <path d="M60 50 l6 14 15 1 -12 9 4 15 -13 -8 -13 8 4 -15 -12 -9 15 -1 Z" fill="#E53935"/>
+  <path d="M340 50 l6 14 15 1 -12 9 4 15 -13 -8 -13 8 4 -15 -12 -9 15 -1 Z" fill="#E53935"/>
+</svg>

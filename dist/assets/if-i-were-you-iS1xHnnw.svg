@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  
+  <circle cx="120" cy="130" r="28" fill="#FFCC80"/>
+  <path d="M92 124 a28 28 0 0 1 56 0 Z" fill="#5D4037"/>
+  <circle cx="112" cy="134" r="3.5" fill="#3E2723"/><circle cx="132" cy="134" r="3.5" fill="#3E2723"/>
+  <path d="M110 146 q12 8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M90 162 h60 l10 100 h-80 Z" fill="#3949AB"/>
+  <rect x="100" y="262" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="130" y="262" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M150 176 L190 160" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  
+  <circle cx="290" cy="130" r="28" fill="#FFCC80"/>
+  <path d="M262 124 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <circle cx="282" cy="134" r="3.5" fill="#3E2723"/><circle cx="302" cy="134" r="3.5" fill="#3E2723"/>
+  <path d="M282 152 q10 -6 20 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M260 162 h60 l10 100 h-80 Z" fill="#8E24AA"/>
+  <rect x="270" y="262" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="300" y="262" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M60 30 h190 a10 10 0 0 1 10 10 v40 a10 10 0 0 1 -10 10 h-120 l-20 18 v-18 h-50 a10 10 0 0 1 -10 -10 v-40 a10 10 0 0 1 10 -10 Z" fill="#FFFFFF" stroke="#3949AB" stroke-width="3"/>
+  <text x="155" y="55" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#3949AB">If I were you,</text>
+  <text x="155" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#3949AB">I'd take the job.</text>
+  <circle cx="330" cy="60" r="18" fill="#FFF59D" stroke="#FBC02D" stroke-width="3"/>
+  <rect x="324" y="78" width="12" height="8" fill="#FBC02D"/>
+</svg>

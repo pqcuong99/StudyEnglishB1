@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- rain cloud -->
+  <ellipse cx="320" cy="60" rx="52" ry="26" fill="#90A4AE"/>
+  <circle cx="296" cy="50" r="24" fill="#90A4AE"/>
+  <circle cx="334" cy="42" r="28" fill="#90A4AE"/>
+  <g stroke="#64B5F6" stroke-width="4" stroke-linecap="round">
+    <path d="M290 96 l-6 16 M316 100 l-6 16 M342 96 l-6 16"/>
+  </g>
+  <!-- sad face with thumbs down -->
+  <circle cx="150" cy="140" r="80" fill="#B0BEC5"/>
+  <circle cx="122" cy="122" r="8" fill="#37474F"/>
+  <circle cx="178" cy="122" r="8" fill="#37474F"/>
+  <path d="M108 178 q42 -36 84 0" stroke="#37474F" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M108 104 l24 10 M192 104 l-24 10" stroke="#37474F" stroke-width="6" stroke-linecap="round"/>
+  <!-- thumbs down -->
+  <g transform="translate(270 200) scale(1 -1)">
+    <rect x="0" y="40" width="26" height="60" rx="6" fill="#E53935"/>
+    <path d="M30 100 h50 q14 0 14 -14 v-36 q0 -14 -14 -14 h-28 l8 -26 q4 -14 -8 -16 q-8 -2 -12 8 l-16 34 z" fill="#EF5350"/>
+  </g>
+  <!-- minus sign -->
+  <rect x="40" y="42" width="40" height="12" rx="4" fill="#E53935"/>
+  <text x="200" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#C62828">bad &amp; unhappy</text>
+</svg>

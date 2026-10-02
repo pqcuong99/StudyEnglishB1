@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- a factory machine making shirts on a belt -->
+  <rect x="30" y="80" width="140" height="120" rx="8" fill="#78909C"/>
+  <rect x="52" y="104" width="44" height="40" rx="4" fill="#CFD8DC"/>
+  <circle cx="134" cy="124" r="18" fill="#EF5350"/>
+  <path d="M60 80 V40 h26 V80 M110 80 V30 h26 V80" fill="#90A4AE"/>
+  <circle cx="73" cy="26" r="10" fill="#CFD8DC"/><circle cx="90" cy="14" r="8" fill="#E1E6E8"/>
+  <circle cx="123" cy="16" r="10" fill="#CFD8DC"/>
+  <rect x="30" y="212" width="340" height="26" rx="13" fill="#455A64"/>
+  <circle cx="60" cy="225" r="8" fill="#B0BEC5"/><circle cx="160" cy="225" r="8" fill="#B0BEC5"/>
+  <circle cx="260" cy="225" r="8" fill="#B0BEC5"/><circle cx="345" cy="225" r="8" fill="#B0BEC5"/>
+  <g fill="#42A5F5">
+    <path d="M196 208 v-44 l14 -10 h28 l14 10 v44 Z"/>
+    <path d="M196 164 l-14 10 l10 12 l12 -10 Z"/>
+    <path d="M252 164 l14 10 l-10 12 l-12 -10 Z"/>
+  </g>
+  <g fill="#66BB6A">
+    <path d="M300 208 v-44 l14 -10 h28 l14 10 v44 Z"/>
+    <path d="M300 164 l-14 10 l10 12 l12 -10 Z"/>
+    <path d="M356 164 l14 10 l-10 12 l-12 -10 Z"/>
+  </g>
+  <path d="M176 190 h16" stroke="#37474F" stroke-width="4"/>
+  <path d="M192 190 l-10 -7 v14 Z" fill="#37474F"/>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#37474F">PRODUCE = sản xuất</text>
+</svg>

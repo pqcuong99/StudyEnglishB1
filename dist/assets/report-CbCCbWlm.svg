@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- a report with a bar chart -->
+  <rect x="80" y="20" width="240" height="260" rx="8" fill="#FFF" stroke="#90CAF9" stroke-width="4"/>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1565C0">REPORT</text>
+  <path d="M110 220 h180 M110 220 V90" stroke="#37474F" stroke-width="3"/>
+  <rect x="126" y="170" width="30" height="50" fill="#42A5F5"/>
+  <rect x="170" y="140" width="30" height="80" fill="#66BB6A"/>
+  <rect x="214" y="110" width="30" height="110" fill="#FFA726"/>
+  <rect x="258" y="90" width="24" height="130" fill="#EF5350"/>
+  <path d="M110 244 h180 M110 260 h120" stroke="#B0BEC5" stroke-width="5" stroke-linecap="round"/>
+</svg>

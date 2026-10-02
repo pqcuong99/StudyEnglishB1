@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- shelf -->
+  <rect x="150" y="70" width="220" height="12" rx="4" fill="#8D6E63"/>
+  <rect x="150" y="160" width="220" height="12" rx="4" fill="#8D6E63"/>
+  <rect x="150" y="250" width="220" height="12" rx="4" fill="#8D6E63"/>
+  <!-- top row binders -->
+  <rect x="170" y="90" width="34" height="70" rx="4" fill="#42A5F5"/>
+  <rect x="210" y="90" width="34" height="70" rx="4" fill="#66BB6A"/>
+  <rect x="250" y="90" width="34" height="70" rx="4" fill="#FFCA28"/>
+  <rect x="290" y="90" width="34" height="70" rx="4" fill="#EF5350"/>
+  <rect x="330" y="90" width="34" height="70" rx="4" fill="#AB47BC"/>
+  <g fill="#FFF" opacity="0.7">
+    <rect x="178" y="100" width="18" height="6" rx="3"/>
+    <rect x="218" y="100" width="18" height="6" rx="3"/>
+    <rect x="258" y="100" width="18" height="6" rx="3"/>
+    <rect x="298" y="100" width="18" height="6" rx="3"/>
+    <rect x="338" y="100" width="18" height="6" rx="3"/>
+  </g>
+  <!-- bottom row boxes -->
+  <rect x="166" y="190" width="56" height="60" rx="4" fill="#FFB74D"/>
+  <rect x="166" y="190" width="56" height="14" fill="#F57C00"/>
+  <rect x="232" y="190" width="56" height="60" rx="4" fill="#4DB6AC"/>
+  <rect x="232" y="190" width="56" height="14" fill="#00897B"/>
+  <rect x="298" y="190" width="56" height="60" rx="4" fill="#9575CD"/>
+  <rect x="298" y="190" width="56" height="14" fill="#5E35B1"/>
+  <g fill="#FFF">
+    <rect x="180" y="216" width="28" height="8" rx="4"/>
+    <rect x="246" y="216" width="28" height="8" rx="4"/>
+    <rect x="312" y="216" width="28" height="8" rx="4"/>
+  </g>
+  <!-- person arranging -->
+  <circle cx="72" cy="120" r="24" fill="#FFCC80"/>
+  <path d="M48 114 a24 24 0 0 1 48 0 Z" fill="#6D4C41"/>
+  <circle cx="64" cy="122" r="3" fill="#3E2723"/><circle cx="80" cy="122" r="3" fill="#3E2723"/>
+  <path d="M64 132 q8 6 16 0" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M40 150 h64 l8 70 h-80 Z" fill="#26A69A"/>
+  <path d="M104 160 L140 130" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="142" cy="128" r="8" fill="#FFCC80"/>
+  <path d="M40 160 L20 200" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <rect x="50" y="220" width="18" height="50" fill="#5C6BC0"/>
+  <rect x="78" y="220" width="18" height="50" fill="#5C6BC0"/>
+  <!-- checkmark -->
+  <circle cx="60" cy="40" r="22" fill="#43A047"/>
+  <path d="M50 40 l7 7 l14 -14" stroke="#FFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

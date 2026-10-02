@@ -8,7 +8,8 @@ import { emojiFor, emojiTint, twemojiUrl } from '../lib/emojiImage.js'
 
 // Thứ tự ưu tiên ảnh cho một từ:
 //   1. Ảnh AI đã tạo bằng API key của người dùng (cache trong IndexedDB)
-//   2. Ảnh SVG vẽ sẵn đóng gói trong app (src/assets/words/)
+//   2. Ảnh đóng gói sẵn trong app: SVG vẽ tay (src/assets/words/) hoặc ảnh AI
+//      tạo sẵn cho từ theo chủ đề (src/assets/topics/), xem lib/localImages.js
 //   3. Có API key -> tự tạo ảnh mới (hàng đợi tuần tự)
 //   4. Không có key: từ có emoji minh họa (src/data/wordEmoji.js) -> emoji
 //   5. Còn lại -> Pollinations.ai (tải tuần tự + thử lại; ảnh chưa có trong

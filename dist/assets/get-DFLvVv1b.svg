@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <!-- giving hand from the left -->
+  <path d="M0 150 h90 a14 14 0 0 1 0 28 h-90 Z" fill="#FFCC80"/>
+  <path d="M0 140 h40 a20 20 0 0 1 0 48 h-40 Z" fill="#42A5F5"/>
+  <!-- arrow -->
+  <path d="M110 120 h60" stroke="#43A047" stroke-width="8" stroke-linecap="round"/>
+  <path d="M164 106 L188 120 L164 134 Z" fill="#43A047"/>
+  <!-- gift box -->
+  <rect x="120" y="150" width="70" height="60" rx="4" fill="#EF5350"/>
+  <rect x="114" y="140" width="82" height="20" rx="4" fill="#E53935"/>
+  <rect x="150" y="140" width="10" height="70" fill="#FFD54F"/>
+  <path d="M155 140 q-20 -26 -6 -30 q10 -2 6 30 q20 -26 6 -30 q-10 -2 -6 30" fill="none" stroke="#FFD54F" stroke-width="5"/>
+  <!-- person receiving -->
+  <circle cx="300" cy="90" r="30" fill="#FFCC80"/>
+  <path d="M270 84 a30 30 0 0 1 60 0 Z" fill="#6D4C41"/>
+  <circle cx="290" cy="94" r="3.5" fill="#3E2723"/><circle cx="310" cy="94" r="3.5" fill="#3E2723"/>
+  <path d="M288 104 q12 10 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M262 126 h76 l10 100 h-96 Z" fill="#FFA726"/>
+  <rect x="272" y="226" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="306" y="226" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M266 140 L196 166" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M270 190 L196 198" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <path d="M230 60 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 Z" fill="#FFD54F"/>
+</svg>

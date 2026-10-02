@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F1F8E9"/>
+  <!-- a shelf with a range of the same product in many colours -->
+  <rect x="30" y="200" width="340" height="14" rx="4" fill="#8D6E63"/>
+  <rect x="30" y="110" width="340" height="14" rx="4" fill="#8D6E63"/>
+  <g>
+    <rect x="48" y="44" width="44" height="66" rx="8" fill="#EF5350"/>
+    <rect x="112" y="44" width="44" height="66" rx="8" fill="#FFA726"/>
+    <rect x="176" y="44" width="44" height="66" rx="8" fill="#FFEE58"/>
+    <rect x="240" y="44" width="44" height="66" rx="8" fill="#66BB6A"/>
+    <rect x="304" y="44" width="44" height="66" rx="8" fill="#42A5F5"/>
+    <rect x="48" y="134" width="44" height="66" rx="8" fill="#AB47BC"/>
+    <rect x="112" y="134" width="44" height="66" rx="8" fill="#EC407A"/>
+    <rect x="176" y="134" width="44" height="66" rx="8" fill="#26A69A"/>
+    <rect x="240" y="134" width="44" height="66" rx="8" fill="#8D6E63"/>
+    <rect x="304" y="134" width="44" height="66" rx="8" fill="#78909C"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.8">
+    <rect x="58" y="60" width="24" height="12" rx="3"/><rect x="122" y="60" width="24" height="12" rx="3"/>
+    <rect x="186" y="60" width="24" height="12" rx="3"/><rect x="250" y="60" width="24" height="12" rx="3"/>
+    <rect x="314" y="60" width="24" height="12" rx="3"/><rect x="58" y="150" width="24" height="12" rx="3"/>
+    <rect x="122" y="150" width="24" height="12" rx="3"/><rect x="186" y="150" width="24" height="12" rx="3"/>
+    <rect x="250" y="150" width="24" height="12" rx="3"/><rect x="314" y="150" width="24" height="12" rx="3"/>
+  </g>
+  <path d="M40 236 H360" stroke="#558B2F" stroke-width="4"/>
+  <path d="M40 236 l12 -8 v16 z M360 236 l-12 -8 v16 z" fill="#558B2F"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#33691E">range</text>
+</svg>

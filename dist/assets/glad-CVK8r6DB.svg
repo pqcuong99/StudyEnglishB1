@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <circle cx="200" cy="140" r="90" fill="#FFD54F"/>
+  <circle cx="165" cy="120" r="10" fill="#5D4037"/><circle cx="235" cy="120" r="10" fill="#5D4037"/>
+  <path d="M150 165 q50 50 100 0" stroke="#5D4037" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="140" cy="160" r="12" fill="#FFAB91" opacity="0.8"/><circle cx="260" cy="160" r="12" fill="#FFAB91" opacity="0.8"/>
+  <path d="M60 60 l6 14 14 2 -10 10 2 14 -12 -7 -12 7 2 -14 -10 -10 14 -2 Z" fill="#FFB300"/>
+  <path d="M340 50 l6 14 14 2 -10 10 2 14 -12 -7 -12 7 2 -14 -10 -10 14 -2 Z" fill="#FFB300"/>
+  <text x="200" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#E65100">I'm glad!</text>
+</svg>

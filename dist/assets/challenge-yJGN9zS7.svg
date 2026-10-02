@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <!-- a runner facing a high wall with a flag on top -->
+  <rect x="230" y="70" width="110" height="200" fill="#B0BEC5" stroke="#78909C" stroke-width="4"/>
+  <path d="M230 110 h110 M230 150 h110 M230 190 h110 M230 230 h110 M285 70 v40 M258 110 v40 M312 110 v40 M285 150 v40 M258 190 v40 M312 190 v40 M285 230 v40" stroke="#78909C" stroke-width="3"/>
+  <path d="M285 70 V26" stroke="#5D4037" stroke-width="5"/>
+  <path d="M285 26 h44 l-10 13 l10 13 h-44 Z" fill="#E53935"/>
+  <rect x="96" y="168" width="48" height="66" rx="13" fill="#FB8C00"/>
+  <circle cx="120" cy="144" r="24" fill="#FFCC80"/>
+  <path d="M96 142 a24 19 0 0 1 48 0 Z" fill="#3E2723"/>
+  <circle cx="113" cy="150" r="3" fill="#3E2723"/><circle cx="127" cy="150" r="3" fill="#3E2723"/>
+  <path d="M112 162 h16" stroke="#3E2723" stroke-width="3" stroke-linecap="round"/>
+  <path d="M96 178 l-28 -20 M144 178 l30 -24" stroke="#FFCC80" stroke-width="10" stroke-linecap="round"/>
+  <path d="M104 234 l-24 34 M136 234 l24 34" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  <path d="M20 270 h360" stroke="#8D6E63" stroke-width="6"/>
+  <text x="120" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#0277BD">CHALLENGE</text>
+  <text x="120" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#01579B">thử thách khó</text>
+  <text x="120" y="114" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#EF6C00">I can do it!</text>
+</svg>

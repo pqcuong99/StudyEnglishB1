@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- big multi-floor store building -->
+  <rect x="60" y="60" width="280" height="190" fill="#FFFFFF" stroke="#546E7A" stroke-width="4"/>
+  <rect x="60" y="34" width="280" height="30" fill="#1E88E5"/>
+  <text x="200" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">DEPARTMENT STORE</text>
+  <!-- floors with shop windows -->
+  <g>
+    <rect x="76" y="76" width="70" height="44" fill="#FFCC80"/>
+    <rect x="165" y="76" width="70" height="44" fill="#A5D6A7"/>
+    <rect x="254" y="76" width="70" height="44" fill="#F48FB1"/>
+    <rect x="76" y="136" width="70" height="44" fill="#CE93D8"/>
+    <rect x="165" y="136" width="70" height="44" fill="#90CAF9"/>
+    <rect x="254" y="136" width="70" height="44" fill="#FFE082"/>
+  </g>
+  <!-- goods on each floor: dress, shoe, ring / teddy, TV, pan -->
+  <path d="M104 84 h14 l-2 8 l10 22 h-30 l10 -22 z" fill="#E53935"/>
+  <path d="M184 108 v-12 h10 q4 8 14 8 q8 2 8 8 v2 h-32 z" fill="#FFFFFF" stroke="#37474F" stroke-width="2"/>
+  <circle cx="289" cy="102" r="10" fill="none" stroke="#FFC107" stroke-width="4"/>
+  <polygon points="289,82 295,88 289,94 283,88" fill="#29B6F6"/>
+  <circle cx="111" cy="162" r="11" fill="#A1887F"/><circle cx="102" cy="148" r="5" fill="#A1887F"/><circle cx="120" cy="148" r="5" fill="#A1887F"/><circle cx="111" cy="152" r="8" fill="#A1887F"/>
+  <rect x="186" y="144" width="28" height="20" rx="3" fill="#37474F"/><rect x="190" y="148" width="20" height="12" fill="#81D4FA"/><path d="M194 170 h12" stroke="#37474F" stroke-width="3"/>
+  <circle cx="284" cy="158" r="11" fill="#455A64"/><path d="M294 156 h18" stroke="#455A64" stroke-width="5" stroke-linecap="round"/><circle cx="284" cy="158" r="5" fill="#FFEB3B"/>
+  <!-- entrance -->
+  <rect x="170" y="196" width="60" height="54" fill="#B3E5FC" stroke="#546E7A" stroke-width="3"/>
+  <path d="M200 196 v54" stroke="#546E7A" stroke-width="3"/>
+  <path d="M60 196 h110 M230 196 h110" stroke="#546E7A" stroke-width="3"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0">department store</text>
+</svg>

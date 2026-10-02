@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E1F5FE"/>
+  <circle cx="340" cy="60" r="28" fill="#FFCA28"/>
+  <path d="M0 200 Q100 170 200 200 T400 200 V300 H0 Z" fill="#A5D6A7"/>
+  <rect y="230" width="400" height="70" fill="#78909C"/>
+  <path d="M0 265 h40 M80 265 h40 M160 265 h40 M240 265 h40 M320 265 h40" stroke="#FFF" stroke-width="4" stroke-dasharray="0"/>
+  <!-- wheels -->
+  <circle cx="110" cy="220" r="44" fill="none" stroke="#212121" stroke-width="8"/>
+  <circle cx="290" cy="220" r="44" fill="none" stroke="#212121" stroke-width="8"/>
+  <g stroke="#9E9E9E" stroke-width="2">
+    <path d="M110 176 v88 M66 220 h88 M79 189 l62 62 M141 189 l-62 62"/>
+    <path d="M290 176 v88 M246 220 h88 M259 189 l62 62 M321 189 l-62 62"/>
+  </g>
+  <circle cx="110" cy="220" r="6" fill="#212121"/><circle cx="290" cy="220" r="6" fill="#212121"/>
+  <!-- frame -->
+  <g stroke="#E53935" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 220 L170 140 L250 140 L290 220"/>
+    <path d="M170 140 L200 220 L110 220"/>
+    <path d="M200 220 L250 140"/>
+    <path d="M250 140 L260 120"/>
+    <path d="M170 140 L160 120"/>
+  </g>
+  <path d="M140 120 h40" stroke="#212121" stroke-width="8" stroke-linecap="round"/>
+  <path d="M244 118 h34" stroke="#212121" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="220" r="10" fill="#424242"/>
+  <path d="M200 220 L214 236" stroke="#424242" stroke-width="5"/>
+  <!-- rider -->
+  <path d="M188 118 L230 76 L262 116" stroke="#FFCC80" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M170 116 L210 82" stroke="#1E88E5" stroke-width="20" stroke-linecap="round"/>
+  <path d="M190 110 L200 160 L212 234" stroke="#FFCC80" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M175 106 L188 150 L200 160" stroke="#3949AB" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="232" cy="62" r="22" fill="#FFCC80"/>
+  <path d="M208 58 a24 22 0 0 1 48 0 l2 6 h-52 Z" fill="#43A047"/>
+  <path d="M206 64 h54" stroke="#2E7D32" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="240" cy="66" r="3" fill="#3E2723"/>
+  <path d="M236 76 q8 3 12 -2" stroke="#3E2723" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- motion lines -->
+  <g stroke="#90CAF9" stroke-width="4" stroke-linecap="round">
+    <path d="M20 120 h40 M10 145 h30 M30 170 h34"/>
+  </g>
+</svg>

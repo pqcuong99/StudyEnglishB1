@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- a van delivering boxes to a shop -->
+  <rect x="20" y="150" width="130" height="80" rx="8" fill="#42A5F5"/>
+  <path d="M150 150 h60 l30 40 v40 h-90 Z" fill="#64B5F6"/>
+  <rect x="160" y="158" width="46" height="30" rx="4" fill="#E3F2FD"/>
+  <circle cx="70" cy="238" r="20" fill="#37474F"/><circle cx="70" cy="238" r="8" fill="#B0BEC5"/>
+  <circle cx="200" cy="238" r="20" fill="#37474F"/><circle cx="200" cy="238" r="8" fill="#B0BEC5"/>
+  <rect x="270" y="170" width="54" height="54" fill="#FFB74D" stroke="#EF6C00" stroke-width="3"/>
+  <path d="M297 170 v54 M270 197 h54" stroke="#EF6C00" stroke-width="3"/>
+  <rect x="300" y="110" width="54" height="54" fill="#FFB74D" stroke="#EF6C00" stroke-width="3"/>
+  <path d="M327 110 v54 M300 137 h54" stroke="#EF6C00" stroke-width="3"/>
+  <path d="M20 230 h360" stroke="#8D6E63" stroke-width="6"/>
+  <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#2E7D32">SUPPLY</text>
+  <text x="200" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#558B2F">give / provide things</text>
+</svg>

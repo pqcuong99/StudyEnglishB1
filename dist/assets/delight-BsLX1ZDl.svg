@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- a jumping happy girl with a gift and sparkles -->
+  <rect x="172" y="146" width="56" height="80" rx="15" fill="#EC407A"/>
+  <circle cx="200" cy="118" r="28" fill="#FFCC80"/>
+  <path d="M172 116 a28 24 0 0 1 56 0 q-6 20 -28 16 q-22 4 -28 -16 Z" fill="#6D4C41"/>
+  <path d="M190 122 q5 -6 10 0 M210 122 q-5 -6 -10 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M186 134 q14 16 28 0 Z" fill="#AD1457"/>
+  <path d="M172 158 l-30 -34 M228 158 l30 -34" stroke="#FFCC80" stroke-width="11" stroke-linecap="round"/>
+  <path d="M182 226 l-22 28 M218 226 l22 28" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  <rect x="42" y="196" width="84" height="70" fill="#42A5F5" stroke="#1565C0" stroke-width="4"/>
+  <path d="M84 196 v70 M42 226 h84" stroke="#FFC107" stroke-width="9"/>
+  <path d="M84 196 q-26 -28 -6 -14 q-16 -20 6 14 Z" fill="#FFC107"/>
+  <path d="M84 196 q26 -28 6 -14 q16 -20 -6 14 Z" fill="#FFC107"/>
+  <g fill="#FFC107">
+    <path d="M300 130 l7 20 h21 l-17 13 l6 21 l-17 -13 l-17 13 l6 -21 l-17 -13 h21 Z"/>
+    <path d="M352 196 l5 14 h15 l-12 9 l4 15 l-12 -9 l-12 9 l4 -15 l-12 -9 h15 Z"/>
+  </g>
+  <text x="200" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#F57F17">DELIGHT</text>
+  <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#9E7700">niềm vui sướng</text>
+</svg>

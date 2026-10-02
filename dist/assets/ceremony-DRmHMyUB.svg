@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FCE4EC"/>
+  <!-- bunting -->
+  <path d="M0 30 Q200 70 400 30" stroke="#8D6E63" stroke-width="3" fill="none"/>
+  <g>
+    <path d="M40 38 l12 26 l12 -24 Z" fill="#EF5350"/>
+    <path d="M90 46 l12 26 l12 -24 Z" fill="#42A5F5"/>
+    <path d="M140 52 l12 26 l12 -24 Z" fill="#FFCA28"/>
+    <path d="M190 55 l12 26 l12 -24 Z" fill="#66BB6A"/>
+    <path d="M240 52 l12 26 l12 -24 Z" fill="#AB47BC"/>
+    <path d="M290 46 l12 26 l12 -24 Z" fill="#EF5350"/>
+    <path d="M340 38 l12 26 l12 -24 Z" fill="#42A5F5"/>
+  </g>
+  <!-- stage -->
+  <rect x="40" y="210" width="320" height="30" rx="4" fill="#A1887F"/>
+  <rect x="60" y="240" width="280" height="30" fill="#8D6E63"/>
+  <!-- balloons -->
+  <g>
+    <ellipse cx="60" cy="120" rx="18" ry="24" fill="#EF5350"/>
+    <ellipse cx="86" cy="100" rx="18" ry="24" fill="#42A5F5"/>
+    <ellipse cx="340" cy="120" rx="18" ry="24" fill="#FFCA28"/>
+    <ellipse cx="314" cy="100" rx="18" ry="24" fill="#AB47BC"/>
+    <path d="M60 144 q4 30 0 66 M86 124 q4 40 -2 86 M340 144 q-4 30 0 66 M314 124 q-4 40 2 86" stroke="#616161" stroke-width="2" fill="none"/>
+  </g>
+  <!-- podium -->
+  <rect x="160" y="150" width="80" height="60" rx="4" fill="#5D4037"/>
+  <rect x="152" y="142" width="96" height="14" rx="4" fill="#795548"/>
+  <path d="M200 142 v-24" stroke="#424242" stroke-width="4"/>
+  <ellipse cx="200" cy="112" rx="7" ry="10" fill="#424242"/>
+  <!-- speaker -->
+  <circle cx="200" cy="90" r="20" fill="#FFCC80"/>
+  <path d="M180 84 a20 20 0 0 1 40 0 Z" fill="#6D4C41"/>
+  <circle cx="193" cy="92" r="2.5" fill="#3E2723"/><circle cx="207" cy="92" r="2.5" fill="#3E2723"/>
+  <path d="M193 100 q7 5 14 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M176 110 h48 l4 34 h-56 Z" fill="#1E88E5"/>
+  <path d="M200 110 v34" stroke="#EF5350" stroke-width="4"/>
+  <!-- audience heads -->
+  <g>
+    <circle cx="100" cy="196" r="12" fill="#FFCC80"/><path d="M88 194 a12 12 0 0 1 24 0 Z" fill="#6D4C41"/>
+    <circle cx="130" cy="200" r="12" fill="#FFCC80"/><path d="M118 198 a12 12 0 0 1 24 0 Z" fill="#212121"/>
+    <circle cx="270" cy="200" r="12" fill="#FFCC80"/><path d="M258 198 a12 12 0 0 1 24 0 Z" fill="#6D4C41"/>
+    <circle cx="300" cy="196" r="12" fill="#FFCC80"/><path d="M288 194 a12 12 0 0 1 24 0 Z" fill="#212121"/>
+  </g>
+  <!-- ribbon cutting -->
+  <path d="M60 180 h280" stroke="#E53935" stroke-width="8"/>
+  <path d="M200 180 l-14 -8 v16 Z M200 180 l14 -8 v16 Z" fill="#B71C1C"/>
+  <!-- confetti -->
+  <g>
+    <circle cx="140" cy="70" r="4" fill="#FFCA28"/><circle cx="260" cy="80" r="4" fill="#66BB6A"/>
+    <circle cx="120" cy="130" r="4" fill="#AB47BC"/><circle cx="280" cy="140" r="4" fill="#42A5F5"/>
+    <rect x="240" y="100" width="6" height="10" rx="1" fill="#EF5350" transform="rotate(30 243 105)"/>
+    <rect x="150" y="110" width="6" height="10" rx="1" fill="#42A5F5" transform="rotate(-25 153 115)"/>
+  </g>
+</svg>

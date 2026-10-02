@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- knitted jumper with a snowflake pattern -->
+  <path d="M155 44 L110 60 L48 160 L84 180 L120 128 L120 250 L280 250 L280 128 L316 180 L352 160 L290 60 L245 44 Q200 70 155 44 Z" fill="#C62828"/>
+  <path d="M155 44 Q200 70 245 44 L240 36 Q200 60 160 36 Z" fill="#8E0000"/>
+  <path d="M120 236 H280 V250 H120 Z" fill="#8E0000"/>
+  <path d="M120 236 M130 236 v14 M140 236 v14 M150 236 v14 M160 236 v14 M170 236 v14 M180 236 v14 M190 236 v14 M200 236 v14 M210 236 v14 M220 236 v14 M230 236 v14 M240 236 v14 M250 236 v14 M260 236 v14 M270 236 v14" stroke="#B71C1C" stroke-width="2"/>
+  <path d="M48 160 L84 180 L76 192 L40 172 Z M352 160 L316 180 L324 192 L360 172 Z" fill="#8E0000"/>
+  <!-- white knitted band -->
+  <rect x="120" y="120" width="160" height="30" fill="#FFFFFF"/>
+  <path d="M130 135 l10 -10 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10 l10 10 l10 -10 l10 10" fill="none" stroke="#C62828" stroke-width="4"/>
+  <!-- snowflake -->
+  <g stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" transform="translate(200 196)">
+    <path d="M0 -24 V24 M-21 -12 L21 12 M-21 12 L21 -12"/>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#B71C1C">jumper</text>
+</svg>

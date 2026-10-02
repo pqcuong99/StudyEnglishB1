@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <circle cx="120" cy="100" r="28" fill="#FFCC80"/>
+  <path d="M92 94 a28 28 0 0 1 56 0 Z" fill="#3E2723"/>
+  <circle cx="112" cy="104" r="3.5" fill="#3E2723"/><circle cx="132" cy="104" r="3.5" fill="#3E2723"/>
+  <path d="M110 114 q12 8 24 0" stroke="#3E2723" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M90 132 h60 l10 100 h-80 Z" fill="#FFA726"/>
+  <rect x="100" y="232" width="24" height="60" rx="4" fill="#37474F"/>
+  <rect x="130" y="232" width="24" height="60" rx="4" fill="#37474F"/>
+  <path d="M150 140 L210 130" stroke="#FFCC80" stroke-width="13" stroke-linecap="round"/>
+  <circle cx="212" cy="130" r="11" fill="#FFCC80"/>
+  <path d="M230 80 h60 v40 a30 30 0 0 1 -60 0 Z" fill="#FFD54F" stroke="#F9A825" stroke-width="3"/>
+  <path d="M230 90 h-14 a14 14 0 0 0 14 24 M290 90 h14 a14 14 0 0 1 -14 24" fill="none" stroke="#F9A825" stroke-width="4"/>
+  <rect x="252" y="150" width="16" height="16" fill="#F9A825"/>
+  <rect x="240" y="166" width="40" height="10" rx="3" fill="#F9A825"/>
+  <path d="M300 240 l30 -40 20 15 30 -55" fill="none" stroke="#43A047" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M366 160 l14 0 0 14" fill="none" stroke="#43A047" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="330" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#EF6C00">+ experience</text>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <g id="pin">
+      <circle cy="-30" r="12" fill="currentColor"/>
+      <rect x="-14" y="-16" width="28" height="34" rx="9" fill="currentColor"/>
+    </g>
+  </defs>
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- pie chart: the big blue part is the majority -->
+  <path d="M120 150 L120 66 A84 84 0 1 1 36 150 Z" fill="#1E88E5"/>
+  <path d="M120 150 L36 150 A84 84 0 0 1 120 66 Z" fill="#FFB74D"/>
+  <circle cx="120" cy="150" r="84" fill="none" stroke="#FFF" stroke-width="4"/>
+  <path d="M120 150 V66 M120 150 H36" stroke="#FFF" stroke-width="4"/>
+  <text x="150" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#FFF">75%</text>
+  <!-- people: most are blue -->
+  <g color="#1E88E5">
+    <use href="#pin" x="250" y="112"/><use href="#pin" x="296" y="112"/><use href="#pin" x="342" y="112"/>
+    <use href="#pin" x="250" y="188"/><use href="#pin" x="296" y="188"/>
+  </g>
+  <use href="#pin" x="342" y="188" color="#FFB74D"/>
+  <text x="200" y="266" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#1565C0">most of them</text>
+</svg>

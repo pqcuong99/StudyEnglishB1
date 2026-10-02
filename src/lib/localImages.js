@@ -1,16 +1,17 @@
-// Ảnh minh họa vẽ tay (SVG) đóng gói sẵn trong app, khớp theo từ.
-// Thêm ảnh mới: đặt file .svg vào src/assets/words/ với tên là từ đã
-// slug hóa (chữ thường, khoảng trắng -> "-"), ví dụ "be-keen-on.svg".
-const files = import.meta.glob('../assets/words/*.svg', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-})
+// Ảnh minh họa đóng gói sẵn trong app, khớp theo từ đã slug hóa (chữ thường,
+// khoảng trắng -> "-"), ví dụ "be-keen-on.svg":
+//   src/assets/words/*.svg    ảnh vẽ tay cho các unit của khóa học
+//   src/assets/topics/*.webp  ảnh AI (Pollinations) tạo sẵn cho 2000 từ theo chủ đề
+// Trùng tên thì SVG được ưu tiên.
+const files = {
+  ...import.meta.glob('../assets/topics/*.webp', { eager: true, query: '?url', import: 'default' }),
+  ...import.meta.glob('../assets/words/*.svg', { eager: true, query: '?url', import: 'default' }),
+}
 
 const map = {}
 for (const [path, url] of Object.entries(files)) {
-  const name = path.split('/').pop().replace(/\.svg$/, '')
-  map[name] = url
+  const name = path.split('/').pop().replace(/\.(svg|webp)$/, '')
+  if (!map[name] || path.endsWith('.svg')) map[name] = url
 }
 
 export function slugify(word) {

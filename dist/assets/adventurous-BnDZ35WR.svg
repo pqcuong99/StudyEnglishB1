@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- an explorer with a backpack climbing rocks -->
+  <path d="M0 280 L110 176 L180 240 L268 130 L400 280 Z" fill="#80CBC4"/>
+  <path d="M268 130 L306 176 h-76 Z" fill="#FFF"/>
+  <rect x="120" y="150" width="50" height="72" rx="13" fill="#FB8C00"/>
+  <rect x="106" y="158" width="26" height="46" rx="8" fill="#6D4C41"/>
+  <circle cx="145" cy="126" r="25" fill="#FFCC80"/>
+  <path d="M118 120 h54 l-6 -14 h-42 Z" fill="#33691E"/>
+  <path d="M112 120 h66" stroke="#33691E" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="137" cy="130" r="3.5" fill="#3E2723"/><circle cx="153" cy="130" r="3.5" fill="#3E2723"/>
+  <path d="M136 142 q9 9 18 0" stroke="#3E2723" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M170 160 l34 -30" stroke="#FFCC80" stroke-width="10" stroke-linecap="round"/>
+  <path d="M128 222 l-20 34 M162 222 l22 30" stroke="#37474F" stroke-width="13" stroke-linecap="round"/>
+  <path d="M212 126 l16 -8 v40 Z" fill="#5D4037"/>
+  <circle cx="330" cy="70" r="24" fill="#FFD54F"/>
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="bold" fill="#00695C">ADVENTUROUS</text>
+  <text x="200" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#00796B">thích phiêu lưu, mạo hiểm</text>
+</svg>

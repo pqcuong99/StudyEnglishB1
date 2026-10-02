@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <rect x="40" y="50" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#00838F" stroke-width="4"/>
+  <rect x="40" y="50" width="200" height="44" rx="12" fill="#00838F"/>
+  <rect x="70" y="36" width="12" height="28" rx="4" fill="#37474F"/><rect x="198" y="36" width="12" height="28" rx="4" fill="#37474F"/>
+  <text x="140" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">MONDAY</text>
+  <g fill="#B2EBF2">
+    <rect x="58" y="110" width="30" height="26" rx="4"/><rect x="98" y="110" width="30" height="26" rx="4"/><rect x="138" y="110" width="30" height="26" rx="4"/><rect x="178" y="110" width="30" height="26" rx="4"/>
+    <rect x="58" y="150" width="30" height="26" rx="4"/><rect x="138" y="150" width="30" height="26" rx="4"/><rect x="178" y="150" width="30" height="26" rx="4"/>
+    <rect x="58" y="190" width="30" height="26" rx="4"/><rect x="98" y="190" width="30" height="26" rx="4"/><rect x="138" y="190" width="30" height="26" rx="4"/>
+  </g>
+  <rect x="98" y="150" width="30" height="26" rx="4" fill="#E53935"/>
+  <circle cx="113" cy="163" r="16" fill="none" stroke="#E53935" stroke-width="3"/>
+  <circle cx="310" cy="120" r="50" fill="#FFFFFF" stroke="#00838F" stroke-width="5"/>
+  <path d="M310 84 v36 l22 14" stroke="#00838F" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <text x="310" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#00838F">3 p.m.</text>
+  <text x="310" y="232" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#006064">dentist</text>
+</svg>

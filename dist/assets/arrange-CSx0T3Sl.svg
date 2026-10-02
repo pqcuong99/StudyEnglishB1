@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- left: messy books -->
+  <g transform="translate(40 90)">
+    <rect x="0" y="80" width="90" height="22" rx="4" fill="#EF5350" transform="rotate(-8 45 91)"/>
+    <rect x="10" y="52" width="90" height="22" rx="4" fill="#42A5F5" transform="rotate(12 55 63)"/>
+    <rect x="4" y="24" width="90" height="22" rx="4" fill="#66BB6A" transform="rotate(-18 49 35)"/>
+    <rect x="20" y="0" width="90" height="22" rx="4" fill="#FFA726" transform="rotate(25 65 11)"/>
+  </g>
+  <text x="95" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#795548">messy</text>
+  <!-- arrow -->
+  <path d="M170 150 h50" stroke="#F9A825" stroke-width="8" stroke-linecap="round"/>
+  <path d="M206 134 l18 16 l-18 16" stroke="#F9A825" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- right: neat stack + calendar -->
+  <g transform="translate(250 90)">
+    <rect x="0" y="84" width="90" height="22" rx="4" fill="#EF5350"/>
+    <rect x="0" y="56" width="90" height="22" rx="4" fill="#42A5F5"/>
+    <rect x="0" y="28" width="90" height="22" rx="4" fill="#66BB6A"/>
+    <rect x="0" y="0" width="90" height="22" rx="4" fill="#FFA726"/>
+  </g>
+  <text x="295" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#795548">tidy &amp; planned</text>
+  <!-- small calendar -->
+  <g transform="translate(320 20)">
+    <rect x="0" y="6" width="56" height="50" rx="6" fill="#FFF" stroke="#F9A825" stroke-width="3"/>
+    <rect x="0" y="6" width="56" height="14" rx="6" fill="#F9A825"/>
+    <path d="M14 0 v12 M42 0 v12" stroke="#795548" stroke-width="3" stroke-linecap="round"/>
+    <path d="M18 40 l8 8 l14 -16" stroke="#43A047" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F57F17">put in order / plan</text>
+</svg>
