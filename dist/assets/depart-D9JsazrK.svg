@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- a plane taking off and a departures board -->
+  <rect x="30" y="30" width="170" height="110" rx="8" fill="#263238"/>
+  <text x="115" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#FFD54F">DEPARTURES</text>
+  <g font-family="Courier New, monospace" font-size="14" font-weight="bold" fill="#FFFFFF">
+    <text x="44" y="82">PARIS   09:15</text><text x="44" y="104">ROME    10:40</text><text x="44" y="126">TOKYO   12:05</text>
+  </g>
+  <path d="M30 250 H370" stroke="#9FA8DA" stroke-width="6"/>
+  <g transform="translate(270 160) rotate(-20)">
+    <path d="M-80 0 Q-80 -14 -60 -14 H60 Q84 -14 90 0 Q84 14 60 14 H-60 Q-80 14 -80 0 Z" fill="#FFFFFF" stroke="#3949AB" stroke-width="3"/>
+    <path d="M-10 -12 L-40 -56 H-24 L20 -12 Z" fill="#3949AB"/>
+    <path d="M-10 12 L-30 44 H-16 L20 12 Z" fill="#3949AB"/>
+    <path d="M-70 -12 L-84 -36 H-72 L-54 -12 Z" fill="#3949AB"/>
+    <g fill="#90CAF9"><circle cx="-30" cy="-2" r="4"/><circle cx="-14" cy="-2" r="4"/><circle cx="2" cy="-2" r="4"/><circle cx="18" cy="-2" r="4"/><circle cx="34" cy="-2" r="4"/></g>
+  </g>
+  <path d="M90 240 q60 -10 100 -40" stroke="#9FA8DA" stroke-width="4" fill="none" stroke-dasharray="6 8"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1A237E">depart</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <!-- football kit laid out: shirt, shorts, socks, boots, ball -->
+  <path d="M90 50 L130 36 Q150 52 170 36 L210 50 L230 90 L204 102 L196 88 V170 H104 V88 L96 102 L70 90 Z" fill="#E53935"/>
+  <text x="150" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#FFFFFF">10</text>
+  <path d="M110 186 H190 L196 236 H158 L150 212 L142 236 H104 Z" fill="#FFFFFF" stroke="#BDBDBD" stroke-width="2"/>
+  <rect x="248" y="40" width="22" height="80" rx="6" fill="#E53935"/><rect x="248" y="58" width="22" height="10" fill="#FFFFFF"/>
+  <rect x="282" y="40" width="22" height="80" rx="6" fill="#E53935"/><rect x="282" y="58" width="22" height="10" fill="#FFFFFF"/>
+  <path d="M236 160 h44 q14 0 14 14 v10 h-58 z" fill="#212121"/>
+  <path d="M300 160 h44 q14 0 14 14 v10 h-58 z" fill="#212121"/>
+  <g fill="#FFFFFF"><circle cx="246" cy="188" r="3"/><circle cx="262" cy="188" r="3"/><circle cx="310" cy="188" r="3"/><circle cx="326" cy="188" r="3"/></g>
+  <circle cx="300" cy="234" r="26" fill="#FFFFFF" stroke="#424242" stroke-width="3"/>
+  <path d="M300 222 l11 8 l-4 13 h-14 l-4 -13 z" fill="#424242"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#0D47A1">kit</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- a planner/calendar with an appointment arranged -->
+  <rect x="70" y="40" width="200" height="200" rx="12" fill="#FFFFFF" stroke="#FB8C00" stroke-width="4"/>
+  <rect x="70" y="40" width="200" height="44" rx="12" fill="#FB8C00"/>
+  <rect x="70" y="70" width="200" height="14" fill="#FB8C00"/>
+  <rect x="110" y="28" width="10" height="26" rx="5" fill="#5D4037"/><rect x="220" y="28" width="10" height="26" rx="5" fill="#5D4037"/>
+  <g fill="#FFE0B2">
+    <rect x="88" y="100" width="34" height="28" rx="4"/><rect x="132" y="100" width="34" height="28" rx="4"/><rect x="176" y="100" width="34" height="28" rx="4"/><rect x="220" y="100" width="34" height="28" rx="4"/>
+    <rect x="88" y="138" width="34" height="28" rx="4"/><rect x="176" y="138" width="34" height="28" rx="4"/><rect x="220" y="138" width="34" height="28" rx="4"/>
+    <rect x="88" y="176" width="34" height="28" rx="4"/><rect x="132" y="176" width="34" height="28" rx="4"/><rect x="176" y="176" width="34" height="28" rx="4"/>
+  </g>
+  <rect x="132" y="138" width="34" height="28" rx="4" fill="#EF6C00"/>
+  <circle cx="149" cy="152" r="24" fill="none" stroke="#D32F2F" stroke-width="4"/>
+  <!-- two people shaking hands: deal made -->
+  <circle cx="320" cy="140" r="34" fill="#FFE0B2"/>
+  <path d="M296 146 l14 -10 l14 8 l14 -8 l10 10 l-24 16 z" fill="#FFB74D" stroke="#E65100" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M300 200 l12 12 l24 -26" stroke="#43A047" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#E65100">arrangement</text>
+</svg>

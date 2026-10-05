@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- a shelf of items with an "available" sign and a green tick -->
+  <rect x="50" y="160" width="300" height="12" fill="#8D6E63"/>
+  <rect x="70" y="100" width="50" height="60" rx="4" fill="#42A5F5"/>
+  <rect x="130" y="90" width="50" height="70" rx="4" fill="#FFB74D"/>
+  <rect x="190" y="104" width="50" height="56" rx="4" fill="#BA68C8"/>
+  <rect x="250" y="94" width="50" height="66" rx="4" fill="#4DB6AC"/>
+  <rect x="120" y="196" width="160" height="50" rx="25" fill="#43A047"/>
+  <text x="200" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">IN STOCK</text>
+  <circle cx="320" cy="60" r="28" fill="#66BB6A"/>
+  <path d="M306 60 l10 11 l19 -21" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1B5E20">available</text>
+</svg>

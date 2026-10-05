@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFEBEE"/>
+  <!-- a gauge with the needle at MAX -->
+  <path d="M90 200 A110 110 0 0 1 310 200" fill="none" stroke="#C8E6C9" stroke-width="30"/>
+  <path d="M200 90 A110 110 0 0 1 290 137" fill="none" stroke="#FFE082" stroke-width="30"/>
+  <path d="M290 137 A110 110 0 0 1 310 200" fill="none" stroke="#E53935" stroke-width="30"/>
+  <path d="M200 200 L300 176" stroke="#263238" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="200" r="16" fill="#263238"/>
+  <text x="300" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C62828">MAX</text>
+  <text x="96" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#757575">0</text>
+  <path d="M332 70 v40 M320 82 l12 -12 l12 12" stroke="#C62828" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#B71C1C">maximum</text>
+</svg>

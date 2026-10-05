@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F1F8E9"/>
+  <!-- a cheap price tag and a happy shopper's full wallet -->
+  <path d="M80 70 H220 L270 130 L220 190 H80 Z" fill="#AED581" stroke="#558B2F" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="226" cy="130" r="10" fill="#F1F8E9" stroke="#558B2F" stroke-width="3"/>
+  <text x="150" y="146" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#1B5E20">£2</text>
+  <rect x="270" y="190" width="90" height="60" rx="8" fill="#8D6E63"/>
+  <rect x="330" y="208" width="30" height="24" rx="4" fill="#6D4C41"/>
+  <rect x="280" y="176" width="60" height="22" rx="3" fill="#81C784"/>
+  <circle cx="110" cy="236" r="16" fill="#FFD54F" stroke="#FFA000" stroke-width="3"/>
+  <circle cx="150" cy="240" r="12" fill="#FFD54F" stroke="#FFA000" stroke-width="3"/>
+  <circle cx="186" cy="236" r="16" fill="#FFD54F" stroke="#FFA000" stroke-width="3"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32">inexpensive</text>
+</svg>

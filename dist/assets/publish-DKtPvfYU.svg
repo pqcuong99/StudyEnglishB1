@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- a printing press sending out new books -->
+  <rect x="40" y="90" width="140" height="120" rx="10" fill="#7E57C2"/>
+  <rect x="58" y="110" width="104" height="30" rx="4" fill="#B39DDB"/>
+  <circle cx="80" cy="176" r="18" fill="#5E35B1"/><circle cx="140" cy="176" r="18" fill="#5E35B1"/>
+  <circle cx="80" cy="176" r="6" fill="#D1C4E9"/><circle cx="140" cy="176" r="6" fill="#D1C4E9"/>
+  <path d="M180 160 H230" stroke="#9575CD" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 12"/>
+  <path d="M228 148 l16 12 l-16 12 z" fill="#9575CD"/>
+  <rect x="258" y="190" width="100" height="22" rx="3" fill="#EF5350"/>
+  <rect x="264" y="168" width="96" height="22" rx="3" fill="#29B6F6"/>
+  <g transform="rotate(-8 300 120)">
+    <rect x="258" y="80" width="84" height="80" rx="4" fill="#FFCA28"/>
+    <rect x="258" y="80" width="10" height="80" fill="#FFA000"/>
+    <rect x="280" y="100" width="48" height="6" rx="3" fill="#FFFFFF"/><rect x="280" y="114" width="36" height="6" rx="3" fill="#FFFFFF"/>
+  </g>
+  <text x="300" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#6A1B9A">NEW!</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4A148C">publish</text>
+</svg>

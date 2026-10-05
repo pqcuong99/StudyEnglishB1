@@ -97,10 +97,11 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   Reading Part 5** (12 từ vựng + 5 cụm động từ với "in" + 4 từ ghi trong vở),
   **Phần 4 – Vocab (tiếp)** (23 từ của bảng từ mới tiếp theo) và **Phần 5 – Session 9:
   Writing Part 2 + Speaking Part 3** (14 từ của bảng "I/ VOCAB").
-- **Unit 3: Let’s Shop** (30 từ) cũng nằm trong `seedUnits.js`: **Phần 1 – Session 11:
+- **Unit 3: Let’s Shop** (47 từ) cũng nằm trong `seedUnits.js`: **Phần 1 – Session 11:
   Listening Part 4 + Speaking Part 4** (16 từ của bảng "I/ VOCAB": sweatshirt, trainers,
   jewellery, material, range…) và **Phần 2 – Vocab** (14 từ ghi trong vở: invitation,
-  weird, decide, suddenly, letter…).
+  weird, decide, suddenly, letter…) và **Phần 3 – Vocab (tiếp)** (5 từ của bảng từ vựng
+  tiếp theo + 12 từ ghi trong vở: kit, maximum, available, queue, refund…).
 - **Từ vựng theo chủ đề (🗂️)**: 2000 từ thông dụng chia theo 39 chủ đề (Tính cách, Gia đình,
   Thức ăn, Du lịch…) lấy từ file `2000_tu_vung_tieng_Anh_theo_chu_de.xlsx`, dữ liệu nằm trong
   `src/data/topicUnits.js` (chỉ có từ + nghĩa, chưa có loại từ / phiên âm). Mỗi chủ đề là một

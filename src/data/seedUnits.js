@@ -8,7 +8,8 @@
 // mới tiếp theo (phần 4) và bảng "I/ VOCAB" của Session 9: Writing Part 2 +
 // Speaking Part 3 (phần 5).
 // Unit 3 lấy từ bảng "I/ VOCAB" của Session 11: Listening Part 4 + Speaking
-// Part 4 (phần 1) và vở ghi từ vựng tiếp theo (phần 2).
+// Part 4 (phần 1), vở ghi từ vựng tiếp theo (phần 2), bảng từ vựng tiếp theo
+// cùng vở ghi trên lớp (phần 3).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -27,7 +28,7 @@
 
 import { TOPICS } from './topicUnits.js'
 
-export const SEED_VERSION = 15
+export const SEED_VERSION = 16
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -327,6 +328,27 @@ const U3_VOCAB2_WORDS = [
   ['careless', 'adj', 'ˈkeə.ləs', 'bất cẩn'],
 ]
 
+// Unit 3 – bảng từ vựng tiếp theo + vở ghi trên lớp (phần 3)
+const U3_VOCAB3_WORDS = [
+  ['kit', 'n', 'kɪt', 'trang phục & dụng cụ thi đấu (trong thể thao)'],
+  ['maximum', 'adj/n', 'ˈmæk.sɪ.məm', 'tối đa'],
+  ['available', 'adj', 'əˈveɪ.lə.bəl', 'có sẵn; có thể sử dụng'],
+  ['publish', 'v', 'ˈpʌb.lɪʃ', 'xuất bản, công bố'],
+  ['inexpensive', 'adj', 'ˌɪn.ɪkˈspen.sɪv', 'rẻ, không đắt'],
+  ['fast food restaurant', 'n', 'ˌfɑːst ˈfuːd ˌres.tər.ɒnt', 'nhà hàng thức ăn nhanh'],
+  ['queue', 'n/v', 'kjuː', 'hàng (người) chờ; xếp hàng'],
+  ['forbid', 'v', 'fəˈbɪd', 'cấm'],
+  ['inform', 'v', 'ɪnˈfɔːm', 'thông báo, báo tin'],
+  ['depart', 'v', 'dɪˈpɑːt', 'khởi hành, rời đi'],
+  ['arrangement', 'n', 'əˈreɪndʒ.mənt', 'sự sắp xếp, sự chuẩn bị'],
+  ['refund', 'n/v', 'ˈriː.fʌnd', 'tiền hoàn lại; hoàn tiền'],
+  ['reduced item', 'n', 'rɪˈdjuːst ˈaɪ.təm', 'hàng giảm giá'],
+  ['delivery', 'n', 'dɪˈlɪv.ər.i', 'sự giao hàng'],
+  ['questionnaire', 'n', 'ˌkwes.tʃəˈneə(r)', 'bảng câu hỏi, phiếu khảo sát'],
+  ['passenger', 'n', 'ˈpæs.ən.dʒə(r)', 'hành khách'],
+  ['formal', 'adj', 'ˈfɔː.məl', 'trang trọng'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -383,10 +405,12 @@ const UNITS = [
     sections: [
       { id: 'p1', name: 'Phần 1 – Session 11: Listening Part 4 + Speaking Part 4' },
       { id: 'p2', name: 'Phần 2 – Vocab' },
+      { id: 'p3', name: 'Phần 3 – Vocab (tiếp)' },
     ],
     groups: [
       { version: 14, prefix: 'u3s11', seedBase: 1400, section: 'p1', rows: U3S11_WORDS },
       { version: 15, prefix: 'u3v2', seedBase: 1500, section: 'p2', rows: U3_VOCAB2_WORDS },
+      { version: 16, prefix: 'u3v3', seedBase: 1600, section: 'p3', rows: U3_VOCAB3_WORDS },
     ],
   },
   ...TOPICS.map(topicUnit),

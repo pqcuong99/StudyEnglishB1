@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- a dress on a hanger with a SALE tag: old price crossed out -->
+  <path d="M120 40 q0 -14 14 -14 q14 0 14 14 l-14 10" stroke="#757575" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M70 80 L134 50 L198 80" stroke="#757575" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M100 74 Q134 92 168 74 L176 120 L206 250 H62 L92 120 Z" fill="#AB47BC"/>
+  <path d="M92 120 H176" stroke="#7B1FA2" stroke-width="5"/>
+  <path d="M220 100 H330 L360 140 L330 180 H220 Z" fill="#E53935"/>
+  <circle cx="334" cy="140" r="7" fill="#FFF8E1"/>
+  <text x="270" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFCDD2">£40</text>
+  <path d="M244 128 L298 122" stroke="#FFFFFF" stroke-width="4"/>
+  <text x="270" y="166" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#FFFFFF">£20</text>
+  <path d="M180 140 H220" stroke="#757575" stroke-width="3"/>
+  <rect x="236" y="200" width="110" height="40" rx="20" fill="#FFC107"/>
+  <text x="291" y="228" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#BF360C">-50%</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C62828">reduced item</text>
+</svg>

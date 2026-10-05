@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- a clipboard survey with tick boxes and a pen -->
+  <rect x="110" y="30" width="180" height="230" rx="10" fill="#8D6E63"/>
+  <rect x="124" y="50" width="152" height="196" rx="4" fill="#FFFFFF"/>
+  <rect x="170" y="22" width="60" height="22" rx="6" fill="#B0BEC5"/>
+  <text x="200" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#3949AB">SURVEY</text>
+  <g>
+    <rect x="138" y="94" width="18" height="18" rx="3" fill="none" stroke="#3949AB" stroke-width="3"/>
+    <path d="M141 103 l5 6 l9 -12" stroke="#43A047" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="166" y="99" width="92" height="7" rx="3" fill="#C5CAE9"/>
+    <rect x="138" y="130" width="18" height="18" rx="3" fill="none" stroke="#3949AB" stroke-width="3"/>
+    <rect x="166" y="135" width="80" height="7" rx="3" fill="#C5CAE9"/>
+    <rect x="138" y="166" width="18" height="18" rx="3" fill="none" stroke="#3949AB" stroke-width="3"/>
+    <path d="M141 175 l5 6 l9 -12" stroke="#43A047" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <rect x="166" y="171" width="88" height="7" rx="3" fill="#C5CAE9"/>
+    <rect x="138" y="202" width="18" height="18" rx="3" fill="none" stroke="#3949AB" stroke-width="3"/>
+    <rect x="166" y="207" width="70" height="7" rx="3" fill="#C5CAE9"/>
+  </g>
+  <g transform="rotate(35 320 160)">
+    <rect x="310" y="90" width="18" height="110" rx="4" fill="#FFB300"/>
+    <path d="M310 200 h18 l-9 20 z" fill="#FFE0B2"/><path d="M316 212 h6 l-3 8 z" fill="#424242"/>
+  </g>
+  <text x="60" y="110" font-family="Arial, sans-serif" font-size="44" font-weight="bold" fill="#7986CB">?</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#283593">questionnaire</text>
+</svg>

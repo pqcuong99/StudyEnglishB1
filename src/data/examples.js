@@ -261,6 +261,24 @@ const ROWS = [
   ['modern', 'They live in a modern flat in the city centre.', 'Họ sống trong một căn hộ hiện đại ở trung tâm thành phố.'],
   ['carefully', 'Please listen carefully to the teacher.', 'Hãy lắng nghe giáo viên thật cẩn thận.'],
   ['careless', 'It was careless of me to lose my keys.', 'Tôi thật bất cẩn khi làm mất chìa khóa.'],
+  // Unit 3 – Phần 3 – Vocab (tiếp)
+  ['kit', 'Don’t forget your football kit tomorrow.', 'Đừng quên mang đồ đá bóng ngày mai nhé.'],
+  ['maximum', 'The maximum number of people in the lift is eight.', 'Số người tối đa trong thang máy là tám.'],
+  ['available', 'Is this jacket available in a smaller size?', 'Chiếc áo khoác này có sẵn cỡ nhỏ hơn không?'],
+  ['publish', 'Her first book was published last year.', 'Cuốn sách đầu tiên của cô ấy được xuất bản năm ngoái.'],
+  ['inexpensive', 'This café serves good, inexpensive food.', 'Quán cà phê này phục vụ đồ ăn ngon mà không đắt.'],
+  ['fast food restaurant', 'We had burgers at a fast food restaurant.', 'Chúng tôi đã ăn bánh mì kẹp ở một nhà hàng thức ăn nhanh.'],
+  ['queue', 'There was a long queue at the checkout.', 'Có một hàng dài người chờ ở quầy thanh toán.'],
+  ['forbid', 'My parents forbid me to stay out late.', 'Bố mẹ cấm tôi đi chơi về muộn.'],
+  ['inform', 'Please inform us if you change your address.', 'Vui lòng thông báo cho chúng tôi nếu bạn đổi địa chỉ.'],
+  ['depart', 'The train departs at 9:15.', 'Tàu khởi hành lúc 9 giờ 15.'],
+  ['arrangement', 'We made arrangements to meet at the station.', 'Chúng tôi đã sắp xếp để gặp nhau ở nhà ga.'],
+  ['refund', 'The shoes were broken, so I asked for a refund.', 'Đôi giày bị hỏng nên tôi đã yêu cầu hoàn tiền.'],
+  ['reduced item', 'You can’t return reduced items.', 'Bạn không thể trả lại hàng giảm giá.'],
+  ['delivery', 'Delivery is free for orders over £20.', 'Miễn phí giao hàng cho đơn trên 20 bảng.'],
+  ['questionnaire', 'Please fill in this short questionnaire.', 'Vui lòng điền vào bảng câu hỏi ngắn này.'],
+  ['passenger', 'All passengers must show their tickets.', 'Tất cả hành khách phải xuất trình vé.'],
+  ['formal', 'You should wear formal clothes to the interview.', 'Bạn nên mặc trang phục trang trọng khi đi phỏng vấn.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()
