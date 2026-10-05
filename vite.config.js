@@ -7,6 +7,14 @@ export default defineConfig({
     // ảnh minh họa từ (src/assets/topics, src/assets/words) luôn là file riêng,
     // không nhúng base64 vào JS — có hàng nghìn ảnh, chỉ tải ảnh của từ đang xem
     assetsInlineLimit: (file) => (/[\\/]assets[\\/](topics|words)[\\/]/.test(file) ? false : undefined),
+    rollupOptions: {
+      output: {
+        // ảnh .webp nằm ở assets/img/: lần đầu đưa lên VPS, IIS chưa có MIME .webp nên trả 404
+        // kèm Cache-Control 1 năm — đổi đường dẫn để trình duyệt nào đã nhớ lỗi đó cũng tải lại
+        assetFileNames: (info) =>
+          /\.webp$/i.test(info.names?.[0] ?? info.name ?? '') ? 'assets/img/[name]-[hash][extname]' : 'assets/[name]-[hash][extname]',
+      },
+    },
   },
   server: {
     // PORT do công cụ preview cấp (khi 5173 đang bận), mặc định 5173
