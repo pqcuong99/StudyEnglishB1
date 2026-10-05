@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- a cup falls off the table and breaks: something happens -->
+  <rect x="40" y="150" width="180" height="16" rx="4" fill="#8D6E63"/>
+  <rect x="56" y="166" width="12" height="90" fill="#6D4C41"/><rect x="192" y="166" width="12" height="90" fill="#6D4C41"/>
+  <path d="M210 140 q40 0 60 50" stroke="#90A4AE" stroke-width="4" fill="none" stroke-dasharray="6 6"/>
+  <g transform="rotate(35 280 190)">
+    <path d="M262 176 h36 l-5 30 h-26 z" fill="#42A5F5"/>
+    <path d="M298 182 q14 0 10 14 q-4 8 -12 6" stroke="#42A5F5" stroke-width="5" fill="none"/>
+  </g>
+  <path d="M250 256 l10 -8 l8 6 l12 -10 l10 8 l14 -6 l6 10 z" fill="#1E88E5"/>
+  <path d="M236 256 h140" stroke="#78909C" stroke-width="4"/>
+  <g stroke="#FFA000" stroke-width="4" stroke-linecap="round">
+    <path d="M316 238 l14 -14"/><path d="M252 236 l-12 -14"/><path d="M284 232 v-14"/>
+  </g>
+  <circle cx="110" cy="80" r="28" fill="#FFE0B2"/>
+  <circle cx="100" cy="76" r="5" fill="#212121"/><circle cx="120" cy="76" r="5" fill="#212121"/>
+  <ellipse cx="110" cy="96" rx="7" ry="9" fill="#5D4037"/>
+  <text x="150" y="70" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#37474F">Oh no!</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#263238">happen</text>
+</svg>

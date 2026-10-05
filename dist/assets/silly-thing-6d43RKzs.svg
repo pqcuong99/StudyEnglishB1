@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- someone wearing a pan as a hat and a sock on their hand -->
+  <circle cx="200" cy="130" r="50" fill="#FFE0B2"/>
+  <path d="M146 100 Q200 56 254 100 Z" fill="#616161"/>
+  <rect x="250" y="90" width="80" height="12" rx="6" fill="#424242"/>
+  <circle cx="182" cy="126" r="6" fill="#212121"/><circle cx="222" cy="122" r="6" fill="#212121"/>
+  <path d="M178 152 Q200 176 222 152 Z" fill="#FFFFFF" stroke="#C62828" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M196 162 v10 q0 8 8 8 q8 0 8 -8 v-8" fill="#EF5350"/>
+  <rect x="160" y="182" width="80" height="70" rx="20" fill="#26A69A"/>
+  <path d="M236 200 L280 166" stroke="#FFE0B2" stroke-width="12" stroke-linecap="round"/>
+  <path d="M272 176 l18 -30 q8 -10 18 -2 l-14 34 z" fill="#FF7043"/>
+  <path d="M282 160 l20 8" stroke="#FFFFFF" stroke-width="4"/>
+  <circle cx="166" cy="146" r="8" fill="#FF8A80" opacity="0.6"/><circle cx="236" cy="142" r="8" fill="#FF8A80" opacity="0.6"/>
+  <text x="56" y="90" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#00838F">ha ha</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#006064">silly thing</text>
+</svg>

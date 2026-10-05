@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#EFEBE9"/>
+  <!-- runner slumped on the ground, sweating, with an empty battery -->
+  <path d="M40 240 H360" stroke="#A1887F" stroke-width="4"/>
+  <circle cx="150" cy="160" r="30" fill="#FFCC80"/>
+  <path d="M136 156 h12 M156 156 h12" stroke="#4E342E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 178 q10 -6 20 0" stroke="#4E342E" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M178 132 q8 10 2 20 q-8 -6 -2 -20 z" fill="#4FC3F7"/>
+  <path d="M160 188 Q210 186 240 236 H140 Q130 210 160 188 Z" fill="#26A69A"/>
+  <path d="M236 234 L300 236" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <path d="M140 222 L100 238" stroke="#FFCC80" stroke-width="12" stroke-linecap="round"/>
+  <rect x="250" y="70" width="90" height="44" rx="6" fill="#FFFFFF" stroke="#5D4037" stroke-width="4"/>
+  <rect x="340" y="82" width="8" height="20" rx="2" fill="#5D4037"/>
+  <rect x="256" y="76" width="12" height="32" rx="2" fill="#E53935"/>
+  <text x="60" y="80" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#8D6E63">phew…</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4E342E">exhausted</text>
+</svg>

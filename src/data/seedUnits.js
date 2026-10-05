@@ -8,7 +8,7 @@
 // mới tiếp theo (phần 4) và bảng "I/ VOCAB" của Session 9: Writing Part 2 +
 // Speaking Part 3 (phần 5).
 // Unit 3 lấy từ bảng "I/ VOCAB" của Session 11: Listening Part 4 + Speaking
-// Part 4 (phần 1).
+// Part 4 (phần 1) và vở ghi từ vựng tiếp theo (phần 2).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -27,7 +27,7 @@
 
 import { TOPICS } from './topicUnits.js'
 
-export const SEED_VERSION = 14
+export const SEED_VERSION = 15
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -309,6 +309,24 @@ const U3S11_WORDS = [
   ['wool', 'n', 'wʊl', 'len, sợi len'],
 ]
 
+// Unit 3 – vở ghi từ vựng tiếp theo (phần 2)
+const U3_VOCAB2_WORDS = [
+  ['invitation', 'n', 'ˌɪn.vɪˈteɪ.ʃən', 'thư mời, thiệp mời'],
+  ['weird', 'adj', 'wɪəd', 'kỳ quặc'],
+  ['decide', 'v', 'dɪˈsaɪd', 'quyết định'],
+  ['suddenly', 'adv', 'ˈsʌd.ən.li', 'đột nhiên'],
+  ['letter', 'n', 'ˈlet.ə(r)', 'bức thư'],
+  ['silly thing', 'n', 'ˈsɪl.i θɪŋ', 'thứ ngớ ngẩn, điều ngớ ngẩn'],
+  ['happen', 'v', 'ˈhæp.ən', 'xảy ra'],
+  ['background', 'n', 'ˈbæk.ɡraʊnd', 'bối cảnh; phông nền'],
+  ['paragraph', 'n', 'ˈpær.ə.ɡrɑːf', 'đoạn văn'],
+  ['exhausted', 'adj', 'ɪɡˈzɔː.stɪd', 'kiệt sức, mệt lả'],
+  ['busy', 'adj', 'ˈbɪz.i', 'đông đúc; bận rộn'],
+  ['modern', 'adj', 'ˈmɒd.ən', 'hiện đại'],
+  ['carefully', 'adv', 'ˈkeə.fəl.i', 'cẩn thận'],
+  ['careless', 'adj', 'ˈkeə.ləs', 'bất cẩn'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -362,8 +380,14 @@ const UNITS = [
     id: 'u3',
     name: 'Unit 3: Let’s Shop',
     nameMatch: /^\s*unit\s*3\b/i,
-    sections: [{ id: 'p1', name: 'Phần 1 – Session 11: Listening Part 4 + Speaking Part 4' }],
-    groups: [{ version: 14, prefix: 'u3s11', seedBase: 1400, section: 'p1', rows: U3S11_WORDS }],
+    sections: [
+      { id: 'p1', name: 'Phần 1 – Session 11: Listening Part 4 + Speaking Part 4' },
+      { id: 'p2', name: 'Phần 2 – Vocab' },
+    ],
+    groups: [
+      { version: 14, prefix: 'u3s11', seedBase: 1400, section: 'p1', rows: U3S11_WORDS },
+      { version: 15, prefix: 'u3v2', seedBase: 1500, section: 'p2', rows: U3_VOCAB2_WORDS },
+    ],
   },
   ...TOPICS.map(topicUnit),
 ]

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFEBEE"/>
+  <!-- someone staring at their phone, about to step on a banana peel, keys dropped -->
+  <circle cx="170" cy="70" r="26" fill="#FFCC80"/>
+  <path d="M164 78 h6 M180 78 h6" stroke="#212121" stroke-width="4" stroke-linecap="round"/>
+  <rect x="150" y="96" width="40" height="70" rx="12" fill="#7E57C2"/>
+  <path d="M184 120 L200 112" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+  <rect x="198" y="94" width="22" height="36" rx="4" fill="#263238"/><rect x="201" y="98" width="16" height="26" fill="#80DEEA"/>
+  <path d="M160 166 L152 240 M180 166 L212 226" stroke="#37474F" stroke-width="10" stroke-linecap="round"/>
+  <path d="M222 244 q20 -22 40 0 q-10 -4 -14 6 q-6 -10 -12 0 q-6 -10 -14 -6 z" fill="#FDD835"/>
+  <path d="M40 248 H360" stroke="#BDBDBD" stroke-width="4"/>
+  <circle cx="96" cy="238" r="9" fill="none" stroke="#FFA000" stroke-width="4"/>
+  <path d="M105 238 h22 m-6 0 v7 m-7 -7 v7" stroke="#FFA000" stroke-width="4" fill="none"/>
+  <circle cx="320" cy="70" r="26" fill="#E53935"/>
+  <path d="M310 60 l20 20 M330 60 l-20 20" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#B71C1C">careless</text>
+</svg>

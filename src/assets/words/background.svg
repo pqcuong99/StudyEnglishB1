@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- a person in the foreground, a landscape behind them -->
+  <rect x="50" y="30" width="300" height="220" rx="8" fill="#81D4FA"/>
+  <circle cx="290" cy="80" r="24" fill="#FFEE58"/>
+  <path d="M50 200 L130 110 L190 170 L250 100 L350 200 V250 H50 Z" fill="#7986CB"/>
+  <path d="M50 220 Q200 180 350 220 V250 H50 Z" fill="#66BB6A"/>
+  <circle cx="200" cy="150" r="28" fill="#FFCC80"/>
+  <path d="M172 146 Q200 108 228 146 Q214 128 200 132 Q186 128 172 146 Z" fill="#5D4037"/>
+  <path d="M150 250 Q150 186 200 184 Q250 186 250 250 Z" fill="#EF5350"/>
+  <rect x="50" y="30" width="300" height="220" rx="8" fill="none" stroke="#3F51B5" stroke-width="4"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1A237E">background</text>
+</svg>

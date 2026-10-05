@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- two hands carrying a full glass of water, slowly and with care -->
+  <path d="M168 70 L178 200 H222 L232 70 Z" fill="#E1F5FE" stroke="#4FC3F7" stroke-width="4"/>
+  <path d="M170 92 L178 200 H222 L230 92 Z" fill="#4FC3F7"/>
+  <path d="M170 92 q15 -6 30 0 t30 0" stroke="#0288D1" stroke-width="3" fill="none"/>
+  <path d="M120 210 Q150 180 178 196 L178 214 Q150 228 120 230 Z" fill="#FFCC80"/>
+  <path d="M280 210 Q250 180 222 196 L222 214 Q250 228 280 230 Z" fill="#FFCC80"/>
+  <path d="M100 246 h200" stroke="#A5D6A7" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 10"/>
+  <g stroke="#43A047" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M120 130 q-14 -14 0 -28"/><path d="M280 130 q14 -14 0 -28"/>
+  </g>
+  <circle cx="330" cy="60" r="24" fill="#66BB6A"/>
+  <path d="M318 60 l8 9 l16 -18" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1B5E20">carefully</text>
+</svg>

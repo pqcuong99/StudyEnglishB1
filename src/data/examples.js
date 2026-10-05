@@ -246,6 +246,21 @@ const ROWS = [
   ['sleeve', 'The sleeves of this jumper are too long.', 'Tay áo của chiếc áo len này quá dài.'],
   ['leather', 'He wants a pair of leather shoes.', 'Anh ấy muốn một đôi giày da.'],
   ['wool', 'This scarf is made of wool.', 'Chiếc khăn quàng này được làm bằng len.'],
+  // Unit 3 – Phần 2 – Vocab
+  ['invitation', 'I got an invitation to her birthday party.', 'Tôi nhận được thiệp mời dự tiệc sinh nhật của cô ấy.'],
+  ['weird', 'I heard a weird noise in the kitchen last night.', 'Tối qua tôi nghe thấy một tiếng động kỳ quặc trong bếp.'],
+  ['decide', 'I can’t decide which dress to buy.', 'Tôi không thể quyết định nên mua chiếc váy nào.'],
+  ['suddenly', 'Suddenly, the lights went out.', 'Đột nhiên, đèn tắt phụt.'],
+  ['letter', 'My grandma wrote me a long letter.', 'Bà tôi đã viết cho tôi một bức thư dài.'],
+  ['silly thing', 'I said a silly thing and everyone laughed.', 'Tôi đã nói một điều ngớ ngẩn và mọi người đều cười.'],
+  ['happen', 'What happened to your phone?', 'Điện thoại của bạn bị làm sao vậy?'],
+  ['background', 'Tell me about the background of the story.', 'Hãy kể cho tôi về bối cảnh của câu chuyện.'],
+  ['paragraph', 'Read the first paragraph and answer the question.', 'Đọc đoạn văn đầu tiên và trả lời câu hỏi.'],
+  ['exhausted', 'I was exhausted after the long walk.', 'Tôi kiệt sức sau chuyến đi bộ dài.'],
+  ['busy', 'The market is very busy on Saturdays.', 'Khu chợ rất đông đúc vào các ngày thứ Bảy.'],
+  ['modern', 'They live in a modern flat in the city centre.', 'Họ sống trong một căn hộ hiện đại ở trung tâm thành phố.'],
+  ['carefully', 'Please listen carefully to the teacher.', 'Hãy lắng nghe giáo viên thật cẩn thận.'],
+  ['careless', 'It was careless of me to lose my keys.', 'Tôi thật bất cẩn khi làm mất chìa khóa.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()

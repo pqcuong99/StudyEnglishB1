@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- a jack-in-the-box springs up out of nowhere -->
+  <g stroke="#FFA000" stroke-width="6" stroke-linecap="round">
+    <path d="M140 50 L124 32"/><path d="M260 50 L276 32"/>
+    <path d="M120 90 H96"/><path d="M280 90 H304"/>
+  </g>
+  <rect x="140" y="180" width="120" height="80" rx="6" fill="#E53935"/>
+  <path d="M140 180 L110 150 L170 150 Z" fill="#C62828"/>
+  <path d="M200 180 Q180 168 200 156 Q220 144 200 132 Q180 120 200 108" stroke="#757575" stroke-width="6" fill="none"/>
+  <circle cx="200" cy="80" r="30" fill="#FFE0B2"/>
+  <path d="M172 62 L200 22 L228 62 Z" fill="#7E57C2"/>
+  <circle cx="200" cy="20" r="7" fill="#FFD54F"/>
+  <circle cx="190" cy="78" r="5" fill="#212121"/><circle cx="210" cy="78" r="5" fill="#212121"/>
+  <ellipse cx="200" cy="96" rx="8" ry="6" fill="#B71C1C"/>
+  <text x="70" y="230" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#E65100">!</text>
+  <text x="316" y="230" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#E65100">!</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#E65100">suddenly</text>
+</svg>
