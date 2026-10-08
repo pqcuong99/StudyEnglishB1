@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#EDE7F6"/>
+  <!-- a gold quality medal with five stars -->
+  <path d="M160 40 L140 140 L175 125 L190 155 L200 60 Z" fill="#E53935"/>
+  <path d="M240 40 L260 140 L225 125 L210 155 L200 60 Z" fill="#1E88E5"/>
+  <circle cx="200" cy="150" r="62" fill="#FFC107" stroke="#FF8F00" stroke-width="6"/>
+  <circle cx="200" cy="150" r="46" fill="none" stroke="#FFE082" stroke-width="4"/>
+  <path d="M200 115 l10 22 h24 l-19 14 l7 23 l-22 -14 l-22 14 l7 -23 l-19 -14 h24 Z" fill="#FFF8E1"/>
+  <g fill="#FFB300">
+    <path d="M70 230 l5 12 h13 l-10 8 l4 13 l-12 -8 l-12 8 l4 -13 l-10 -8 h13 Z"/>
+    <path d="M330 230 l5 12 h13 l-10 8 l4 13 l-12 -8 l-12 8 l4 -13 l-10 -8 h13 Z"/>
+  </g>
+  <text x="200" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#4527A0">quality</text>
+</svg>

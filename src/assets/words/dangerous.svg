@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF3E0"/>
+  <!-- warning sign at the edge of a cliff -->
+  <path d="M0 200 L230 200 L250 300 L0 300 Z" fill="#8D6E63"/>
+  <path d="M230 200 L250 300 L400 300 L400 290 L260 290 Z" fill="#5D4037" opacity="0.4"/>
+  <rect x="268" y="230" width="132" height="70" fill="#4FC3F7"/>
+  <path d="M268 240 q15 -8 30 0 t30 0 t30 0 t30 0 t12 0" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+  <rect x="116" y="130" width="8" height="70" fill="#6D4C41"/>
+  <path d="M120 40 L178 136 L62 136 Z" fill="#FFC107" stroke="#E65100" stroke-width="6" stroke-linejoin="round"/>
+  <rect x="115" y="70" width="10" height="38" rx="4" fill="#212121"/>
+  <circle cx="120" cy="120" r="6" fill="#212121"/>
+  <g stroke="#E53935" stroke-width="5" stroke-linecap="round">
+    <line x1="215" y1="140" x2="245" y2="170"/>
+    <line x1="245" y1="140" x2="215" y2="170"/>
+  </g>
+  <text x="300" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#BF360C">dangerous</text>
+</svg>

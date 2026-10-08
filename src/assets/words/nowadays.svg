@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8EAF6"/>
+  <!-- then vs now: an old letter and a smartphone with online shopping -->
+  <g opacity="0.55">
+    <rect x="40" y="90" width="110" height="74" rx="4" fill="#FFF8E1" stroke="#8D6E63" stroke-width="3"/>
+    <path d="M40 90 l55 40 l55 -40" stroke="#8D6E63" stroke-width="3" fill="none"/>
+    <text x="95" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#5D4037">THEN</text>
+  </g>
+  <path d="M170 130 H210 M200 118 l14 12 l-14 12" stroke="#3949AB" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="240" y="40" width="110" height="200" rx="16" fill="#263238"/>
+  <rect x="250" y="60" width="90" height="156" rx="4" fill="#FFFFFF"/>
+  <rect x="258" y="70" width="74" height="40" rx="4" fill="#C5CAE9"/>
+  <path d="M272 100 l10 -16 l10 10 l8 -6 l12 12 z" fill="#5C6BC0"/>
+  <rect x="258" y="118" width="50" height="7" rx="3" fill="#9FA8DA"/>
+  <rect x="258" y="132" width="36" height="7" rx="3" fill="#9FA8DA"/>
+  <rect x="258" y="176" width="74" height="26" rx="13" fill="#43A047"/>
+  <text x="295" y="194" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF">BUY NOW</text>
+  <circle cx="295" cy="228" r="5" fill="#90A4AE"/>
+  <text x="295" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#283593">NOW</text>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1A237E">nowadays</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- a row of plain, identical grey houses -->
+  <rect x="0" y="210" width="400" height="90" fill="#B0BEC5"/>
+  <g stroke="#78909C" stroke-width="3">
+    <g fill="#CFD8DC">
+      <rect x="30" y="120" width="90" height="90"/>
+      <rect x="155" y="120" width="90" height="90"/>
+      <rect x="280" y="120" width="90" height="90"/>
+    </g>
+    <g fill="#90A4AE">
+      <path d="M20 122 L75 75 L130 122 Z"/>
+      <path d="M145 122 L200 75 L255 122 Z"/>
+      <path d="M270 122 L325 75 L380 122 Z"/>
+    </g>
+    <g fill="#FFFFFF">
+      <rect x="45" y="140" width="22" height="22"/><rect x="83" y="140" width="22" height="22"/>
+      <rect x="170" y="140" width="22" height="22"/><rect x="208" y="140" width="22" height="22"/>
+      <rect x="295" y="140" width="22" height="22"/><rect x="333" y="140" width="22" height="22"/>
+    </g>
+    <g fill="#78909C">
+      <rect x="64" y="175" width="22" height="35"/>
+      <rect x="189" y="175" width="22" height="35"/>
+      <rect x="314" y="175" width="22" height="35"/>
+    </g>
+  </g>
+  <circle cx="340" cy="40" r="20" fill="#FFFFFF" opacity="0.8"/>
+  <text x="200" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#455A64">ordinary</text>
+</svg>

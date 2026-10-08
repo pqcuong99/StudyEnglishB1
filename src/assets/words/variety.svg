@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F3E5F5"/>
+  <!-- shelves with many different kinds of things -->
+  <rect x="40" y="130" width="320" height="10" fill="#8D6E63"/>
+  <rect x="40" y="240" width="320" height="10" fill="#8D6E63"/>
+  <circle cx="75" cy="105" r="24" fill="#E53935"/><path d="M75 81 q6 -12 14 -10" stroke="#43A047" stroke-width="4" fill="none"/>
+  <path d="M120 130 l20 -60 l20 60 z" fill="#FFB300"/>
+  <rect x="180" y="74" width="40" height="56" rx="6" fill="#1E88E5"/><rect x="190" y="66" width="20" height="10" fill="#1565C0"/>
+  <path d="M240 130 v-40 h50 v40 z" fill="#43A047"/><path d="M240 90 q25 -30 50 0 z" fill="#66BB6A"/>
+  <rect x="306" y="80" width="40" height="50" rx="20" fill="#AB47BC"/>
+  <path d="M60 240 l20 -50 h20 l20 50 z" fill="#26A69A"/>
+  <rect x="140" y="196" width="50" height="44" fill="#FF7043"/><path d="M140 196 l25 -18 l25 18 z" fill="#F4511E"/>
+  <circle cx="230" cy="214" r="26" fill="#FFEE58" stroke="#F9A825" stroke-width="3"/>
+  <path d="M280 240 v-46 q20 -14 40 0 v46 z" fill="#EC407A"/>
+  <rect x="330" y="200" width="22" height="40" rx="4" fill="#5C6BC0"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#6A1B9A">variety</text>
+</svg>

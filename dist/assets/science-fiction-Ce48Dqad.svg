@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#1A237E"/>
+  <!-- stars, a ringed planet, a flying saucer and a robot -->
+  <g fill="#FFFFFF">
+    <circle cx="40" cy="40" r="2"/><circle cx="120" cy="25" r="1.5"/><circle cx="210" cy="50" r="2"/>
+    <circle cx="350" cy="30" r="2"/><circle cx="370" cy="120" r="1.5"/><circle cx="30" cy="150" r="1.5"/>
+    <circle cx="180" cy="140" r="1.5"/><circle cx="260" cy="20" r="1.5"/>
+  </g>
+  <circle cx="310" cy="85" r="34" fill="#FF8A65"/>
+  <ellipse cx="310" cy="85" rx="60" ry="12" fill="none" stroke="#FFE082" stroke-width="5" transform="rotate(-15 310 85)"/>
+  <ellipse cx="120" cy="95" rx="70" ry="18" fill="#B0BEC5" stroke="#78909C" stroke-width="3"/>
+  <path d="M85 88 Q120 40 155 88 Z" fill="#80DEEA" stroke="#4DD0E1" stroke-width="3"/>
+  <circle cx="85" cy="100" r="5" fill="#FFEB3B"/><circle cx="120" cy="104" r="5" fill="#FFEB3B"/><circle cx="155" cy="100" r="5" fill="#FFEB3B"/>
+  <path d="M95 113 L70 200 L170 200 L145 113 Z" fill="#FFF59D" opacity="0.35"/>
+  <g transform="translate(250 150)">
+    <line x1="40" y1="0" x2="40" y2="-14" stroke="#B0BEC5" stroke-width="3"/>
+    <circle cx="40" cy="-17" r="5" fill="#E53935"/>
+    <rect x="15" y="0" width="50" height="40" rx="8" fill="#CFD8DC" stroke="#78909C" stroke-width="3"/>
+    <circle cx="30" cy="18" r="6" fill="#00E5FF"/><circle cx="50" cy="18" r="6" fill="#00E5FF"/>
+    <rect x="28" y="30" width="24" height="4" fill="#78909C"/>
+    <rect x="5" y="45" width="70" height="55" rx="8" fill="#CFD8DC" stroke="#78909C" stroke-width="3"/>
+    <rect x="25" y="58" width="30" height="20" rx="3" fill="#4DD0E1"/>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFEB3B">science fiction</text>
+</svg>

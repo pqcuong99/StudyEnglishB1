@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFFDE7"/>
+  <!-- a head silhouette with traits inside: heart, star, smile, idea -->
+  <path d="M130 250 V200 Q70 180 76 120 Q84 40 180 36 Q280 36 290 120 Q296 150 310 170 L290 176 V210 Q290 226 270 226 H240 V250 Z" fill="#FFE082" stroke="#F9A825" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M150 104 c0 -14 20 -18 24 -4 c4 -14 24 -10 24 4 c0 16 -24 28 -24 28 c0 0 -24 -12 -24 -28 z" fill="#E53935"/>
+  <path d="M240 76 l7 15 l16 2 l-12 11 l3 16 l-14 -8 l-14 8 l3 -16 l-12 -11 l16 -2 z" fill="#FB8C00"/>
+  <circle cx="226" cy="160" r="20" fill="#42A5F5"/>
+  <circle cx="219" cy="155" r="3" fill="#FFFFFF"/><circle cx="233" cy="155" r="3" fill="#FFFFFF"/>
+  <path d="M217 166 q9 8 18 0" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="150" cy="168" r="16" fill="#AB47BC"/><rect x="144" y="184" width="12" height="10" rx="2" fill="#7B1FA2"/>
+  <path d="M150 140 v-6 M128 150 l-5 -4 M172 150 l5 -4" stroke="#AB47BC" stroke-width="3" stroke-linecap="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F57F17">personality</text>
+</svg>

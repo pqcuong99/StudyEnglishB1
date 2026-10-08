@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E8F5E9"/>
+  <!-- checklist of essentials for a trip: water, map, phone -->
+  <rect x="40" y="35" width="150" height="210" rx="10" fill="#FFFFFF" stroke="#66BB6A" stroke-width="4"/>
+  <rect x="85" y="25" width="60" height="20" rx="6" fill="#66BB6A"/>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#33691E">
+    <text x="90" y="95">water</text>
+    <text x="90" y="150">map</text>
+    <text x="90" y="205">phone</text>
+  </g>
+  <g fill="none" stroke="#2E7D32" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 88 l8 8 l14 -16"/>
+    <path d="M58 143 l8 8 l14 -16"/>
+    <path d="M58 198 l8 8 l14 -16"/>
+  </g>
+  <rect x="225" y="70" width="40" height="110" rx="10" fill="#81D4FA" stroke="#0288D1" stroke-width="3"/>
+  <rect x="233" y="55" width="24" height="18" rx="4" fill="#0288D1"/>
+  <path d="M285 95 l30 -10 l30 10 l30 -10 v80 l-30 10 l-30 -10 l-30 10 Z" fill="#FFE082" stroke="#F9A825" stroke-width="3"/>
+  <path d="M300 130 q20 -30 45 -5 t25 -10" stroke="#E53935" stroke-width="3" fill="none" stroke-dasharray="6 4"/>
+  <rect x="290" y="190" width="40" height="60" rx="6" fill="#424242"/>
+  <rect x="295" y="197" width="30" height="42" fill="#90CAF9"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32">essential</text>
+</svg>

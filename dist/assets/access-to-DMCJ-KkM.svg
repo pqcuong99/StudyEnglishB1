@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E0F7FA"/>
+  <!-- a key card opening a door, and a wifi signal -->
+  <rect x="200" y="40" width="130" height="210" rx="6" fill="#FFFFFF" stroke="#00838F" stroke-width="4"/>
+  <path d="M206 46 L290 64 V238 L206 244 Z" fill="#4DD0E1"/>
+  <circle cx="276" cy="150" r="7" fill="#006064"/>
+  <rect x="160" y="130" width="28" height="44" rx="4" fill="#37474F"/>
+  <circle cx="174" cy="144" r="5" fill="#66BB6A"/>
+  <g transform="rotate(-20 110 170)">
+    <rect x="60" y="150" width="90" height="56" rx="8" fill="#FFB300"/>
+    <rect x="72" y="164" width="24" height="18" rx="3" fill="#FFE082"/>
+    <rect x="104" y="188" width="36" height="6" rx="3" fill="#FFF8E1"/>
+  </g>
+  <g stroke="#00838F" stroke-width="7" fill="none" stroke-linecap="round">
+    <path d="M60 90 q40 -36 80 0"/><path d="M74 104 q26 -22 52 0"/>
+  </g>
+  <circle cx="100" cy="116" r="7" fill="#00838F"/>
+  <path d="M344 140 h30 M362 128 l14 12 l-14 12" stroke="#43A047" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#006064">access to</text>
+</svg>

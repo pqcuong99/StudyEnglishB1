@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFF8E1"/>
+  <!-- cake ingredients: flour, eggs, sugar, milk around a mixing bowl -->
+  <rect x="30" y="80" width="70" height="95" rx="6" fill="#FFFFFF" stroke="#BCAAA4" stroke-width="3"/>
+  <text x="65" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#8D6E63">FLOUR</text>
+  <ellipse cx="140" cy="160" rx="16" ry="21" fill="#FFF3E0" stroke="#D7A86E" stroke-width="3"/>
+  <ellipse cx="172" cy="165" rx="16" ry="21" fill="#FFF3E0" stroke="#D7A86E" stroke-width="3"/>
+  <path d="M235 90 h45 l8 85 h-61 Z" fill="#E3F2FD" stroke="#64B5F6" stroke-width="3"/>
+  <text x="258" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1976D2">MILK</text>
+  <path d="M310 120 h60 v55 h-60 Z" fill="#FCE4EC" stroke="#F06292" stroke-width="3"/>
+  <text x="340" y="153" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#C2185B">SUGAR</text>
+  <path d="M110 195 h180 q-10 60 -90 60 q-80 0 -90 -60 Z" fill="#90A4AE" stroke="#546E7A" stroke-width="3"/>
+  <ellipse cx="200" cy="195" rx="90" ry="12" fill="#ECEFF1" stroke="#546E7A" stroke-width="3"/>
+  <text x="200" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#E65100">ingredient</text>
+</svg>

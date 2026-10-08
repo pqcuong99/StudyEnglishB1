@@ -9,7 +9,8 @@
 // Speaking Part 3 (phần 5).
 // Unit 3 lấy từ bảng "I/ VOCAB" của Session 11: Listening Part 4 + Speaking
 // Part 4 (phần 1), vở ghi từ vựng tiếp theo (phần 2), bảng từ vựng tiếp theo
-// cùng vở ghi trên lớp (phần 3).
+// cùng vở ghi trên lớp (phần 3) và vở ghi từ vựng tiếp theo (phần 4).
+// Unit 4 lấy từ bảng từ vựng đầu tiên của unit (phần 1).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -28,7 +29,7 @@
 
 import { TOPICS } from './topicUnits.js'
 
-export const SEED_VERSION = 16
+export const SEED_VERSION = 18
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -349,6 +350,42 @@ const U3_VOCAB3_WORDS = [
   ['formal', 'adj', 'ˈfɔː.məl', 'trang trọng'],
 ]
 
+// Unit 3 – vở ghi từ vựng tiếp theo (phần 4)
+const U3_VOCAB4_WORDS = [
+  ['lively', 'adj', 'ˈlaɪv.li', 'sống động, sôi nổi'],
+  ['variety', 'n', 'vəˈraɪ.ə.ti', 'sự đa dạng, nhiều loại'],
+  ['attractive', 'adj', 'əˈtræk.tɪv', 'hấp dẫn, thu hút'],
+  ['brave', 'adj', 'breɪv', 'dũng cảm'],
+  ['calm', 'adj', 'kɑːm', 'bình tĩnh, yên tĩnh'],
+  ['cheerful', 'adj', 'ˈtʃɪə.fəl', 'vui vẻ, tươi tắn'],
+  ['pleasure', 'n', 'ˈpleʒ.ə(r)', 'niềm vui, sự hài lòng'],
+  ['flavour', 'n', 'ˈfleɪ.və(r)', 'hương vị'],
+  ['destination', 'n', 'ˌdes.tɪˈneɪ.ʃən', 'điểm đến'],
+  ['benefit', 'n', 'ˈbenɪfɪt', 'lợi ích'],
+  ['access to', 'n/v', 'ˈæk.ses tə', 'sự tiếp cận; truy cập vào'],
+  ['behaviour', 'n', 'bɪˈheɪ.vjə(r)', 'cách cư xử, hành vi'],
+  ['casual', 'adj', 'ˈkæʒ.ju.əl', 'thường ngày, giản dị'],
+  ['baggy', 'adj', 'ˈbæɡ.i', 'rộng thùng thình'],
+  ['loose jeans', 'n', 'luːs dʒiːnz', 'quần jeans ống rộng'],
+  ['personality', 'n', 'ˌpɜː.sənˈæl.ə.ti', 'tính cách, cá tính'],
+  ['nowadays', 'adv', 'ˈnaʊ.ə.deɪz', 'ngày nay'],
+  ['stylish', 'adj', 'ˈstaɪ.lɪʃ', 'hợp thời trang, sành điệu'],
+]
+
+// Unit 4 – bảng từ vựng (phần 1)
+const U4_VOCAB1_WORDS = [
+  ['adventure', 'n', 'ədˈven.tʃə(r)', 'cuộc phiêu lưu'],
+  ['dangerous', 'adj', 'ˈdeɪn.dʒər.əs', 'nguy hiểm'],
+  ['science fiction', 'n', 'ˌsaɪ.əns ˈfɪk.ʃən', 'khoa học viễn tưởng'],
+  ['essential', 'adj', 'ɪˈsen.ʃəl', 'thiết yếu'],
+  ['ingredient', 'n', 'ɪnˈɡriː.di.ənt', 'thành phần (nguyên liệu)'],
+  ['quality', 'n', 'ˈkwɒl.ə.ti', 'phẩm chất, chất lượng'],
+  ['equipment', 'n', 'ɪˈkwɪp.mənt', 'trang thiết bị'],
+  ['ordinary', 'adj', 'ˈɔː.dən.ri', 'bình thường'],
+  ['fantastic', 'adj', 'fænˈtæs.tɪk', 'tuyệt vời'],
+  ['frighten', 'v', 'ˈfraɪ.tən', 'làm sợ, làm hoảng hốt'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -406,11 +443,22 @@ const UNITS = [
       { id: 'p1', name: 'Phần 1 – Session 11: Listening Part 4 + Speaking Part 4' },
       { id: 'p2', name: 'Phần 2 – Vocab' },
       { id: 'p3', name: 'Phần 3 – Vocab (tiếp)' },
+      { id: 'p4', name: 'Phần 4 – Vocab (tiếp)' },
     ],
     groups: [
       { version: 14, prefix: 'u3s11', seedBase: 1400, section: 'p1', rows: U3S11_WORDS },
       { version: 15, prefix: 'u3v2', seedBase: 1500, section: 'p2', rows: U3_VOCAB2_WORDS },
       { version: 16, prefix: 'u3v3', seedBase: 1600, section: 'p3', rows: U3_VOCAB3_WORDS },
+      { version: 17, prefix: 'u3v4', seedBase: 1700, section: 'p4', rows: U3_VOCAB4_WORDS },
+    ],
+  },
+  {
+    id: 'u4',
+    name: 'Unit 4',
+    nameMatch: /^\s*unit\s*4\b/i,
+    sections: [{ id: 'p1', name: 'Phần 1 – Vocab' }],
+    groups: [
+      { version: 18, prefix: 'u4v1', seedBase: 1800, section: 'p1', rows: U4_VOCAB1_WORDS },
     ],
   },
   ...TOPICS.map(topicUnit),

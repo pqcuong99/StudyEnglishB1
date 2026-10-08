@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#311B92"/>
+  <!-- a ghost saying BOO! frightens a scared boy -->
+  <circle cx="340" cy="50" r="26" fill="#FFF59D"/>
+  <path d="M90 230 V120 q0 -60 60 -60 q60 0 60 60 V230 l-15 -15 l-15 15 l-15 -15 l-15 15 l-15 -15 l-15 15 l-15 -15 Z" fill="#FFFFFF"/>
+  <ellipse cx="130" cy="120" rx="9" ry="13" fill="#212121"/>
+  <ellipse cx="170" cy="120" rx="9" ry="13" fill="#212121"/>
+  <ellipse cx="150" cy="160" rx="14" ry="18" fill="#212121"/>
+  <path d="M60 140 q-25 -10 -20 20" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <text x="95" y="55" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FFEB3B">BOO!</text>
+  <g transform="translate(290 150)">
+    <circle cx="0" cy="0" r="32" fill="#FFCC80"/>
+    <path d="M-30 -10 q30 -40 60 0 q-10 -25 -30 -25 q-20 0 -30 25 Z" fill="#5D4037"/>
+    <circle cx="-11" cy="-2" r="7" fill="#FFFFFF"/><circle cx="11" cy="-2" r="7" fill="#FFFFFF"/>
+    <circle cx="-11" cy="-2" r="3" fill="#212121"/><circle cx="11" cy="-2" r="3" fill="#212121"/>
+    <ellipse cx="0" cy="17" rx="7" ry="9" fill="#5D4037"/>
+    <rect x="-24" y="32" width="48" height="60" rx="10" fill="#42A5F5"/>
+    <path d="M-24 45 l-22 -40 M24 45 l22 -40" stroke="#FFCC80" stroke-width="8" stroke-linecap="round"/>
+    <g stroke="#FFEB3B" stroke-width="3" stroke-linecap="round">
+      <line x1="-50" y1="-30" x2="-42" y2="-22"/><line x1="50" y1="-30" x2="42" y2="-22"/><line x1="0" y1="-48" x2="0" y2="-40"/>
+    </g>
+  </g>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#FFEB3B">frighten</text>
+</svg>
