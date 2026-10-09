@@ -94,10 +94,13 @@ export default function Quiz({
     setAnswers((a) => ({ ...a, [index]: option }))
     // cập nhật trạng thái thuộc/chưa thuộc + thống kê đúng/sai của từ
     onAnswer(q.item, correct)
+    // chọn xong (đúng hay sai) đều đọc từ tiếng Anh đúng của câu hỏi
     if (correct) {
+      // âm báo đúng trước, đọc từ sau khi âm báo kết thúc để không chồng tiếng
       playCorrect()
-      // câu "nghĩa -> từ": vừa chọn đúng thì đọc luôn cách phát âm của từ đó
-      if (q.type === 'meaning2word') setTimeout(() => speak(q.item.word.word), CORRECT_SOUND_MS)
+      setTimeout(() => speak(q.item.word.word), CORRECT_SOUND_MS)
+    } else {
+      speak(q.item.word.word)
     }
   }
 
