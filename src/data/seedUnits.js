@@ -10,7 +10,8 @@
 // Unit 3 lấy từ bảng "I/ VOCAB" của Session 11: Listening Part 4 + Speaking
 // Part 4 (phần 1), vở ghi từ vựng tiếp theo (phần 2), bảng từ vựng tiếp theo
 // cùng vở ghi trên lớp (phần 3) và vở ghi từ vựng tiếp theo (phần 4).
-// Unit 4 lấy từ bảng từ vựng đầu tiên của unit (phần 1).
+// Unit 4 lấy từ bảng từ vựng đầu tiên của unit (phần 1) và bảng "I/ VOCAB"
+// của Lesson 2: Grammar + Reading Part 6 (phần 2).
 //
 // Cách thêm từ mới cho unit có sẵn: thêm một nhóm mới vào `groups` với
 // `version` = SEED_VERSION + 1 (và `section` là id phần muốn nối vào; thêm
@@ -29,7 +30,7 @@
 
 import { TOPICS } from './topicUnits.js'
 
-export const SEED_VERSION = 18
+export const SEED_VERSION = 19
 
 // Mỗi dòng: [từ, loại từ, IPA, nghĩa]
 
@@ -386,6 +387,21 @@ const U4_VOCAB1_WORDS = [
   ['frighten', 'v', 'ˈfraɪ.tən', 'làm sợ, làm hoảng hốt'],
 ]
 
+// Unit 4 – Lesson 2: Grammar + Reading Part 6, bảng "I/ VOCAB" (phần 2)
+const U4L2_WORDS = [
+  ['scary', 'adj', 'ˈskeə.ri', 'đáng sợ'],
+  ['disappointed', 'adj', 'ˌdɪs.əˈpɔɪn.tɪd', 'thất vọng'],
+  ['excited', 'adj', 'ɪkˈsaɪ.tɪd', 'phấn khích'],
+  ['impressed', 'adj', 'ɪmˈprest', 'bị ấn tượng'],
+  ['jealous', 'adj', 'ˈdʒel.əs', 'ghen tị'],
+  ['anxious', 'adj', 'ˈæŋk.ʃəs', 'lo lắng'],
+  ['amazed', 'adj', 'əˈmeɪzd', 'ngạc nhiên'],
+  ['annoyed', 'adj', 'əˈnɔɪd', 'khó chịu, bực mình'],
+  ['confidence', 'n', 'ˈkɒn.fɪ.dəns', 'sự tự tin'],
+  ['performance', 'n', 'pəˈfɔː.məns', 'buổi biểu diễn; sự thể hiện'],
+  ['audience', 'n', 'ˈɔː.di.əns', 'khán giả'],
+]
+
 const UNITS = [
   {
     // giữ id cũ để khớp với dữ liệu đã lưu
@@ -456,9 +472,13 @@ const UNITS = [
     id: 'u4',
     name: 'Unit 4',
     nameMatch: /^\s*unit\s*4\b/i,
-    sections: [{ id: 'p1', name: 'Phần 1 – Vocab' }],
+    sections: [
+      { id: 'p1', name: 'Phần 1 – Vocab' },
+      { id: 'p2', name: 'Phần 2 – Lesson 2: Grammar + Reading Part 6' },
+    ],
     groups: [
       { version: 18, prefix: 'u4v1', seedBase: 1800, section: 'p1', rows: U4_VOCAB1_WORDS },
+      { version: 19, prefix: 'u4l2', seedBase: 1900, section: 'p2', rows: U4L2_WORDS },
     ],
   },
   ...TOPICS.map(topicUnit),

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#FFEBEE"/>
+  <!-- an annoyed person covering ears while someone plays loud drums -->
+  <circle cx="120" cy="120" r="44" fill="#FFCC80"/>
+  <path d="M76 112 a44 44 0 0 1 88 0 Z" fill="#5D4037"/>
+  <path d="M100 108 l16 6 M140 108 l-16 6" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+  <path d="M104 124 h12 M124 124 h12" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+  <path d="M106 148 h28" stroke="#3E2723" stroke-width="4" stroke-linecap="round"/>
+  <path d="M70 92 l-6 -14 M70 92 l-14 -4 M64 98 l-12 4" stroke="#E53935" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="76" cy="124" r="13" fill="#FFB74D"/><circle cx="164" cy="124" r="13" fill="#FFB74D"/>
+  <path d="M76 250 Q76 176 120 170 Q164 176 164 250 Z" fill="#EF5350"/>
+  <rect x="270" y="150" width="80" height="60" rx="8" fill="#1E88E5" stroke="#0D47A1" stroke-width="3"/>
+  <ellipse cx="310" cy="150" rx="40" ry="10" fill="#E3F2FD" stroke="#0D47A1" stroke-width="3"/>
+  <path d="M286 120 l20 26 M340 116 l-22 30" stroke="#8D6E63" stroke-width="6" stroke-linecap="round"/>
+  <path d="M220 110 q12 12 0 24 M236 100 q20 22 0 44 M252 90 q28 32 0 64" stroke="#E53935" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="320" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#E53935">BOOM!</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#B71C1C">annoyed</text>
+</svg>

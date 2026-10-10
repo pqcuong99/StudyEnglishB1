@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#263238"/>
+  <!-- a haunted house at night with a ghost -->
+  <circle cx="330" cy="60" r="34" fill="#FFF59D"/>
+  <circle cx="318" cy="52" r="34" fill="#263238"/>
+  <path d="M60 250 V150 L130 90 L200 150 V250 Z" fill="#455A64" stroke="#212121" stroke-width="3"/>
+  <rect x="112" y="190" width="36" height="60" fill="#212121"/>
+  <rect x="78" y="160" width="26" height="24" fill="#FFCA28"/>
+  <rect x="156" y="160" width="26" height="24" fill="#FFCA28"/>
+  <path d="M78 172 h26 M91 160 v24 M156 172 h26 M169 160 v24" stroke="#455A64" stroke-width="3"/>
+  <path d="M250 230 V140 q0 -50 50 -50 q50 0 50 50 V230 l-17 -14 l-16 14 l-17 -14 l-16 14 l-17 -14 Z" fill="#ECEFF1"/>
+  <ellipse cx="282" cy="140" rx="9" ry="13" fill="#212121"/>
+  <ellipse cx="318" cy="140" rx="9" ry="13" fill="#212121"/>
+  <ellipse cx="300" cy="175" rx="12" ry="16" fill="#212121"/>
+  <path d="M20 250 H380" stroke="#37474F" stroke-width="6"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#FFF59D">scary</text>
+</svg>

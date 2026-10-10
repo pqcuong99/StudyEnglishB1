@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#4A148C"/>
+  <!-- a singer on stage under a spotlight, between red curtains -->
+  <path d="M0 0 h70 q-10 120 20 230 H0 Z" fill="#C62828"/>
+  <path d="M400 0 h-70 q10 120 -20 230 H400 Z" fill="#C62828"/>
+  <path d="M0 0 H400 V28 q-50 20 -100 0 q-50 20 -100 0 q-50 20 -100 0 q-50 20 -100 0 Z" fill="#B71C1C"/>
+  <path d="M160 30 L240 30 L290 230 L110 230 Z" fill="#FFF59D" opacity="0.3"/>
+  <circle cx="200" cy="100" r="24" fill="#FFCC80"/>
+  <path d="M176 96 a24 24 0 0 1 48 0 q-10 -10 -24 -8 q-14 -2 -24 8 Z" fill="#212121"/>
+  <ellipse cx="200" cy="112" rx="6" ry="5" fill="#3E2723"/>
+  <path d="M180 128 h40 l10 92 h-60 Z" fill="#FFB300"/>
+  <path d="M184 136 L160 116 M216 136 L232 120" stroke="#FFCC80" stroke-width="9" stroke-linecap="round"/>
+  <rect x="228" y="104" width="8" height="18" rx="3" fill="#424242"/>
+  <circle cx="232" cy="102" r="7" fill="#9E9E9E"/>
+  <g fill="#FFD54F" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    <text x="120" y="80">&#9834;</text><text x="262" y="74">&#9835;</text><text x="282" y="130">&#9834;</text>
+  </g>
+  <rect x="0" y="230" width="400" height="70" fill="#5D4037"/>
+  <text x="200" y="278" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#FFE082">performance</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#ECEFF1"/>
+  <!-- a sad person looking at a burst balloon and a cancelled sign -->
+  <circle cx="140" cy="110" r="44" fill="#FFCC80"/>
+  <path d="M96 100 a44 44 0 0 1 88 0 q-20 -14 -44 -10 q-24 -4 -44 10 Z" fill="#5D4037"/>
+  <path d="M116 108 q8 6 16 0 M148 108 q8 6 16 0" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M120 140 q20 -14 40 0" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M100 250 Q100 166 140 160 Q180 166 180 250 Z" fill="#78909C"/>
+  <path d="M260 90 l-10 -16 l18 6 l4 -18 l10 14 l14 -10 l-2 18 l18 2 l-14 12" fill="#EF5350" stroke="#C62828" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M276 104 q-6 50 10 100" stroke="#90A4AE" stroke-width="3" fill="none"/>
+  <rect x="220" y="200" width="140" height="44" rx="6" fill="#FFFFFF" stroke="#E53935" stroke-width="4"/>
+  <text x="290" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#E53935">CANCELLED</text>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#455A64">disappointed</text>
+</svg>

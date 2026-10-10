@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F1F8E9"/>
+  <!-- a green-faced person glaring at a friend with a new phone -->
+  <circle cx="110" cy="120" r="42" fill="#AED581"/>
+  <path d="M68 112 a42 42 0 0 1 84 0 Z" fill="#33691E"/>
+  <path d="M90 116 l16 4 M130 116 l-16 4" stroke="#1B5E20" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="102" cy="130" r="5" fill="#1B5E20"/><circle cx="126" cy="130" r="5" fill="#1B5E20"/>
+  <path d="M96 152 q14 -8 28 0" stroke="#1B5E20" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M70 250 Q70 170 110 164 Q150 170 150 250 Z" fill="#558B2F"/>
+  <circle cx="290" cy="120" r="40" fill="#FFCC80"/>
+  <path d="M250 112 a40 40 0 0 1 80 0 Z" fill="#6D4C41"/>
+  <path d="M274 120 q6 -6 12 0 M296 120 q6 -6 12 0" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M276 140 q14 14 28 0" stroke="#3E2723" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M250 250 Q250 170 290 164 Q330 170 330 250 Z" fill="#42A5F5"/>
+  <rect x="320" y="150" width="34" height="58" rx="6" fill="#424242"/>
+  <rect x="325" y="157" width="24" height="42" fill="#81D4FA"/>
+  <path d="M340 120 l4 10 l10 2 l-8 6 l2 10 l-8 -6 l-8 6 l2 -10 l-8 -6 l10 -2 Z" fill="#FFD54F"/>
+  <path d="M160 100 l30 6 l-30 6" stroke="#558B2F" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="285" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#33691E">jealous</text>
+</svg>

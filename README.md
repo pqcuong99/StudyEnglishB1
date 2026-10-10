@@ -103,8 +103,10 @@ Rồi mở trình duyệt tại **http://localhost:5173**
   weird, decide, suddenly, letter…) và **Phần 3 – Vocab (tiếp)** (5 từ của bảng từ vựng
   tiếp theo + 12 từ ghi trong vở: kit, maximum, available, queue, refund…) và **Phần 4 –
   Vocab (tiếp)** (18 từ ghi trong vở: lively, variety, flavour, baggy, stylish…).
-- **Unit 4** (10 từ) cũng nằm trong `seedUnits.js`: **Phần 1 – Vocab** (10 từ của bảng
-  từ vựng: adventure, dangerous, science fiction, essential, ingredient…).
+- **Unit 4** (21 từ) cũng nằm trong `seedUnits.js`: **Phần 1 – Vocab** (10 từ của bảng
+  từ vựng: adventure, dangerous, science fiction, essential, ingredient…) và **Phần 2 –
+  Lesson 2: Grammar + Reading Part 6** (11 từ của bảng "I/ VOCAB": scary, disappointed,
+  jealous, anxious, confidence…).
 - **Từ vựng theo chủ đề (🗂️)**: 2000 từ thông dụng chia theo 39 chủ đề (Tính cách, Gia đình,
   Thức ăn, Du lịch…) lấy từ file `2000_tu_vung_tieng_Anh_theo_chu_de.xlsx`, dữ liệu nằm trong
   `src/data/topicUnits.js` (chỉ có từ + nghĩa, chưa có loại từ / phiên âm). Mỗi chủ đề là một

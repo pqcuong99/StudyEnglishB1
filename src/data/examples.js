@@ -307,6 +307,16 @@ const ROWS = [
   ['equipment', 'You need special equipment to climb this mountain.', 'Bạn cần trang thiết bị chuyên dụng để leo ngọn núi này.'],
   ['ordinary', 'It was just an ordinary day at school.', 'Đó chỉ là một ngày bình thường ở trường.'],
   ['frighten', 'The loud noise frightened the children.', 'Tiếng động lớn làm bọn trẻ hoảng sợ.'],
+  // Unit 4 – Phần 2 – Lesson 2 ('impressed', 'audience' đã có câu ví dụ ở Unit 1)
+  ['scary', 'That film was so scary that I couldn’t sleep.', 'Bộ phim đó đáng sợ đến mức tôi không ngủ được.'],
+  ['disappointed', 'I was disappointed when the concert was cancelled.', 'Tôi thất vọng khi buổi hòa nhạc bị hủy.'],
+  ['excited', 'The children are excited about the school trip.', 'Bọn trẻ rất háo hức về chuyến đi của trường.'],
+  ['jealous', 'He was jealous of his brother’s new bike.', 'Cậu ấy ghen tị với chiếc xe đạp mới của anh trai.'],
+  ['anxious', 'She felt anxious before her driving test.', 'Cô ấy cảm thấy lo lắng trước kỳ thi lái xe.'],
+  ['amazed', 'We were amazed by the view from the top.', 'Chúng tôi ngạc nhiên trước khung cảnh từ trên đỉnh.'],
+  ['annoyed', 'I get annoyed when people talk during a film.', 'Tôi thấy bực mình khi mọi người nói chuyện lúc đang xem phim.'],
+  ['confidence', 'Speaking English every day gave her more confidence.', 'Nói tiếng Anh mỗi ngày giúp cô ấy tự tin hơn.'],
+  ['performance', 'The actors gave a wonderful performance last night.', 'Các diễn viên đã có một buổi biểu diễn tuyệt vời tối qua.'],
 ]
 
 const key = (s) => String(s || '').trim().toLowerCase()
