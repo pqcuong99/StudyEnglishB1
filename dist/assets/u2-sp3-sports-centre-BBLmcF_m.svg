@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Unit 2 trang 21 – Speaking Part 3: các hoạt động cho trung tâm thể thao (vẽ lại có màu) -->
+  <defs>
+    <clipPath id="scene"><path d="M0 176V14A14 14 0 0 1 14 0H256A14 14 0 0 1 270 14V176Z"/></clipPath>
+    <clipPath id="sceneW"><path d="M0 176V14A14 14 0 0 1 14 0H286A14 14 0 0 1 300 14V176Z"/></clipPath>
+    <clipPath id="centre"><circle cx="480" cy="240" r="185"/></clipPath>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#29b6f6"/><stop offset="1" stop-color="#0277bd"/></linearGradient>
+  </defs>
+  <rect width="960" height="700" fill="#f4f1ea"/>
+
+  <!-- ===== Trung tâm thể thao (nhìn từ trên xuống) ===== -->
+  <g clip-path="url(#centre)">
+    <rect x="290" y="50" width="380" height="380" fill="#74c69d"/>
+    <path d="M290 120 L670 60 V92 L290 152Z" fill="#8d99ae"/>
+    <path d="M290 136 L670 76" stroke="#fff" stroke-width="2" stroke-dasharray="12 10"/>
+    <ellipse cx="410" cy="300" rx="100" ry="62" fill="#e76f51"/>
+    <ellipse cx="410" cy="300" rx="84" ry="46" fill="#52b788"/>
+    <ellipse cx="410" cy="300" rx="92" ry="54" fill="none" stroke="#fff" stroke-width="1.2" opacity=".7"/>
+    <rect x="352" y="272" width="116" height="56" fill="none" stroke="#fff" stroke-width="2"/>
+    <line x1="410" y1="272" x2="410" y2="328" stroke="#fff" stroke-width="2"/>
+    <circle cx="410" cy="300" r="10" fill="none" stroke="#fff" stroke-width="2"/>
+    <!-- nhà thi đấu chính -->
+    <path d="M492 150 L612 132 L630 222 L510 240Z" fill="#6c757d"/>
+    <path d="M492 150 L612 132 L622 180 L502 198Z" fill="#adb5bd"/>
+    <path d="M502 198 L622 180 L630 222 L510 240Z" fill="#ced4da"/>
+    <g stroke="#e9ecef" stroke-width="3">
+      <line x1="520" y1="160" x2="528" y2="196"/><line x1="545" y1="156" x2="553" y2="192"/>
+      <line x1="570" y1="152" x2="578" y2="188"/><line x1="595" y1="148" x2="603" y2="184"/>
+    </g>
+    <path d="M510 240 L630 222 L634 236 L514 254Z" fill="#495057"/>
+    <!-- bể bơi -->
+    <rect x="520" y="275" width="96" height="54" rx="4" fill="#48cae4" stroke="#fff" stroke-width="4"/>
+    <g stroke="#fff" stroke-width="1.5" opacity=".8">
+      <line x1="524" y1="288" x2="612" y2="288"/><line x1="524" y1="302" x2="612" y2="302"/><line x1="524" y1="316" x2="612" y2="316"/>
+    </g>
+    <!-- sân tennis / bãi xe -->
+    <rect x="525" y="350" width="70" height="40" fill="#4361ee"/>
+    <rect x="531" y="356" width="58" height="28" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <line x1="560" y1="356" x2="560" y2="384" stroke="#fff" stroke-width="1.5"/>
+    <rect x="345" y="180" width="110" height="40" fill="#adb5bd"/>
+    <g fill="#fff"><rect x="350" y="186" width="2" height="28"/><rect x="370" y="186" width="2" height="28"/><rect x="390" y="186" width="2" height="28"/><rect x="410" y="186" width="2" height="28"/><rect x="430" y="186" width="2" height="28"/><rect x="450" y="186" width="2" height="28"/></g>
+    <g fill="#e63946"><rect x="355" y="190" width="10" height="16" rx="2"/><rect x="395" y="192" width="10" height="16" rx="2"/></g>
+    <rect x="415" y="190" width="10" height="16" rx="2" fill="#ffd60a"/>
+    <!-- cây -->
+    <g fill="#2d6a4f">
+      <circle cx="320" cy="200" r="13"/><circle cx="330" cy="230" r="11"/><circle cx="470" cy="380" r="12"/>
+      <circle cx="495" cy="400" r="10"/><circle cx="640" cy="300" r="12"/><circle cx="625" cy="345" r="10"/>
+      <circle cx="315" cy="380" r="12"/><circle cx="470" cy="160" r="10"/>
+    </g>
+  </g>
+  <circle cx="480" cy="240" r="185" fill="none" stroke="#fff" stroke-width="8"/>
+  <circle cx="480" cy="240" r="191" fill="none" stroke="#264653" stroke-width="3"/>
+  <rect x="365" y="410" width="230" height="36" rx="18" fill="#264653"/>
+  <text x="480" y="434" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Sports &amp; Activity Centre</text>
+
+  <!-- ===== 1. Mountain biking ===== -->
+  <g transform="translate(15 15)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#bfe3ff"/>
+      <circle cx="232" cy="32" r="15" fill="#ffd23f"/>
+      <path d="M0 105 Q60 60 130 95 T270 85 V176 H0Z" fill="#7cc576"/>
+      <path d="M0 125 Q90 100 180 120 T270 115 V176 H0Z" fill="#52a447"/>
+      <path d="M0 158 Q120 136 270 160 V176 H0Z" fill="#a0764a"/>
+      <g fill="none" stroke="#222" stroke-width="5">
+        <circle cx="95" cy="140" r="24"/><circle cx="175" cy="140" r="24"/>
+      </g>
+      <g fill="#555"><circle cx="95" cy="140" r="3"/><circle cx="175" cy="140" r="3"/></g>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M95 140 L132 140 L165 108 L120 108 Z M132 140 L120 108" stroke="#e63946" stroke-width="5"/>
+        <path d="M175 140 L162 98 M156 96 L172 93" stroke="#333" stroke-width="4"/>
+        <path d="M120 108 L116 96 M106 95 L124 95" stroke="#333" stroke-width="4"/>
+        <path d="M117 92 L142 110 L132 140" stroke="#1d3557" stroke-width="7"/>
+        <path d="M117 92 L146 70" stroke="#f4a261" stroke-width="13"/>
+        <path d="M146 72 L162 96" stroke="#f4a261" stroke-width="6"/>
+      </g>
+      <circle cx="156" cy="59" r="10" fill="#f1c27d"/>
+      <path d="M144 58 A12 12 0 0 1 168 56 L170 60 L144 61Z" fill="#2a9d8f"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">1</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Mountain biking</text>
+  </g>
+
+  <!-- ===== 2. Surfing ===== -->
+  <g transform="translate(15 245)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#aee2ff"/>
+      <rect y="80" width="270" height="96" fill="url(#sea)"/>
+      <path d="M0 105 Q50 70 100 98 Q150 128 200 90 Q235 65 270 85 V176 H0Z" fill="#1976d2"/>
+      <path d="M190 92 Q230 60 270 80" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <path d="M10 140 q15 -8 30 0 M70 155 q15 -8 30 0 M200 150 q15 -8 30 0" fill="none" stroke="#e3f2fd" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="140" cy="122" rx="62" ry="9" transform="rotate(-12 140 122)" fill="#ffb703" stroke="#fb8500" stroke-width="2"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M118 126 L128 104 L137 88" stroke="#c68642" stroke-width="7"/>
+        <path d="M160 116 L152 102 L139 88" stroke="#c68642" stroke-width="7"/>
+        <path d="M128 108 L130 96 L137 88 L148 92 L150 104" stroke="#023e8a" stroke-width="8"/>
+        <path d="M137 88 L143 60" stroke="#e76f51" stroke-width="12"/>
+        <path d="M141 64 L116 70 M145 63 L172 50" stroke="#c68642" stroke-width="6"/>
+      </g>
+      <circle cx="146" cy="48" r="9" fill="#c68642"/>
+      <path d="M137 46 A9 9 0 0 1 155 44 L154 40 Q146 34 138 40Z" fill="#3d2b1f"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">2</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Surfing</text>
+  </g>
+
+  <!-- ===== 3. Sailing ===== -->
+  <g transform="translate(15 475)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#cfeeff"/>
+      <g fill="#fff" opacity=".9"><ellipse cx="50" cy="30" rx="26" ry="9"/><ellipse cx="70" cy="24" rx="16" ry="9"/></g>
+      <rect y="122" width="270" height="54" fill="#0288d1"/>
+      <path d="M0 132 q20 -6 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#81d4fa" stroke-width="3"/>
+      <line x1="135" y1="124" x2="135" y2="22" stroke="#5d4037" stroke-width="4"/>
+      <path d="M139 26 L139 116 L210 116 Z" fill="#fff" stroke="#b0bec5" stroke-width="2"/>
+      <path d="M139 56 L170 116" stroke="#e0e0e0" stroke-width="1.5"/>
+      <path d="M131 34 L131 114 L80 114 Z" fill="#fff3b0" stroke="#e9c46a" stroke-width="2"/>
+      <path d="M68 120 L210 120 L192 144 L86 144 Z" fill="#e63946"/>
+      <path d="M68 120 L210 120 L207 126 L72 126 Z" fill="#fff"/>
+      <rect x="168" y="100" width="14" height="18" rx="4" fill="#fb8500"/>
+      <circle cx="175" cy="92" r="8" fill="#f1c27d"/>
+      <path d="M167 90 A8 8 0 0 1 183 89 L183 86 Q175 80 167 86Z" fill="#6d4c41"/>
+      <path d="M170 106 L160 112" stroke="#f1c27d" stroke-width="4" stroke-linecap="round"/>
+      <path d="M100 160 q15 -6 30 0 M190 165 q15 -6 30 0" fill="none" stroke="#81d4fa" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">3</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Sailing</text>
+  </g>
+
+  <!-- ===== 4. Table tennis ===== -->
+  <g transform="translate(675 15)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#eaf4f4"/>
+      <rect y="120" width="270" height="56" fill="#cdb4db"/>
+      <rect x="30" y="20" width="60" height="40" rx="4" fill="#fff" stroke="#bcd" stroke-width="2"/>
+      <rect x="180" y="20" width="60" height="40" rx="4" fill="#fff" stroke="#bcd" stroke-width="2"/>
+      <rect x="48" y="128" width="7" height="36" fill="#555"/>
+      <rect x="215" y="128" width="7" height="36" fill="#555"/>
+      <path d="M40 98 L230 98 L250 130 L20 130 Z" fill="#1d6fa3"/>
+      <path d="M20 130 L250 130 L250 136 L20 136 Z" fill="#14507a"/>
+      <path d="M40 98 L230 98 L250 130 L20 130 Z" fill="none" stroke="#fff" stroke-width="2"/>
+      <line x1="30" y1="114" x2="240" y2="114" stroke="#fff" stroke-width="1.5"/>
+      <path d="M132 98 L132 84 L138 84 L138 130 L132 130Z" fill="#fff" opacity=".35"/>
+      <path d="M128 84 L142 84 L146 112 L131 112Z" fill="none" stroke="#fff" stroke-width="2"/>
+      <path d="M128 84 L131 112 M134 84 L137 112 M140 84 L143 112" stroke="#fff" stroke-width=".8"/>
+      <circle cx="52" cy="70" r="15" fill="#d62828"/>
+      <rect x="49" y="83" width="6" height="16" rx="2" fill="#8d5524"/>
+      <circle cx="222" cy="64" r="15" fill="#222"/>
+      <rect x="219" y="77" width="6" height="16" rx="2" fill="#8d5524"/>
+      <circle cx="168" cy="58" r="5" fill="#ff9f1c"/>
+      <path d="M150 64 q-25 8 -50 4" fill="none" stroke="#ff9f1c" stroke-width="1.5" stroke-dasharray="3 4"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">4</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Table tennis</text>
+  </g>
+
+  <!-- ===== 5. Rock climbing ===== -->
+  <g transform="translate(675 245)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#ffe8cc"/>
+      <circle cx="40" cy="40" r="16" fill="#ffb703"/>
+      <path d="M70 0 H270 V176 H50 L65 125 L45 75 Z" fill="#a1887f"/>
+      <path d="M100 0 L90 50 L110 90 L95 140 L105 176 M210 0 L225 60 L205 110 L220 176" fill="none" stroke="#8d6e63" stroke-width="4"/>
+      <path d="M180 20 l20 10 M120 150 l25 -6 M230 130 l20 6" stroke="#8d6e63" stroke-width="3"/>
+      <g>
+        <circle cx="118" cy="38" r="5" fill="#ef476f"/><circle cx="165" cy="44" r="5" fill="#06d6a0"/>
+        <circle cx="128" cy="118" r="5" fill="#ffd166"/><circle cx="172" cy="134" r="5" fill="#118ab2"/>
+        <circle cx="190" cy="80" r="5" fill="#ef476f"/><circle cx="105" cy="80" r="5" fill="#06d6a0"/>
+      </g>
+      <line x1="150" y1="0" x2="150" y2="96" stroke="#ffd60a" stroke-width="2.5"/>
+      <line x1="150" y1="96" x2="150" y2="176" stroke="#ffd60a" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M149 96 L131 116 L128 118 M151 96 L166 115 L172 134" stroke="#333" stroke-width="8"/>
+        <path d="M150 96 L141 66" stroke="#457b9d" stroke-width="13"/>
+        <path d="M140 68 L120 40 M144 66 L164 46" stroke="#f1c27d" stroke-width="6"/>
+        <path d="M143 93 L157 93" stroke="#ff006e" stroke-width="5"/>
+      </g>
+      <circle cx="139" cy="54" r="9" fill="#f1c27d"/>
+      <path d="M129 53 A10 10 0 0 1 149 51 L150 55 L129 56Z" fill="#e63946"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">5</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Rock climbing</text>
+  </g>
+
+  <!-- ===== 6. Horse riding ===== -->
+  <g transform="translate(675 475)">
+    <rect width="270" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#scene)">
+      <rect width="270" height="176" fill="#d8f3dc"/>
+      <path d="M0 100 Q80 80 160 95 T270 90 V176 H0Z" fill="#95d5b2"/>
+      <g stroke="#8d6e63" stroke-width="4"><line x1="0" y1="112" x2="270" y2="112"/><line x1="0" y1="126" x2="270" y2="126"/>
+        <line x1="20" y1="100" x2="20" y2="140"/><line x1="245" y1="100" x2="245" y2="140"/></g>
+      <path d="M82 104 Q60 110 64 150 Q72 128 86 116Z" fill="#5c3317"/>
+      <g fill="#8d5524">
+        <rect x="95" y="118" width="9" height="44" rx="3"/><rect x="112" y="118" width="9" height="42" rx="3"/>
+        <rect x="155" y="118" width="9" height="44" rx="3"/><rect x="171" y="118" width="9" height="42" rx="3"/>
+        <ellipse cx="135" cy="112" rx="56" ry="22"/>
+        <path d="M168 104 L182 66 L200 68 L192 112Z"/>
+        <ellipse cx="200" cy="72" rx="20" ry="9" transform="rotate(32 200 72)"/>
+      </g>
+      <path d="M180 66 L176 56 L184 62Z" fill="#8d5524"/>
+      <path d="M178 66 Q170 84 170 104" fill="none" stroke="#5c3317" stroke-width="6"/>
+      <g fill="#3d2b1f"><rect x="94" y="158" width="11" height="6" rx="2"/><rect x="111" y="156" width="11" height="6" rx="2"/>
+        <rect x="154" y="158" width="11" height="6" rx="2"/><rect x="170" y="156" width="11" height="6" rx="2"/></g>
+      <circle cx="205" cy="70" r="2" fill="#222"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M200 80 L176 82" stroke="#3d2b1f" stroke-width="1.5"/>
+        <path d="M136 90 L148 112 L142 128" stroke="#1d3557" stroke-width="8"/>
+        <path d="M134 92 L140 60" stroke="#e63946" stroke-width="13"/>
+        <path d="M141 64 L162 82 L176 82" stroke="#e63946" stroke-width="6"/>
+      </g>
+      <path d="M138 128 L148 128" stroke="#222" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="142" cy="48" r="9" fill="#f1c27d"/>
+      <path d="M132 47 A10 10 0 0 1 152 45 L156 47 L132 50Z" fill="#222"/>
+      <path d="M133 50 Q128 58 131 64" fill="none" stroke="#e9c46a" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">6</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Horse riding</text>
+  </g>
+
+  <!-- ===== 7. Volleyball ===== -->
+  <g transform="translate(330 475)">
+    <rect width="300" height="210" rx="14" fill="#264653"/>
+    <g clip-path="url(#sceneW)">
+      <rect width="300" height="176" fill="#bde0fe"/>
+      <rect y="122" width="300" height="54" fill="#f6d186"/>
+      <path d="M0 140 Q150 128 300 142" fill="none" stroke="#e9b949" stroke-width="2"/>
+      <line x1="150" y1="44" x2="150" y2="168" stroke="#555" stroke-width="5"/>
+      <rect x="138" y="52" width="24" height="46" fill="#fff" opacity=".25"/>
+      <g stroke="#fff" stroke-width="1.2">
+        <line x1="138" y1="64" x2="162" y2="64"/><line x1="138" y1="76" x2="162" y2="76"/><line x1="138" y1="88" x2="162" y2="88"/>
+        <line x1="144" y1="52" x2="144" y2="98"/><line x1="156" y1="52" x2="156" y2="98"/>
+      </g>
+      <rect x="136" y="50" width="28" height="5" fill="#fff"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M95 112 L82 132 L86 150 M97 112 L110 132 L106 150" stroke="#c68642" stroke-width="7"/>
+        <path d="M90 108 L104 108 L100 118 L92 118Z" stroke="#1d3557" stroke-width="7"/>
+        <path d="M96 110 L102 80" stroke="#ff006e" stroke-width="13"/>
+        <path d="M103 84 L124 54 M100 84 L80 98" stroke="#c68642" stroke-width="6"/>
+        <path d="M206 118 L198 136 L198 152 M208 118 L216 136 L218 152" stroke="#8d5524" stroke-width="7"/>
+        <path d="M201 114 L214 114 L212 124 L203 124Z" stroke="#1d3557" stroke-width="7"/>
+        <path d="M207 116 L201 86" stroke="#3a86ff" stroke-width="13"/>
+        <path d="M199 90 L186 60 M204 89 L210 58" stroke="#8d5524" stroke-width="6"/>
+      </g>
+      <circle cx="103" cy="68" r="9" fill="#c68642"/>
+      <path d="M94 66 A9 9 0 0 1 112 64 Q114 72 110 76 Q104 62 94 70Z" fill="#3d2b1f"/>
+      <circle cx="199" cy="74" r="9" fill="#8d5524"/>
+      <path d="M190 72 A9 9 0 0 1 208 70 L207 66 Q199 60 191 66Z" fill="#222"/>
+      <circle cx="134" cy="38" r="10" fill="#fff" stroke="#f4a261" stroke-width="1.5"/>
+      <path d="M125 34 Q134 40 143 33 M128 45 Q130 36 138 29" fill="none" stroke="#3a86ff" stroke-width="2"/>
+      <path d="M131 28 Q140 38 141 47" fill="none" stroke="#ffd60a" stroke-width="2"/>
+    </g>
+    <circle cx="22" cy="193" r="12" fill="#e9c46a"/>
+    <text x="22" y="198" text-anchor="middle" font-size="14" font-weight="700" fill="#264653">7</text>
+    <text x="42" y="199" font-size="16" font-weight="600" fill="#fff">Volleyball</text>
+  </g>
+</svg>

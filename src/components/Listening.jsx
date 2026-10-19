@@ -2,11 +2,19 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { LEVELS, levelById, makeCloze, isCorrect } from '../lib/cloze.js'
 import { loadLastLevel, saveLastLevel } from '../lib/listeningProgress.js'
 import { playCorrect, playFinish } from '../lib/sound.js'
+import ListenRead from './ListenRead.jsx'
 
 const SPEAKER = {
   F: { icon: '👧', label: 'F' },
   M: { icon: '👦', label: 'M' },
   W: { icon: '👩', label: 'W', title: 'Woman' },
+  A: { icon: '🧑', label: 'A', title: 'Student A' },
+  B: { icon: '👩', label: 'B', title: 'Student B' },
+}
+
+// bài có mốc thời gian từng lượt / từng chữ thì có thêm chế độ "Nghe & đọc"
+function hasSubtitles(ex) {
+  return ex.lines.every((l) => l.at && l.w)
 }
 
 // ---------- chọn mức độ ----------
@@ -64,8 +72,10 @@ function ExerciseList({ set, levelId, onChangeLevel, progress, onOpen, onExit })
       <div className="unit-grid">
         {set.exercises.map((ex, i) => {
           const p = progress[ex.id] || {}
+          const readable = hasSubtitles(ex)
           return (
-            <div key={ex.id} className="unit-card card listen-card" onClick={() => onOpen(ex.id)}>
+            <div key={ex.id} className="unit-card card listen-card" onClick={() => onOpen(ex.id, readable ? 'read' : 'cloze')}>
+              {ex.image && <img src={ex.image} alt="" className="listen-card-img" />}
               <h3>{ex.title}</h3>
               <p className="unit-meta">
                 {ex.page ? `Trang ${ex.page} · ` : ''}
@@ -85,7 +95,15 @@ function ExerciseList({ set, levelId, onChangeLevel, progress, onOpen, onExit })
                 })}
               </div>
               <div className="btn-row" onClick={(e) => e.stopPropagation()}>
-                <button className="btn btn-primary btn-sm" onClick={() => onOpen(ex.id)}>
+                {readable && (
+                  <button className="btn btn-primary btn-sm" onClick={() => onOpen(ex.id, 'read')}>
+                    📖 Nghe & đọc (phụ đề)
+                  </button>
+                )}
+                <button
+                  className={`btn btn-sm ${readable ? 'btn-outline' : 'btn-primary'}`}
+                  onClick={() => onOpen(ex.id, 'cloze')}
+                >
                   🎧 Nghe & điền từ ({level.label})
                 </button>
               </div>
@@ -313,6 +331,12 @@ function ListeningExercise({
         </div>
       </div>
 
+      {exercise.image && (
+        <div className="card lr-picture-card">
+          <img src={exercise.image} alt="" className="lr-picture" />
+        </div>
+      )}
+
       <AudioPlayer src={exercise.audio} />
 
       <div className="card script-card">
@@ -485,6 +509,7 @@ function ListeningExercise({
 // `progress` / `onResult`: tiến độ nghe nằm trong dữ liệu người dùng (App quản lý và lưu)
 export default function Listening({ set, progress, onResult, onExit }) {
   const [exerciseId, setExerciseId] = useState(null)
+  const [mode, setMode] = useState('cloze') // 'cloze' = nghe & điền từ, 'read' = nghe & đọc phụ đề
   const [levelId, setLevelIdRaw] = useState(loadLastLevel)
   const [attempt, setAttempt] = useState(0)
 
@@ -515,10 +540,28 @@ export default function Listening({ set, progress, onResult, onExit }) {
         levelId={levelId}
         onChangeLevel={setLevelId}
         progress={progress}
-        onOpen={(id) => {
+        onOpen={(id, m = 'cloze') => {
           setExerciseId(id)
+          setMode(m)
           setAttempt((a) => a + 1)
         }}
+        onExit={onExit}
+      />
+    )
+  }
+
+  if (mode === 'read' && hasSubtitles(exercise)) {
+    return (
+      <ListenRead
+        key={exercise.id}
+        set={set}
+        exercise={exercise}
+        index={index}
+        onCloze={() => {
+          setMode('cloze')
+          setAttempt((a) => a + 1)
+        }}
+        onBackToList={() => setExerciseId(null)}
         onExit={onExit}
       />
     )

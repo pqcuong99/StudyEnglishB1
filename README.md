@@ -122,7 +122,17 @@ Rồi mở trình duyệt tại **http://localhost:5173**
 - **Luyện nghe – Listening Part 3** (Unit 2): bài nói của Susan Chapman về Westfield Sports
   Centre (audio workbook `COMPACT_PFS_WB_03.mp3`, 2:34, một người nói). Audio được cắt tại các
   khoảng lặng thành 5 bài `src/assets/listening/u2-wb03-part3-q1..5.mp3`, mỗi bài kèm một câu
-  hỏi trắc nghiệm A/B/C. Muốn thêm bộ bài nghe mới: thêm
+  hỏi trắc nghiệm A/B/C.
+- **Luyện nghe – Speaking Part 3** (Unit 2, Student's Book trang 21): hội thoại hai học sinh
+  chọn hoạt động cho trung tâm thể thao (agreeing & disagreeing). Không có audio gốc nên audio
+  `u2-sp3-sports-centre.mp3` được tạo bằng giọng đọc AI (edge-tts, A = `en-GB-RyanNeural`,
+  B = `en-GB-LibbyNeural`), kèm mốc thời gian từng lượt (`at`) và từng chữ (`w`); tranh trang sách
+  được vẽ lại có màu thành `u2-sp3-sports-centre.svg`. Bài có mốc thời gian thì có thêm chế độ
+  **📖 Nghe & đọc** (`src/components/ListenRead.jsx`): phụ đề tô sáng từng chữ đang đọc, bấm chữ /
+  tên người nói để nghe lại từ đó, bật/tắt phụ đề (ẩn để luyện nghe, bấm từng câu để xem), dịch
+  tiếng Việt (`vi`), tô màu cụm đồng ý / không đồng ý / hỏi ý kiến (`phrases`), dừng sau mỗi lượt
+  để nói đuổi; tùy chọn nhớ trong trình duyệt. Chế độ điền từ vẫn dùng được như các bài khác.
+  Muốn thêm bộ bài nghe mới: thêm
   một phần tử vào `LISTENING_SETS` (gắn với unit qua `unitId` hoặc `unitMatch`) và đặt file
   mp3 vào thư mục trên. Thuật toán chọn từ để ẩn nằm trong `src/lib/cloze.js` (bỏ qua từ chức
   năng, tên riêng, không ẩn hai từ liền nhau, rải đều giữa các câu).
